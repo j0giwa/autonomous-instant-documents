@@ -1,8 +1,8 @@
 # Autonomous Instantdocument System
 
-<img src="https://img.shields.io/github/issues/j0giwa/automomous-instantdokument-system">
-<img src="https://img.shields.io/github/license/j0giwa/automomous-instantdokument-system">
-<img src="https://img.shields.io/github/stars/j0giwa/automomous-instantdokument-system">
+[![shields.io](https://img.shields.io/github/issues/j0giwa/automomous-instantdokument-system)](https://img.shields.io/github/issues/j0giwa/automomous-instantdokument-system)
+[![shields.io](https://img.shields.io/github/license/j0giwa/automomous-instantdokument-system)](https://img.shields.io/github/license/j0giwa/automomous-instantdokument-system)
+[![sields.io](https://img.shields.io/github/stars/j0giwa/automomous-instantdokument-system)](https://img.shields.io/github/stars/j0giwa/automomous-instantdokument-system)
 
 ## Features
 - Generate LaTeX-documents (Preconfigured to produce exams and answers)
