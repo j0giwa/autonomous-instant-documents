@@ -1,5 +1,9 @@
 # Autonomous Instantdocument System
 
+<img src="https://img.shields.io/github/issues/j0giwa/automomous-instantdokument-system">
+<img src="https://img.shields.io/github/license/j0giwa/automomous-instantdokument-system">
+<img src="https://img.shields.io/github/stars/j0giwa/automomous-instantdokument-system">
+
 ## Features
 - Generate LaTeX-documents (Preconfigured to produce exams and answers)
 - Customisable LateX-snippets
