@@ -9,7 +9,7 @@
 
 ## Features
 - Generate LaTeX documents (preconfigured to produce exams and answers)
-- Customisable LateX snippets
+- Customisable LaTeX snippets
 - ChatGPT integration to automatically generate new snippets (API-key required)
 - Snippet statistics are saved in a database (for example how often a snipped has been used)
 - Export database to csv
