@@ -16,7 +16,7 @@
 - Usable via GUI and CLI
 
 ## Requirements
-COMMING SOON
+- Java17
 
 ## Install
 <details>
