@@ -1,7 +1,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>automomous-instantdocument-system</groupId>
+  <groupId>de.th-owl.automomous-instantdocument-system</groupId>
   <artifactId>automomous-instantdocument-system</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>Autonomous Instantdocument System</name>
+  <dependencies>
+	<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
+	<dependency>
+    	<groupId>com.googlecode.json-simple</groupId>
+    	<artifactId>json-simple</artifactId>
+    	<version>1.1.1</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+	<dependency>
+    	<groupId>commons-io</groupId>
+    	<artifactId>commons-io</artifactId>
+    	<version>2.11.0</version>
+	</dependency>
+  </dependencies>  
 </project>
