@@ -17,6 +17,7 @@
 
 ## Requirements
 - Java17
+- pdflatex
 
 ## Install
 <details>
