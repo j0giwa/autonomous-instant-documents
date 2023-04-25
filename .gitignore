@@ -20,6 +20,9 @@
 log/
 target/
 
+# runtime
+temp/
+
 # Package Files #
 *.jar
 *.war

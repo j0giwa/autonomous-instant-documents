@@ -55,7 +55,6 @@ public class LatexConcatenator {
 	public void concat(String type) {
 		
 		// TODO: Replace with data from json
-		System.out.println(System.getProperty("user.dir"));
 		snippets.add(new LatexSnippet("/home/jogiwa/Documents/projekte/eclipse/automomous-instantdocument-system/assets/latex/test/header.tex"));
 		snippets.add(new LatexSnippet("/home/jogiwa/Documents/projekte/eclipse/automomous-instantdocument-system/assets/latex/test/01.tex"));
 		snippets.add(new LatexSnippet("/home/jogiwa/Documents/projekte/eclipse/automomous-instantdocument-system/assets/latex/test/02.tex"));
@@ -72,6 +71,7 @@ public class LatexConcatenator {
 			} else {
 				sb.append("\\input{" + currentSnipptet.getFilepath() + "}");
 			}
+			sb.append("\n");
 		}
 		File file = new File("./temp/" + type + ".tex");
 		try {
@@ -80,6 +80,5 @@ public class LatexConcatenator {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("Done!");
 	} 
 }
