@@ -1,3 +1,22 @@
+/*
+ * Autonomous Instantdocument System -- Automatically generate LaTeX Documents
+ * Copyright (C) 2023 Jonas Schwind
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+
 package controll;
 
 import java.io.File;
@@ -9,17 +28,32 @@ import org.apache.commons.io.FileUtils;
 
 import model.LatexSnippet;
 
-public class LatexConcatinator {
+/**
+ * This class is a concatenator for LaTeX-snippets files.
+ * It can concatenate and compile LaTeX documents.
+ * 
+ * @version 0.0.0.1
+ * @author jogiwa
+ */
+public class LatexConcatenator {
 
 	private ArrayList<LatexSnippet> snippets;
 	private StringBuilder sb;
 
-	public LatexConcatinator() {
+	/**
+	 * Constructor for objects of this class
+	 */
+	public LatexConcatenator() {
 		snippets = new ArrayList<LatexSnippet>();
 		sb = new StringBuilder();	
 	}
 	
+	/**
+	 * This method concatenates all requred snippets for a specified document 
+	 * @param String
+	 */
 	public void concat(String type) {
+		
 		// TODO: Replace with data from json
 		System.out.println(System.getProperty("user.dir"));
 		snippets.add(new LatexSnippet("/home/jogiwa/Documents/projekte/eclipse/automomous-instantdocument-system/assets/latex/test/header.tex"));
