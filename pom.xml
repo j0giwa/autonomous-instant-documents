@@ -3,7 +3,7 @@
   <groupId>de.th-owl.automomous-instantdocument-system</groupId>
   <artifactId>automomous-instantdocument-system</artifactId>
   <name>Autonomous Instantdocument System</name>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.1.2-SNAPSHOT</version>
   <packaging>jar</packaging>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
