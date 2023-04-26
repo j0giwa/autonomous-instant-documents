@@ -34,7 +34,7 @@ import model.LatexSnippet;
  * This class is a concatenator for LaTeXsnippets files. It can concatenate and
  * compile LaTeX documents.
  * 
- * @version 0.0.0.1
+ * @version 0.1.2
  * @author jogiwa
  */
 public class LatexConcatenator {
@@ -90,7 +90,7 @@ public class LatexConcatenator {
 
 	/**
 	 * This method complies a LaTeX document
-	 * TODO: Implement Windows compiler loaction
+	 * TODO: Implement Windows compiler location
 	 * TODO: change output location
 	 * @param type
 	 */

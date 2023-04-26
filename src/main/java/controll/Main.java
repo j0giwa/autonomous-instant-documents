@@ -22,7 +22,7 @@ package controll;
 /**
  * This is the Main file of the programm
  * 
- * @version 0.0.0.1
+ * @version 0.1.1
  * @author jogiwa
  */
 
