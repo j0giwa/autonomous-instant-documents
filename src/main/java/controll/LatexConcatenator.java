@@ -31,7 +31,7 @@ import org.apache.commons.io.FileUtils;
 import model.LatexSnippet;
 
 /**
- * This class is a concatenator for LaTeX-snippets files. It can concatenate and
+ * This class is a concatenator for LaTeXsnippets files. It can concatenate and
  * compile LaTeX documents.
  * 
  * @version 0.0.0.1
@@ -56,7 +56,7 @@ public class LatexConcatenator {
 	 * @param type
 	 */
 	public void concat(String type) {
-		// TODO: Replace with data from json
+		// TODO: Replace with data from json (LOOP)
 		snippets.add(new LatexSnippet(
 				"/home/jogiwa/Documents/projekte/eclipse/automomous-instantdocument-system/assets/latex/test/header.tex"));
 		snippets.add(new LatexSnippet(
@@ -65,23 +65,23 @@ public class LatexConcatenator {
 				"/home/jogiwa/Documents/projekte/eclipse/automomous-instantdocument-system/assets/latex/test/02.tex"));
 		snippets.add(new LatexSnippet(
 				"/home/jogiwa/Documents/projekte/eclipse/automomous-instantdocument-system/assets/latex/test/footer.tex"));
-
-		// Feed relevant snippet data to StringBuilder
+		// Format snippet data to TeX and append it to a to a StringBuilder 
 		Iterator<LatexSnippet> it = snippets.iterator();
 		while (it.hasNext()) {
-			LatexSnippet currentSnipptet = it.next();
-			// FileContent is only relevant for header and footer files
-			if (currentSnipptet.getFilepath().contains("header.tex")
-					|| currentSnipptet.getFilepath().contains("footer.tex")) {
-				sb.append(currentSnipptet.getFilecontent());
-			} else {
-				sb.append("\\input{" + currentSnipptet.getFilepath() + "}");
+			LatexSnippet snippet = it.next();
+			String filepath = snippet.getFilepath();
+			// Header and footer contents are the only important aspects
+			if (filepath.contains("header") || filepath.contains("footer")) {
+				sb.append(snippet.getFilecontent()+"\n");
+				continue;
 			}
-			sb.append("\n");
+			// For all other files their path is sufficient.
+			sb.append("\\input{" + snippet.getFilepath() + "}\n");
 		}
-		File file = new File("./temp/" + type + ".tex");
 		try {
-			FileUtils.writeStringToFile(file, sb.toString(), "utf-8");
+			// Print StringBuilder String to .tex file
+			File outputfile = new File("./temp/" + type + ".tex");
+			FileUtils.writeStringToFile(outputfile, sb.toString(), "utf-8");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -91,28 +91,26 @@ public class LatexConcatenator {
 	/**
 	 * This method complies a LaTeX document
 	 * TODO: Implement Windows compiler loaction
-	 * 
+	 * TODO: change output location
 	 * @param type
 	 */
 	public void compile(String type) {
 		String latexcompiler = "/usr/bin/pdflatex";
 		if (!new File(latexcompiler).exists())
+			// TODO: Make custom exception
 			return;
-		
-		// Compiler command: [compliler] [path to .tex file]
+		// Compiler command: [Compliler] [path to .tex file]
 		String compilercommand = latexcompiler + " " + System.getProperty("user.dir") + "/temp/" + type +".tex";
-		
 		try {
-			Process p = Runtime.getRuntime().exec(compilercommand);
-			
-			BufferedReader stdout = new BufferedReader(new InputStreamReader(p.getInputStream()));
-			
-			// Print stdOut of pdflatex (NECCESARY, DONT DELETE!!!)
-			String s;
+			// Compile LaTeX document
+			Process proc = Runtime.getRuntime().exec(compilercommand);
+			BufferedReader stdout = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+			// Print stdOut of pdflatex (NECCESARY, DON'T DELETE!!!)
+			String output = null;
 			do {
-				s = stdout.readLine();
-				System.out.println(s);
-			} while (s != null);
+				output = stdout.readLine();
+				System.out.println(output);
+			} while (output != null);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
