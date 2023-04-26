@@ -107,11 +107,11 @@ public class LatexConcatenator {
 	    Process proc = Runtime.getRuntime().exec(compilercommand);
 	    BufferedReader stdout = new BufferedReader(new InputStreamReader(proc.getInputStream()));
 	    // Print stdOut of pdflatex (NOTE: NECCESARY, DON'T DELETE!!!)
-	    String output = null;
-	    do {
-		output = stdout.readLine();
-		System.out.println(output);
-	    } while (output != null);
+	    String output;
+     while((output = stdout.readLine()) != null) {
+         System.out.println(output);
+ }
+
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
