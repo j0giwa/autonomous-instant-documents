@@ -17,8 +17,17 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-package model;
+package de.thowl.automomousInstantdocumentSystem.model;
 
-public class Json {
+import java.io.BufferedWriter;
+import java.io.File;
 
+public class CsvExport {
+
+    private BufferedWriter writer;
+    private File file;
+
+    public CsvExport() {
+
+    }
 }

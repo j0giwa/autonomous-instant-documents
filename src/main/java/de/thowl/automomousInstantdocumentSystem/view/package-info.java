@@ -16,22 +16,5 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-    
-package controll;
 
-/**
- * This is the Main file of the programm
- * 
- * @version 0.1.1
- * @author jogiwa
- */
-
-public class Main {
-
-	public static void main(String[] args) {
-		
-		LatexConcatenator concatenator = new LatexConcatenator();
-		concatenator.concat("test");
-		concatenator.compile("test");
-	}
-}
+package de.thowl.automomousInstantdocumentSystem.view;

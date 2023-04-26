@@ -17,4 +17,18 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-package view;
+package de.thowl.automomousInstantdocumentSystem.control;
+
+/**
+ * This is the Mainfile of the Program
+ * 
+ * @version 0.1.2
+ * @author jogiwa
+ */
+public class Main {
+    public static void main(String[] args) {
+	LatexConcatenator concatenator = new LatexConcatenator();
+	concatenator.concat("test");
+	concatenator.compile("test");
+    }
+}

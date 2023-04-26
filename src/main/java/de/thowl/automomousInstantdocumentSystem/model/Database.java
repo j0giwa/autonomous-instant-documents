@@ -17,24 +17,24 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-package model;
+package de.thowl.automomousInstantdocumentSystem.model;
 
 public class Database {
 
-	private String databaseIp;
-	private String databaseName;
-	private String databaseUser;
-	private String databasePassword;
-	
-	public Database() {
-		
-	}
-	
-	public void insert(String[] dataset) {
-		
-	}
-	
-	public String[] select(String statement){
-		return null;
-	}
+    private String databaseIp;
+    private String databaseName;
+    private String databaseUser;
+    private String databasePassword;
+
+    public Database() {
+
+    }
+
+    public void insert(String[] dataset) {
+
+    }
+
+    public String[] select(String statement) {
+	return null;
+    }
 }
