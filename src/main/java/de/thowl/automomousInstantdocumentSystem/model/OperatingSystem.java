@@ -19,6 +19,7 @@
 
 package de.thowl.automomousInstantdocumentSystem.model;
 
+@SuppressWarnings("unused")
 public class OperatingSystem {
 
     private String os;

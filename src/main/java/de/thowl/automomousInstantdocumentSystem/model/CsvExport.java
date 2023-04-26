@@ -22,6 +22,7 @@ package de.thowl.automomousInstantdocumentSystem.model;
 import java.io.BufferedWriter;
 import java.io.File;
 
+@SuppressWarnings("unused")
 public class CsvExport {
 
     private BufferedWriter writer;

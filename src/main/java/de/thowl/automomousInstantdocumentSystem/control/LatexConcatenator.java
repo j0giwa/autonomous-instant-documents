@@ -89,8 +89,8 @@ public class LatexConcatenator {
     }
 
     /**
-     * This method complies a LaTeX document TODO: Implement Windows compiler
-     * location TODO: change output location
+     * This method complies a LaTeX document
+     * TODO: Implement Windows compilerlocation
      * 
      * @param type
      */
@@ -99,11 +99,10 @@ public class LatexConcatenator {
 	if (!new File(latexcompiler).exists())
 	    // TODO: Make custom exception
 	    return;
-	
+	// Variables for LaTeX complier
 	String userdir = System.getProperty("user.dir");
 	String outputDir = "-output-directory=" + destination;
 	String texFile = userdir + "/temp/" + type + ".tex";
-	
 	// Compiler command: [Compliler] [path to destination] [path to source.tex file]
 	String compilercommand = latexcompiler + " " + outputDir + " " + texFile;
 	try {
