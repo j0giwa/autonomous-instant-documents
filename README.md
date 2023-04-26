@@ -26,7 +26,12 @@
 </details>
 <details>
   <summary>Build from source</summary>
-  COMMING SOON
+  <details>
+  <summary>Maven</summary>
+    ```bash
+    mvn package
+    ```
+  </details>
 </details>
 
 ## Getting started

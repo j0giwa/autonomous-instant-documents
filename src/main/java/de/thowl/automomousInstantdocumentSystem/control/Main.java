@@ -29,6 +29,6 @@ public class Main {
     public static void main(String[] args) {
 	LatexConcatenator concatenator = new LatexConcatenator();
 	concatenator.concat("test");
-	concatenator.compile("test");
+	concatenator.compile("test", "/home/jogiwa/Downloads");
     }
 }

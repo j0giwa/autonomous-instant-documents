@@ -31,7 +31,7 @@ import org.apache.commons.io.FileUtils;
 import de.thowl.automomousInstantdocumentSystem.model.LatexSnippet;
 
 /**
- * This class is a concatenator for LaTeXsnippets files. It can concatenate and
+ * This class is a concatenator for LaTeX snippets files. It can concatenate and
  * compile LaTeX documents.
  * 
  * @version 0.1.2
@@ -89,29 +89,32 @@ public class LatexConcatenator {
     }
 
     /**
-     * This method complies a LaTeX document
-     * TODO: Implement Windows compiler location 
-     * TODO: change output location
+     * This method complies a LaTeX document TODO: Implement Windows compiler
+     * location TODO: change output location
      * 
      * @param type
      */
-    public void compile(String type) {
+    public void compile(String type, String destination) {
 	String latexcompiler = "/usr/bin/pdflatex";
 	if (!new File(latexcompiler).exists())
 	    // TODO: Make custom exception
 	    return;
-	// Compiler command: [Compliler] [path to .tex file]
-	String compilercommand = latexcompiler + " " + System.getProperty("user.dir") + "/temp/" + type + ".tex";
+	
+	String userdir = System.getProperty("user.dir");
+	String outputDir = "-output-directory=" + destination;
+	String texFile = userdir + "/temp/" + type + ".tex";
+	
+	// Compiler command: [Compliler] [path to destination] [path to source.tex file]
+	String compilercommand = latexcompiler + " " + outputDir + " " + texFile;
 	try {
 	    // Compile LaTeX document
 	    Process proc = Runtime.getRuntime().exec(compilercommand);
 	    BufferedReader stdout = new BufferedReader(new InputStreamReader(proc.getInputStream()));
 	    // Print stdOut of pdflatex (NOTE: NECCESARY, DON'T DELETE!!!)
-	    String output;
-     while((output = stdout.readLine()) != null) {
-         System.out.println(output);
- }
-
+	    String compliermsg;
+	    while ((compliermsg = stdout.readLine()) != null) {
+		System.out.println(compliermsg);
+	    }
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
