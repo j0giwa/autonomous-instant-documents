@@ -19,8 +19,10 @@
 
 package controll;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -29,8 +31,8 @@ import org.apache.commons.io.FileUtils;
 import model.LatexSnippet;
 
 /**
- * This class is a concatenator for LaTeX-snippets files.
- * It can concatenate and compile LaTeX documents.
+ * This class is a concatenator for LaTeX-snippets files. It can concatenate and
+ * compile LaTeX documents.
  * 
  * @version 0.0.0.1
  * @author jogiwa
@@ -45,28 +47,32 @@ public class LatexConcatenator {
 	 */
 	public LatexConcatenator() {
 		snippets = new ArrayList<LatexSnippet>();
-		sb = new StringBuilder();	
+		sb = new StringBuilder();
 	}
-	
+
 	/**
-	 * This method concatenates all requred snippets for a specified document 
-	 * @param String
+	 * This method concatenates all requred snippets for a specified document
+	 * 
+	 * @param type
 	 */
 	public void concat(String type) {
-		
 		// TODO: Replace with data from json
-		snippets.add(new LatexSnippet("/home/jogiwa/Documents/projekte/eclipse/automomous-instantdocument-system/assets/latex/test/header.tex"));
-		snippets.add(new LatexSnippet("/home/jogiwa/Documents/projekte/eclipse/automomous-instantdocument-system/assets/latex/test/01.tex"));
-		snippets.add(new LatexSnippet("/home/jogiwa/Documents/projekte/eclipse/automomous-instantdocument-system/assets/latex/test/02.tex"));
-		snippets.add(new LatexSnippet("/home/jogiwa/Documents/projekte/eclipse/automomous-instantdocument-system/assets/latex/test/footer.tex"));
-		
+		snippets.add(new LatexSnippet(
+				"/home/jogiwa/Documents/projekte/eclipse/automomous-instantdocument-system/assets/latex/test/header.tex"));
+		snippets.add(new LatexSnippet(
+				"/home/jogiwa/Documents/projekte/eclipse/automomous-instantdocument-system/assets/latex/test/01.tex"));
+		snippets.add(new LatexSnippet(
+				"/home/jogiwa/Documents/projekte/eclipse/automomous-instantdocument-system/assets/latex/test/02.tex"));
+		snippets.add(new LatexSnippet(
+				"/home/jogiwa/Documents/projekte/eclipse/automomous-instantdocument-system/assets/latex/test/footer.tex"));
+
 		// Feed relevant snippet data to StringBuilder
 		Iterator<LatexSnippet> it = snippets.iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			LatexSnippet currentSnipptet = it.next();
 			// FileContent is only relevant for header and footer files
-			if (currentSnipptet.getFilepath().contains("header.tex") ||
-					currentSnipptet.getFilepath().contains("footer.tex")) {
+			if (currentSnipptet.getFilepath().contains("header.tex")
+					|| currentSnipptet.getFilepath().contains("footer.tex")) {
 				sb.append(currentSnipptet.getFilecontent());
 			} else {
 				sb.append("\\input{" + currentSnipptet.getFilepath() + "}");
@@ -80,5 +86,35 @@ public class LatexConcatenator {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	} 
+	}
+
+	/**
+	 * This method complies a LaTeX document
+	 * TODO: Implement Windows compiler loaction
+	 * 
+	 * @param type
+	 */
+	public void compile(String type) {
+		String latexcompiler = "/usr/bin/pdflatex";
+		if (!new File(latexcompiler).exists())
+			return;
+		
+		// Compiler command: [compliler] [path to .tex file]
+		String compilercommand = latexcompiler + " " + System.getProperty("user.dir") + "/temp/" + type +".tex";
+		
+		try {
+			Process p = Runtime.getRuntime().exec(compilercommand);
+			
+			BufferedReader stdout = new BufferedReader(new InputStreamReader(p.getInputStream()));
+			
+			// Print stdOut of pdflatex (NECCESARY, DONT DELETE!!!)
+			String s;
+			do {
+				s = stdout.readLine();
+				System.out.println(s);
+			} while (s != null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
