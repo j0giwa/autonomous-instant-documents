@@ -10,6 +10,7 @@
 ## Features
 <details>
 <summary>Click to expand!</summary>
+
 - Generate LaTeX documents
 
 ### Planned Features
@@ -28,8 +29,10 @@
 ## Requirements
 <details>
 <summary>Click to expand!</summary>
+
 - Java17
 - pdflatex
+
 </details>
 
 ## Install
@@ -48,5 +51,7 @@ mvn package
 ## How to use
 <details>
 <summary>Click to expand!</summary>
+
 COMMING SOON
+
 </details>
