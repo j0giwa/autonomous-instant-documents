@@ -8,31 +8,40 @@
 [![shields.io](https://img.shields.io/github/issues/j0giwa/automomous-instantdokument-system)](https://img.shields.io/github/issues/j0giwa/automomous-instantdokument-system)
 
 ## Features
-- Generate LaTeX documents (preconfigured to produce exams and answers)
-- Customisable LaTeX snippets
+<details>
+<summary>Click to expand!</summary>
+- Generate LaTeX documents
+</details>
+
+## Planned Features
+<details>
+<summary>Click to expand!</summary>
+- Customisable LaTeX snippets (preconfigured to produce exams and answers)
 - ChatGPT integration to automatically generate new snippets (API-key required)
 - Snippet statistics are saved in a database (for example how often a snipped has been used)
 - Export database to csv
 - Usable via GUI and CLI
+</details>
 
 ## Requirements
 - Java17
 - pdflatex
 
+## Install
 <details>
-<summary>## Install</summary>
+<summary>Click to expand!</summary>
 
 ### Prebuild jar
 COMMING SOON
 
-### Build from source
+### Build it yourself
 ``` bash
 mvn package
 ```
 </details>
 
-## Getting started
-COMMING SOON
-
 ## How to use
+<details>
+<summary>Click to expand!</summary>
 COMMING SOON
+</details>
