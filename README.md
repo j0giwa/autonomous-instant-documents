@@ -24,8 +24,11 @@
 </details>
 
 ## Requirements
+<details>
+<summary>Click to expand!</summary>
 - Java17
 - pdflatex
+</details>
 
 ## Install
 <details>
