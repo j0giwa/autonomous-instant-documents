@@ -28,7 +28,7 @@
   <summary>Build from source</summary>
   <details>
   <summary>Maven</summary>
-    ```bash
+    ``` sh
     mvn package
     ```
   </details>
