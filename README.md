@@ -19,19 +19,15 @@
 - Java17
 - pdflatex
 
-## Install
 <details>
-  <summary>Premade jar</summary>
-  COMMING SOON
-</details>
-<details>
-  <summary>Build from source</summary>
-  <details>
-  <summary>Maven</summary>
-    ``` bash
-    mvn package
-    ```
-  </details>
+<summary>Install</summary>
+### Prebuild jar
+COMMING SOON
+
+### Build from source
+``` bash
+mvn package
+```
 </details>
 
 ## Getting started
