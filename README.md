@@ -20,7 +20,7 @@
 - pdflatex
 
 <details>
-<summary>Install</summary>
+<summary>## Install</summary>
 
 ### Prebuild jar
 COMMING SOON
