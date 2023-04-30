@@ -89,12 +89,13 @@ public class LatexConcatenator {
     }
 
     /**
-     * This method complies a LaTeX document
-     * TODO: Implement Windows compilerlocation
+     * This method compiles a LaTeX document
      * 
      * @param type
+     * @param destination
      */
     public void compile(String type, String destination) {
+	// TODO: Implement Windows compiler location
 	String latexcompiler = "/usr/bin/pdflatex";
 	if (!new File(latexcompiler).exists())
 	    // TODO: Make custom exception
