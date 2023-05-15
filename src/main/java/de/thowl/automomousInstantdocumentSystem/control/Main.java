@@ -22,7 +22,7 @@ package de.thowl.automomousInstantdocumentSystem.control;
 /**
  * This is the Main Class of the Program
  * 
- * @version 0.1.2
+ * @version 0.2.5
  * @author Jonas Schwind
  */
 public class Main {
@@ -30,10 +30,9 @@ public class Main {
     private static String OS;
     private static final String version = "Autonomous-Instantdocument-System V0.1.2-SNAPSHOT";
 
-    // Variables related to document generation
-    private static String type = null;
-    private static String destination = null;
-    private static int amount = 0;
+    private static String documentType = null;
+    private static String documentDestination = null;
+    private static int documentAmount = 0;
 
     public static void main(String[] args) {
 	OS = System.getProperty("os.name");
@@ -41,22 +40,22 @@ public class Main {
 	if (args.length > 0) {
 	    // TODO: run GUI
 	}
-	// handle cli arguments
 	handleArgs(args);
+	System.out.println(documentType);
+	System.out.println(documentDestination);
+	System.out.println(documentAmount);
 	// early return on incomplete values
-	if (type == null || destination == null || amount <= 0) {
+	if (documentType == null || documentDestination == null || documentAmount <= 0) {
 	    System.out.println("Not enough arguments");
 	    System.exit(2);
 	}
-	
-	System.out.println(destination);
-	System.out.println(amount);
-	generate(type, destination, amount);
+	generate(documentType, documentDestination, documentAmount);
 	System.exit(0);
     }
 
     /**
      * This method handles the command line arguments
+     * 
      * @param args
      */
     private static void handleArgs(String[] args) {
@@ -65,49 +64,55 @@ public class Main {
 	String previousArg = null;
 	for (int i = 0; i < argc; i++) {
 	    arg = args[i];
+	    if (arg.startsWith("--")) {
+		arg = arg.substring(2);
+	    } else if (arg.startsWith("-")) {
+		arg = arg.substring(1);
+	    }
 	    // Parameterized arguments
 	    if (previousArg != null) {
-		switch (previousArg) {
-		case "type":
-		case "t":
-		    System.out.println("type: " + arg);
-		    type = arg;
-		    break;
-		case "destination":
-		case "d":
-		    System.out.println("dest: " + arg);
-		    destination = arg;
-		    break;
-		case "amount":
-		case "a":
-		    System.out.println("ammount: " + arg);
-		    amount = Integer.parseInt(arg);
-		    break;
-		}
+		handleParameterisedArgs(arg, previousArg);
 		previousArg = null;
 	    }
 	    // Standard arguments
 	    switch (arg) {
-	    case "--version":
-	    case "-v":
+	    case "version":
+	    case "v":
 		printVersion();
 		System.exit(0);
 		break;
-	    case "--help":
-	    case "-h":
+	    case "help":
+	    case "h":
 		printHelp();
 		System.exit(0);
 		break;
 	    default:
-		if (arg.startsWith("--")) {
-		    arg = arg.substring(2);
-		} else if (arg.startsWith("-")) {
-		    arg = arg.substring(1);
-		}
 		previousArg = arg;
 		break;
 	    }
-	    
+	}
+    }
+
+    /**
+     * This method handles the command line arguments with additional parameters
+     * 
+     * @param args
+     */
+    private static void handleParameterisedArgs(String arg, String previousArg) {
+	switch (previousArg) {
+	case "type":
+	case "t":
+	    documentType = arg;
+	    break;
+	case "destination":
+	case "d":
+	    documentDestination = arg;
+	    break;
+	case "amount":
+	case "a":
+	    System.out.println("ammount: " + arg);
+	    documentAmount = Integer.parseInt(arg);
+	    break;
 	}
     }
 
