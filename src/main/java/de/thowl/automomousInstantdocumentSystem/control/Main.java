@@ -110,7 +110,6 @@ public class Main {
 	    break;
 	case "amount":
 	case "a":
-	    System.out.println("ammount: " + arg);
 	    documentAmount = Integer.parseInt(arg);
 	    break;
 	}
