@@ -48,7 +48,7 @@ public class Main {
 	    System.out.println("Not enough arguments");
 	    System.exit(2);
 	}
-	System.out.println(type);
+	
 	System.out.println(destination);
 	System.out.println(amount);
 	generate(type, destination, amount);
@@ -57,7 +57,6 @@ public class Main {
 
     /**
      * This method handles the command line arguments
-     * 
      * @param args
      */
     private static void handleArgs(String[] args) {
@@ -66,55 +65,49 @@ public class Main {
 	String previousArg = null;
 	for (int i = 0; i < argc; i++) {
 	    arg = args[i];
-	    // This is a long-form argument
-	    if (arg.startsWith("--")) {
-		arg = arg.substring(2);
-		switch (arg) {
-		case "version":
-		    printVersion();
-		    System.exit(0);
-		    break;
-		case "help":
-		    printHelp();
-		    System.exit(0);
-		    break;
-		default:
-		    previousArg = arg;
-		    break;
-		}
-	    // This is a short-form argument
-	    } else if (arg.startsWith("-")) {
-		arg = arg.substring(1);
-		switch (arg) {
-		case "version":
-		    printVersion();
-		    System.exit(0);
-		    break;
-		case "help":
-		    printHelp();
-		    System.exit(0);
-		    break;
-		default:
-		    previousArg = arg;
-		    break;
-		}
-	    } else if (previousArg != null) {
+	    // Parameterized arguments
+	    if (previousArg != null) {
 		switch (previousArg) {
 		case "type":
 		case "t":
+		    System.out.println("type: " + arg);
 		    type = arg;
 		    break;
 		case "destination":
 		case "d":
+		    System.out.println("dest: " + arg);
 		    destination = arg;
 		    break;
 		case "amount":
 		case "a":
+		    System.out.println("ammount: " + arg);
 		    amount = Integer.parseInt(arg);
 		    break;
 		}
 		previousArg = null;
 	    }
+	    // Standard arguments
+	    switch (arg) {
+	    case "--version":
+	    case "-v":
+		printVersion();
+		System.exit(0);
+		break;
+	    case "--help":
+	    case "-h":
+		printHelp();
+		System.exit(0);
+		break;
+	    default:
+		if (arg.startsWith("--")) {
+		    arg = arg.substring(2);
+		} else if (arg.startsWith("-")) {
+		    arg = arg.substring(1);
+		}
+		previousArg = arg;
+		break;
+	    }
+	    
 	}
     }
 
