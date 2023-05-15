@@ -41,9 +41,6 @@ public class Main {
 	    // TODO: run GUI
 	}
 	handleArgs(args);
-	System.out.println(documentType);
-	System.out.println(documentDestination);
-	System.out.println(documentAmount);
 	// early return on incomplete values
 	if (documentType == null || documentDestination == null || documentAmount <= 0) {
 	    System.out.println("Not enough arguments");
