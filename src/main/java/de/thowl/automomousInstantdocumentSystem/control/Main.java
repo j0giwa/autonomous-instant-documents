@@ -30,39 +30,75 @@ public class Main {
     private static String OS;
     private static final String version = "Autonomous-Instantdocument-System V0.1.2-SNAPSHOT";
 
+    // Variables related to document generation
+    private static String type = null;
+    private static String destination = null;
+    private static int amount = 0;
+
     public static void main(String[] args) {
 	OS = System.getProperty("os.name");
-	int argc = args.length;
 	// When no arguments are passed the program runs in a graphical mode
-	if (argc > 0) {
+	if (args.length > 0) {
 	    // TODO: run GUI
 	}
-	String type = null;
-	String destination = null;
-	int amount = 0;
+	// handle cli arguments
+	handleArgs(args);
+	// early return on incomplete values
+	if (type == null || destination == null || amount <= 0) {
+	    System.out.println("Not enough arguments");
+	    System.exit(2);
+	}
+	System.out.println(type);
+	System.out.println(destination);
+	System.out.println(amount);
+	generate(type, destination, amount);
+	System.exit(0);
+    }
+
+    /**
+     * This method handles the command line arguments
+     * 
+     * @param args
+     */
+    private static void handleArgs(String[] args) {
+	int argc = args.length;
 	String arg = null;
 	String previousArg = null;
 	for (int i = 0; i < argc; i++) {
 	    arg = args[i];
-	    // These arguments do are Documentation related.
-	    if (arg.equals("--help") || arg.equals("-h")) {
-		printHelp();
-		System.exit(0);
-	    }
-	    if (arg.equals("--version") || arg.equals("-v")) {
-		printVersion();
-		System.exit(0);
-	    }
-	    
-	    //Handle interface Commands
+	    // This is a long-form argument
 	    if (arg.startsWith("--")) {
-		// This is a long-form argument
-		previousArg = arg.substring(2);
+		arg = arg.substring(2);
+		switch (arg) {
+		case "version":
+		    printVersion();
+		    System.exit(0);
+		    break;
+		case "help":
+		    printHelp();
+		    System.exit(0);
+		    break;
+		default:
+		    previousArg = arg;
+		    break;
+		}
+	    // This is a short-form argument
 	    } else if (arg.startsWith("-")) {
-		// This is a short-form argument
-		previousArg = arg.substring(1);
+		arg = arg.substring(1);
+		switch (arg) {
+		case "version":
+		    printVersion();
+		    System.exit(0);
+		    break;
+		case "help":
+		    printHelp();
+		    System.exit(0);
+		    break;
+		default:
+		    previousArg = arg;
+		    break;
+		}
 	    } else if (previousArg != null) {
-		// This is a value for the previous argument
 		switch (previousArg) {
 		case "type":
 		case "t":
@@ -76,29 +112,21 @@ public class Main {
 		case "a":
 		    amount = Integer.parseInt(arg);
 		    break;
-
 		}
 		previousArg = null;
 	    }
 	}
-	// early return on incomplete values
-	if (type == null || destination == null || amount <= 0) {
-	    System.out.println("Not enough arguments");
-	    System.exit(2);
-	}
-	generate(type, destination, amount);
-	System.exit(0);
     }
 
     /**
-     * This method print the versioninformation to console
+     * This method print the version information to console
      */
     private static void printVersion() {
 	System.out.println(version);
     }
 
     /**
-     * This Method prints a simple help ducument to console
+     * This Method prints a simple help document to console
      */
     private static void printHelp() {
 	// TODO Add help once all features are implemented
@@ -106,8 +134,9 @@ public class Main {
     }
 
     /**
-     * This Method generates Documents within the passed parameters
-     * TODO: amount does not do anything yet
+     * This Method generates Documents within the passed parameters TODO: amount
+     * does not do anything yet
+     * 
      * @param type
      * @param destination
      * @param amount
