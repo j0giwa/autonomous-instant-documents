@@ -10,9 +10,9 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
-import de.thowl.automomousInstantdocumentSystem.control.LatexConcatenator;
+import de.thowl.automomousInstantdocumentSystem.control.Latex;
 
-public class TestLatexConcatenator {
+public class TestLatex {
     
     /**
      * This test checks if the tex file has been formated successfully
@@ -20,7 +20,7 @@ public class TestLatexConcatenator {
     @Test
     public void testConcat() {
 	// Concatenate test Document
-	LatexConcatenator latex = new LatexConcatenator();
+	Latex latex = new Latex();
 	latex.concat("test");
 
 	File testFile = new File("./temp/test.tex");
@@ -42,7 +42,7 @@ public class TestLatexConcatenator {
     public void testCompile() {
 	String type = "test";
 	String destination = "temp/";
-	LatexConcatenator latex = new LatexConcatenator();
+	Latex latex = new Latex();
 	latex.concat("test");
 	latex.compile(type, destination);
 	if (!new File(destination + type + ".pdf").exists()) {

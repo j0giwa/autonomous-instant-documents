@@ -35,9 +35,9 @@ import de.thowl.automomousInstantdocumentSystem.model.LatexSnippet;
  * compile LaTeX documents.
  * 
  * @version 0.1.2
- * @author jogiwa
+ * @author Jonas Schwind
  */
-public class LatexConcatenator {
+public class Latex {
 
     private ArrayList<LatexSnippet> snippets;
     private StringBuilder sb;
@@ -45,7 +45,7 @@ public class LatexConcatenator {
     /**
      * Constructor for objects of this class
      */
-    public LatexConcatenator() {
+    public Latex() {
 	snippets = new ArrayList<LatexSnippet>();
 	sb = new StringBuilder();
     }

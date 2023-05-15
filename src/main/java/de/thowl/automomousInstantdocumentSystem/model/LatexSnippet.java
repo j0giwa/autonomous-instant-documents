@@ -29,7 +29,7 @@ import org.apache.commons.io.FileUtils;
  * content of the file
  * 
  * @version 0.0.0.1
- * @author jogiwa
+ * @author Jonas Schwwind
  */
 public class LatexSnippet {
 
