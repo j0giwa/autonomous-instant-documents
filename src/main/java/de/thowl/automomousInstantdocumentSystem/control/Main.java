@@ -20,7 +20,7 @@
 package de.thowl.automomousInstantdocumentSystem.control;
 
 /**
- * This is the Mainfile of the Program
+ * This is the Main Class of the Program
  * 
  * @version 0.1.2
  * @author Jonas Schwind
@@ -33,9 +33,9 @@ public class Main {
     public static void main(String[] args) {
 	OS = System.getProperty("os.name");
 	int argc = args.length;
-	// When no arguments are passes the programm shuld run in graphiclea mode
+	// When no arguments are passed the program runs in a graphical mode
 	if (argc > 0) {
-	    // TODO: run gui
+	    // TODO: run GUI
 	}
 	String type = null;
 	String destination = null;
@@ -44,7 +44,7 @@ public class Main {
 	String previousArg = null;
 	for (int i = 0; i < argc; i++) {
 	    arg = args[i];
-	    // These arguments do are Documetation related
+	    // These arguments do are Documentation related.
 	    if (arg.equals("--help") || arg.equals("-h")) {
 		printHelp();
 		System.exit(0);
@@ -53,7 +53,8 @@ public class Main {
 		printVersion();
 		System.exit(0);
 	    }
-	    //Handle parameterised Commands
+	    
+	    //Handle interface Commands
 	    if (arg.startsWith("--")) {
 		// This is a long-form argument
 		previousArg = arg.substring(2);
@@ -100,21 +101,21 @@ public class Main {
      * This Method prints a simple help ducument to console
      */
     private static void printHelp() {
-	// TODO Add helt once all features are implemented
+	// TODO Add help once all features are implemented
 	System.out.println("NO HELP (yet...)");
     }
 
     /**
      * This Method generates Documents within the passed parameters
-     * 
+     * TODO: amount does not do anything yet
      * @param type
      * @param destination
      * @param amount
      */
     private static void generate(String type, String destination, int amount) {
 	Latex latex = new Latex();
-	latex.concat("test");
-	latex.compile("test", "/home/jogiwa/Downloads");
+	latex.concat(type);
+	latex.compile(type, destination);
     }
 
     /**
@@ -126,5 +127,4 @@ public class Main {
     public static String getOS() {
 	return OS;
     }
-
 }
