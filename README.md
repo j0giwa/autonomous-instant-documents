@@ -21,7 +21,7 @@
 - ChatGPT integration to automatically generate new snippets (API-key required)
 - Snippet statistics are saved in a database (for example how often a snipped has been used)
 - Export database to csv
-- Usable via GUI and CLI
+- Usable via GUI/TUI and CLI
 
 </details>
 </details>
@@ -32,6 +32,7 @@
 
 - Java17
 - pdflatex
+- an SQL-Server
 
 </details>
 
