@@ -25,10 +25,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
 
 import org.apache.commons.io.FileUtils;
 
-import de.thowl.automomousInstantdocumentSystem.Exceptions.LatexNotInstalledException;
+import de.thowl.automomousInstantdocumentSystem.exceptions.LatexNotInstalledException;
 import de.thowl.automomousInstantdocumentSystem.model.LatexSnippet;
 
 /**
@@ -51,21 +52,37 @@ public class Latex {
 	sb = new StringBuilder();
     }
 
+    private void gatherSnippets(String type, int chapterCount, boolean randomize) {
+	String OS = Main.getOS();
+	String snippetsDir = null;
+	// determine OS specific file path
+	if (OS.equals("Windows")) {
+	    snippetsDir = System.getenv("appdata") + "/aids/latex/";
+	} else if (OS.equals("UNIX")) {
+	    snippetsDir = System.getenv("XDG_CONFIG_HOME") + "/aids/latex/";
+	}
+	snippets.add(new LatexSnippet(snippetsDir + type + "/header.tex"));
+	for (int i = 0; i < chapterCount; i++) {
+	    File directory = new File(snippetsDir + type + "/chapters/");
+	    File[] files = directory.listFiles();
+	    int index = i;
+	    if (randomize) {
+		Random rng = new Random();
+		index = rng.nextInt(files.length);
+	    }
+	    File file = files[index];
+	    snippets.add(new LatexSnippet(file.getPath()));
+	}
+	snippets.add(new LatexSnippet(snippetsDir + type + "/footer.tex"));
+    }
+
     /**
      * This method concatenates all required snippets for a specified document
      * 
      * @param type
      */
-    public void concat(String type) {
-	// TODO: Replace with data from json (LOOP)
-	snippets.add(new LatexSnippet(
-		"/home/jogiwa/Documents/projekte/eclipse/automomous-instantdocument-system/assets/latex/test/header.tex"));
-	snippets.add(new LatexSnippet(
-		"/home/jogiwa/Documents/projekte/eclipse/automomous-instantdocument-system/assets/latex/test/01.tex"));
-	snippets.add(new LatexSnippet(
-		"/home/jogiwa/Documents/projekte/eclipse/automomous-instantdocument-system/assets/latex/test/02.tex"));
-	snippets.add(new LatexSnippet(
-		"/home/jogiwa/Documents/projekte/eclipse/automomous-instantdocument-system/assets/latex/test/footer.tex"));
+    public void concat(String type, int chapterCount, boolean randomize) {
+	gatherSnippets("test", chapterCount, randomize);
 	// Format snippet data to TeX and append it to a to a StringBuilder
 	Iterator<LatexSnippet> it = snippets.iterator();
 	while (it.hasNext()) {
@@ -92,33 +109,26 @@ public class Latex {
     private String latexCompiler() {
 	String compilerPath = null;
 	System.out.println(Main.getOS());
-	switch(Main.getOS()) {
-	case "Linux":
-	case "MacOS": //TODO: find out actual name of OS
+	if(Main.getOS().equals("UNIX")) {
 	    compilerPath = "/usr/bin/pdflatex";
-	    break;
-	case "Windows 10":
-	case "Windows 11":
+	} else if (Main.getOS().equals("Windows")) {
 	    compilerPath = "C:\\texlive\\2023\\bin\\windows\\pdflatex.exe";
-	    break;
-	default:
-	    break;
 	}
 	if (!new File(compilerPath).exists())
 	    return null;
 	return compilerPath;
     }
-    
+
     /**
      * This method compiles a LaTeX document
      * 
      * @param type
      * @param destination
-     * @throws LatexNotInstalledException 
+     * @throws LatexNotInstalledException
      */
     public void compile(String type, String destination) throws LatexNotInstalledException {
 	String compiler = latexCompiler();
-	if (compiler==null) {
+	if (compiler == null) {
 	    throw new LatexNotInstalledException("pdflatex not found");
 	}
 	// Variables for LaTeX complier

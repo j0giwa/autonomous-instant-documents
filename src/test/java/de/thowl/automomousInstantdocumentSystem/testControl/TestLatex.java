@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
-import de.thowl.automomousInstantdocumentSystem.Exceptions.LatexNotInstalledException;
 import de.thowl.automomousInstantdocumentSystem.control.Latex;
+import de.thowl.automomousInstantdocumentSystem.exceptions.LatexNotInstalledException;
 
 public class TestLatex {
     
@@ -22,11 +22,9 @@ public class TestLatex {
     public void testConcat() {
 	// Concatenate test Document
 	Latex latex = new Latex();
-	latex.concat("test");
-
+	latex.concat("test", 2, false);
 	File testFile = new File("./temp/test.tex");
 	File referenceFile = new File("./assets/latex/test/test.tex");
-
 	try {
 	    String referenceFileContent = FileUtils.readFileToString(referenceFile, "utf-8");
 	    String testFileContent = FileUtils.readFileToString(testFile, "utf-8");
@@ -44,7 +42,7 @@ public class TestLatex {
 	String type = "test";
 	String destination = "temp/";
 	Latex latex = new Latex();
-	latex.concat(type);
+	latex.concat(type, 2, false);
 	try {
 	    latex.compile(type, destination);
 	} catch (LatexNotInstalledException e) {

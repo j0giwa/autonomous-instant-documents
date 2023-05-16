@@ -19,7 +19,7 @@
 
 package de.thowl.automomousInstantdocumentSystem.control;
 
-import de.thowl.automomousInstantdocumentSystem.Exceptions.LatexNotInstalledException;
+import de.thowl.automomousInstantdocumentSystem.exceptions.LatexNotInstalledException;
 
 /**
  * This is the Main Class of the Program
@@ -138,7 +138,7 @@ public class Main {
      */
     private static void generate(String type, String destination, int amount) {
 	Latex latex = new Latex();
-	latex.concat(type);
+	latex.concat(type, 2, false);
 	try {
 	    latex.compile(type, destination);
 	} catch (LatexNotInstalledException e) {
@@ -148,12 +148,25 @@ public class Main {
     }
 
     /**
-     * This Method gets the name of the current OS (a Linux distribution is just
-     * called "Linux")
+     * This Method gets the name of the current OS
+     * (Just returns Windows or Unix to simplify things)
      * 
      * @return OS name
      */
     public static String getOS() {
-	return OS;
+	String OperatingSystemType = null;
+	switch (OS) {
+	case "Linux":
+	case "MacOS": // TODO: find out actual name of OS
+	    OperatingSystemType = "UNIX";
+	    break;
+	case "Windows 10":
+	case "Windows 11":
+	    OperatingSystemType = "Windows";
+	    break;
+	default:
+	    break;
+	}
+	return OperatingSystemType;
     }
 }
