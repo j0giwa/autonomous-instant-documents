@@ -24,7 +24,7 @@ public class TestLatex {
 	Latex latex = new Latex();
 	latex.concat("test", 2, false);
 	File testFile = new File("./temp/test.tex");
-	File referenceFile = new File("./assets/latex/test/test.tex");
+	File referenceFile = new File("./assets/defaults/latex/test/test.tex");
 	try {
 	    String referenceFileContent = FileUtils.readFileToString(referenceFile, "utf-8");
 	    String testFileContent = FileUtils.readFileToString(testFile, "utf-8");
