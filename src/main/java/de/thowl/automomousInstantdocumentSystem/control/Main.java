@@ -19,6 +19,8 @@
 
 package de.thowl.automomousInstantdocumentSystem.control;
 
+import de.thowl.automomousInstantdocumentSystem.Exceptions.LatexNotInstalledException;
+
 /**
  * This is the Main Class of the Program
  * 
@@ -27,7 +29,7 @@ package de.thowl.automomousInstantdocumentSystem.control;
  */
 public class Main {
 
-    private static String OS;
+    private static String OS = System.getProperty("os.name");
     private static final String version = "Autonomous-Instantdocument-System V0.1.2-SNAPSHOT";
 
     private static String documentType = null;
@@ -35,7 +37,6 @@ public class Main {
     private static int documentAmount = 0;
 
     public static void main(String[] args) {
-	OS = System.getProperty("os.name");
 	// When no arguments are passed the program runs in a graphical mode
 	if (args.length > 0) {
 	    // TODO: run GUI
@@ -138,7 +139,12 @@ public class Main {
     private static void generate(String type, String destination, int amount) {
 	Latex latex = new Latex();
 	latex.concat(type);
-	latex.compile(type, destination);
+	try {
+	    latex.compile(type, destination);
+	} catch (LatexNotInstalledException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
     }
 
     /**

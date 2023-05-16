@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
+import de.thowl.automomousInstantdocumentSystem.Exceptions.LatexNotInstalledException;
 import de.thowl.automomousInstantdocumentSystem.control.Latex;
 
 public class TestLatex {
@@ -43,8 +44,13 @@ public class TestLatex {
 	String type = "test";
 	String destination = "temp/";
 	Latex latex = new Latex();
-	latex.concat("test");
-	latex.compile(type, destination);
+	latex.concat(type);
+	try {
+	    latex.compile(type, destination);
+	} catch (LatexNotInstalledException e) {
+	    e.printStackTrace();
+	    fail("LaTeX not installed");
+	}
 	if (!new File(destination + type + ".pdf").exists()) {
 	    fail("PDF not compiled");
 	}

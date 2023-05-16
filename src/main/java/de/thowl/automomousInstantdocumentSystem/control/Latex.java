@@ -28,6 +28,7 @@ import java.util.Iterator;
 
 import org.apache.commons.io.FileUtils;
 
+import de.thowl.automomousInstantdocumentSystem.Exceptions.LatexNotInstalledException;
 import de.thowl.automomousInstantdocumentSystem.model.LatexSnippet;
 
 /**
@@ -88,24 +89,44 @@ public class Latex {
 	}
     }
 
+    private String latexCompiler() {
+	String compilerPath = null;
+	System.out.println(Main.getOS());
+	switch(Main.getOS()) {
+	case "Linux":
+	case "MacOS": //TODO: find out actual name of OS
+	    compilerPath = "/usr/bin/pdflatex";
+	    break;
+	case "Windows 10":
+	case "Windows 11":
+	    compilerPath = "C:\\texlive\\2023\\bin\\windows\\pdflatex.exe";
+	    break;
+	default:
+	    break;
+	}
+	if (!new File(compilerPath).exists())
+	    return null;
+	return compilerPath;
+    }
+    
     /**
      * This method compiles a LaTeX document
      * 
      * @param type
      * @param destination
+     * @throws LatexNotInstalledException 
      */
-    public void compile(String type, String destination) {
-	// TODO: Implement Windows compiler location
-	String latexcompiler = "/usr/bin/pdflatex";
-	if (!new File(latexcompiler).exists())
-	    // TODO: Make custom exception
-	    return;
+    public void compile(String type, String destination) throws LatexNotInstalledException {
+	String compiler = latexCompiler();
+	if (compiler==null) {
+	    throw new LatexNotInstalledException("pdflatex not found");
+	}
 	// Variables for LaTeX complier
 	String userdir = System.getProperty("user.dir");
 	String outputDir = "-output-directory=" + destination;
 	String texFile = userdir + "/temp/" + type + ".tex";
 	// Compiler command: [Compliler] [path to destination] [path to source.tex file]
-	String compilercommand = latexcompiler + " " + outputDir + " " + texFile;
+	String compilercommand = compiler + " " + outputDir + " " + texFile;
 	try {
 	    // Compile LaTeX document
 	    Process proc = Runtime.getRuntime().exec(compilercommand);
