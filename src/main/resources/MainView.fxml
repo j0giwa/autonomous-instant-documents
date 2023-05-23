@@ -1,0 +1,8 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<GridPane fx:controller="de.thowl.automomousInstantdocumentSystem.control.Controller" xmlns:fx="https://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+    <Label text="Hello"/>
+    <Button text="Hello" fx:id="btnTestButton" onAction="#btnTestButtonClick"/>
+</GridPane> 

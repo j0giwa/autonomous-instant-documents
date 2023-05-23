@@ -29,6 +29,7 @@ import java.util.Random;
 
 import org.apache.commons.io.FileUtils;
 
+import de.thowl.automomousInstantdocumentSystem.Main;
 import de.thowl.automomousInstantdocumentSystem.exceptions.LatexNotInstalledException;
 import de.thowl.automomousInstantdocumentSystem.model.LatexSnippet;
 
