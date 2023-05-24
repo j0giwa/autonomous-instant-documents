@@ -10,7 +10,7 @@ public class MainView extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("MainView.fxml"));
-		primaryStage.setTitle("Hello World!");
+		primaryStage.setTitle("Automomous Instantdocument System");
 		primaryStage.setScene(new Scene(root, 765, 490));
 		primaryStage.show();
 	}

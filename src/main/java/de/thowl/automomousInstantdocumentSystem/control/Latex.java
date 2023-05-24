@@ -42,113 +42,145 @@ import de.thowl.automomousInstantdocumentSystem.model.LatexSnippet;
  */
 public class Latex {
 
-    private ArrayList<LatexSnippet> snippets;
-    private StringBuilder sb;
+	private ArrayList<LatexSnippet> snippets;
+	private StringBuilder sb;
 
-    /**
-     * Constructor for objects of this class
-     */
-    public Latex() {
-	snippets = new ArrayList<LatexSnippet>();
-	sb = new StringBuilder();
-    }
+	/**
+	 * Constructor for objects of this class
+	 */
+	public Latex() {
+		snippets = new ArrayList<LatexSnippet>();
+		sb = new StringBuilder();
+	}
 
-    private void gatherSnippets(String type, int chapterCount, boolean randomize) {
-	String OS = Main.getOS();
-	String snippetsDir = null;
-	// determine OS specific file path
-	if (OS.equals("Windows")) {
-	    snippetsDir = System.getenv("appdata") + "/aids/latex/";
-	} else if (OS.equals("UNIX")) {
-	    snippetsDir = System.getenv("XDG_CONFIG_HOME") + "/aids/latex/";
+	/**
+	 * This Method gthers snipptes for a document
+	 * 
+	 * @param type
+	 * @param chapters
+	 * @param shuffle
+	 */
+	public void gatherSnippets(String type, int chapters, boolean shuffle) {
+		String OS = Main.getOS();
+		String snippetsDir = null;
+		// determine OS specific file path
+		if (OS.equals("Windows")) {
+			snippetsDir = System.getenv("appdata") + "/aids/latex/";
+		} else if (OS.equals("UNIX")) {
+			snippetsDir = System.getenv("XDG_CONFIG_HOME") + "/aids/latex/";
+		}
+		snippets.add(new LatexSnippet(snippetsDir + type + "/header.tex"));
+		for (int i = 0; i < chapters; i++) {
+			File directory = new File(snippetsDir + type + "/chapters/");
+			File[] files = directory.listFiles();
+			int index = i;
+			if (shuffle) {
+				Random rng = new Random();
+				index = rng.nextInt(files.length);
+			}
+			File file = files[index];
+			snippets.add(new LatexSnippet(file.getPath()));
+		}
+		snippets.add(new LatexSnippet(snippetsDir + type + "/footer.tex"));
 	}
-	snippets.add(new LatexSnippet(snippetsDir + type + "/header.tex"));
-	for (int i = 0; i < chapterCount; i++) {
-	    File directory = new File(snippetsDir + type + "/chapters/");
-	    File[] files = directory.listFiles();
-	    int index = i;
-	    if (randomize) {
-		Random rng = new Random();
-		index = rng.nextInt(files.length);
-	    }
-	    File file = files[index];
-	    snippets.add(new LatexSnippet(file.getPath()));
-	}
-	snippets.add(new LatexSnippet(snippetsDir + type + "/footer.tex"));
-    }
 
-    /**
-     * This method concatenates all required snippets for a specified document
-     * 
-     * @param type
-     */
-    public void concat(String type, int chapterCount, boolean randomize) {
-	gatherSnippets("test", chapterCount, randomize);
-	// Format snippet data to TeX and append it to a to a StringBuilder
-	Iterator<LatexSnippet> it = snippets.iterator();
-	while (it.hasNext()) {
-	    LatexSnippet snippet = it.next();
-	    String filepath = snippet.getFilepath();
-	    // Header and footer contents are the only important aspects
-	    if (filepath.contains("header") || filepath.contains("footer")) {
-		sb.append(snippet.getFilecontent() + "\n");
-		continue;
-	    }
-	    // For all other files their path is sufficient.
-	    sb.append("\\input{" + snippet.getFilepath() + "}\n");
+	/**
+	 * This method concatenates all required snippets for a specified document
+	 * 
+	 * @param type
+	 */
+	public void concat(String type) {
+		// Format snippet data to TeX and append it to a to a StringBuilder
+		Iterator<LatexSnippet> it = snippets.iterator();
+		while (it.hasNext()) {
+			LatexSnippet snippet = it.next();
+			String filepath = snippet.getFilepath();
+			// Header and footer contents are the only important aspects
+			if (filepath.contains("header") || filepath.contains("footer")) {
+				sb.append(snippet.getFilecontent() + "\n");
+				continue;
+			}
+			// For all other files their path is sufficient.
+			sb.append("\\input{" + snippet.getFilepath() + "}\n");
+		}
+		try {
+			// Print StringBuilder String to .tex file
+			File outputfile = new File("./temp/" + type + ".tex");
+			FileUtils.writeStringToFile(outputfile, sb.toString(), "utf-8");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-	try {
-	    // Print StringBuilder String to .tex file
-	    File outputfile = new File("./temp/" + type + ".tex");
-	    FileUtils.writeStringToFile(outputfile, sb.toString(), "utf-8");
-	} catch (IOException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	}
-    }
 
-    private String latexCompiler() {
-	String compilerPath = null;
-	System.out.println(Main.getOS());
-	if(Main.getOS().equals("UNIX")) {
-	    compilerPath = "/usr/bin/pdflatex";
-	} else if (Main.getOS().equals("Windows")) {
-	    compilerPath = "C:\\texlive\\2023\\bin\\windows\\pdflatex.exe";
+	/**
+	 * This Methodd returns the default location of the pdflatex binary for the
+	 * current opperating system.
+	 * 
+	 * @return location of pdflatex
+	 * @throws LatexNotInstalledException
+	 */
+	private String latexCompilerLocation() throws LatexNotInstalledException {
+		String compilerPath = null;
+		System.out.println(Main.getOS());
+		if (Main.getOS().equals("UNIX")) {
+			compilerPath = "/usr/bin/pdflatex";
+		} else if (Main.getOS().equals("Windows")) {
+			compilerPath = "C:\\texlive\\2023\\bin\\windows\\pdflatex.exe";
+		}
+		if (!new File(compilerPath).exists())
+			throw new LatexNotInstalledException("pdflatex not found");
+		return compilerPath;
 	}
-	if (!new File(compilerPath).exists())
-	    return null;
-	return compilerPath;
-    }
 
-    /**
-     * This method compiles a LaTeX document
-     * 
-     * @param type
-     * @param destination
-     * @throws LatexNotInstalledException
-     */
-    public void compile(String type, String destination) throws LatexNotInstalledException {
-	String compiler = latexCompiler();
-	if (compiler == null) {
-	    throw new LatexNotInstalledException("pdflatex not found");
+	/**
+	 * This method compiles a LaTeX document
+	 * 
+	 * @param type
+	 * @param destination
+	 */
+	public void compile(String type, String destination) {
+		String compiler = null;
+		try {
+			compiler = latexCompilerLocation();
+		} catch (LatexNotInstalledException e) {
+			e.printStackTrace();
+		}
+		// Variables for LaTeX complier
+		String userdir = System.getProperty("user.dir");
+		String outputDir = "-output-directory=" + destination;
+		String texFile = userdir + "/temp/" + type + ".tex";
+		// Compiler command: [Compliler] [path to destination] [path to source.tex file]
+		String compilercommand = compiler + " " + outputDir + " " + texFile;
+		try {
+			// Compile LaTeX document
+			Process proc = Runtime.getRuntime().exec(compilercommand);
+			BufferedReader stdout = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+			// Print stdOut of pdflatex (NOTE: NECCESARY, DON'T DELETE!!!)
+			String compliermsg;
+			while ((compliermsg = stdout.readLine()) != null) {
+				System.out.println(compliermsg);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-	// Variables for LaTeX complier
-	String userdir = System.getProperty("user.dir");
-	String outputDir = "-output-directory=" + destination;
-	String texFile = userdir + "/temp/" + type + ".tex";
-	// Compiler command: [Compliler] [path to destination] [path to source.tex file]
-	String compilercommand = compiler + " " + outputDir + " " + texFile;
-	try {
-	    // Compile LaTeX document
-	    Process proc = Runtime.getRuntime().exec(compilercommand);
-	    BufferedReader stdout = new BufferedReader(new InputStreamReader(proc.getInputStream()));
-	    // Print stdOut of pdflatex (NOTE: NECCESARY, DON'T DELETE!!!)
-	    String compliermsg;
-	    while ((compliermsg = stdout.readLine()) != null) {
-		System.out.println(compliermsg);
-	    }
-	} catch (IOException e) {
-	    e.printStackTrace();
+
+	/**
+	 * This Method concatinates and Compiles Documents within the passed parameters
+	 * Use this to generate Documents
+	 * 
+	 * @param type
+	 * @param destination
+	 * @param amount
+	 */
+	public void generate(String type, String destination, int amount, int chapters, boolean shuffle) {
+		gatherSnippets(type, chapters, shuffle);
+		for (int i = 0; i <= amount; i++) {
+			String subdirname = "foldername" + i;
+			String outputDir = destination + "/" + subdirname;
+			new File(outputDir).mkdir();
+			concat(type);
+			compile(type, outputDir);
+		}
 	}
-    }
 }

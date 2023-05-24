@@ -46,7 +46,6 @@ public class LatexSnippet {
 	try {
 	    filecontent = FileUtils.readFileToString(texfile, "utf-8");
 	} catch (IOException e) {
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
     }

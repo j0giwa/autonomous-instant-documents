@@ -20,7 +20,6 @@
 package de.thowl.automomousInstantdocumentSystem;
 
 import de.thowl.automomousInstantdocumentSystem.control.Latex;
-import de.thowl.automomousInstantdocumentSystem.exceptions.LatexNotInstalledException;
 import de.thowl.automomousInstantdocumentSystem.view.MainView;
 import javafx.application.Application;
 
@@ -41,6 +40,8 @@ public class Main {
 	private static String documentType = null;
 	private static String documentDestination = null;
 	private static int documentAmount = 0;
+	private static int documentChapters = 0;
+	private static boolean documentShuffle = true;
 
 	public static void main(String[] args) {
 		// When no arguments are passed the program runs in a graphical mode
@@ -54,7 +55,8 @@ public class Main {
 			System.out.println("Not enough arguments");
 			System.exit(EXIT_ERROR);
 		}
-		generate(documentType, documentDestination, documentAmount);
+		Latex latex = new Latex();
+		latex.generate(documentType, documentDestination, documentAmount, documentChapters, documentShuffle);
 		System.exit(EXIT_SUCCESS);
 	}
 
@@ -91,6 +93,10 @@ public class Main {
 					printHelp();
 					System.exit(EXIT_SUCCESS);
 					break;
+				case "noshuffle":
+				case "ns":
+					documentShuffle = false;
+					break;
 				default:
 					previousArg = arg;
 					break;
@@ -117,6 +123,10 @@ public class Main {
 			case "a":
 				documentAmount = Integer.parseInt(arg);
 				break;
+			case "chapters":
+			case "c":
+				documentChapters = Integer.parseInt(arg);
+				break;
 		}
 	}
 
@@ -136,25 +146,6 @@ public class Main {
 	}
 
 	/**
-	 * This Method generates Documents within the passed parameters TODO: amount
-	 * does not do anything yet
-	 * 
-	 * @param type
-	 * @param destination
-	 * @param amount
-	 */
-	private static void generate(String type, String destination, int amount) {
-		Latex latex = new Latex();
-		latex.concat(type, 2, false);
-		try {
-			latex.compile(type, destination);
-		} catch (LatexNotInstalledException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	/**
 	 * This Method gets the name of the current OS (Just returns Windows or Unix to
 	 * simplify things)
 	 * 
@@ -164,8 +155,7 @@ public class Main {
 		String OperatingSystemType = null;
 		switch (OS) {
 			case "Linux":
-				// TODO: find out actual name of OS
-			case "MacOS":
+			case "Mac OS X":
 				OperatingSystemType = "UNIX";
 				break;
 			case "Windows 10":
