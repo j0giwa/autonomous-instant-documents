@@ -17,4 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+/**
+ * This Package contains the Grafical User Interface (GUI)
+ */
 package de.thowl.automomousInstantdocumentSystem.view;

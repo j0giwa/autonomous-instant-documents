@@ -17,4 +17,10 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+/**
+ * This package contains all classes that handle data, either from files or
+ * databases
+ * 
+ * @author Jonas Schwind
+ */
 package de.thowl.automomousInstantdocumentSystem.model;

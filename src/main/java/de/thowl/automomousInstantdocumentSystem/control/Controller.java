@@ -7,6 +7,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
+/**
+ * This Class is the controller of the class <emph>Gui</emph>
+ * 
+ * @author Jonas Schwind
+ * @version 0.1.2
+ * @see de.thowl.automomousInstantdocumentSystem.view.Gui
+ */
 public class Controller {
 
     // Sidebar

@@ -34,11 +34,13 @@ import de.thowl.automomousInstantdocumentSystem.exceptions.LatexNotInstalledExce
 import de.thowl.automomousInstantdocumentSystem.model.LatexSnippet;
 
 /**
- * This class is a concatenator for LaTeX snippets files. It can concatenate and
+ * This class is a concatenator for LaTeX-snippets. It can concatenate and
  * compile LaTeX documents.
  * 
  * @version 0.1.2
  * @author Jonas Schwind
+ * 
+ * @see de.thowl.automomousInstantdocumentSystem.model.LatexSnippet
  */
 public class Latex {
 
@@ -54,13 +56,15 @@ public class Latex {
 	}
 
 	/**
-	 * This Method gthers snipptes for a document
+	 * This Method gathers snipptes for a document
 	 * 
-	 * @param type
-	 * @param chapters
-	 * @param shuffle
+	 * @param type     "type" of snippets that shuld be gathert (asigned by dircotry
+	 *                 name)
+	 * @param chapters amont of snipptts needed
+	 * @param shuffle  should the order be randomised (alway true except for
+	 *                 JUnit-tests)
 	 */
-	public void gatherSnippets(String type, int chapters, boolean shuffle) {
+	public void gatherSnippets(String type, int chapters, boolean randomise) {
 		String OS = Main.getOS();
 		String snippetsDir = null;
 		// determine OS specific file path
@@ -74,7 +78,7 @@ public class Latex {
 			File directory = new File(snippetsDir + type + "/chapters/");
 			File[] files = directory.listFiles();
 			int index = i;
-			if (shuffle) {
+			if (randomise) {
 				Random rng = new Random();
 				index = rng.nextInt(files.length);
 			}
@@ -87,7 +91,7 @@ public class Latex {
 	/**
 	 * This method concatenates all required snippets for a specified document
 	 * 
-	 * @param type
+	 * @param type type of the document
 	 */
 	public void concat(String type) {
 		// Format snippet data to TeX and append it to a to a StringBuilder
@@ -135,8 +139,8 @@ public class Latex {
 	/**
 	 * This method compiles a LaTeX document
 	 * 
-	 * @param type
-	 * @param destination
+	 * @param type        type of the Document
+	 * @param destination outputlocation for the compilde document
 	 */
 	public void compile(String type, String destination) {
 		String compiler = null;
@@ -169,12 +173,12 @@ public class Latex {
 	 * This Method concatinates and Compiles Documents within the passed parameters
 	 * Use this to generate Documents
 	 * 
-	 * @param type
-	 * @param destination
-	 * @param amount
+	 * @param type        type of the document that should be genearated
+	 * @param destination directory in which the documunt should be saved
+	 * @param amount      amount of instances that should bs saved
 	 */
 	public void generate(String type, String destination, int amount, int chapters, boolean shuffle) {
-		gatherSnippets(type, chapters, shuffle);
+		gatherSnippets(type, chapters, true);
 		for (int i = 0; i <= amount; i++) {
 			String subdirname = "foldername" + i;
 			String outputDir = destination + "/" + subdirname;

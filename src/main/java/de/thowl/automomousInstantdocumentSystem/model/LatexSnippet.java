@@ -25,11 +25,12 @@ import java.io.IOException;
 import org.apache.commons.io.FileUtils;
 
 /**
- * This class is a representation of a .tex file. It contains the Path and the
- * content of the file
+ * This class is a representation of a .tex file.
+ * It contains the Path and their respective content of the file
  * 
  * @version 0.0.0.1
  * @author Jonas Schwwind
+ * 
  */
 public class LatexSnippet {
 
@@ -41,48 +42,48 @@ public class LatexSnippet {
      * Constructor for objects of this class
      */
     public LatexSnippet(String filepath) {
-	this.filepath = filepath;
-	texfile = new File(this.filepath);
-	try {
-	    filecontent = FileUtils.readFileToString(texfile, "utf-8");
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
+        this.filepath = filepath;
+        texfile = new File(this.filepath);
+        try {
+            filecontent = FileUtils.readFileToString(texfile, "utf-8");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Get the location of the file
      * 
-     * @return String
+     * @return path to the file
      */
     public String getFilepath() {
-	return filepath;
+        return filepath;
     }
 
     /**
      * Get the content of the file
      * 
-     * @return String
+     * @return path of the file
      */
     public String getFilecontent() {
-	return filecontent;
+        return filecontent;
     }
 
     /**
      * Overwrite the location of the file
      * 
-     * @param String
+     * @param String new path to the file
      */
     public void setFilepath(String filepath) {
-	this.filepath = filepath;
+        this.filepath = filepath;
     }
 
     /**
      * Overwrite the content of the file
      * 
-     * @param String
+     * @param new content of the file
      */
     public void getFilecontent(String filecontent) {
-	this.filecontent = filecontent;
+        this.filecontent = filecontent;
     }
 }

@@ -17,4 +17,9 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+/**
+ * This Package contains the Main controlling logic of the Programm
+ * 
+ * @author Jonas Schwind
+ */
 package de.thowl.automomousInstantdocumentSystem.control;
