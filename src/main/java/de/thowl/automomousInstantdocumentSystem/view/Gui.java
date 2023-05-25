@@ -12,7 +12,7 @@ public class Gui extends Application {
 		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("MainScene.fxml"));
 		root.getStylesheets().add(getClass().getClassLoader().getResource("styles.css").toExternalForm());
 		primaryStage.setTitle("Automomous Instantdocument System");
-		primaryStage.setScene(new Scene(root, 765, 490));
+		primaryStage.setScene(new Scene(root, 760, 490));
 		primaryStage.show();
 	}
 }
