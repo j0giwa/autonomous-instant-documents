@@ -20,7 +20,7 @@
 package de.thowl.automomousInstantdocumentSystem;
 
 import de.thowl.automomousInstantdocumentSystem.control.Latex;
-import de.thowl.automomousInstantdocumentSystem.view.MainView;
+import de.thowl.automomousInstantdocumentSystem.view.Gui;
 import javafx.application.Application;
 
 /**
@@ -46,7 +46,7 @@ public class Main {
 	public static void main(String[] args) {
 		// When no arguments are passed the program runs in a graphical mode
 		if (args.length == 0) {
-			Application.launch(MainView.class, args);
+			Application.launch(Gui.class, args);
 			System.exit(EXIT_SUCCESS);
 		}
 		handleArgs(args);

@@ -19,11 +19,11 @@ public class Controller {
 
     // Button area
     @FXML
-    private Label lblAmmount;
+    private Label lblAmount;
     @FXML
     private Label lblChapters;
     @FXML
-    private TextField txtAmmount;
+    private TextField txtAmount;
     @FXML
     private TextField txtChapters;
     @FXML
@@ -58,7 +58,7 @@ public class Controller {
     protected void btnGenerateDocumentClick() {
         String type = "test"; // TODO: Add dropdown
         String destination = "/home/jogiwa/Downloads"; // TODO: add location in settings
-        int amount = Integer.parseInt(txtAmmount.getText());
+        int amount = Integer.parseInt(txtAmount.getText());
         int chapters = Integer.parseInt(txtChapters.getText());
         boolean shuffle = chkShuffle.isArmed();
         Latex latex = new Latex();
