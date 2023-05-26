@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import de.thowl.automomousInstantdocumentSystem.Main;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -52,7 +53,7 @@ public class Controller implements Initializable {
     private TextArea txtMultipurposeTextArea;
 
     /**
-     * 
+     * This Methodd populates the Dropdownmenu
      */
     private void initialiseDropdown() {
         String OS = Main.getOS();
@@ -103,14 +104,14 @@ public class Controller implements Initializable {
     @FXML
     protected void btnGenerateDocumentClick() {
         Alert errorAlert = new Alert(AlertType.ERROR);
-        String documentType = cmbType.getSelectionModel().getSelectedItem();
-        String destination = "/home/jogiwa/Downloads"; // TODO: add location in settings
-        System.out.println(documentType);
-        int amount = 0;
-        int chapters = 0;
+        // Defining Document related Variables
+        final String documentType = cmbType.getSelectionModel().getSelectedItem();
+        final String documentDestination = "/home/jogiwa/Downloads"; // TODO: add location in settings
+        int documentAmountInput = 0;
+        int documentChaptersInput = 0;
         try {
-            amount = Integer.parseInt(txtAmount.getText());
-            chapters = Integer.parseInt(txtChapters.getText());
+            documentAmountInput = Integer.parseInt(txtAmount.getText());
+            documentChaptersInput = Integer.parseInt(txtChapters.getText());
         } catch (NumberFormatException e) {
             // Display
             StringWriter sw = new StringWriter();
@@ -120,21 +121,40 @@ public class Controller implements Initializable {
             errorAlert.showAndWait();
             return;
         }
-        boolean shuffle = chkShuffle.isArmed();
-        // Abort on invalid inputs
+        final int documentAmount = documentAmountInput;
+        final int documentChapters = documentChaptersInput;
+        final boolean shuffle = chkShuffle.isArmed();
+        // Check Vars, Abort on invalid inputs
         if (documentType == null) {
             errorAlert.setHeaderText("Invalid Inputs");
             errorAlert.setContentText("Please specify a document type");
             errorAlert.showAndWait();
             return;
         }
-        if (amount <= 0 || chapters <= 0) {
+        if (documentAmount <= 0 || documentChapters <= 0) {
             errorAlert.setHeaderText("Invalid Inputs");
             errorAlert.setContentText("Please specify a value higher than 0");
             errorAlert.showAndWait();
             return;
         }
-        Latex latex = new Latex();
-        latex.generate(documentType, destination, amount, chapters, shuffle);
-    }    
+        // Generate Latex Documents
+        Thread t = new Thread(() -> {
+            Latex latex = new Latex();
+            latex.generate(documentType, documentDestination, documentAmount, documentChapters, shuffle);
+            Platform.runLater(() -> {
+                appendToMultiPurposeTextArea("[ INFO ] Starting new LaTeX instance\n");
+                appendToMultiPurposeTextArea("[ INFO ]  Generating " + documentAmount +
+                        " Documents with " + documentChapters + " Chapters...\n");
+                appendToMultiPurposeTextArea("[ INFO ]  done!\n");
+            });
+        });
+        t.start();
+    }
+
+    public void appendToMultiPurposeTextArea(String newString) {
+        StringBuilder areaContent = new StringBuilder();
+        areaContent.append(txtMultipurposeTextArea.getText());
+        areaContent.append(newString);
+        txtMultipurposeTextArea.setText(areaContent.toString());
+    }
 }
