@@ -39,4 +39,4 @@ if __name__ == "__main__":
     operatingSystem = detectOS()
     assetLocation = getAssetLocation(operatingSystem)
     copyDefaultsToLocation("./assets/defaults", assetLocation)
-    constructLatexRefferenceFile(assetLocation, "./assets/defaults/latex/test/test.tex")
+    constructLatexRefferenceFile(assetLocation, "./src/test/resources/latex/test/test.tex")
