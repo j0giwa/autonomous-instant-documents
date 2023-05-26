@@ -1,6 +1,7 @@
 package de.thowl.automomousInstantdocumentSystem.control;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.URL;
@@ -9,8 +10,13 @@ import java.util.ResourceBundle;
 
 import de.thowl.automomousInstantdocumentSystem.Main;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -18,6 +24,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * This Class is the controller of the class <emph>Gui</emph>
@@ -28,6 +35,9 @@ import javafx.scene.control.TextField;
  */
 public class Controller implements Initializable {
 
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
     // Sidebar
     @FXML
     private Button btnMainScene;
@@ -52,10 +62,20 @@ public class Controller implements Initializable {
     @FXML
     private TextArea txtMultipurposeTextArea;
 
+    private void switchToScene(ActionEvent event, String sceneName) throws IOException {
+        root = FXMLLoader.load(getClass().getClassLoader().getResource(sceneName + ".fxml"));
+        root.getStylesheets().add(getClass().getClassLoader().getResource("styles.css").toExternalForm());
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
     /**
-     * This Methodd populates the Dropdownmenu
+     * This Methodd populates the Dropdownmenu <emph>cmbType</emph>
      */
-    private void initialiseDropdown() {
+    private void initialiseTypeDropdown() {
         String OS = Main.getOS();
         String snippetsDir = null;
         // determine OS specific file path
@@ -75,26 +95,67 @@ public class Controller implements Initializable {
         cmbType.getItems().setAll(dropdownItems);
     }
 
+    private void appendToMultiPurposeTextArea(String newString) {
+        StringBuilder areaContent = new StringBuilder();
+        areaContent.append(txtMultipurposeTextArea.getText());
+        areaContent.append(newString);
+        txtMultipurposeTextArea.setText(areaContent.toString());
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Populate Dropdown menu
-        initialiseDropdown();
+        try {
+            initialiseTypeDropdown();
+        } catch (NullPointerException e) {
+        }
     }
 
     // Events
     @FXML
-    protected void btnMainSceneClick() {
-        // TODO: Add logic
+    private void btnMainSceneClick(ActionEvent event) {
+        try {
+            switchToScene(event, "MainScene");
+        } catch (IOException e) {
+            Alert errorAlert = new Alert(AlertType.ERROR);
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            errorAlert.setHeaderText("NumberFormatException");
+            errorAlert.setContentText(sw.toString());
+            errorAlert.showAndWait();
+            return;
+        }
     }
 
     @FXML
-    protected void btnLatexSceneClick() {
-        // TODO: Add logic
+    private void btnLatexSceneClick(ActionEvent event) {
+        try {
+            switchToScene(event, "LatexScene");
+        } catch (IOException e) {
+            Alert errorAlert = new Alert(AlertType.ERROR);
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            e.printStackTrace();
+            errorAlert.setHeaderText("NumberFormatException");
+            errorAlert.setContentText(sw.toString());
+            errorAlert.showAndWait();
+            return;
+        }
     }
 
     @FXML
-    protected void btnDatabaseSceneClick() {
-        // TODO: Add logic
+    private void btnDatabaseSceneClick(ActionEvent event) {
+        try {
+            switchToScene(event, "DatabaseScene");
+        } catch (IOException e) {
+            Alert errorAlert = new Alert(AlertType.ERROR);
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            errorAlert.setHeaderText("NumberFormatException");
+            errorAlert.setContentText(sw.toString());
+            errorAlert.showAndWait();
+            return;
+        }
     }
 
     /**
@@ -102,7 +163,7 @@ public class Controller implements Initializable {
      * Exected when button is pressed
      */
     @FXML
-    protected void btnGenerateDocumentClick() {
+    private void btnGenerateDocumentClick(ActionEvent event) {
         Alert errorAlert = new Alert(AlertType.ERROR);
         // Defining Document related Variables
         final String documentType = cmbType.getSelectionModel().getSelectedItem();
@@ -138,7 +199,7 @@ public class Controller implements Initializable {
             return;
         }
         // Generate Latex Documents
-        Thread t = new Thread(() -> {
+        new Thread(() -> {
             Latex latex = new Latex();
             latex.generate(documentType, documentDestination, documentAmount, documentChapters, shuffle);
             Platform.runLater(() -> {
@@ -147,14 +208,6 @@ public class Controller implements Initializable {
                         " Documents with " + documentChapters + " Chapters...\n");
                 appendToMultiPurposeTextArea("[ INFO ]  done!\n");
             });
-        });
-        t.start();
-    }
-
-    public void appendToMultiPurposeTextArea(String newString) {
-        StringBuilder areaContent = new StringBuilder();
-        areaContent.append(txtMultipurposeTextArea.getText());
-        areaContent.append(newString);
-        txtMultipurposeTextArea.setText(areaContent.toString());
+        }).start();
     }
 }
