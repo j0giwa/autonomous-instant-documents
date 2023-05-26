@@ -121,11 +121,19 @@ public class Main {
 				break;
 			case "amount":
 			case "a":
-				documentAmount = Integer.parseInt(arg);
+				try {
+					documentAmount = Integer.parseInt(arg);
+				} catch (NumberFormatException e) {
+					e.printStackTrace();
+				}
 				break;
 			case "chapters":
 			case "c":
-				documentChapters = Integer.parseInt(arg);
+				try {
+					documentChapters = Integer.parseInt(arg);
+				} catch (NumberFormatException e) {
+					e.printStackTrace();
+				}
 				break;
 		}
 	}

@@ -1,9 +1,20 @@
 package de.thowl.automomousInstantdocumentSystem.control;
 
+import java.io.File;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
+import de.thowl.automomousInstantdocumentSystem.Main;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
@@ -14,7 +25,7 @@ import javafx.scene.control.TextField;
  * @version 0.1.2
  * @see de.thowl.automomousInstantdocumentSystem.view.Gui
  */
-public class Controller {
+public class Controller implements Initializable {
 
     // Sidebar
     @FXML
@@ -26,9 +37,7 @@ public class Controller {
 
     // Button area
     @FXML
-    private Label lblAmount;
-    @FXML
-    private Label lblChapters;
+    private ComboBox<String> cmbType;
     @FXML
     private TextField txtAmount;
     @FXML
@@ -41,6 +50,35 @@ public class Controller {
     // Multipurpose TextArea
     @FXML
     private TextArea txtMultipurposeTextArea;
+
+    /**
+     * 
+     */
+    private void initialiseDropdown() {
+        String OS = Main.getOS();
+        String snippetsDir = null;
+        // determine OS specific file path
+        if (OS.equals("Windows")) {
+            snippetsDir = System.getenv("appdata") + "/aids/latex/";
+        } else if (OS.equals("UNIX")) {
+            snippetsDir = System.getenv("XDG_CONFIG_HOME") + "/aids/latex/";
+        }
+        File directory = new File(snippetsDir);
+        String[] files = directory.list();
+        ArrayList<String> dropdownItems = new ArrayList<String>();
+        for (String file : files) {
+            if (new File(snippetsDir + "/" + file).isDirectory()) {
+                dropdownItems.add(file);
+            }
+        }
+        cmbType.getItems().setAll(dropdownItems);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        // Populate Dropdown menu
+        initialiseDropdown();
+    }
 
     // Events
     @FXML
@@ -60,15 +98,43 @@ public class Controller {
 
     /**
      * This method contains the logic behind the "Generate" Button on the GUI
+     * Exected when button is pressed
      */
     @FXML
     protected void btnGenerateDocumentClick() {
-        String type = "test"; // TODO: Add dropdown
+        Alert errorAlert = new Alert(AlertType.ERROR);
+        String documentType = cmbType.getSelectionModel().getSelectedItem();
         String destination = "/home/jogiwa/Downloads"; // TODO: add location in settings
-        int amount = Integer.parseInt(txtAmount.getText());
-        int chapters = Integer.parseInt(txtChapters.getText());
+        System.out.println(documentType);
+        int amount = 0;
+        int chapters = 0;
+        try {
+            amount = Integer.parseInt(txtAmount.getText());
+            chapters = Integer.parseInt(txtChapters.getText());
+        } catch (NumberFormatException e) {
+            // Display
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            errorAlert.setHeaderText("NumberFormatException");
+            errorAlert.setContentText(sw.toString());
+            errorAlert.showAndWait();
+            return;
+        }
         boolean shuffle = chkShuffle.isArmed();
+        // Abort on invalid inputs
+        if (documentType == null) {
+            errorAlert.setHeaderText("Invalid Inputs");
+            errorAlert.setContentText("Please specify a document type");
+            errorAlert.showAndWait();
+            return;
+        }
+        if (amount <= 0 || chapters <= 0) {
+            errorAlert.setHeaderText("Invalid Inputs");
+            errorAlert.setContentText("Please specify a value higher than 0");
+            errorAlert.showAndWait();
+            return;
+        }
         Latex latex = new Latex();
-        latex.generate(type, destination, amount, chapters, shuffle);
-    }
+        latex.generate(documentType, destination, amount, chapters, shuffle);
+    }    
 }

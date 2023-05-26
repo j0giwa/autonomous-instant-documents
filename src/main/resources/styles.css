@@ -40,12 +40,7 @@
   -fx-padding: 20px 40px;
 }
 
-.label {
-  -fx-margin: 17px;
-  -fx-font-size: 16pt;
-  -fx-text-fill: -fx-primary-text;
-}
-
+.combo-box-base,
 .text-field {
   -fx-padding: 10px;
   -fx-border-insets: 10px;
