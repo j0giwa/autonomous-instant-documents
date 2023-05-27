@@ -32,6 +32,9 @@
         <VBox fx:id="buttonarea" GridPane.columnIndex="1">
             <children>
                 <Label text="Scene 2"/>
+                <ComboBox fx:id="cmbType" value="Type"/>
+                <TextField fx:id="txtChatGptPrompt" promptText="Proompt"/>
+                 <Button fx:id="btnChatGptGo" text="GO" onAction="#btnChatGptGoClick"/>
             </children>
         </VBox>
         <!--Multipurpose Textarea-->

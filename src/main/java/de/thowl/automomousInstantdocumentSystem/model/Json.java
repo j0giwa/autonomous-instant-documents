@@ -19,6 +19,45 @@
 
 package de.thowl.automomousInstantdocumentSystem.model;
 
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 public class Json {
 
+    private String filePath;
+    private JSONObject jsonObject;
+
+    public Json(String filepath) {
+        this.filePath = filepath;
+        try {
+            Object parser = new JSONParser().parse(new FileReader(filepath));
+            jsonObject = (JSONObject) parser;
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getValue(String object, String key) {
+        JSONObject currentObject = (JSONObject) jsonObject.get(object);
+        String value = (String) currentObject.get(key);
+        return value;
+    }
+
+    public void setValue(String object, String key, String value) {
+        JSONObject currentObject = (JSONObject) jsonObject.get(object);
+        currentObject.put(key, value);
+        try {
+            FileWriter file = new FileWriter(filePath);
+            file.write(jsonObject.toJSONString());
+            file.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+    }
 }

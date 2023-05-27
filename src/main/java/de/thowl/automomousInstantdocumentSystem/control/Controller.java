@@ -54,14 +54,24 @@ public class Controller implements Initializable {
     @FXML
     private TextField txtChapters;
     @FXML
+    private TextField txtChatGptPrompt;
+    @FXML
     private CheckBox chkShuffle;
     @FXML
     private Button btnGenerateDocument;
+    @FXML
+    private Button btnChatGptGo;
 
     // Multipurpose TextArea
     @FXML
     private TextArea txtMultipurposeTextArea;
 
+    /**
+     * This method chages the scene to the specifiedd one
+     * 
+     * @param event     Actionevent from the current scene
+     * @param sceneName scene to switch to
+     */
     private void switchToScene(ActionEvent event, String sceneName) throws IOException {
         root = FXMLLoader.load(getClass().getClassLoader().getResource(sceneName + ".fxml"));
         root.getStylesheets().add(getClass().getClassLoader().getResource("styles.css").toExternalForm());
@@ -69,7 +79,6 @@ public class Controller implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-
     }
 
     /**
@@ -209,5 +218,10 @@ public class Controller implements Initializable {
                 appendToMultiPurposeTextArea("[ INFO ]  done!\n");
             });
         }).start();
+    }
+
+    @FXML
+    private void btnChatGptGoClick() {
+        // Todo: add logic
     }
 }

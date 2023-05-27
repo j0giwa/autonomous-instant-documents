@@ -33,6 +33,7 @@
   -fx-margin-bottom: 12px;
 }
 
+#multipurposearea,
 #buttonarea {
   -fx-min-width: 365px;
   -fx-min-height: 490px;
@@ -81,7 +82,8 @@
    -fx-background-color: mark-color
 }
 
-#btnGenerateDocument {
+#btnGenerateDocument,
+#btnChatGptGo {
   -fx-padding: 16px 38px; 
   -fx-border-insets: 17px;
   -fx-background-insets: 17px;
@@ -94,11 +96,6 @@
   -fx-background-color: -fx-light-background;
   -fx-font-size: 16pt;
   -fx-text-fill: -fx-primary-text;
-}
-
-#multipurposearea {
-  -fx-min-width: 365px;
-  -fx-padding: 20px 40px;  
 }
 
 .text-area {
