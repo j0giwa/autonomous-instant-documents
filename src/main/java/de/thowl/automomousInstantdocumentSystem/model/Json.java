@@ -27,6 +27,12 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+/**
+ * This class contains Methods to read and write a JSon file
+ * 
+ * @author Jonas Schwind
+ * @version 1.0,0
+ */
 public class Json {
 
     private String filePath;
@@ -42,19 +48,35 @@ public class Json {
         }
     }
 
+    /**
+     * This method returs a value from a JSon file.
+     * 
+     * @param object JSonObject that contains the value that should be returned
+     * @param key    key in JSonObject, that contains the value that should be
+     *               returned
+     * @param value  value the should be returned
+     */
     public String getValue(String object, String key) {
         JSONObject currentObject = (JSONObject) jsonObject.get(object);
         String value = (String) currentObject.get(key);
         return value;
     }
 
+    /**
+     * This method overwrites a value in a JSon file.
+     * 
+     * @param object JSonObject that contains the value that should be changed
+     * @param key    key in JSonObject, that contains the value that should be
+     *               changed
+     * @param value  value the should be changed
+     */
     public void setValue(String object, String key, String value) {
         JSONObject currentObject = (JSONObject) jsonObject.get(object);
-        currentObject.put(key, value);
+        currentObject.put(key, value); // NOTE: library not implemented as "generic type"
         try {
             FileWriter file = new FileWriter(filePath);
             file.write(jsonObject.toJSONString());
-            file.flush();
+            file.close();
         } catch (IOException e) {
             e.printStackTrace();
             return;

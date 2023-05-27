@@ -35,9 +35,11 @@ import javafx.stage.Stage;
  */
 public class Controller implements Initializable {
 
+    Alert errorAlert = new Alert(AlertType.ERROR);
     private Stage stage;
     private Scene scene;
     private Parent root;
+
     // Sidebar
     @FXML
     private Button btnMainScene;
@@ -82,7 +84,7 @@ public class Controller implements Initializable {
     }
 
     /**
-     * This Methodd populates the Dropdownmenu <emph>cmbType</emph>
+     * This method populates the Dropdownmenu <emph>cmbType</emph>
      */
     private void initialiseTypeDropdown() {
         String OS = Main.getOS();
@@ -104,11 +106,38 @@ public class Controller implements Initializable {
         cmbType.getItems().setAll(dropdownItems);
     }
 
+    /**
+     * This metod appends a sttring to the TextArea
+     * <emph>txtMultipurposeTextArea</emph>
+     * 
+     * @param newString String to append
+     */
     private void appendToMultiPurposeTextArea(String newString) {
         StringBuilder areaContent = new StringBuilder();
         areaContent.append(txtMultipurposeTextArea.getText());
         areaContent.append(newString);
         txtMultipurposeTextArea.setText(areaContent.toString());
+    }
+
+    /**
+     * This method valtidates if an supposed integer is an actual integer
+     * 
+     * @param inputInt Integer to validate
+     * @return Integervalue (if int)
+     */
+    private int validateInt(String inputInt) {
+        int integer = 0;
+        try {
+            integer = Integer.parseInt(inputInt);
+        } catch (NumberFormatException e) {
+            StringWriter stringWriter = new StringWriter();
+            e.printStackTrace(new PrintWriter(stringWriter));
+            errorAlert.setHeaderText("NumberFormatException");
+            errorAlert.setContentText(stringWriter.toString());
+            errorAlert.showAndWait();
+            return 0;
+        }
+        return integer;
     }
 
     @Override
@@ -117,6 +146,7 @@ public class Controller implements Initializable {
         try {
             initialiseTypeDropdown();
         } catch (NullPointerException e) {
+            // Do nothing
         }
     }
 
@@ -141,12 +171,10 @@ public class Controller implements Initializable {
         try {
             switchToScene(event, "LatexScene");
         } catch (IOException e) {
-            Alert errorAlert = new Alert(AlertType.ERROR);
-            StringWriter sw = new StringWriter();
-            e.printStackTrace(new PrintWriter(sw));
-            e.printStackTrace();
+            StringWriter stringWriter = new StringWriter();
+            e.printStackTrace(new PrintWriter(stringWriter));
             errorAlert.setHeaderText("NumberFormatException");
-            errorAlert.setContentText(sw.toString());
+            errorAlert.setContentText(stringWriter.toString());
             errorAlert.showAndWait();
             return;
         }
@@ -157,11 +185,10 @@ public class Controller implements Initializable {
         try {
             switchToScene(event, "DatabaseScene");
         } catch (IOException e) {
-            Alert errorAlert = new Alert(AlertType.ERROR);
-            StringWriter sw = new StringWriter();
-            e.printStackTrace(new PrintWriter(sw));
+            StringWriter stringWriter = new StringWriter();
+            e.printStackTrace(new PrintWriter(stringWriter));
             errorAlert.setHeaderText("NumberFormatException");
-            errorAlert.setContentText(sw.toString());
+            errorAlert.setContentText(stringWriter.toString());
             errorAlert.showAndWait();
             return;
         }
@@ -173,51 +200,27 @@ public class Controller implements Initializable {
      */
     @FXML
     private void btnGenerateDocumentClick(ActionEvent event) {
-        Alert errorAlert = new Alert(AlertType.ERROR);
-        // Defining Document related Variables
-        final String documentType = cmbType.getSelectionModel().getSelectedItem();
-        final String documentDestination = "/home/jogiwa/Downloads"; // TODO: add location in settings
-        int documentAmountInput = 0;
-        int documentChaptersInput = 0;
-        try {
-            documentAmountInput = Integer.parseInt(txtAmount.getText());
-            documentChaptersInput = Integer.parseInt(txtChapters.getText());
-        } catch (NumberFormatException e) {
-            // Display
-            StringWriter sw = new StringWriter();
-            e.printStackTrace(new PrintWriter(sw));
-            errorAlert.setHeaderText("NumberFormatException");
-            errorAlert.setContentText(sw.toString());
-            errorAlert.showAndWait();
-            return;
-        }
-        final int documentAmount = documentAmountInput;
-        final int documentChapters = documentChaptersInput;
+        final String type = cmbType.getSelectionModel().getSelectedItem();
+        final String destination = "/home/jogiwa/Downloads"; // TODO: add location in settings
+        final int amount = validateInt(txtAmount.getText());
+        final int chapters = validateInt(txtChapters.getText());
         final boolean shuffle = chkShuffle.isArmed();
-        // Check Vars, Abort on invalid inputs
-        if (documentType == null) {
+        if (type == null || amount <= 0 || chapters <= 0) {
             errorAlert.setHeaderText("Invalid Inputs");
-            errorAlert.setContentText("Please specify a document type");
+            errorAlert.setContentText("Please check your inputs");
             errorAlert.showAndWait();
             return;
         }
-        if (documentAmount <= 0 || documentChapters <= 0) {
-            errorAlert.setHeaderText("Invalid Inputs");
-            errorAlert.setContentText("Please specify a value higher than 0");
-            errorAlert.showAndWait();
-            return;
-        }
-        // Generate Latex Documents
+        appendToMultiPurposeTextArea("[ INFO ] Starting new LaTeX instance\n");
         new Thread(() -> {
             Latex latex = new Latex();
-            latex.generate(documentType, documentDestination, documentAmount, documentChapters, shuffle);
+            latex.generate(type, destination, amount, chapters, shuffle);
             Platform.runLater(() -> {
-                appendToMultiPurposeTextArea("[ INFO ] Starting new LaTeX instance\n");
-                appendToMultiPurposeTextArea("[ INFO ]  Generating " + documentAmount +
-                        " Documents with " + documentChapters + " Chapters...\n");
-                appendToMultiPurposeTextArea("[ INFO ]  done!\n");
+                appendToMultiPurposeTextArea(
+                        "[ INFO ]  Generating " + amount + " Documents with " + chapters + " Chapters...\n");
             });
         }).start();
+        appendToMultiPurposeTextArea("[ INFO ]  done!\n");
     }
 
     @FXML
