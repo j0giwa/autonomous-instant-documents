@@ -12,6 +12,7 @@
 <summary>Click to expand!</summary>
 
 - Generate LaTeX documents
+- Usable via GUI/TUI and CLI
 
 ### Planned Features
 <details>
@@ -21,7 +22,6 @@
 - ChatGPT integration to automatically generate new snippets (API-key required)
 - Snippet statistics are saved in a database (for example how often a snipped has been used)
 - Export database to csv
-- Usable via GUI/TUI and CLI
 
 </details>
 </details>
@@ -31,6 +31,7 @@
 <summary>Click to expand!</summary>
 
 - Java17
+- JavaFx
 - pdflatex
 - an SQL-Server
 
@@ -53,6 +54,16 @@ mvn package
 <details>
 <summary>Click to expand!</summary>
 
-COMMING SOON
+`automomous-instantdocument-system` without options launches in a grafical mode.
+
+### Flags
+| flag          | function                           |
+| ------------- | ---------------------------------- |
+| -t --type <type> | Specifies the desired Document type e.g. "exam". |
+| -c --chapters <chapters> | Specifies the amount of chapters per document. 
+| -a --amount <amount> | Specifies how many Documents should be generated.
+| -ns --noshuffle | Turns of shuffle mode. |
+| -h --help | Show summary of options. |
+| -v --version | Print version number and exit. |
 
 </details>
