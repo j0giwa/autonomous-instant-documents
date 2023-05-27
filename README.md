@@ -12,7 +12,7 @@
 <summary>Click to expand!</summary>
 
 - Generate LaTeX documents
-- Usable via GUI/TUI and CLI
+- Usable via GUI, TUI and CLI
 
 ### Planned Features
 <details>
@@ -33,8 +33,7 @@
 - Java17
 - JavaFx
 - pdflatex
-- an SQL-Server
-
+  
 </details>
 
 ## Install
