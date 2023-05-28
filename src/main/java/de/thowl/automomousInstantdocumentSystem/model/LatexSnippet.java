@@ -83,7 +83,7 @@ public class LatexSnippet {
 	 * 
 	 * @param new content of the file
 	 */
-	public void getFilecontent(String filecontent) {
+	public void setFilecontent(String filecontent) {
 		this.filecontent = filecontent;
 	}
 }
