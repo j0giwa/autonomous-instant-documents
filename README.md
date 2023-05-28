@@ -12,16 +12,16 @@
 <summary>Click to expand!</summary>
 
 - Generate LaTeX documents
-- Usable via GUI, TUI and CLI
+- Usable via GUI, TUI (UNIX OS only) and CLI
 
 ### Planned Features
 <details>
 <summary>Click to expand!</summary>
 
-- Customisable LaTeX snippets (preconfigured to produce exams and answers)
-- ChatGPT integration to automatically generate new snippets (API-key required)
+- Customisable LaTeX snippets (preconfigured ffor exams and answers)
 - Snippet statistics are saved in a database (for example how often a snipped has been used)
 - Export database to csv
+- ChatGPT integration to automatically generate new snippets (API-key required)
 
 </details>
 </details>
@@ -30,10 +30,11 @@
 <details>
 <summary>Click to expand!</summary>
 
-- Java17
-- JavaFx
+- java17
+- javafx
 - pdflatex
-  
+- whiptail (for TUI)
+
 </details>
 
 ## Install
