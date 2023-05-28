@@ -34,7 +34,7 @@ public class Main {
 	private static final int EXIT_SUCCESS = 0;
 	private static final int EXIT_ERROR = 1;
 
-	private static final String version = "Autonomous-Instantdocument-System V0.1.2-SNAPSHOT";
+	private static final String version = "version: 0.8.5";
 
 	private static String type = null;
 	private static String destination = null;
