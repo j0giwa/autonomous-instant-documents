@@ -1,6 +1,6 @@
 /*
  * Autonomous Instantdocument System -- Automatically generate LaTeX Documents
- * Copyright (C) 2023 Jonas Schwind
+ * Copyright (C) 2023 Jonas Schwind, Marvin Boschmann
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,10 +25,10 @@ import java.io.File;
 @SuppressWarnings("unused")
 public class CsvExport {
 
-    private BufferedWriter writer;
-    private File file;
+	private BufferedWriter writer;
+	private File file;
 
-    public CsvExport() {
+	public CsvExport() {
 
-    }
+	}
 }

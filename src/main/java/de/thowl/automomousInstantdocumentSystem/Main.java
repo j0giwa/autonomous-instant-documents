@@ -1,6 +1,6 @@
 /*
  * Autonomous Instantdocument System -- Automatically generate LaTeX Documents
- * Copyright (C) 2023 Jonas Schwind
+ * Copyright (C) 2023 Jonas Schwind, Marvin Boschmann
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,29 +34,26 @@ public class Main {
 	private static final int EXIT_SUCCESS = 0;
 	private static final int EXIT_ERROR = 1;
 
-	private static String OS = System.getProperty("os.name");
 	private static final String version = "Autonomous-Instantdocument-System V0.1.2-SNAPSHOT";
 
-	private static String documentType = null;
-	private static String documentDestination = null;
-	private static int documentAmount = 0;
-	private static int documentChapters = 0;
-	private static boolean documentShuffle = true;
+	private static String type = null;
+	private static String destination = null;
+	private static int amount = 0;
+	private static int chapters = 0;
+	private static boolean shuffle = true;
 
 	public static void main(String[] args) {
-		// When no arguments are passed the program runs in a graphical mode
 		if (args.length == 0) {
 			Application.launch(Gui.class, args);
 			System.exit(EXIT_SUCCESS);
 		}
 		handleArgs(args);
-		// early return on incomplete values
-		if (documentType == null || documentDestination == null || documentAmount <= 0) {
+		if (type == null || destination == null || amount <= 0) {
 			System.out.println("Not enough arguments");
 			System.exit(EXIT_ERROR);
 		}
 		Latex latex = new Latex();
-		latex.generate(documentType, documentDestination, documentAmount, documentChapters, documentShuffle);
+		latex.generate(type, destination, amount, chapters, shuffle);
 		System.exit(EXIT_SUCCESS);
 	}
 
@@ -95,7 +92,7 @@ public class Main {
 					break;
 				case "noshuffle":
 				case "ns":
-					documentShuffle = false;
+					shuffle = false;
 					break;
 				default:
 					previousArg = arg;
@@ -113,16 +110,16 @@ public class Main {
 		switch (previousArg) {
 			case "type":
 			case "t":
-				documentType = arg;
+				type = arg;
 				break;
 			case "destination":
 			case "d":
-				documentDestination = arg;
+				destination = arg;
 				break;
 			case "amount":
 			case "a":
 				try {
-					documentAmount = Integer.parseInt(arg);
+					amount = Integer.parseInt(arg);
 				} catch (NumberFormatException e) {
 					e.printStackTrace();
 				}
@@ -130,7 +127,7 @@ public class Main {
 			case "chapters":
 			case "c":
 				try {
-					documentChapters = Integer.parseInt(arg);
+					chapters = Integer.parseInt(arg);
 				} catch (NumberFormatException e) {
 					e.printStackTrace();
 				}
@@ -151,28 +148,5 @@ public class Main {
 	private static void printHelp() {
 		// TODO Add help once all features are implemented
 		System.out.println("NO HELP (yet...)");
-	}
-
-	/**
-	 * This Method gets the name of the current OS (Just returns Windows or Unix to
-	 * simplify things)
-	 * 
-	 * @return OS name
-	 */
-	public static String getOS() {
-		String OperatingSystemType = null;
-		switch (OS) {
-			case "Linux":
-			case "Mac OS X":
-				OperatingSystemType = "UNIX";
-				break;
-			case "Windows 10":
-			case "Windows 11":
-				OperatingSystemType = "Windows";
-				break;
-			default:
-				break;
-		}
-		return OperatingSystemType;
 	}
 }

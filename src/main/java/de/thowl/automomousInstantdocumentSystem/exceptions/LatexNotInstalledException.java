@@ -1,6 +1,6 @@
 /*
  * Autonomous Instantdocument System -- Automatically generate LaTeX Documents
- * Copyright (C) 2023 Jonas Schwind
+ * Copyright (C) 2023 Jonas Schwind, Marvin Boschmann
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,16 +21,16 @@ package de.thowl.automomousInstantdocumentSystem.exceptions;
 
 public class LatexNotInstalledException extends Exception {
 
-    private static final long serialVersionUID = 1L;
-    private String message;
-    
-    public LatexNotInstalledException (String message) {
-	super(message);
-	this.message = message;
-    }
-    
-    @Override 
-    public String toString() {
-	return message;
-    }
+	private static final long serialVersionUID = 1L;
+	private String message;
+
+	public LatexNotInstalledException(String message) {
+		super(message);
+		this.message = message;
+	}
+
+	@Override
+	public String toString() {
+		return message;
+	}
 }

@@ -1,6 +1,6 @@
 /*
  * Autonomous Instantdocument System -- Automatically generate LaTeX Documents
- * Copyright (C) 2023 Jonas Schwind
+ * Copyright (C) 2023 Jonas Schwind, Marvin Boschmann
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,20 +22,20 @@ package de.thowl.automomousInstantdocumentSystem.model;
 @SuppressWarnings("unused")
 public class Database {
 
-    private String databaseIp;
-    private String databaseName;
-    private String databaseUser;
-    private String databasePassword;
+	private String databaseIp;
+	private String databaseName;
+	private String databaseUser;
+	private String databasePassword;
 
-    public Database() {
+	public Database() {
 
-    }
+	}
 
-    public void insert(String[] dataset) {
+	public void insert(String[] dataset) {
 
-    }
+	}
 
-    public String[] select(String statement) {
-	return null;
-    }
+	public String[] select(String statement) {
+		return null;
+	}
 }

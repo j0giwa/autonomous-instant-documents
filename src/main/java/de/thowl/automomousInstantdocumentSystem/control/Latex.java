@@ -1,6 +1,6 @@
 /*
  * Autonomous Instantdocument System -- Automatically generate LaTeX Documents
- * Copyright (C) 2023 Jonas Schwind
+ * Copyright (C) 2023 Jonas Schwind, Marvin Boschmann
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,9 +29,9 @@ import java.util.Random;
 
 import org.apache.commons.io.FileUtils;
 
-import de.thowl.automomousInstantdocumentSystem.Main;
 import de.thowl.automomousInstantdocumentSystem.exceptions.LatexNotInstalledException;
 import de.thowl.automomousInstantdocumentSystem.model.LatexSnippet;
+import de.thowl.automomousInstantdocumentSystem.model.Os;
 
 /**
  * This class is a concatenator for LaTeX-snippets. It can concatenate and
@@ -46,6 +46,9 @@ public class Latex {
 
 	private ArrayList<LatexSnippet> snippets;
 	private StringBuilder sb;
+	private Os os;
+	private String osName;
+	private String homeDir;
 
 	/**
 	 * Constructor for objects of this class
@@ -53,26 +56,23 @@ public class Latex {
 	public Latex() {
 		snippets = new ArrayList<LatexSnippet>();
 		sb = new StringBuilder();
+		os = new Os();
+		osName = os.getOS();
+		homeDir = os.getHomeDir();
+		os = null;
 	}
 
 	/**
 	 * This Method gathers snipptes for a document
 	 * 
-	 * @param type     "type" of snippets that shuld be gathert (asigned by dircotry
+	 * @param type     "type" of snippets that should be used (directory
 	 *                 name)
-	 * @param chapters amont of snipptts needed
-	 * @param shuffle  should the order be randomised (alway true except for
-	 *                 JUnit-tests)
+	 * @param chapters amount of snippets
+	 * @param shuffle  should the order be randomised (always true except for
+	 *                 tests)
 	 */
 	public void gatherSnippets(String type, int chapters, boolean randomise) {
-		String OS = Main.getOS();
-		String snippetsDir = null;
-		// determine OS specific file path
-		if (OS.equals("Windows")) {
-			snippetsDir = System.getenv("appdata") + "/aids/latex/";
-		} else if (OS.equals("UNIX")) {
-			snippetsDir = System.getenv("XDG_CONFIG_HOME") + "/aids/latex/";
-		}
+		String snippetsDir = homeDir + "/latex/";
 		snippets.add(new LatexSnippet(snippetsDir + type + "/header.tex"));
 		for (int i = 0; i < chapters; i++) {
 			File directory = new File(snippetsDir + type + "/chapters/");
@@ -125,10 +125,9 @@ public class Latex {
 	 */
 	private String latexCompilerLocation() throws LatexNotInstalledException {
 		String compilerPath = null;
-		System.out.println(Main.getOS());
-		if (Main.getOS().equals("UNIX")) {
+		if (osName.equals("UNIX")) {
 			compilerPath = "/usr/bin/pdflatex";
-		} else if (Main.getOS().equals("Windows")) {
+		} else if (osName.equals("Windows")) {
 			compilerPath = "C:\\texlive\\2023\\bin\\windows\\pdflatex.exe";
 		}
 		if (!new File(compilerPath).exists())

@@ -1,6 +1,6 @@
 /*
  * Autonomous Instantdocument System -- Automatically generate LaTeX Documents
- * Copyright (C) 2023 Jonas Schwind
+ * Copyright (C) 2023 Jonas Schwind, Marvin Boschmann
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,56 +34,56 @@ import org.apache.commons.io.FileUtils;
  */
 public class LatexSnippet {
 
-    private File texfile;
-    private String filepath;
-    private String filecontent;
+	private File texfile;
+	private String filepath;
+	private String filecontent;
 
-    /**
-     * Constructor for objects of this class
-     */
-    public LatexSnippet(String filepath) {
-        this.filepath = filepath;
-        texfile = new File(this.filepath);
-        try {
-            filecontent = FileUtils.readFileToString(texfile, "utf-8");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+	/**
+	 * Constructor for objects of this class
+	 */
+	public LatexSnippet(String filepath) {
+		this.filepath = filepath;
+		texfile = new File(this.filepath);
+		try {
+			filecontent = FileUtils.readFileToString(texfile, "utf-8");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-    /**
-     * Get the location of the file
-     * 
-     * @return path to the file
-     */
-    public String getFilepath() {
-        return filepath;
-    }
+	/**
+	 * Get the location of the file
+	 * 
+	 * @return path to the file
+	 */
+	public String getFilepath() {
+		return filepath;
+	}
 
-    /**
-     * Get the content of the file
-     * 
-     * @return path of the file
-     */
-    public String getFilecontent() {
-        return filecontent;
-    }
+	/**
+	 * Get the content of the file
+	 * 
+	 * @return path of the file
+	 */
+	public String getFilecontent() {
+		return filecontent;
+	}
 
-    /**
-     * Overwrite the location of the file
-     * 
-     * @param String new path to the file
-     */
-    public void setFilepath(String filepath) {
-        this.filepath = filepath;
-    }
+	/**
+	 * Overwrite the location of the file
+	 * 
+	 * @param String new path to the file
+	 */
+	public void setFilepath(String filepath) {
+		this.filepath = filepath;
+	}
 
-    /**
-     * Overwrite the content of the file
-     * 
-     * @param new content of the file
-     */
-    public void getFilecontent(String filecontent) {
-        this.filecontent = filecontent;
-    }
+	/**
+	 * Overwrite the content of the file
+	 * 
+	 * @param new content of the file
+	 */
+	public void getFilecontent(String filecontent) {
+		this.filecontent = filecontent;
+	}
 }
