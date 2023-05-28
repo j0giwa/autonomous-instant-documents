@@ -29,16 +29,18 @@ public class TestLatexSnippet {
 
 	@Test
 	void testGetFilepath() {
-		String filepath = "/home/jogiwa/Documents/projekte/eclipse/automomous-instantdocument-system/src/test/resources/latex/test/header.tex";
+		String currentDir = System.getProperty("user.dir");
+		String filepath = currentDir + "/src/test/resources/latex/test/header.tex";
 		LatexSnippet snippet = new LatexSnippet(filepath);
 		assertEquals(filepath, snippet.getFilepath());
 	}
 
 	@Test
 	void testSetFilepath() {
-		String filepath = "/home/jogiwa/Documents/projekte/eclipse/automomous-instantdocument-system/src/test/resources/latex/test/header.tex";
+		String currentDir = System.getProperty("user.dir");
+		String filepath = currentDir + "/src/test/resources/latex/test/header.tex";
 		LatexSnippet snippet = new LatexSnippet(filepath);
-		String newFilepath = "/home/jogiwa/Documents/projekte/eclipse/automomous-instantdocument-system/src/test/resources/latex/test/header1.tex";
+		String newFilepath = currentDir + "/src/test/resources/latex/test/header1.tex";
 		String expected = newFilepath;
 		snippet.setFilepath(newFilepath);
 		String actual = snippet.getFilepath();
@@ -47,7 +49,8 @@ public class TestLatexSnippet {
 
 	@Test
 	void testGetFilecontent() {
-		String filepath = "/home/jogiwa/Documents/projekte/eclipse/automomous-instantdocument-system/src/test/resources/latex/test/footer.tex";
+		String currentDir = System.getProperty("user.dir");
+		String filepath = currentDir + "/src/test/resources/latex/test/footer.tex";
 		LatexSnippet snippet = new LatexSnippet(filepath);
 		String expected = "\\end{document}";
 		String actual = snippet.getFilecontent();
@@ -56,7 +59,8 @@ public class TestLatexSnippet {
 
 	@Test
 	void testSetFilecontent() {
-		String filepath = "/home/jogiwa/Documents/projekte/eclipse/automomous-instantdocument-system/src/test/resources/latex/test/footer.tex";
+		String currentDir = System.getProperty("user.dir");
+		String filepath = currentDir + "/src/test/resources/latex/test/footer.tex";
 		LatexSnippet snippet = new LatexSnippet(filepath);
 		String newContent = "\\end{file}";
 		String expected = newContent;
