@@ -34,6 +34,7 @@
 - javafx
 - pdflatex
 - whiptail (for TUI)
+- maven (if you want to build from source)
 
 </details>
 
