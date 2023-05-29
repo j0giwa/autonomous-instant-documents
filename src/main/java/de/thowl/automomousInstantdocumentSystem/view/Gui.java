@@ -28,7 +28,7 @@ import javafx.stage.Stage;
 /**
  * This class is the Gui of the Programm
  * Is just a loader for an fxml-file
- * The controling logic can be found in the <emph>Conttroller</emph> class
+ * The controling logic can be found in the <em>Conttroller</em> class
  * 
  * @author Jonas Schwind
  * @version 1.0.3

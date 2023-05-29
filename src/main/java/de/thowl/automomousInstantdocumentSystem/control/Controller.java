@@ -46,7 +46,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
- * This Class is the controller of the class <emph>Gui</emph>
+ * This Class is the controller of the class <em>Gui</em>
  * 
  * @author Jonas Schwind
  * @version 0.1.2
@@ -103,7 +103,7 @@ public class Controller implements Initializable {
 	}
 
 	/**
-	 * This method populates the Dropdownmenu <emph>cmbType</emph>
+	 * Populates the Dropdownmenu <em>cmbType</em>
 	 */
 	private void initialiseTypeDropdown() {
 		Os os = new Os();
@@ -121,8 +121,8 @@ public class Controller implements Initializable {
 	}
 
 	/**
-	 * This metod appends a String to the TextArea
-	 * <emph>txtMultipurposeTextArea</emph>
+	 * Appends a String to the TextArea
+	 * <em>txtMultipurposeTextArea</em>
 	 * 
 	 * @param newString String to append
 	 */
@@ -134,7 +134,7 @@ public class Controller implements Initializable {
 	}
 
 	/**
-	 * This method valtidates if an supposed integer is an actual integer
+	 * Valtidates if an supposed integer is an actual integer
 	 * 
 	 * @param inputInt Integer to validate
 	 * @return Integervalue (if int)
@@ -154,9 +154,14 @@ public class Controller implements Initializable {
 		return integer;
 	}
 
+	/**
+	 * Initiialises the gui
+	 * 
+	 * @param location
+	 * @param resources
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// Populate Dropdown menu
 		try {
 			initialiseTypeDropdown();
 		} catch (NullPointerException e) {
@@ -164,7 +169,11 @@ public class Controller implements Initializable {
 		}
 	}
 
-	// Events
+	/**
+	 * Switshes to the <em>Main</em> scene
+	 * 
+	 * @param event ActionEvent of the Button
+	 */
 	@FXML
 	private void btnMainSceneClick(ActionEvent event) {
 		try {
@@ -180,6 +189,11 @@ public class Controller implements Initializable {
 		}
 	}
 
+	/**
+	 * Switshes to the <em>LaTeX</em> scene
+	 * 
+	 * @param event ActionEvent of the Button
+	 */
 	@FXML
 	private void btnLatexSceneClick(ActionEvent event) {
 		try {
@@ -194,6 +208,11 @@ public class Controller implements Initializable {
 		}
 	}
 
+	/**
+	 * Switshes to the <em>Database</em> scene
+	 * 
+	 * @param event ActionEvent of the Button
+	 */
 	@FXML
 	private void btnDatabaseSceneClick(ActionEvent event) {
 		try {
@@ -211,6 +230,8 @@ public class Controller implements Initializable {
 	/**
 	 * This method contains the logic behind the "Generate" Button on the GUI
 	 * Exected when button is pressed
+	 * 
+	 * @param event ActionEvent of the Button
 	 */
 	@FXML
 	private void btnGenerateDocumentClick(ActionEvent event) {

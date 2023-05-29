@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Random;
 
@@ -37,8 +38,8 @@ import de.thowl.automomousInstantdocumentSystem.model.Os;
  * This class is a concatenator for LaTeX-snippets. It can concatenate and
  * compile LaTeX documents.
  * 
- * @version 0.1.2
  * @author Jonas Schwind
+ * @version 0.1.2
  * 
  * @see de.thowl.automomousInstantdocumentSystem.model.LatexSnippet
  */
@@ -63,10 +64,10 @@ public class Latex {
 	}
 
 	/**
-	 * This Method gathers snipptes for a document
+	 * This Method gathers snipptes for a LaTex document
 	 * 
-	 * @param type     "type" of snippets that should be used (directory
-	 *                 name)
+	 * @param type     The "type" of snippets that should be collected, the type is
+	 *                 defined by a directoryname in the config-directory.
 	 * @param chapters amount of snippets
 	 * @param shuffle  should the order be randomised (always true except for
 	 *                 tests)
@@ -77,6 +78,7 @@ public class Latex {
 		for (int i = 0; i < chapters; i++) {
 			File directory = new File(snippetsDir + type + "/chapters/");
 			File[] files = directory.listFiles();
+			Arrays.sort(files);
 			int index = i;
 			if (randomise) {
 				Random rng = new Random();
@@ -89,9 +91,17 @@ public class Latex {
 	}
 
 	/**
-	 * This method concatenates all required snippets for a specified document
+	 * This method concatenates a sourcefile from snippets gathered by the
+	 * <em>gatherSnippets</em> method.
 	 * 
-	 * @param type type of the document
+	 * <p>
+	 * The method <em>gatherSnippets</em> nedds to called first,
+	 * as it gathers all snippets that are required for the sourcefile.
+	 * </p>
+	 * 
+	 * @param type type of the document, the sourcefile gets saved under this name
+	 *             at a temporary location
+	 * @see de.thowl.automomousInstantdocumentSystem.control.Latex.gatherSnippets
 	 */
 	public void concat(String type) {
 		// Format snippet data to TeX and append it to a to a StringBuilder
@@ -117,11 +127,16 @@ public class Latex {
 	}
 
 	/**
-	 * This Methodd returns the default location of the pdflatex binary for the
-	 * current opperating system.
+	 * Returns the location of the pdflatex binary current operating system
 	 * 
-	 * @return location of pdflatex
-	 * @throws LatexNotInstalledException
+	 * <p>
+	 * Only the default instalation locations are checked.
+	 * If the binary is stored anywhre else, it can't be found.
+	 * </p>
+	 * 
+	 * @return location of the pdflatex binary
+	 * @throws LatexNotInstalledException if the compiler cannot be found anywhere
+	 *                                    on the system.
 	 */
 	private String latexCompilerLocation() throws LatexNotInstalledException {
 		String compilerPath = null;
@@ -136,10 +151,16 @@ public class Latex {
 	}
 
 	/**
-	 * This method compiles a LaTeX document
+	 * Compiles a LaTeX document from a sourcefile
 	 * 
-	 * @param type        type of the Document
-	 * @param destination outputlocation for the compilde document
+	 * <p>
+	 * The method <em>concat</em> needs to be called first,
+	 * as it generates the sourcefile.
+	 * </p>
+	 * 
+	 * @param type        type of the the sourcefile ()
+	 * @param destination outputlocation for the compilde document.
+	 * @see de.thowl.automomousInstantdocumentSystem.control.Latex.concat
 	 */
 	public void compile(String type, String destination) {
 		String compiler = null;
@@ -148,17 +169,15 @@ public class Latex {
 		} catch (LatexNotInstalledException e) {
 			e.printStackTrace();
 		}
-		// Variables for LaTeX complier
 		String userdir = System.getProperty("user.dir");
 		String outputDir = "-output-directory=" + destination;
 		String texFile = userdir + "/temp/" + type + ".tex";
-		// Compiler command: [Compliler] [path to destination] [path to source.tex file]
 		String compilercommand = compiler + " " + outputDir + " " + texFile;
 		try {
-			// Compile LaTeX document
 			Process proc = Runtime.getRuntime().exec(compilercommand);
-			BufferedReader stdout = new BufferedReader(new InputStreamReader(proc.getInputStream()));
-			// Print stdOut of pdflatex (NOTE: NECCESARY, DON'T DELETE!!!)
+			// Print stdOut of pdflatex NOTE: NECCESARY, DON'T DELETE!!!
+			InputStreamReader inputStream = new InputStreamReader(proc.getInputStream());
+			BufferedReader stdout = new BufferedReader(inputStream);
 			String compliermsg;
 			while ((compliermsg = stdout.readLine()) != null) {
 				System.out.println(compliermsg);
@@ -169,12 +188,12 @@ public class Latex {
 	}
 
 	/**
-	 * This Method concatinates and Compiles Documents within the passed parameters
-	 * Use this to generate Documents
+	 * This Method is wrapper function, genererate documents here
 	 * 
 	 * @param type        type of the document that should be genearated
 	 * @param destination directory in which the documunt should be saved
-	 * @param amount      amount of instances that should bs saved
+	 * @param amount      amount of instances that should be saved
+	 * @param shuffle     generate each document with a new set of snippets
 	 */
 	public void generate(String type, String destination, int amount, int chapters, boolean shuffle) {
 		gatherSnippets(type, chapters, true);

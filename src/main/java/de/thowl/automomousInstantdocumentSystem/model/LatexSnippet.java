@@ -28,7 +28,7 @@ import org.apache.commons.io.FileUtils;
  * This class is a representation of a .tex file.
  * It contains the Path and their respective content of the file
  * 
- * @version 0.0.0.1
+ * @version 1.2.0
  * @author Jonas Schwwind
  * 
  */
@@ -72,7 +72,7 @@ public class LatexSnippet {
 	/**
 	 * Overwrite the location of the file
 	 * 
-	 * @param String new path to the file
+	 * @param filepath new path to the file
 	 */
 	public void setFilepath(String filepath) {
 		this.filepath = filepath;
@@ -81,7 +81,7 @@ public class LatexSnippet {
 	/**
 	 * Overwrite the content of the file
 	 * 
-	 * @param new content of the file
+	 * @param filecontent content of the file
 	 */
 	public void setFilecontent(String filecontent) {
 		this.filecontent = filecontent;

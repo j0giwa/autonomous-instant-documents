@@ -42,6 +42,11 @@ public class Main {
 	private static int chapters = 0;
 	private static boolean shuffle = true;
 
+	/**
+	 * This method starts the programm (as we all know)
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		if (args.length == 0) {
 			Application.launch(Gui.class, args);

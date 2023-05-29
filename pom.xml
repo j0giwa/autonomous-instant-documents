@@ -61,14 +61,6 @@
 				</configuration>
 			</plugin>
 			<plugin>
-        <groupId>org.openjfx</groupId>
-        <artifactId>javafx-maven-plugin</artifactId>
-        <version>0.0.3</version>
-        <configuration>
-					<mainClass>de.thowl.automomousInstantdocumentSystem.Main</mainClass>
-        </configuration>
-        </plugin>
-			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<version>3.5.0</version>
 				<configuration>
@@ -87,6 +79,18 @@
 						<phase>package</phase>
 						<goals>
 							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>atrach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
 						</goals>
 					</execution>
 				</executions>
@@ -126,6 +130,14 @@
 					</systemPropertyVariables>
 				</configuration>
 			</plugin>
+			<plugin>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-maven-plugin</artifactId>
+        <version>0.0.3</version>
+        <configuration>
+					<mainClass>de.thowl.automomousInstantdocumentSystem.Main</mainClass>
+        </configuration>
+      </plugin>
 		</plugins>
 	</build>
 </project>

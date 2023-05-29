@@ -27,14 +27,25 @@ public class Database {
 	private String databaseUser;
 	private String databasePassword;
 
+	/**
+	 * 
+	 */
 	public Database() {
 
 	}
 
+	/**
+	 * @param dataset
+	 */
 	public void insert(String[] dataset) {
 
 	}
 
+	/**
+	 * 
+	 * @param statement
+	 * @return
+	 */
 	public String[] select(String statement) {
 		return null;
 	}

@@ -38,6 +38,9 @@ public class Json {
     private String filePath;
     private JSONObject jsonObject;
 
+    /**
+     * Constructor for objects of this class
+     */
     public Json(String filepath) {
         this.filePath = filepath;
         try {
@@ -49,7 +52,7 @@ public class Json {
     }
 
     /**
-     * This method returs a value from a JSon file.
+     * Returns a value from a JSon file.
      * 
      * @param object JSonObject that contains the value that should be returned
      * @param key    key in JSonObject, that contains the value that should be
@@ -63,7 +66,7 @@ public class Json {
     }
 
     /**
-     * This method overwrites a value in a JSon file.
+     * Cahnges a value in a JSon file.
      * 
      * @param object JSonObject that contains the value that should be changed
      * @param key    key in JSonObject, that contains the value that should be
