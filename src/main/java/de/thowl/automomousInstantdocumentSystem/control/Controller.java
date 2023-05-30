@@ -28,7 +28,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import de.thowl.automomousInstantdocumentSystem.model.Os;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -126,7 +125,7 @@ public class Controller implements Initializable {
 	 * 
 	 * @param newString String to append
 	 */
-	private void appendToMultiPurposeTextArea(String newString) {
+	private void appendToTextArea(String newString) {
 		StringBuilder areaContent = new StringBuilder();
 		areaContent.append(txtMultipurposeTextArea.getText());
 		areaContent.append(newString);
@@ -246,17 +245,10 @@ public class Controller implements Initializable {
 			errorAlert.showAndWait();
 			return;
 		}
-		appendToMultiPurposeTextArea("[ INFO ] Starting new LaTeX instance\n");
-		new Thread(() -> {
-			Latex latex = new Latex();
-			latex.generate(type, destination, amount, chapters, shuffle);
-			Platform.runLater(() -> {
-				appendToMultiPurposeTextArea(
-						"[ INFO ]  Generating " + amount + " Documents with " + chapters
-								+ " Chapters...\n");
-			});
-		}).start();
-		appendToMultiPurposeTextArea("[ INFO ]  done!\n");
+		Latex latex = new Latex();
+		latex.generate(type, destination, amount, chapters, shuffle);
+		appendToTextArea("[ INFO ]  Generated " + amount +
+				" Documents with " + chapters + " Chapters\n");
 	}
 
 	@FXML

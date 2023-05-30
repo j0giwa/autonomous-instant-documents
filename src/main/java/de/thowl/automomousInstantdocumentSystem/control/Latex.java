@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Random;
 
@@ -45,8 +46,9 @@ import de.thowl.automomousInstantdocumentSystem.model.Os;
  */
 public class Latex {
 
+	private LatexSnippet header;
 	private ArrayList<LatexSnippet> snippets;
-	private StringBuilder sb;
+	private LatexSnippet footer;
 	private Os os;
 	private String osName;
 	private String homeDir;
@@ -56,7 +58,6 @@ public class Latex {
 	 */
 	public Latex() {
 		snippets = new ArrayList<LatexSnippet>();
-		sb = new StringBuilder();
 		os = new Os();
 		osName = os.getOS();
 		homeDir = os.getHomeDir();
@@ -73,21 +74,22 @@ public class Latex {
 	 *                 tests)
 	 */
 	public void gatherSnippets(String type, int chapters, boolean randomise) {
+		Random rng = new Random(System.currentTimeMillis() / 1000L);
 		String snippetsDir = homeDir + "/latex/";
-		snippets.add(new LatexSnippet(snippetsDir + type + "/header.tex"));
+		header = new LatexSnippet(snippetsDir + type + "/header.tex");
 		for (int i = 0; i < chapters; i++) {
 			File directory = new File(snippetsDir + type + "/chapters/");
 			File[] files = directory.listFiles();
 			Arrays.sort(files);
 			int index = i;
 			if (randomise) {
-				Random rng = new Random(System.currentTimeMillis() / 1000L);
+
 				index = rng.nextInt(files.length);
 			}
 			File file = files[index];
 			snippets.add(new LatexSnippet(file.getPath()));
 		}
-		snippets.add(new LatexSnippet(snippetsDir + type + "/footer.tex"));
+		footer = new LatexSnippet(snippetsDir + type + "/footer.tex");
 	}
 
 	/**
@@ -104,25 +106,21 @@ public class Latex {
 	 * @see de.thowl.automomousInstantdocumentSystem.control.Latex.gatherSnippets
 	 */
 	public void concat(String type) {
-		// Format snippet data to TeX and append it to a to a StringBuilder
+		StringBuilder sb = new StringBuilder();
+		sb.append(header.getFilecontent() + "\n");
 		Iterator<LatexSnippet> it = snippets.iterator();
 		while (it.hasNext()) {
 			LatexSnippet snippet = it.next();
-			String filepath = snippet.getFilepath();
-			// Header and footer contents are the only important aspects
-			if (filepath.contains("header") || filepath.contains("footer")) {
-				sb.append(snippet.getFilecontent() + "\n");
-				continue;
-			}
-			// For all other files their path is sufficient.
 			sb.append("\\input{" + snippet.getFilepath() + "}\n");
 		}
+		sb.append(footer.getFilecontent() + "\n");
 		try {
-			// Print StringBuilder String to .tex file
 			File outputfile = new File("./temp/" + type + ".tex");
 			FileUtils.writeStringToFile(outputfile, sb.toString(), "utf-8");
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+
 		}
 	}
 
@@ -172,12 +170,12 @@ public class Latex {
 		String userdir = System.getProperty("user.dir");
 		String outputDir = "-output-directory=" + destination;
 		String texFile = userdir + "/temp/" + type + ".tex";
-		String compilercommand = compiler + " " + outputDir + " " + texFile;
+		String command = compiler + " " + outputDir + " " + texFile;
 		try {
-			Process proc = Runtime.getRuntime().exec(compilercommand);
+			Process proc = Runtime.getRuntime().exec(command);
 			// Print stdOut of pdflatex NOTE: NECCESARY, DON'T DELETE!!!
-			InputStreamReader inputStream = new InputStreamReader(proc.getInputStream());
-			BufferedReader stdout = new BufferedReader(inputStream);
+			InputStreamReader stream = new InputStreamReader(proc.getInputStream());
+			BufferedReader stdout = new BufferedReader(stream);
 			String compliermsg;
 			while ((compliermsg = stdout.readLine()) != null) {
 				System.out.println(compliermsg);
@@ -197,12 +195,13 @@ public class Latex {
 	 */
 	public void generate(String type, String destination, int amount, int chapters, boolean shuffle) {
 		gatherSnippets(type, chapters, true);
-		for (int i = 0; i <= amount; i++) {
+		for (int i = 1; i <= amount; i++) {
 			String subdirname = "foldername" + i;
 			String outputDir = destination + "/" + subdirname;
 			new File(outputDir).mkdir();
 			concat(type);
 			compile(type, outputDir);
+			Collections.shuffle(snippets);
 		}
 	}
 }
