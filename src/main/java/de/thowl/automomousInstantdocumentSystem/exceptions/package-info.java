@@ -17,4 +17,9 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+/**
+ * This Package contains nonstandart exxeenpitons for the Programm
+ * 
+ * @author Jonas Schwind
+ */
 package de.thowl.automomousInstantdocumentSystem.exceptions;

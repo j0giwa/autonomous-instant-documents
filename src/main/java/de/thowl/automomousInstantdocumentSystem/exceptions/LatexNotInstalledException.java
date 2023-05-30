@@ -19,16 +19,25 @@
 
 package de.thowl.automomousInstantdocumentSystem.exceptions;
 
+/**
+ * This exception gets thrown wen a LaTeX binary cannot be found
+ */
 public class LatexNotInstalledException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 	private String message;
 
+	/**
+	 * @param message errormessage if the exception gets thrown
+	 */
 	public LatexNotInstalledException(String message) {
 		super(message);
 		this.message = message;
 	}
 
+	/**
+	 * @return Erromassage as a String
+	 */
 	@Override
 	public String toString() {
 		return message;

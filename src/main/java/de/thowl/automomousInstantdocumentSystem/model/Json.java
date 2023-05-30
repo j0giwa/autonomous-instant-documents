@@ -40,6 +40,8 @@ public class Json {
 
     /**
      * Constructor for objects of this class
+     * 
+     * @param filepath The location of the JSonfile
      */
     public Json(String filepath) {
         this.filePath = filepath;
@@ -57,7 +59,7 @@ public class Json {
      * @param object JSonObject that contains the value that should be returned
      * @param key    key in JSonObject, that contains the value that should be
      *               returned
-     * @param value  value the should be returned
+     * @return value of the Json Key
      */
     public String getValue(String object, String key) {
         JSONObject currentObject = (JSONObject) jsonObject.get(object);

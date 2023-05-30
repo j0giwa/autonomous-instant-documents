@@ -36,8 +36,11 @@ import de.thowl.automomousInstantdocumentSystem.model.LatexSnippet;
 import de.thowl.automomousInstantdocumentSystem.model.Os;
 
 /**
- * This class is a concatenator for LaTeX-snippets. It can concatenate and
- * compile LaTeX documents.
+ * This class is a Representation of a LaTeX-document.
+ * 
+ * <p>
+ * It ccontains method neccesary for the craetin of LaTeX Documents
+ * </p>
  * 
  * @author Jonas Schwind
  * @version 0.1.2
@@ -67,11 +70,11 @@ public class Latex {
 	/**
 	 * This Method gathers snipptes for a LaTex document
 	 * 
-	 * @param type     The "type" of snippets that should be collected, the type is
-	 *                 defined by a directoryname in the config-directory.
-	 * @param chapters amount of snippets
-	 * @param shuffle  should the order be randomised (always true except for
-	 *                 tests)
+	 * @param type      The "type" of snippets that should be collected, the type is
+	 *                  defined by a directoryname in the config-directory.
+	 * @param chapters  amount of snippets
+	 * @param randomise should the order be randomised (always true except for
+	 *                  tests)
 	 */
 	public void gatherSnippets(String type, int chapters, boolean randomise) {
 		Random rng = new Random(System.currentTimeMillis() / 1000L);
@@ -97,13 +100,13 @@ public class Latex {
 	 * <em>gatherSnippets</em> method.
 	 * 
 	 * <p>
-	 * The method <em>gatherSnippets</em> nedds to called first,
+	 * The method {@link #gatherSnippets(String, int, boolean)} needs to called
+	 * first,
 	 * as it gathers all snippets that are required for the sourcefile.
 	 * </p>
 	 * 
 	 * @param type type of the document, the sourcefile gets saved under this name
 	 *             at a temporary location
-	 * @see de.thowl.automomousInstantdocumentSystem.control.Latex.gatherSnippets
 	 */
 	public void concat(String type) {
 		StringBuilder sb = new StringBuilder();
@@ -152,13 +155,12 @@ public class Latex {
 	 * Compiles a LaTeX document from a sourcefile
 	 * 
 	 * <p>
-	 * The method <em>concat</em> needs to be called first,
+	 * The method {@link #concat(String)} needs to be called first,
 	 * as it generates the sourcefile.
 	 * </p>
 	 * 
 	 * @param type        type of the the sourcefile ()
 	 * @param destination outputlocation for the compilde document.
-	 * @see de.thowl.automomousInstantdocumentSystem.control.Latex.concat
 	 */
 	public void compile(String type, String destination) {
 		String compiler = null;

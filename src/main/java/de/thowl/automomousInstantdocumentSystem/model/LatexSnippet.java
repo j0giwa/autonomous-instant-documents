@@ -40,6 +40,8 @@ public class LatexSnippet {
 
 	/**
 	 * Constructor for objects of this class
+	 * 
+	 * @param filepath location of the .tex file
 	 */
 	public LatexSnippet(String filepath) {
 		this.filepath = filepath;
