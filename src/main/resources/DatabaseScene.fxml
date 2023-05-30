@@ -10,33 +10,33 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <GridPane fx:controller="de.thowl.automomousInstantdocumentSystem.control.Controller"
-          xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/13">
-    <columnConstraints>
-        <ColumnConstraints hgrow="NEVER"/>
-        <ColumnConstraints hgrow="SOMETIMES"/>
-        <ColumnConstraints hgrow="SOMETIMES"/>
-    </columnConstraints>
-    <rowConstraints>
-        <RowConstraints vgrow="ALWAYS"/>
-    </rowConstraints>
-    <children>
-        <!--Sidebar-->
-        <VBox fx:id="sidebar" GridPane.columnIndex="0">
-            <children>
-                <Button fx:id="btnMainScene" text="Main" onAction="#btnMainSceneClick"/> 
-                <Button fx:id="btnLatexScene" text="Latex" onAction="#btnLatexSceneClick"/>
-                <Button fx:id="btnDatabaseScene" text="Database" onAction="#btnDatabaseSceneClick"/>
-            </children>
-        </VBox>
-        <!--Buttons-->
-        <VBox fx:id="buttonarea" GridPane.columnIndex="1">
-            <children>
-                <Label text="Scene 3"/>
-            </children>
-        </VBox>
-        <!--Multipurpose Textarea-->
-        <VBox fx:id="multipurposearea" GridPane.columnIndex="2">
-            <TextArea fx:id="txtMultipurposeTextArea"/>
-        </VBox>
-    </children>
+		  xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/13">
+	<columnConstraints>
+		<ColumnConstraints hgrow="NEVER"/>
+		<ColumnConstraints hgrow="SOMETIMES"/>
+		<ColumnConstraints hgrow="SOMETIMES"/>
+	</columnConstraints>
+	<rowConstraints>
+		<RowConstraints vgrow="ALWAYS"/>
+	</rowConstraints>
+	<children>
+		<!--Sidebar-->
+		<VBox fx:id="sidebar" GridPane.columnIndex="0">
+			<children>
+				<Button fx:id="btnMainScene" text="Main" onAction="#btnMainSceneClick"/> 
+				<Button fx:id="btnLatexScene" text="Latex" onAction="#btnLatexSceneClick"/>
+				<Button fx:id="btnDatabaseScene" text="Database" onAction="#btnDatabaseSceneClick"/>
+			</children>
+		</VBox>
+		<!--Buttons-->
+		<VBox fx:id="buttonarea" GridPane.columnIndex="1">
+			<children>
+				<Label text="Scene 3"/>
+			</children>
+		</VBox>
+		<!--Multipurpose Textarea-->
+		<VBox fx:id="multipurposearea" GridPane.columnIndex="2">
+			<TextArea fx:id="txtMultipurposeTextArea"/>
+		</VBox>
+	</children>
 </GridPane>

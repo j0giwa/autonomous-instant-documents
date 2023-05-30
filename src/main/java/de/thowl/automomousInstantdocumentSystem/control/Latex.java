@@ -86,7 +86,6 @@ public class Latex {
 			Arrays.sort(files);
 			int index = i;
 			if (randomise) {
-
 				index = rng.nextInt(files.length);
 			}
 			File file = files[index];
