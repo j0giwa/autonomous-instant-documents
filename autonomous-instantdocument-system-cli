@@ -11,4 +11,4 @@ documentAmmount="$(whiptail --inputbox "Ammount" --backtitle $whipTilte 0 0 3>&1
 documentDestination="$(whiptail --inputbox "Destination" --backtitle $whipTilte 0 0 3>&1 1>&2 2>&3)"
 
 # run command
-./autonomous-instantdocument-system --type "$documentType" --amount "$documentAmmount" --destination "$documentDestination"  
+autonomous-instantdocument-system --type "$documentType" --amount "$documentAmmount" --destination "$documentDestination"  

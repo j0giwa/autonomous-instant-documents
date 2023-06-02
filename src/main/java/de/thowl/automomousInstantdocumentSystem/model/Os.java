@@ -58,7 +58,7 @@ public class Os {
 			} else if (os.equals("UNIX")) {
 				directory = System.getenv("XDG_CONFIG_HOME");
 			} else if (os.equals("mac")) {
-				directory = System.getenv("Library");
+				directory = "~/Library/Application Support/";
 			}
 			directory += "/aids";
 		}

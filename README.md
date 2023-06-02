@@ -42,13 +42,21 @@
 <details>
 <summary>Click to expand!</summary>
 
-### Prebuild jar
-COMMING SOON
-
 ### Build it yourself
+
+#### Linux
 ``` bash
+sudo rm -rf "/usr/local/bin/automomous-instantdocument-system" "/usr/local/bin/automomous-instantdocument-system-cli"
+git clone "https://github.com/j0giwa/automomous-instantdocument-system"
+cd automomous-instantdocument-system
 mvn package
+sudo cp ./target/automomousInstantdocumentSystem-0.8.5-jar-with-dependencies.jar /opt/automomous-instantdocument-system/automomous-instantdocument-system.jar
+sudo cp ./automomous-instantdocument-system /usr/local/bin
+sudo cp ./automomous-instantdocument-system-cli /usr/local/bin
+cd ..
+rm -rf automomous-instantdocument-system
 ```
+
 </details>
 
 ## How to use
