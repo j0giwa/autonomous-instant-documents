@@ -50,7 +50,18 @@ sudo rm -rf "/usr/local/bin/automomous-instantdocument-system" "/usr/local/bin/a
 git clone "https://github.com/j0giwa/automomous-instantdocument-system"
 cd automomous-instantdocument-system
 mvn package
-sudo cp ./target/automomousInstantdocumentSystem-0.8.5-jar-with-dependencies.jar /opt/automomous-instantdocument-system/automomous-instantdocument-system.jar
+sudo cp ./target/automomousInstantdocumentSystem-sudo rm -rf "/usr/local/bin/automomous-instantdocument-system" "/usr/local/bin/automomous-instantdocument-system-cli"
+git clone "https://github.com/j0giwa/automomous-instantdocument-system"
+cd automomous-instantdocument-system
+mvn package
+sudo cp ./target/automomousInstantdocumentSystem-*-jar-with-dependencies.jar /opt/automomous-instantdocument-system/automomous-instantdocument-system.jar
+sudo cp ./automomous-instantdocument-system /usr/local/bin
+sudo cp ./automomous-instantdocument-system-cli /usr/local/bin
+sudo cp ./automomous-instantdocument-system-cli /usr/local/bin
+gip gzip docs/man/autonomous-instantdocument-system.1
+cp .docs/man/autonomous-instantdocument-system.1.gz /usr/share/man/man1/
+cd ..
+rm -rf automomous-instantdocument-system-jar-with-dependencies.jar /opt/automomous-instantdocument-system/automomous-instantdocument-system.jar
 sudo cp ./automomous-instantdocument-system /usr/local/bin
 sudo cp ./automomous-instantdocument-system-cli /usr/local/bin
 sudo cp ./automomous-instantdocument-system-cli /usr/local/bin
