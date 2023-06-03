@@ -37,17 +37,14 @@ public class Os {
 		os = defineOs();
 		homeDir = defineHomeDir();
 	}
-
+	
 	/**
-	 * Returns the confighome where all configuration files and LaTeX snippets
-	 * reside.
+	 * Returns the confighome where all configuration files and LaTeX snippets reside.
 	 * This is a helper method used to clean up the constructor.
 	 * 
 	 * <p>
-	 * The environment variable {@code AIDS_HOME} is checked first, serving as a
-	 * manual override.
-	 * If {@code AIDS_HOME} is not defined, a location will be chosen based on the
-	 * operating system.
+	 * The environment variable {@code AIDS_HOME} is checked first, serving as a manual override.
+	 * If {@code AIDS_HOME} is not defined, a location will be chosen based on the operating system.
 	 * </p>
 	 * 
 	 * @return The confighome location
@@ -64,7 +61,7 @@ public class Os {
 		case "UNIX":
 			dir = System.getenv("XDG_CONFIG_HOME");
 			// Fallback when XDG is unconfigured/unsupported
-			if (dir == null)
+			if (dir == null) 
 				dir = System.getProperty("user.home") + "/.config";
 			break;
 		case "Mac":
@@ -73,10 +70,10 @@ public class Os {
 		}
 		return dir + "/aids";
 	}
-
+	
 	/**
-	 * Returns the operating system used by the program. This is a helper method
-	 * used to simplify the constructor.
+	 * Returns the operating system used by the program.
+	 * This is a helper method used to simplify the constructor.
 	 *
 	 * <p>
 	 * To provide simplicity, the OS name will be abstracted as follows:
