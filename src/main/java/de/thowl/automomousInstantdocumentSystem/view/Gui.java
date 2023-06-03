@@ -19,6 +19,8 @@
 
 package de.thowl.automomousInstantdocumentSystem.view;
 
+import java.net.URL;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,9 +28,14 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * This class is the Gui of the Programm
- * Is just a loader for an fxml-file
- * The controling logic can be found in the <em>Conttroller</em> class
+ * This class represents the GUI of the Program.
+ * It acts as a loader for an FXML file and sets up the graphical user
+ * interface.
+ * 
+ * <p>
+ * The controlling logic can be found in the
+ * {@link de.thowl.automomousInstantdocumentSystem.control.Controller} class.
+ * </p>
  * 
  * @author Jonas Schwind
  * @version 1.0.3
@@ -36,12 +43,25 @@ import javafx.stage.Stage;
  * @see de.thowl.automomousInstantdocumentSystem.control.Controller
  */
 public class Gui extends Application {
+
+	/*
+	 * Starts the GUI by loading the FXML file, applying the stylesheet,
+	 * configuring the stage, and displaying it.
+	 * 
+	 * @param stage the primary stage for this application
+	 * 
+	 * @throws Exception if an error occurs during GUI initialization
+	 */
 	@Override
-	public void start(Stage primaryStage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("MainScene.fxml"));
-		root.getStylesheets().add(getClass().getClassLoader().getResource("styles.css").toExternalForm());
-		primaryStage.setTitle("Automomous Instantdocument System");
-		primaryStage.setScene(new Scene(root, 760, 490));
-		primaryStage.show();
+	public void start(Stage stage) throws Exception {
+		URL resourceURL = getClass().getClassLoader().getResource("Main.fxml");
+		URL stylesheetURL = getClass().getClassLoader().getResource("styles.css");
+		FXMLLoader fxmlLoader = new FXMLLoader();
+		fxmlLoader.setLocation(resourceURL);
+		Parent root = fxmlLoader.load();
+		root.getStylesheets().add(stylesheetURL.toExternalForm());
+		stage.setTitle("Automomous Instantdocument System");
+		stage.setScene(new Scene(root, 760, 490));
+		stage.show();
 	}
 }

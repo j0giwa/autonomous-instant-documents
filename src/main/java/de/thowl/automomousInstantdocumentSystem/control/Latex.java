@@ -39,7 +39,7 @@ import de.thowl.automomousInstantdocumentSystem.model.Os;
  * This class is a Representation of a LaTeX-document.
  * 
  * <p>
- * It ccontains method neccesary for the craetin of LaTeX Documents
+ * It contains methods for the creation of LaTeX-Documents
  * </p>
  * 
  * @author Jonas Schwind
@@ -109,13 +109,13 @@ public class Latex {
 	 */
 	public void concat(String type) {
 		StringBuilder sb = new StringBuilder();
-		sb.append(header.getFilecontent() + "\n");
+		sb.append(header.getFileContent() + "\n");
 		Iterator<LatexSnippet> it = snippets.iterator();
 		while (it.hasNext()) {
 			LatexSnippet snippet = it.next();
-			sb.append("\\input{" + snippet.getFilepath() + "}\n");
+			sb.append("\\input{" + snippet.getFilePath() + "}\n");
 		}
-		sb.append(footer.getFilecontent() + "\n");
+		sb.append(footer.getFileContent() + "\n");
 		try {
 			File outputfile = new File("./temp/" + type + ".tex");
 			FileUtils.writeStringToFile(outputfile, sb.toString(), "utf-8");
@@ -138,7 +138,7 @@ public class Latex {
 	 * @throws LatexNotInstalledException if the compiler cannot be found anywhere
 	 *                                    on the system.
 	 */
-	private String latexCompilerLocation() throws LatexNotInstalledException {
+	public String latexCompilerLocation() throws LatexNotInstalledException {
 		String compilerPath = null;
 		if (osName.equals("UNIX")) {
 			compilerPath = "/usr/bin/pdflatex";
@@ -173,6 +173,8 @@ public class Latex {
 		String texFile = userdir + "/temp/" + type + ".tex";
 		String command = compiler + " " + outputDir + " " + texFile;
 		try {
+			// TODO: Change this ASAP
+			@SuppressWarnings("deprecation")
 			Process proc = Runtime.getRuntime().exec(command);
 			// Print stdOut of pdflatex NOTE: NECCESARY, DON'T DELETE!!!
 			InputStreamReader stream = new InputStreamReader(proc.getInputStream());
@@ -204,5 +206,17 @@ public class Latex {
 			compile(type, outputDir);
 			Collections.shuffle(snippets);
 		}
+	}
+
+	public LatexSnippet getHeader() {
+		return header;
+	}
+
+	public LatexSnippet getFooter() {
+		return footer;
+	}
+
+	public ArrayList<LatexSnippet> getSnippets() {
+		return snippets;
 	}
 }

@@ -20,29 +20,61 @@
 package de.thowl.automomousInstantdocumentSystem.testModel;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-import java.util.Random;
+import java.io.FileWriter;
+import java.io.IOException;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import de.thowl.automomousInstantdocumentSystem.model.Json;
 
 public class TestJson {
 
-	@Test
-	void testGetValue() {
-		Json json = new Json("./src/test/resources/test.json");
-		assertEquals("poggers", json.getValue("test", "testGetValue"));
+	private static final String FILE_PATH = "./src/test/resources/test.json";
+	private Json json;
+
+	@BeforeEach
+	public void setUp() {
+		createTestJsonFile();
+		json = new Json(FILE_PATH);
 	}
 
+	/**
+	 * Tests the {@link Json#getValue(String, String)} method to ensure
+	 * it returns the correct value from the JSON object
+	 * when the object and key exist.
+	 */
 	@Test
-	void testsetValue() {
-		Json json = new Json("./src/test/resources/test.json");
-		String oldValue = json.getValue("test", "testSetValue");
-		Random random = new Random(System.currentTimeMillis() / 1000L);
-		json.setValue("test", "testSetValue", String.valueOf(random.nextInt()));
-		String newValue = json.getValue("test", "testSetValue");
-		assertNotEquals(oldValue, newValue);
+	public void getValue_ShouldReturnCorrectValue_WhenObjectAndKeyExist() {
+		String object = "person";
+		String key = "name";
+		String expectedValue = "John Doe";
+		String value = json.getValue(object, key);
+		assertEquals(expectedValue, value);
+	}
+
+	/**
+	 * Tests the {@link Json#setValue(String, String, String)} method
+	 * to ensure it changes the value in the JSON object
+	 * when the object and key exist.
+	 */
+	@Test
+	public void setValue_ShouldChangeValue_WhenObjectAndKeyExist() {
+		String object = "person";
+		String key = "age";
+		String expectedValue = "30";
+		json.setValue(object, key, expectedValue);
+		String updatedValue = json.getValue(object, key);
+		assertEquals(expectedValue, updatedValue);
+	}
+
+	private void createTestJsonFile() {
+		String content = "{ \"person\": { \"name\": \"John Doe\" } }";
+		try (FileWriter fileWriter = new FileWriter(FILE_PATH)) {
+			fileWriter.write(content);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

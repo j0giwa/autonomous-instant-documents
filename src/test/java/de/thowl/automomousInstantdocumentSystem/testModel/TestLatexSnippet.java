@@ -21,51 +21,79 @@ package de.thowl.automomousInstantdocumentSystem.testModel;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import de.thowl.automomousInstantdocumentSystem.model.LatexSnippet;
 
 public class TestLatexSnippet {
 
-	@Test
-	void testGetFilepath() {
-		String currentDir = System.getProperty("user.dir");
-		String filepath = currentDir + "/src/test/resources/latex/test/header.tex";
-		LatexSnippet snippet = new LatexSnippet(filepath);
-		assertEquals(filepath, snippet.getFilepath());
+	private static final String FILE_PATH = "src/test/resources/latex/testSnipptet.tex";
+	private static final String FILE_CONTENT = "\\documentclass{article}";
+
+	private LatexSnippet latexSnippet;
+
+	@BeforeEach
+	public void setUp() {
+		// Create a test .tex file
+		createTestTexFile();
+		// Initialize the LatexSnippet object with the test .tex file
+		latexSnippet = new LatexSnippet(FILE_PATH);
 	}
 
+	/**
+	 * Tests the {@link LatexSnippet#getFilePath()} method to ensure it
+	 * returns the correct file path.
+	 */
 	@Test
-	void testSetFilepath() {
-		String currentDir = System.getProperty("user.dir");
-		String filepath = currentDir + "/src/test/resources/latex/test/header.tex";
-		LatexSnippet snippet = new LatexSnippet(filepath);
-		String newFilepath = currentDir + "/src/test/resources/latex/test/header1.tex";
-		String expected = newFilepath;
-		snippet.setFilepath(newFilepath);
-		String actual = snippet.getFilepath();
-		assertEquals(expected, actual);
+	public void test_getFilePath_ShouldReturnFilePath() {
+		String expectedFilePath = FILE_PATH;
+		String filePath = latexSnippet.getFilePath();
+		assertEquals(expectedFilePath, filePath);
 	}
 
+	/**
+	 * Tests the {@link LatexSnippet#getFileContent()} method to ensure
+	 * it returns the correct file content.
+	 */
 	@Test
-	void testGetFilecontent() {
-		String currentDir = System.getProperty("user.dir");
-		String filepath = currentDir + "/src/test/resources/latex/test/footer.tex";
-		LatexSnippet snippet = new LatexSnippet(filepath);
-		String expected = "\\end{document}";
-		String actual = snippet.getFilecontent();
-		assertEquals(expected, actual);
+	public void test_getFileContent_ShouldReturnFileContent() {
+		String expectedFileContent = FILE_CONTENT;
+		String fileContent = latexSnippet.getFileContent();
+		assertEquals(expectedFileContent, fileContent);
 	}
 
+	/**
+	 * Tests the {@link LatexSnippet#setFilepath(String)} method
+	 * to ensure it correctly overwrites the file path.
+	 */
 	@Test
-	void testSetFilecontent() {
-		String currentDir = System.getProperty("user.dir");
-		String filepath = currentDir + "/src/test/resources/latex/test/footer.tex";
-		LatexSnippet snippet = new LatexSnippet(filepath);
-		String newContent = "\\end{file}";
-		String expected = newContent;
-		snippet.setFilecontent(newContent);
-		String actual = snippet.getFilecontent();
-		assertEquals(expected, actual);
+	public void test_setFilepath_ShouldOverwriteFilePath() {
+		String newFilePath = "new_test.tex";
+		latexSnippet.setFilepath(newFilePath);
+		assertEquals(newFilePath, latexSnippet.getFilePath());
+	}
+
+	/**
+	 * Tests the {@link LatexSnippet#setFilecontent(String)} method to ensure it
+	 * correctly overwrites the file content.
+	 */
+	@Test
+	public void test_setFilecontent_ShouldOverwriteFileContent() {
+		String newFileContent = "\\documentclass{report}";
+		latexSnippet.setFilecontent(newFileContent);
+		assertEquals(newFileContent, latexSnippet.getFileContent());
+	}
+
+	private void createTestTexFile() {
+		try {
+			FileUtils.writeStringToFile(new File(FILE_PATH), FILE_CONTENT, "utf-8");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

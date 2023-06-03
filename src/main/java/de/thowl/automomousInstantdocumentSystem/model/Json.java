@@ -77,7 +77,8 @@ public class Json {
      */
     public void setValue(String object, String key, String value) {
         JSONObject currentObject = (JSONObject) jsonObject.get(object);
-        currentObject.put(key, value); // NOTE: library not implemented as "generic type"
+        // NOTE: library not implemented as "generic type"
+        currentObject.put(key, value);
         try {
             FileWriter file = new FileWriter(filePath);
             file.write(jsonObject.toJSONString());

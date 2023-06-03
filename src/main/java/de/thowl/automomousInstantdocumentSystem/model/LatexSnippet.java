@@ -34,9 +34,9 @@ import org.apache.commons.io.FileUtils;
  */
 public class LatexSnippet {
 
-	private File texfile;
-	private String filepath;
-	private String filecontent;
+	private File file;
+	private String filePath;
+	private String fileContent;
 
 	/**
 	 * Constructor for objects of this class
@@ -44,10 +44,10 @@ public class LatexSnippet {
 	 * @param filepath location of the .tex file
 	 */
 	public LatexSnippet(String filepath) {
-		this.filepath = filepath;
-		texfile = new File(this.filepath);
+		this.filePath = filepath;
+		file = new File(this.filePath);
 		try {
-			filecontent = FileUtils.readFileToString(texfile, "utf-8");
+			fileContent = FileUtils.readFileToString(file, "utf-8");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -58,8 +58,8 @@ public class LatexSnippet {
 	 * 
 	 * @return path to the file
 	 */
-	public String getFilepath() {
-		return filepath;
+	public String getFilePath() {
+		return filePath;
 	}
 
 	/**
@@ -67,25 +67,25 @@ public class LatexSnippet {
 	 * 
 	 * @return path of the file
 	 */
-	public String getFilecontent() {
-		return filecontent;
+	public String getFileContent() {
+		return fileContent;
 	}
 
 	/**
 	 * Overwrite the location of the file
 	 * 
-	 * @param filepath new path to the file
+	 * @param filePath new path to the file
 	 */
-	public void setFilepath(String filepath) {
-		this.filepath = filepath;
+	public void setFilepath(String filePath) {
+		this.filePath = filePath;
 	}
 
 	/**
 	 * Overwrite the content of the file
 	 * 
-	 * @param filecontent content of the file
+	 * @param fileContent content of the file
 	 */
-	public void setFilecontent(String filecontent) {
-		this.filecontent = filecontent;
+	public void setFilecontent(String fileContent) {
+		this.fileContent = fileContent;
 	}
 }

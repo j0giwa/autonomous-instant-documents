@@ -31,7 +31,7 @@ public class Os {
 	private String homeDir;
 
 	/**
-	 * Constructor for objects of this class
+	 * Constructs a new instance of the Os class.
 	 */
 	public Os() {
 		os = defineOs();
@@ -39,65 +39,76 @@ public class Os {
 	}
 
 	/**
-	 * Return the confighome for the programm. all configurationfiles an
-	 * LatexSnippets reside here. (helpermethod to clean up the construcktor)
+	 * Returns the confighome where all configuration files and LaTeX snippets
+	 * reside.
+	 * This is a helper method used to clean up the constructor.
 	 * 
 	 * <p>
-	 * The envirometvariable {@code AIDS_HOME} gets chaked first, is servves a
-	 * manual override. If {@code AIDS_HOME} is not defined, a location will be
-	 * chosen based on the OS.
+	 * The environment variable {@code AIDS_HOME} is checked first, serving as a
+	 * manual override.
+	 * If {@code AIDS_HOME} is not defined, a location will be chosen based on the
+	 * operating system.
 	 * </p>
 	 * 
-	 * @return confighome location
+	 * @return The confighome location
 	 */
 	private String defineHomeDir() {
-		String directory = System.getenv("AIDS_HOME");
-		if (directory == null) {
-			if (os.equals("Windows")) {
-				directory = System.getenv("appdata");
-			} else if (os.equals("UNIX")) {
-				directory = System.getenv("XDG_CONFIG_HOME");
-			} else if (os.equals("mac")) {
-				directory = "~/Library/Application Support/";
-			}
-			directory += "/aids";
+		String dir = System.getenv("AIDS_HOME");
+		if (dir != null) {
+			return dir + "/aids";
 		}
-		return directory;
+		switch (os) {
+		case "Windows":
+			dir = System.getenv("APPDATA");
+			break;
+		case "UNIX":
+			dir = System.getenv("XDG_CONFIG_HOME");
+			// Fallback when XDG is unconfigured/unsupported
+			if (dir == null)
+				dir = System.getProperty("user.home") + "/.config";
+			break;
+		case "Mac":
+			dir = "~/Library/Application Support/";
+			break;
+		}
+		return dir + "/aids";
 	}
 
 	/**
-	 * Return the used operationg system (helpermethod to clean up the construcktor)
-	 * 
+	 * Returns the operating system used by the program. This is a helper method
+	 * used to simplify the constructor.
+	 *
 	 * <p>
-	 * For sake of simplicity, the os name will be abstracted:
-	 * {@code UNIX} for UNIX based operationg,
-	 * {@code Windows} for Mircrosoft operationg systems,
-	 * and {@code Mac} for Apple macs.
+	 * To provide simplicity, the OS name will be abstracted as follows:
+	 * <ul>
+	 * <li>{@code UNIX} for UNIX-based operating systems</li>
+	 * <li>{@code Windows} for Microsoft operating systems</li>
+	 * <li>{@code Mac} for Apple Macs</li>
 	 * </p>
-	 * 
-	 * @return used OS
+	 *
+	 * @return The used OS
 	 */
 	private String defineOs() {
 		String osType = System.getProperty("os.name");
 		switch (osType) {
-			case "BSD":
-			case "Linux":
-				osType = "UNIX";
-				break;
-			case "Mac OS X":
-				osType = "Mac";
-				break;
-			case "Windows 7":
-			case "Windows 10":
-			case "Windows 11":
-				osType = "Windows";
-				break;
+		case "BSD":
+		case "Linux":
+			osType = "UNIX";
+			break;
+		case "Mac OS X":
+			osType = "Mac";
+			break;
+		case "Windows 7":
+		case "Windows 10":
+		case "Windows 11":
+			osType = "Windows";
+			break;
 		}
 		return osType;
 	}
 
 	/**
-	 * This Method gets the name of the current OS.
+	 * Return the name of the current OS.
 	 * 
 	 * @return OS name
 	 */
@@ -106,7 +117,7 @@ public class Os {
 	}
 
 	/**
-	 * This Method gets the path to the config home.
+	 * Retun the path to the config home.
 	 * 
 	 * @return OS name
 	 */

@@ -93,8 +93,12 @@ public class Controller implements Initializable {
 	 * @param name  scene to switch to
 	 */
 	private void switchToScene(ActionEvent event, String name) throws IOException {
-		root = FXMLLoader.load(getClass().getClassLoader().getResource(name + ".fxml"));
-		root.getStylesheets().add(getClass().getClassLoader().getResource("styles.css").toExternalForm());
+		URL resourceURL = getClass().getClassLoader().getResource(name + ".fxml");
+		URL stylesheetURL = getClass().getClassLoader().getResource("styles.css");
+		FXMLLoader fxmlLoader = new FXMLLoader();
+		fxmlLoader.setLocation(resourceURL);
+		root = fxmlLoader.load();
+		root.getStylesheets().add(stylesheetURL.toExternalForm());
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
@@ -179,7 +183,7 @@ public class Controller implements Initializable {
 	@FXML
 	private void btnMainSceneClick(ActionEvent event) {
 		try {
-			switchToScene(event, "MainScene");
+			switchToScene(event, "Main");
 		} catch (IOException e) {
 			Alert errorAlert = new Alert(AlertType.ERROR);
 			StringWriter sw = new StringWriter();
@@ -199,7 +203,7 @@ public class Controller implements Initializable {
 	@FXML
 	private void btnLatexSceneClick(ActionEvent event) {
 		try {
-			switchToScene(event, "LatexScene");
+			switchToScene(event, "Latex");
 		} catch (IOException e) {
 			StringWriter stringWriter = new StringWriter();
 			e.printStackTrace(new PrintWriter(stringWriter));
@@ -218,7 +222,7 @@ public class Controller implements Initializable {
 	@FXML
 	private void btnDatabaseSceneClick(ActionEvent event) {
 		try {
-			switchToScene(event, "DatabaseScene");
+			switchToScene(event, "Database");
 		} catch (IOException e) {
 			StringWriter stringWriter = new StringWriter();
 			e.printStackTrace(new PrintWriter(stringWriter));
@@ -238,7 +242,8 @@ public class Controller implements Initializable {
 	@FXML
 	private void btnGenerateDocumentClick(ActionEvent event) {
 		final String type = cmbType.getSelectionModel().getSelectedItem();
-		final String destination = "/home/jogiwa/Downloads"; // TODO: add location in settings
+		// TODO: add location in settings
+		final String destination = "/home/jogiwa/Downloads";
 		final int amount = validateInt(txtAmount.getText());
 		final int chapters = validateInt(txtChapters.getText());
 		final boolean shuffle = chkShuffle.isArmed();
