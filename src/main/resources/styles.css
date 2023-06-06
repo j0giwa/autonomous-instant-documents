@@ -47,7 +47,6 @@
 }
 
 .combo-box,
-.combo-box .cell,
 .text-field {
   -fx-padding: 10px;
   -fx-border-insets: 10px;
@@ -60,6 +59,10 @@
   -fx-border-color: -fx-accent;
   -fx-background-color: -fx-input-background;
   -fx-font-size: 12pt;
+  -fx-text-fill: -fx-primary-text;
+}
+
+.combo-box .cell {
   -fx-text-fill: -fx-primary-text;
 }
 

@@ -19,6 +19,9 @@
 
 package de.thowl.automomousinstantdocumentsystem;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import de.thowl.automomousinstantdocumentsystem.control.Latex;
 import de.thowl.automomousinstantdocumentsystem.view.Gui;
 import javafx.application.Application;
@@ -35,6 +38,8 @@ public class Main {
 	private static final int EXIT_ERROR = 1;
 
 	private static final String VERSION = "version: 0.8.5";
+
+	private static final Logger logger = LogManager.getLogger(Main.class);
 
 	private static String type = null;
 	private static String destination = null;
@@ -54,11 +59,14 @@ public class Main {
 		}
 		handleArgs(args);
 		if (type == null || destination == null || amount <= 0) {
-			System.out.println("Not enough arguments");
+			logger.error("Not enough arguments");
 			System.exit(EXIT_ERROR);
 		}
 		Latex latex = new Latex();
+		logger.info("Generating {} Documents of type '{}' with {} chapters.",
+				amount, type, chapters);
 		latex.generate(type, destination, amount, chapters, shuffle);
+		logger.info("done");
 		System.exit(EXIT_SUCCESS);
 	}
 
@@ -128,7 +136,7 @@ public class Main {
 			chapters = checkInt(arg);
 			break;
 		default:
-			System.out.println("Unknown arg: " + arg); // NOSONAR
+			logger.error("Unknown arg: {}", arg);
 			break;
 		}
 	}
@@ -160,8 +168,14 @@ public class Main {
 	/**
 	 * This Method prints a si mple help document to console
 	 */
+	@SuppressWarnings("squid:S106")
 	private static void printHelp() {
-		// TODO Add help once all features are implemented
-		System.out.println("NO HELP (yet...)"); // NOSONAR
+		System.out.println("Flags:\t\t\t\tFunction:");
+		System.out.println("-t --type <type>\t\tSpecifies the desired Document type e.g. \"exam\".");
+		System.out.println("-c --chapters <chapters>\tSpecifies the amount of chapters per document.");
+		System.out.println("-a --amount <amount>\t\tSpecifies how many Documents should be generated.");
+		System.out.println("-ns --noshuffle\t\t\tTurns off shuffle mode.");
+		System.out.println("-h --help\t\t\tShow summary of options.");
+		System.out.println("-v --version\t\t\tPrint version number and exit.");
 	}
 }

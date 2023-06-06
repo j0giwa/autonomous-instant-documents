@@ -21,16 +21,16 @@ package de.thowl.automomousinstantdocumentsystem.model;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.FileUtils;
 
 /**
- * This class is a representation of a .tex file.
- * It contains the Path and their respective content of the file
+ * This class is a representation of a .tex file. It contains the Path and their
+ * respective content of the file
  * 
  * @version 1.2.0
  * @author Jonas Schwwind
- * 
  */
 public class LatexSnippet {
 
@@ -47,7 +47,8 @@ public class LatexSnippet {
 		this.filePath = filepath;
 		file = new File(this.filePath);
 		try {
-			fileContent = FileUtils.readFileToString(file, "utf-8");
+			fileContent = FileUtils.readFileToString(file,
+					StandardCharsets.UTF_8);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

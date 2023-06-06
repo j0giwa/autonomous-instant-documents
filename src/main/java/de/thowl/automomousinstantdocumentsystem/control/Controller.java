@@ -27,6 +27,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import de.thowl.automomousinstantdocumentsystem.model.Os;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -53,10 +56,8 @@ import javafx.stage.Stage;
  */
 public class Controller implements Initializable {
 
-	Alert errorAlert = new Alert(AlertType.ERROR);
-	private Stage stage;
-	private Scene scene;
-	private Parent root;
+	private static final Logger logger = LogManager
+			.getLogger(Controller.class);
 
 	// Sidebar
 	@FXML
@@ -87,20 +88,24 @@ public class Controller implements Initializable {
 	private TextArea txtMultipurposeTextArea;
 
 	/**
-	 * This method chages the scene to the specifiedd one
+	 * This method changes the scene to the specified one
 	 * 
 	 * @param event Actionevent from the current scene
 	 * @param name  scene to switch to
 	 */
-	private void switchToScene(ActionEvent event, String name) throws IOException {
-		URL resourceURL = getClass().getClassLoader().getResource(name + ".fxml");
-		URL stylesheetURL = getClass().getClassLoader().getResource("styles.css");
+	private void switchToScene(ActionEvent event, String name)
+			throws IOException {
+		URL resourceURL = getClass().getClassLoader()
+				.getResource(name + ".fxml");
+		URL stylesheetURL = getClass().getClassLoader()
+				.getResource("styles.css");
 		FXMLLoader fxmlLoader = new FXMLLoader();
 		fxmlLoader.setLocation(resourceURL);
-		root = fxmlLoader.load();
+		Parent root = fxmlLoader.load();
 		root.getStylesheets().add(stylesheetURL.toExternalForm());
-		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
+		Stage stage = (Stage) ((Node) event.getSource()).getScene()
+				.getWindow();
+		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -116,7 +121,8 @@ public class Controller implements Initializable {
 		String[] files = directory.list();
 		ArrayList<String> dropdownItems = new ArrayList<String>();
 		for (String file : files) {
-			if (new File(snippetsDir + "/" + file).isDirectory()) {
+			if (new File(snippetsDir + File.separator + file)
+					.isDirectory()) {
 				dropdownItems.add(file);
 			}
 		}
@@ -124,34 +130,7 @@ public class Controller implements Initializable {
 	}
 
 	/**
-	 * Valtidates if an supposed integer is an actual integer
-	 * 
-	 * <p>
-	 * This is an grafical version of
-	 * {@link de.thowl.automomousinstantdocumentsystem.Main#checkInt}
-	 * </p>
-	 * 
-	 * @param inputInt Integer to validate
-	 * @return Integervalue (if int)
-	 */
-	private int validateInt(String inputInt) {
-		int integer = 0;
-		try {
-			integer = Integer.parseInt(inputInt);
-		} catch (NumberFormatException e) {
-			StringWriter stringWriter = new StringWriter();
-			e.printStackTrace(new PrintWriter(stringWriter));
-			errorAlert.setHeaderText("NumberFormatException");
-			errorAlert.setContentText(stringWriter.toString());
-			errorAlert.showAndWait();
-			return 0;
-		}
-		return integer;
-	}
-
-	/**
-	 * Appends a String to the TextArea
-	 * <em>txtMultipurposeTextArea</em>
+	 * Appends a String to the TextArea <em>txtMultipurposeTextArea</em>
 	 * 
 	 * @param newString String to append
 	 */
@@ -182,6 +161,43 @@ public class Controller implements Initializable {
 	}
 
 	/**
+	 * Displays an error alert with the specified header and exception
+	 * details.
+	 *
+	 * @param header Header text for the error alert
+	 * @param e      Exception that occurred
+	 */
+	private void showErrorAlert(String header, Exception e) {
+		Alert errorAlert = new Alert(AlertType.ERROR);
+		StringWriter stringWriter = new StringWriter();
+		e.printStackTrace(new PrintWriter(stringWriter));
+		errorAlert.setHeaderText(header);
+		errorAlert.setContentText(stringWriter.toString());
+		errorAlert.showAndWait();
+	}
+
+	/**
+	 * Valtidates if an supposed integer is an actual integer
+	 * <p>
+	 * This is an grafical version of
+	 * {@link de.thowl.automomousinstantdocumentsystem.Main#checkInt}
+	 * </p>
+	 * 
+	 * @param inputInt Integer to validate
+	 * @return Integervalue (if int)
+	 */
+	private int validateInt(String inputInt) {
+		int integer = 0;
+		try {
+			integer = Integer.parseInt(inputInt);
+		} catch (NumberFormatException e) {
+			showErrorAlert("NumberFormatException", e);
+			return 0;
+		}
+		return integer;
+	}
+
+	/**
 	 * Switshes to the <em>Main</em> scene
 	 * 
 	 * @param event ActionEvent of the Button
@@ -191,13 +207,7 @@ public class Controller implements Initializable {
 		try {
 			switchToScene(event, "Main");
 		} catch (IOException e) {
-			Alert errorAlert = new Alert(AlertType.ERROR);
-			StringWriter sw = new StringWriter();
-			e.printStackTrace(new PrintWriter(sw));
-			errorAlert.setHeaderText("NumberFormatException");
-			errorAlert.setContentText(sw.toString());
-			errorAlert.showAndWait();
-			return;
+			showErrorAlert("Scene 'Main' not found", e);
 		}
 	}
 
@@ -211,12 +221,7 @@ public class Controller implements Initializable {
 		try {
 			switchToScene(event, "Latex");
 		} catch (IOException e) {
-			StringWriter stringWriter = new StringWriter();
-			e.printStackTrace(new PrintWriter(stringWriter));
-			errorAlert.setHeaderText("NumberFormatException");
-			errorAlert.setContentText(stringWriter.toString());
-			errorAlert.showAndWait();
-			return;
+			showErrorAlert("Scene LaTeX' not found", e);
 		}
 	}
 
@@ -230,39 +235,42 @@ public class Controller implements Initializable {
 		try {
 			switchToScene(event, "Database");
 		} catch (IOException e) {
-			StringWriter stringWriter = new StringWriter();
-			e.printStackTrace(new PrintWriter(stringWriter));
-			errorAlert.setHeaderText("NumberFormatException");
-			errorAlert.setContentText(stringWriter.toString());
-			errorAlert.showAndWait();
-			return;
+			showErrorAlert("Scene 'Database' not found", e);
 		}
 	}
 
 	/**
-	 * This method contains the logic behind the "Generate" Button
-	 * Executed when button is pressed
+	 * This method contains the logic behind the "Generate" Button Executed
+	 * when button is pressed
 	 * 
 	 * @param event ActionEvent of the Button
 	 */
 	@FXML
 	private void btnGenerateDocumentClick(ActionEvent event) {
-		final String type = cmbType.getSelectionModel().getSelectedItem();
+		final String type = cmbType.getSelectionModel()
+				.getSelectedItem();
 		// TODO: add location in settings
 		final String destination = "/home/jogiwa/Downloads";
 		final int amount = validateInt(txtAmount.getText());
 		final int chapters = validateInt(txtChapters.getText());
 		final boolean shuffle = chkShuffle.isArmed();
 		if (type == null || amount <= 0 || chapters <= 0) {
-			errorAlert.setHeaderText("Invalid Inputs");
-			errorAlert.setContentText("Please check your inputs");
-			errorAlert.showAndWait();
 			return;
 		}
-		Latex latex = new Latex();
-		latex.generate(type, destination, amount, chapters, shuffle);
-		appendToTextArea("[ INFO ]  Generated " + amount +
-				" Documents with " + chapters + " Chapters\n");
+		Thread generation = new Thread(() -> {
+			Latex latex = new Latex();
+			appendToTextArea("[ INFO ]  Generating " + amount
+					+ " Document(s) of type '" + type
+					+ "' with " + chapters
+					+ " chapters...\n");
+			logger.info("Generating {} Document(s) of type '{}' with {} chapters.",
+					amount, type, chapters);
+			latex.generate(type, destination, amount, chapters,
+					shuffle);
+			appendToTextArea("[ INFO ]  Generation complete\n");
+			logger.info("Generation complete");
+		});
+		generation.start();
 	}
 
 	@FXML
