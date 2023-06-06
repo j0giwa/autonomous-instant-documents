@@ -124,20 +124,12 @@ public class Controller implements Initializable {
 	}
 
 	/**
-	 * Appends a String to the TextArea
-	 * <em>txtMultipurposeTextArea</em>
-	 * 
-	 * @param newString String to append
-	 */
-	private void appendToTextArea(String newString) {
-		StringBuilder areaContent = new StringBuilder();
-		areaContent.append(txtMultipurposeTextArea.getText());
-		areaContent.append(newString);
-		txtMultipurposeTextArea.setText(areaContent.toString());
-	}
-
-	/**
 	 * Valtidates if an supposed integer is an actual integer
+	 * 
+	 * <p>
+	 * This is an grafical version of
+	 * {@link de.thowl.automomousInstantdocumentSystem.Main#checkInt}
+	 * </p>
 	 * 
 	 * @param inputInt Integer to validate
 	 * @return Integervalue (if int)
@@ -158,12 +150,25 @@ public class Controller implements Initializable {
 	}
 
 	/**
+	 * Appends a String to the TextArea
+	 * <em>txtMultipurposeTextArea</em>
+	 * 
+	 * @param newString String to append
+	 */
+	private void appendToTextArea(String newString) {
+		StringBuilder areaContent = new StringBuilder();
+		areaContent.append(txtMultipurposeTextArea.getText());
+		areaContent.append(newString);
+		txtMultipurposeTextArea.setText(areaContent.toString());
+	}
+
+	/**
 	 * Called to initialize this gui controller after its root element has
 	 * been completely processed by JavaFX.
 	 * 
 	 * @param location  The location used to resolve relative paths for the
-	 * 		    root object, or {@code null} if the location is not 
-	 * 		    known.
+	 *                  root object, or {@code null} if the location is not
+	 *                  known.
 	 * @param resources The resources used to localize the root object, or
 	 *                  {@code null} if the root object was not localized.
 	 */
@@ -262,6 +267,6 @@ public class Controller implements Initializable {
 
 	@FXML
 	private void btnChatGptGoClick() {
-		// Todo: add logic
+		// Todo: add logic
 	}
 }

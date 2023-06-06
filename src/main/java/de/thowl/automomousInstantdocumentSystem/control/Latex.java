@@ -130,7 +130,7 @@ public class Latex {
 	/**
 	 * Returns the location of the pdflatex binary current operating system
 	 * 
-	 * <p>
+	 * <p>
 	 * Only the default instalation locations are checked.
 	 * If the binary is stored anywhre else, it can't be found.
 	 * </p>

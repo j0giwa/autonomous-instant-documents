@@ -73,17 +73,14 @@ public class Main {
 		String prevArg = null;
 		for (int i = 0; i < argc; i++) {
 			arg = args[i];
-			if (arg.startsWith("--")) {
+			if (arg.startsWith("--"))
 				arg = arg.substring(2);
-			} else if (arg.startsWith("-")) {
+			if (arg.startsWith("-"))
 				arg = arg.substring(1);
-			}
-			// Parameterized arguments
 			if (prevArg != null) {
 				handleParamArgs(arg, prevArg);
 				prevArg = null;
 			}
-			// Standard arguments
 			switch (arg) {
 				case "version":
 				case "v":
@@ -123,21 +120,30 @@ public class Main {
 				break;
 			case "amount":
 			case "a":
-				try {
-					amount = Integer.parseInt(arg);
-				} catch (NumberFormatException e) {
-					e.printStackTrace();
-				}
+				amount = checkInt(arg);
 				break;
 			case "chapters":
 			case "c":
-				try {
-					chapters = Integer.parseInt(arg);
-				} catch (NumberFormatException e) {
-					e.printStackTrace();
-				}
+				chapters = checkInt(arg);
 				break;
 		}
+	}
+
+	/**
+	 * Valtidates if an supposed integer is an actual integer
+	 * 
+	 * @param inputInt Integer to validate
+	 * @return Integervalue (if int)
+	 */
+	private static int checkInt(String inputInt) {
+		int integer = 0;
+		try {
+			integer = Integer.parseInt(inputInt);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			return 0;
+		}
+		return integer;
 	}
 
 	/**
@@ -148,7 +154,8 @@ public class Main {
 	}
 
 	/**
-	 * This Method prints a simple help document to console
+	 * This Method prints a si
+	 * mple help document to console
 	 */
 	private static void printHelp() {
 		// TODO Add help once all features are implemented
