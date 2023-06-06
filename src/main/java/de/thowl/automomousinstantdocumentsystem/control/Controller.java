@@ -27,6 +27,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import de.thowl.automomousinstantdocumentsystem.model.Os;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -53,7 +56,8 @@ import javafx.stage.Stage;
  */
 public class Controller implements Initializable {
 
-	Alert errorAlert = new Alert(AlertType.ERROR);
+	private static final Logger logger = LogManager
+			.getLogger(Controller.class);
 
 	// Sidebar
 	@FXML
@@ -84,7 +88,7 @@ public class Controller implements Initializable {
 	private TextArea txtMultipurposeTextArea;
 
 	/**
-	 * This method chages the scene to the specifiedd one
+	 * This method changes the scene to the specified one
 	 * 
 	 * @param event Actionevent from the current scene
 	 * @param name  scene to switch to
@@ -117,36 +121,12 @@ public class Controller implements Initializable {
 		String[] files = directory.list();
 		ArrayList<String> dropdownItems = new ArrayList<String>();
 		for (String file : files) {
-			if (new File(snippetsDir + "/" + file).isDirectory()) {
+			if (new File(snippetsDir + File.separator + file)
+					.isDirectory()) {
 				dropdownItems.add(file);
 			}
 		}
 		cmbType.getItems().setAll(dropdownItems);
-	}
-
-	/**
-	 * Valtidates if an supposed integer is an actual integer
-	 * <p>
-	 * This is an grafical version of
-	 * {@link de.thowl.automomousinstantdocumentsystem.Main#checkInt}
-	 * </p>
-	 * 
-	 * @param inputInt Integer to validate
-	 * @return Integervalue (if int)
-	 */
-	private int validateInt(String inputInt) {
-		int integer = 0;
-		try {
-			integer = Integer.parseInt(inputInt);
-		} catch (NumberFormatException e) {
-			StringWriter stringWriter = new StringWriter();
-			e.printStackTrace(new PrintWriter(stringWriter));
-			errorAlert.setHeaderText("NumberFormatException");
-			errorAlert.setContentText(stringWriter.toString());
-			errorAlert.showAndWait();
-			return 0;
-		}
-		return integer;
 	}
 
 	/**
@@ -181,6 +161,43 @@ public class Controller implements Initializable {
 	}
 
 	/**
+	 * Displays an error alert with the specified header and exception
+	 * details.
+	 *
+	 * @param header Header text for the error alert
+	 * @param e      Exception that occurred
+	 */
+	private void showErrorAlert(String header, Exception e) {
+		Alert errorAlert = new Alert(AlertType.ERROR);
+		StringWriter stringWriter = new StringWriter();
+		e.printStackTrace(new PrintWriter(stringWriter));
+		errorAlert.setHeaderText(header);
+		errorAlert.setContentText(stringWriter.toString());
+		errorAlert.showAndWait();
+	}
+
+	/**
+	 * Valtidates if an supposed integer is an actual integer
+	 * <p>
+	 * This is an grafical version of
+	 * {@link de.thowl.automomousinstantdocumentsystem.Main#checkInt}
+	 * </p>
+	 * 
+	 * @param inputInt Integer to validate
+	 * @return Integervalue (if int)
+	 */
+	private int validateInt(String inputInt) {
+		int integer = 0;
+		try {
+			integer = Integer.parseInt(inputInt);
+		} catch (NumberFormatException e) {
+			showErrorAlert("NumberFormatException", e);
+			return 0;
+		}
+		return integer;
+	}
+
+	/**
 	 * Switshes to the <em>Main</em> scene
 	 * 
 	 * @param event ActionEvent of the Button
@@ -190,11 +207,7 @@ public class Controller implements Initializable {
 		try {
 			switchToScene(event, "Main");
 		} catch (IOException e) {
-			StringWriter sw = new StringWriter();
-			e.printStackTrace(new PrintWriter(sw));
-			errorAlert.setHeaderText("Error");
-			errorAlert.setContentText(sw.toString());
-			errorAlert.showAndWait();
+			showErrorAlert("Scene 'Main' not found", e);
 		}
 	}
 
@@ -208,11 +221,7 @@ public class Controller implements Initializable {
 		try {
 			switchToScene(event, "Latex");
 		} catch (IOException e) {
-			StringWriter stringWriter = new StringWriter();
-			e.printStackTrace(new PrintWriter(stringWriter));
-			errorAlert.setHeaderText("Error");
-			errorAlert.setContentText(stringWriter.toString());
-			errorAlert.showAndWait();
+			showErrorAlert("Scene LaTeX' not found", e);
 		}
 	}
 
@@ -226,11 +235,7 @@ public class Controller implements Initializable {
 		try {
 			switchToScene(event, "Database");
 		} catch (IOException e) {
-			StringWriter stringWriter = new StringWriter();
-			e.printStackTrace(new PrintWriter(stringWriter));
-			errorAlert.setHeaderText("Error");
-			errorAlert.setContentText(stringWriter.toString());
-			errorAlert.showAndWait();
+			showErrorAlert("Scene 'Database' not found", e);
 		}
 	}
 
@@ -250,16 +255,22 @@ public class Controller implements Initializable {
 		final int chapters = validateInt(txtChapters.getText());
 		final boolean shuffle = chkShuffle.isArmed();
 		if (type == null || amount <= 0 || chapters <= 0) {
-			errorAlert.setHeaderText("Invalid Inputs");
-			errorAlert.setContentText("Please check your inputs");
-			errorAlert.showAndWait();
 			return;
 		}
-		Latex latex = new Latex();
-		latex.generate(type, destination, amount, chapters, shuffle);
-		appendToTextArea("[ INFO ]  Generated " + amount
-				+ " Documents with " + chapters
-				+ " Chapters\n");
+		Thread generation = new Thread(() -> {
+			Latex latex = new Latex();
+			appendToTextArea("[ INFO ]  Generating " + amount
+					+ " Document(s) of type '" + type
+					+ "' with " + chapters
+					+ " chapters...\n");
+			logger.info("Generating {} Document(s) of type '{}' with {} chapters.",
+					amount, type, chapters);
+			latex.generate(type, destination, amount, chapters,
+					shuffle);
+			appendToTextArea("[ INFO ]  Generation complete\n");
+			logger.info("Generation complete");
+		});
+		generation.start();
 	}
 
 	@FXML

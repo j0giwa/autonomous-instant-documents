@@ -25,7 +25,7 @@ package de.thowl.automomousinstantdocumentsystem.exceptions;
 public class LatexNotInstalledException extends Exception {
 
 	private static final long serialVersionUID = 1L;
-	private String message;
+	private final String message;
 
 	/**
 	 * @param message errormessage if the exception gets thrown
