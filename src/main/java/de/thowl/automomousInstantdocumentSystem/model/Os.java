@@ -39,12 +39,13 @@ public class Os {
 	}
 	
 	/**
-	 * Returns the confighome where all configuration files and LaTeX snippets reside.
+	 * Returns the confighome where all configfiles and snippets reside.
 	 * This is a helper method used to clean up the constructor.
 	 * 
 	 * <p>
-	 * The environment variable {@code AIDS_HOME} is checked first, serving as a manual override.
-	 * If {@code AIDS_HOME} is not defined, a location will be chosen based on the operating system.
+	 * The environment variable {@code AIDS_HOME} is checked first, 
+	 * serving as a manual override. If {@code AIDS_HOME} is not defined, 
+	 * a location will be chosen based on the operating system.
 	 * </p>
 	 * 
 	 * @return The confighome location

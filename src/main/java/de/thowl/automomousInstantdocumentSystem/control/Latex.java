@@ -70,11 +70,12 @@ public class Latex {
 	/**
 	 * This Method gathers snipptes for a LaTex document
 	 * 
-	 * @param type      The "type" of snippets that should be collected, the type is
-	 *                  defined by a directoryname in the config-directory.
+	 * @param type      The "type" of snippets that should be collected,
+	 *                  the type is defined by a directoryname in the
+	 *                  confighome.
 	 * @param chapters  amount of snippets
-	 * @param randomise should the order be randomised (always true except for
-	 *                  tests)
+	 * @param randomise should the order be randomised
+	 * 		    (always true except for tests)
 	 */
 	public void gatherSnippets(String type, int chapters, boolean randomise) {
 		Random rng = new Random(System.currentTimeMillis() / 1000L);
@@ -99,13 +100,13 @@ public class Latex {
 	 * <em>gatherSnippets</em> method.
 	 * 
 	 * <p>
-	 * The method {@link #gatherSnippets(String, int, boolean)} needs to called
-	 * first,
-	 * as it gathers all snippets that are required for the sourcefile.
+	 * The method {@link #gatherSnippets(String, int, boolean)} needs to be
+	 * called first, as it gathers all snippets that are required for 
+	 * the sourcefile.
 	 * </p>
 	 * 
-	 * @param type type of the document, the sourcefile gets saved under this name
-	 *             at a temporary location
+	 * @param type type of the document, the sourcefile gets saved under 
+	 * 	       this name at a temporary location.
 	 */
 	public void concat(String type) {
 		StringBuilder sb = new StringBuilder();
@@ -129,14 +130,14 @@ public class Latex {
 	/**
 	 * Returns the location of the pdflatex binary current operating system
 	 * 
-	 * <p>
+	 * <p>
 	 * Only the default instalation locations are checked.
 	 * If the binary is stored anywhre else, it can't be found.
 	 * </p>
 	 * 
 	 * @return location of the pdflatex binary
-	 * @throws LatexNotInstalledException if the compiler cannot be found anywhere
-	 *                                    on the system.
+	 * @throws LatexNotInstalledException if the compiler cannot be found
+	 * 				      anywhere on the system.
 	 */
 	public String latexCompilerLocation() throws LatexNotInstalledException {
 		String compilerPath = null;

@@ -70,7 +70,7 @@ public class Main {
 	private static void handleArgs(String[] args) {
 		int argc = args.length;
 		String arg = null;
-		String previousArg = null;
+		String prevArg = null;
 		for (int i = 0; i < argc; i++) {
 			arg = args[i];
 			if (arg.startsWith("--")) {
@@ -79,9 +79,9 @@ public class Main {
 				arg = arg.substring(1);
 			}
 			// Parameterized arguments
-			if (previousArg != null) {
-				handleParameterisedArgs(arg, previousArg);
-				previousArg = null;
+			if (prevArg != null) {
+				handleParamArgs(arg, prevArg);
+				prevArg = null;
 			}
 			// Standard arguments
 			switch (arg) {
@@ -100,7 +100,7 @@ public class Main {
 					shuffle = false;
 					break;
 				default:
-					previousArg = arg;
+					prevArg = arg;
 					break;
 			}
 		}
@@ -111,8 +111,8 @@ public class Main {
 	 * 
 	 * @param args
 	 */
-	private static void handleParameterisedArgs(String arg, String previousArg) {
-		switch (previousArg) {
+	private static void handleParamArgs(String arg, String prevArg) {
+		switch (prevArg) {
 			case "type":
 			case "t":
 				type = arg;

@@ -158,11 +158,12 @@ public class Controller implements Initializable {
 	}
 
 	/**
-	 * Called to initialize this gui controller after its root element has been
-	 * completely processed by JavaFX.
+	 * Called to initialize this gui controller after its root element has
+	 * been completely processed by JavaFX.
 	 * 
-	 * @param location  The location used to resolve relative paths for the root
-	 *                  object, or {@code null} if the location is not known.
+	 * @param location  The location used to resolve relative paths for the
+	 * 		    root object, or {@code null} if the location is not 
+	 * 		    known.
 	 * @param resources The resources used to localize the root object, or
 	 *                  {@code null} if the root object was not localized.
 	 */
@@ -234,8 +235,8 @@ public class Controller implements Initializable {
 	}
 
 	/**
-	 * This method contains the logic behind the "Generate" Button on the GUI
-	 * Exected when button is pressed
+	 * This method contains the logic behind the "Generate" Button
+	 * Executed when button is pressed
 	 * 
 	 * @param event ActionEvent of the Button
 	 */
@@ -261,6 +262,6 @@ public class Controller implements Initializable {
 
 	@FXML
 	private void btnChatGptGoClick() {
-		// Todo: add logic
+		// Todo: add logic
 	}
 }
