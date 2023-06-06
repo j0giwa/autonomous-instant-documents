@@ -17,29 +17,10 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-package de.thowl.automomousInstantdocumentSystem.exceptions;
-
 /**
- * This exception gets thrown wen a LaTeX binary cannot be found
+ * This package contains all classes that handle data, either from files or
+ * databases
+ * 
+ * @author Jonas Schwind
  */
-public class LatexNotInstalledException extends Exception {
-
-	private static final long serialVersionUID = 1L;
-	private String message;
-
-	/**
-	 * @param message errormessage if the exception gets thrown
-	 */
-	public LatexNotInstalledException(String message) {
-		super(message);
-		this.message = message;
-	}
-
-	/**
-	 * @return Erromassage as a String
-	 */
-	@Override
-	public String toString() {
-		return message;
-	}
-}
+package de.thowl.automomousinstantdocumentsystem.model;

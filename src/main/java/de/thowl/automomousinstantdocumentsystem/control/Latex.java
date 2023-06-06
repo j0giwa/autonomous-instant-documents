@@ -17,12 +17,13 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-package de.thowl.automomousInstantdocumentSystem.control;
+package de.thowl.automomousinstantdocumentsystem.control;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -31,21 +32,19 @@ import java.util.Random;
 
 import org.apache.commons.io.FileUtils;
 
-import de.thowl.automomousInstantdocumentSystem.exceptions.LatexNotInstalledException;
-import de.thowl.automomousInstantdocumentSystem.model.LatexSnippet;
-import de.thowl.automomousInstantdocumentSystem.model.Os;
+import de.thowl.automomousinstantdocumentsystem.exceptions.LatexNotInstalledException;
+import de.thowl.automomousinstantdocumentsystem.model.LatexSnippet;
+import de.thowl.automomousinstantdocumentsystem.model.Os;
 
 /**
  * This class is a Representation of a LaTeX-document.
- * 
  * <p>
  * It contains methods for the creation of LaTeX-Documents
  * </p>
  * 
  * @author Jonas Schwind
  * @version 0.1.2
- * 
- * @see de.thowl.automomousInstantdocumentSystem.model.LatexSnippet
+ * @see de.thowl.automomousinstantdocumentsystem.model.LatexSnippet
  */
 public class Latex {
 
@@ -62,7 +61,7 @@ public class Latex {
 	public Latex() {
 		snippets = new ArrayList<LatexSnippet>();
 		os = new Os();
-		osName = os.getOS();
+		osName = os.getOperatingSystem();
 		homeDir = os.getHomeDir();
 		os = null;
 	}
@@ -70,19 +69,21 @@ public class Latex {
 	/**
 	 * This Method gathers snipptes for a LaTex document
 	 * 
-	 * @param type      The "type" of snippets that should be collected,
-	 *                  the type is defined by a directoryname in the
+	 * @param type      The "type" of snippets that should be collected, the
+	 *                  type is defined by a directoryname in the
 	 *                  confighome.
 	 * @param chapters  amount of snippets
-	 * @param randomise should the order be randomised
-	 * 		    (always true except for tests)
+	 * @param randomise should the order be randomised (always true except
+	 *                  for tests)
 	 */
-	public void gatherSnippets(String type, int chapters, boolean randomise) {
+	public void gatherSnippets(String type, int chapters,
+			boolean randomise) {
 		Random rng = new Random(System.currentTimeMillis() / 1000L);
 		String snippetsDir = homeDir + "/latex/";
 		header = new LatexSnippet(snippetsDir + type + "/header.tex");
 		for (int i = 0; i < chapters; i++) {
-			File directory = new File(snippetsDir + type + "/chapters/");
+			File directory = new File(
+					snippetsDir + type + "/chapters/");
 			File[] files = directory.listFiles();
 			Arrays.sort(files);
 			int index = i;
@@ -98,15 +99,14 @@ public class Latex {
 	/**
 	 * This method concatenates a sourcefile from snippets gathered by the
 	 * <em>gatherSnippets</em> method.
-	 * 
 	 * <p>
 	 * The method {@link #gatherSnippets(String, int, boolean)} needs to be
-	 * called first, as it gathers all snippets that are required for 
-	 * the sourcefile.
+	 * called first, as it gathers all snippets that are required for the
+	 * sourcefile.
 	 * </p>
 	 * 
-	 * @param type type of the document, the sourcefile gets saved under 
-	 * 	       this name at a temporary location.
+	 * @param type type of the document, the sourcefile gets saved under
+	 *             this name at a temporary location.
 	 */
 	public void concat(String type) {
 		StringBuilder sb = new StringBuilder();
@@ -119,27 +119,26 @@ public class Latex {
 		sb.append(footer.getFileContent() + "\n");
 		try {
 			File outputfile = new File("./temp/" + type + ".tex");
-			FileUtils.writeStringToFile(outputfile, sb.toString(), "utf-8");
+			FileUtils.writeStringToFile(outputfile, sb.toString(),
+					StandardCharsets.UTF_8);
 		} catch (IOException e) {
 			e.printStackTrace();
-		} finally {
-
 		}
 	}
 
 	/**
 	 * Returns the location of the pdflatex binary current operating system
-	 * 
 	 * <p>
-	 * Only the default instalation locations are checked.
-	 * If the binary is stored anywhre else, it can't be found.
+	 * Only the default instalation locations are checked. If the binary is
+	 * stored anywhre else, it can't be found.
 	 * </p>
 	 * 
 	 * @return location of the pdflatex binary
 	 * @throws LatexNotInstalledException if the compiler cannot be found
-	 * 				      anywhere on the system.
+	 *                                    anywhere on the system.
 	 */
-	public String latexCompilerLocation() throws LatexNotInstalledException {
+	public String latexCompilerLocation()
+			throws LatexNotInstalledException {
 		String compilerPath = null;
 		if (osName.equals("UNIX")) {
 			compilerPath = "/usr/bin/pdflatex";
@@ -147,16 +146,16 @@ public class Latex {
 			compilerPath = "C:\\texlive\\2023\\bin\\windows\\pdflatex.exe";
 		}
 		if (!new File(compilerPath).exists())
-			throw new LatexNotInstalledException("pdflatex not found");
+			throw new LatexNotInstalledException(
+					"pdflatex not found");
 		return compilerPath;
 	}
 
 	/**
 	 * Compiles a LaTeX document from a sourcefile
-	 * 
 	 * <p>
-	 * The method {@link #concat(String)} needs to be called first,
-	 * as it generates the sourcefile.
+	 * The method {@link #concat(String)} needs to be called first, as it
+	 * generates the sourcefile.
 	 * </p>
 	 * 
 	 * @param type        type of the the sourcefile ()
@@ -177,12 +176,14 @@ public class Latex {
 			// TODO: Change this ASAP
 			@SuppressWarnings("deprecation")
 			Process proc = Runtime.getRuntime().exec(command);
-			// Print stdOut of pdflatex NOTE: NECCESARY, DON'T DELETE!!!
-			InputStreamReader stream = new InputStreamReader(proc.getInputStream());
+			// Print stdOut of pdflatex NOTE: NECCESARY, DON'T
+			// DELETE!!!
+			InputStreamReader stream = new InputStreamReader(
+					proc.getInputStream());
 			BufferedReader stdout = new BufferedReader(stream);
 			String compliermsg;
 			while ((compliermsg = stdout.readLine()) != null) {
-				System.out.println(compliermsg);
+				System.out.println(compliermsg); // NOSONAR
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -197,7 +198,8 @@ public class Latex {
 	 * @param amount      amount of instances that should be saved
 	 * @param shuffle     generate each document with a new set of snippets
 	 */
-	public void generate(String type, String destination, int amount, int chapters, boolean shuffle) {
+	public void generate(String type, String destination, int amount,
+			int chapters, boolean shuffle) {
 		gatherSnippets(type, chapters, true);
 		for (int i = 1; i <= amount; i++) {
 			String subdirname = "foldername" + i;

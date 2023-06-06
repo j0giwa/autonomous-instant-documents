@@ -18,9 +18,8 @@
  */
 
 /**
- * This package contains all classes that handle data, either from files or
- * databases
+ * This Package contains nonstandart exxeenpitons for the Programm
  * 
  * @author Jonas Schwind
  */
-package de.thowl.automomousInstantdocumentSystem.model;
+package de.thowl.automomousinstantdocumentsystem.exceptions;

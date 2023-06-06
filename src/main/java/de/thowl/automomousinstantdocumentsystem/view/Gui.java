@@ -17,7 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-package de.thowl.automomousInstantdocumentSystem.view;
+package de.thowl.automomousinstantdocumentsystem.view;
 
 import java.net.URL;
 
@@ -34,13 +34,13 @@ import javafx.stage.Stage;
  * 
  * <p>
  * The controlling logic can be found in the
- * {@link de.thowl.automomousInstantdocumentSystem.control.Controller} class.
+ * {@link de.thowl.automomousinstantdocumentsystem.control.Controller} class.
  * </p>
  * 
  * @author Jonas Schwind
  * @version 1.0.3
  * 
- * @see de.thowl.automomousInstantdocumentSystem.control.Controller
+ * @see de.thowl.automomousinstantdocumentsystem.control.Controller
  */
 public class Gui extends Application {
 

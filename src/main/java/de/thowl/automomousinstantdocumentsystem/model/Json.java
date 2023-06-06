@@ -17,7 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-package de.thowl.automomousInstantdocumentSystem.model;
+package de.thowl.automomousinstantdocumentsystem.model;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -63,8 +63,7 @@ public class Json {
      */
     public String getValue(String object, String key) {
         JSONObject currentObject = (JSONObject) jsonObject.get(object);
-        String value = (String) currentObject.get(key);
-        return value;
+        return (String) currentObject.get(key);
     }
 
     /**
@@ -79,13 +78,10 @@ public class Json {
         JSONObject currentObject = (JSONObject) jsonObject.get(object);
         // NOTE: library not implemented as "generic type"
         currentObject.put(key, value);
-        try {
-            FileWriter file = new FileWriter(filePath);
+        try (FileWriter file = new FileWriter(filePath)) {
             file.write(jsonObject.toJSONString());
-            file.close();
         } catch (IOException e) {
             e.printStackTrace();
-            return;
         }
     }
 }

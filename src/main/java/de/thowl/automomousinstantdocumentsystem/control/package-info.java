@@ -22,4 +22,4 @@
  * 
  * @author Jonas Schwind
  */
-package de.thowl.automomousInstantdocumentSystem.control;
+package de.thowl.automomousinstantdocumentsystem.control;

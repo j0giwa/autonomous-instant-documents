@@ -17,7 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-package de.thowl.automomousInstantdocumentSystem.model;
+package de.thowl.automomousinstantdocumentsystem.model;
 
 /**
  * This class contains Methods to read and write a JSon file
@@ -27,25 +27,24 @@ package de.thowl.automomousInstantdocumentSystem.model;
  */
 public class Os {
 
-	private String os;
+	private String operatingSystem;
 	private String homeDir;
 
 	/**
 	 * Constructs a new instance of the Os class.
 	 */
 	public Os() {
-		os = defineOs();
+		operatingSystem = defineOperatingSystem();
 		homeDir = defineHomeDir();
 	}
-	
+
 	/**
 	 * Returns the confighome where all configfiles and snippets reside.
 	 * This is a helper method used to clean up the constructor.
-	 * 
 	 * <p>
-	 * The environment variable {@code AIDS_HOME} is checked first, 
-	 * serving as a manual override. If {@code AIDS_HOME} is not defined, 
-	 * a location will be chosen based on the operating system.
+	 * The environment variable {@code AIDS_HOME} is checked first, serving
+	 * as a manual override. If {@code AIDS_HOME} is not defined, a location
+	 * will be chosen based on the operating system.
 	 * </p>
 	 * 
 	 * @return The confighome location
@@ -55,27 +54,29 @@ public class Os {
 		if (dir != null) {
 			return dir + "/aids";
 		}
-		switch (os) {
+		switch (operatingSystem) {
 		case "Windows":
 			dir = System.getenv("APPDATA");
 			break;
 		case "UNIX":
 			dir = System.getenv("XDG_CONFIG_HOME");
 			// Fallback when XDG is unconfigured/unsupported
-			if (dir == null) 
-				dir = System.getProperty("user.home") + "/.config";
+			if (dir == null)
+				dir = System.getProperty("user.home")
+						+ "/.config";
 			break;
 		case "Mac":
 			dir = "~/Library/Application Support/";
 			break;
+		default:
+			break;
 		}
 		return dir + "/aids";
 	}
-	
+
 	/**
-	 * Returns the operating system used by the program.
-	 * This is a helper method used to simplify the constructor.
-	 *
+	 * Returns the operating system used by the program. This is a helper
+	 * method used to simplify the constructor.
 	 * <p>
 	 * To provide simplicity, the OS name will be abstracted as follows:
 	 * <ul>
@@ -86,7 +87,7 @@ public class Os {
 	 *
 	 * @return The used OS
 	 */
-	private String defineOs() {
+	private String defineOperatingSystem() {
 		String osType = System.getProperty("os.name");
 		switch (osType) {
 		case "BSD":
@@ -101,6 +102,8 @@ public class Os {
 		case "Windows 11":
 			osType = "Windows";
 			break;
+		default:
+			break;
 		}
 		return osType;
 	}
@@ -110,8 +113,8 @@ public class Os {
 	 * 
 	 * @return OS name
 	 */
-	public String getOS() {
-		return os;
+	public String getOperatingSystem() {
+		return operatingSystem;
 	}
 
 	/**

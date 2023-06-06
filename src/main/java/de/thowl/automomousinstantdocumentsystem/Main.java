@@ -17,10 +17,10 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-package de.thowl.automomousInstantdocumentSystem;
+package de.thowl.automomousinstantdocumentsystem;
 
-import de.thowl.automomousInstantdocumentSystem.control.Latex;
-import de.thowl.automomousInstantdocumentSystem.view.Gui;
+import de.thowl.automomousinstantdocumentsystem.control.Latex;
+import de.thowl.automomousinstantdocumentsystem.view.Gui;
 import javafx.application.Application;
 
 /**
@@ -34,7 +34,7 @@ public class Main {
 	private static final int EXIT_SUCCESS = 0;
 	private static final int EXIT_ERROR = 1;
 
-	private static final String version = "version: 0.8.5";
+	private static final String VERSION = "version: 0.8.5";
 
 	private static String type = null;
 	private static String destination = null;
@@ -82,50 +82,54 @@ public class Main {
 				prevArg = null;
 			}
 			switch (arg) {
-				case "version":
-				case "v":
-					printVersion();
-					System.exit(EXIT_SUCCESS);
-					break;
-				case "help":
-				case "h":
-					printHelp();
-					System.exit(EXIT_SUCCESS);
-					break;
-				case "noshuffle":
-				case "ns":
-					shuffle = false;
-					break;
-				default:
-					prevArg = arg;
-					break;
+			case "version":
+			case "v":
+				printVersion();
+				System.exit(EXIT_SUCCESS);
+				break;
+			case "help":
+			case "h":
+				printHelp();
+				System.exit(EXIT_SUCCESS);
+				break;
+			case "noshuffle":
+			case "ns":
+				shuffle = false;
+				break;
+			default:
+				prevArg = arg;
+				break;
 			}
 		}
 	}
 
 	/**
-	 * This method handles the command line arguments with additional parameters
+	 * This method handles the command line arguments with additional
+	 * parameters
 	 * 
 	 * @param args
 	 */
 	private static void handleParamArgs(String arg, String prevArg) {
 		switch (prevArg) {
-			case "type":
-			case "t":
-				type = arg;
-				break;
-			case "destination":
-			case "d":
-				destination = arg;
-				break;
-			case "amount":
-			case "a":
-				amount = checkInt(arg);
-				break;
-			case "chapters":
-			case "c":
-				chapters = checkInt(arg);
-				break;
+		case "type":
+		case "t":
+			type = arg;
+			break;
+		case "destination":
+		case "d":
+			destination = arg;
+			break;
+		case "amount":
+		case "a":
+			amount = checkInt(arg);
+			break;
+		case "chapters":
+		case "c":
+			chapters = checkInt(arg);
+			break;
+		default:
+			System.out.println("Unknown arg: " + arg); // NOSONAR
+			break;
 		}
 	}
 
@@ -150,15 +154,14 @@ public class Main {
 	 * This method print the version information to console
 	 */
 	private static void printVersion() {
-		System.out.println(version);
+		System.out.println(VERSION); // NOSONAR
 	}
 
 	/**
-	 * This Method prints a si
-	 * mple help document to console
+	 * This Method prints a si mple help document to console
 	 */
 	private static void printHelp() {
 		// TODO Add help once all features are implemented
-		System.out.println("NO HELP (yet...)");
+		System.out.println("NO HELP (yet...)"); // NOSONAR
 	}
 }

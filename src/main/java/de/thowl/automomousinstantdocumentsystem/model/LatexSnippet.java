@@ -17,7 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-package de.thowl.automomousInstantdocumentSystem.model;
+package de.thowl.automomousinstantdocumentsystem.model;
 
 import java.io.File;
 import java.io.IOException;

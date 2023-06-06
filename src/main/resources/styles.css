@@ -36,12 +36,6 @@
 }
 
 #sidebar .button SVGPath{
-  -fx-min-width: 24px;
-  -fx-max-width: 24px; 
-  -fx-pref-width: 24px;
-  -fx-min-height: 24px;
-  -fx-max-height: 24px; 
-  -fx-pref-height: 24px;
   -fx-fill: -fx-primary;
 }
 
@@ -53,6 +47,7 @@
 }
 
 .combo-box,
+.combo-box .cell,
 .text-field {
   -fx-padding: 10px;
   -fx-border-insets: 10px;
@@ -65,10 +60,6 @@
   -fx-border-color: -fx-accent;
   -fx-background-color: -fx-input-background;
   -fx-font-size: 12pt;
-  -fx-text-fill: -fx-primary-text;
-}
-
-.combo-box .cell {
   -fx-text-fill: -fx-primary-text;
 }
 

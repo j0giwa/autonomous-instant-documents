@@ -32,8 +32,8 @@ import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import de.thowl.automomousInstantdocumentSystem.control.Latex;
-import de.thowl.automomousInstantdocumentSystem.exceptions.LatexNotInstalledException;
+import de.thowl.automomousinstantdocumentsystem.control.Latex;
+import de.thowl.automomousinstantdocumentsystem.exceptions.LatexNotInstalledException;
 
 public class TestLatex {
 

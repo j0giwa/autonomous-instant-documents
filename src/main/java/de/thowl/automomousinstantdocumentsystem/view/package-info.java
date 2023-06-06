@@ -18,8 +18,6 @@
  */
 
 /**
- * This Package contains nonstandart exxeenpitons for the Programm
- * 
- * @author Jonas Schwind
+ * This Package contains the Grafical User Interface (GUI)
  */
-package de.thowl.automomousInstantdocumentSystem.exceptions;
+package de.thowl.automomousinstantdocumentsystem.view;

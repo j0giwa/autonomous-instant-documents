@@ -17,7 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-package de.thowl.automomousInstantdocumentSystem.control;
+package de.thowl.automomousinstantdocumentsystem.control;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +27,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import de.thowl.automomousInstantdocumentSystem.model.Os;
+import de.thowl.automomousinstantdocumentsystem.model.Os;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -49,7 +49,7 @@ import javafx.stage.Stage;
  * 
  * @author Jonas Schwind
  * @version 0.1.2
- * @see de.thowl.automomousInstantdocumentSystem.view.Gui
+ * @see de.thowl.automomousinstantdocumentsystem.view.Gui
  */
 public class Controller implements Initializable {
 
@@ -128,7 +128,7 @@ public class Controller implements Initializable {
 	 * 
 	 * <p>
 	 * This is an grafical version of
-	 * {@link de.thowl.automomousInstantdocumentSystem.Main#checkInt}
+	 * {@link de.thowl.automomousinstantdocumentsystem.Main#checkInt}
 	 * </p>
 	 * 
 	 * @param inputInt Integer to validate
