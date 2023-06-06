@@ -54,9 +54,6 @@ import javafx.stage.Stage;
 public class Controller implements Initializable {
 
 	Alert errorAlert = new Alert(AlertType.ERROR);
-	private Stage stage;
-	private Scene scene;
-	private Parent root;
 
 	// Sidebar
 	@FXML
@@ -92,15 +89,19 @@ public class Controller implements Initializable {
 	 * @param event Actionevent from the current scene
 	 * @param name  scene to switch to
 	 */
-	private void switchToScene(ActionEvent event, String name) throws IOException {
-		URL resourceURL = getClass().getClassLoader().getResource(name + ".fxml");
-		URL stylesheetURL = getClass().getClassLoader().getResource("styles.css");
+	private void switchToScene(ActionEvent event, String name)
+			throws IOException {
+		URL resourceURL = getClass().getClassLoader()
+				.getResource(name + ".fxml");
+		URL stylesheetURL = getClass().getClassLoader()
+				.getResource("styles.css");
 		FXMLLoader fxmlLoader = new FXMLLoader();
 		fxmlLoader.setLocation(resourceURL);
-		root = fxmlLoader.load();
+		Parent root = fxmlLoader.load();
 		root.getStylesheets().add(stylesheetURL.toExternalForm());
-		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
+		Stage stage = (Stage) ((Node) event.getSource()).getScene()
+				.getWindow();
+		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -125,7 +126,6 @@ public class Controller implements Initializable {
 
 	/**
 	 * Valtidates if an supposed integer is an actual integer
-	 * 
 	 * <p>
 	 * This is an grafical version of
 	 * {@link de.thowl.automomousinstantdocumentsystem.Main#checkInt}
@@ -150,8 +150,7 @@ public class Controller implements Initializable {
 	}
 
 	/**
-	 * Appends a String to the TextArea
-	 * <em>txtMultipurposeTextArea</em>
+	 * Appends a String to the TextArea <em>txtMultipurposeTextArea</em>
 	 * 
 	 * @param newString String to append
 	 */
@@ -191,13 +190,11 @@ public class Controller implements Initializable {
 		try {
 			switchToScene(event, "Main");
 		} catch (IOException e) {
-			Alert errorAlert = new Alert(AlertType.ERROR);
 			StringWriter sw = new StringWriter();
 			e.printStackTrace(new PrintWriter(sw));
-			errorAlert.setHeaderText("NumberFormatException");
+			errorAlert.setHeaderText("Error");
 			errorAlert.setContentText(sw.toString());
 			errorAlert.showAndWait();
-			return;
 		}
 	}
 
@@ -213,10 +210,9 @@ public class Controller implements Initializable {
 		} catch (IOException e) {
 			StringWriter stringWriter = new StringWriter();
 			e.printStackTrace(new PrintWriter(stringWriter));
-			errorAlert.setHeaderText("NumberFormatException");
+			errorAlert.setHeaderText("Error");
 			errorAlert.setContentText(stringWriter.toString());
 			errorAlert.showAndWait();
-			return;
 		}
 	}
 
@@ -232,22 +228,22 @@ public class Controller implements Initializable {
 		} catch (IOException e) {
 			StringWriter stringWriter = new StringWriter();
 			e.printStackTrace(new PrintWriter(stringWriter));
-			errorAlert.setHeaderText("NumberFormatException");
+			errorAlert.setHeaderText("Error");
 			errorAlert.setContentText(stringWriter.toString());
 			errorAlert.showAndWait();
-			return;
 		}
 	}
 
 	/**
-	 * This method contains the logic behind the "Generate" Button
-	 * Executed when button is pressed
+	 * This method contains the logic behind the "Generate" Button Executed
+	 * when button is pressed
 	 * 
 	 * @param event ActionEvent of the Button
 	 */
 	@FXML
 	private void btnGenerateDocumentClick(ActionEvent event) {
-		final String type = cmbType.getSelectionModel().getSelectedItem();
+		final String type = cmbType.getSelectionModel()
+				.getSelectedItem();
 		// TODO: add location in settings
 		final String destination = "/home/jogiwa/Downloads";
 		final int amount = validateInt(txtAmount.getText());
@@ -261,8 +257,9 @@ public class Controller implements Initializable {
 		}
 		Latex latex = new Latex();
 		latex.generate(type, destination, amount, chapters, shuffle);
-		appendToTextArea("[ INFO ]  Generated " + amount +
-				" Documents with " + chapters + " Chapters\n");
+		appendToTextArea("[ INFO ]  Generated " + amount
+				+ " Documents with " + chapters
+				+ " Chapters\n");
 	}
 
 	@FXML
