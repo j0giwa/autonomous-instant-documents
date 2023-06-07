@@ -44,7 +44,15 @@
 
 ### Build it yourself
 
-#### Linux
+#### Windows
+```
+mvn package
+xcopy ".\target\automomousInstantdocumentSystem-*-jar-with-dependencies.jar" "C:\Program\Files\automomous-instantdocument-system.jar" /Y
+gzip ".\docs\man\autonomous-instantdocument-system.1"
+copy ".\assets\defaults\*" "%appdata\aids%" /E /Y
+```
+
+#### Linux (maybe Mac)
 ``` bash
 mvn package
 sudo cp ./target/automomousInstantdocumentSystem-*-jar-with-dependencies.jar /opt/automomous-instantdocument-system/automomous-instantdocument-system.jar
@@ -53,6 +61,8 @@ gip gzip docs/man/autonomous-instantdocument-system.1
 cp .docs/man/autonomous-instantdocument-system.1.gz /usr/share/man/man1/
 
 ```
+
+
 
 </details>
 
