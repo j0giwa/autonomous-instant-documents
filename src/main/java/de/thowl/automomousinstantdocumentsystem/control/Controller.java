@@ -27,6 +27,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import de.thowl.automomousinstantdocumentsystem.model.Os;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -52,8 +55,9 @@ import javafx.stage.Stage;
  * @see de.thowl.automomousinstantdocumentsystem.view.Gui
  */
 public class Controller implements Initializable {
-
-	Alert errorAlert = new Alert(AlertType.ERROR);
+	
+	private static final Logger logger = LogManager
+			.getLogger(Controller.class);
 
 	// Sidebar
 	@FXML
@@ -121,7 +125,8 @@ public class Controller implements Initializable {
 		String[] files = directory.list();
 		ArrayList<String> dropdownItems = new ArrayList<String>();
 		for (String file : files) {
-			if (new File(snippetsDir + "/" + file).isDirectory()) {
+			if (new File(snippetsDir + File.separator + file)
+					.isDirectory()) {
 				dropdownItems.add(file);
 			}
 		}
@@ -242,16 +247,22 @@ public class Controller implements Initializable {
 		final int chapters = validateInt(txtChapters.getText());
 		final boolean shuffle = chkShuffle.isArmed();
 		if (type == null || amount <= 0 || chapters <= 0) {
-			errorAlert.setHeaderText("Invalid Inputs");
-			errorAlert.setContentText("Please check your inputs");
-			errorAlert.showAndWait();
 			return;
 		}
-		Latex latex = new Latex();
-		latex.generate(type, destination, amount, chapters, shuffle);
-		appendToTextArea("[ INFO ]  Generated " + amount
-				+ " Documents with " + chapters
-				+ " Chapters\n");
+		Thread generation = new Thread(() -> {
+			Latex latex = new Latex();
+			appendToTextArea("[ INFO ]  Generating " + amount
+					+ " Document(s) of type '" + type
+					+ "' with " + chapters
+					+ " chapters...\n");
+			logger.info("Generating {} Document(s) of type '{}' with {} chapters.",
+					amount, type, chapters);
+			latex.generate(type, destination, amount, chapters,
+					shuffle);
+			appendToTextArea("[ INFO ]  Generation complete\n");
+			logger.info("Generation complete");
+		});
+		generation.start();
 	}
 
 	@FXML

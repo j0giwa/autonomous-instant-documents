@@ -19,6 +19,9 @@
 
 package de.thowl.automomousinstantdocumentsystem;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import de.thowl.automomousinstantdocumentsystem.control.Latex;
 import de.thowl.automomousinstantdocumentsystem.view.Gui;
 import javafx.application.Application;
@@ -35,6 +38,8 @@ public class Main {
 	private static final int EXIT_ERROR = 1;
 
 	private static final String VERSION = "version: 0.8.5";
+
+	private static final Logger logger = LogManager.getLogger(Main.class);
 
 	private static String type = null;
 	private static String destination = null;
@@ -54,11 +59,14 @@ public class Main {
 		}
 		handleArgs(args);
 		if (type == null || destination == null || amount <= 0) {
-			System.out.println("Not enough arguments");
+			logger.error("Not enough arguments");
 			System.exit(EXIT_ERROR);
 		}
 		Latex latex = new Latex();
+		logger.info("Generating {} Documents of type '{}' with {} chapters.",
+				amount, type, chapters);
 		latex.generate(type, destination, amount, chapters, shuffle);
+		logger.info("done");
 		System.exit(EXIT_SUCCESS);
 	}
 
@@ -78,9 +86,8 @@ public class Main {
 	 * </p>
 	 *
 	 * <p>
-	 * If the argument is not in the list, it is assumed that the 
-	 * argument is a parameterized argument.
-	 * These arguments are redirected to
+	 * If the argument is not in the list, it is assumed that the argument
+	 * is a parameterized argument. These arguments are redirected to
 	 * {@link Main#handleParamArgs(String arg, String prevArg)}.
 	 * </p>
 	 *
