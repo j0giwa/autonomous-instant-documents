@@ -52,6 +52,11 @@ xcopy ".\target\automomousInstantdocumentSystem-*-jar-with-dependencies.jar" "C:
 xcopy ".\assets\defaults\*" "%appdata%\aids" /E /Y
 ```
 
+It is recommended that you define an alias If you want to launch from the commandline
+``` bat
+doskey aids=java -jar C:\Program Files\automomous-instantdocument-system.jar
+```
+
 #### Linux (maybe Mac)
 Run these commands.
 ``` sh
@@ -63,6 +68,10 @@ cp .docs/man/autonomous-instantdocument-system.1.gz /usr/share/man/man1/
 
 ```
 
+It is recommended that you define an alias If you want to launch from the commandline
+```
+alias aids="java -jar /opt/automomous-instantdocument-system/automomous-instantdocument-system.jar"
+```
 
 
 </details>
