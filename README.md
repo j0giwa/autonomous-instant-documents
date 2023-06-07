@@ -8,15 +8,15 @@
 [![shields.io](https://img.shields.io/github/issues/j0giwa/automomous-instantdokument-system)](https://img.shields.io/github/issues/j0giwa/automomous-instantdokument-system)
 
 
-:book: Table of Contents
+Table of Contents
 =============================
 <details open="open">
 <summary>Table of Contents</summary>
 
-- [:pencil: About The Project](#About-The-Project)
+- [About The Project](#About-The-Project)
     - [Features](#Features)
     - [Planned](#Planned)
-- [:book: Getting started](#Getting-started)
+- [Getting started](#Getting-started)
 	- [Requirements](#Requirements)
 	- [Installation](#Installation)
 		- [Build it yourself](#Build-it-yourself)
