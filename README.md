@@ -34,8 +34,8 @@
 - Usable via GUI, TUI (UNIX OS only) and CLI
 
 ### Planned
-- Customisable LaTeX snippets (preconfigured ffor exams and answers)
-- Snippet statistics are saved in a database (for example how often a snipped has been used)
+- Customisable LaTeX snippets (preconfigured for exams and answers)
+- Snippet usage saved in a database
 - Export database to csv
 - ~~ChatGPT integration to automatically generate new snippets (API-key required)~~
 
@@ -67,12 +67,12 @@ doskey automomous-instantdocument-system="java -jar C:\Program Files\automomous-
 ```
 
 Linux
-``` sh
-mvn package
-sudo cp ./target/automomousInstantdocumentSystem-*-jar-with-dependencies.jar /opt/automomous-instantdocument-system/automomous-instantdocument-system.jar
-sudo cp ./automomous-instantdocument-system-cli /usr/local/bin
-gip gzip docs/man/autonomous-instantdocument-system.1
-cp .docs/man/autonomous-instantdocument-system.1.gz /usr/share/man/man1/
+``` console
+foo@bar:~$ mvn package
+foo@bar:~$ sudo cp ./target/automomousInstantdocumentSystem-*-jar-with-dependencies.jar /opt/automomous-instantdocument-system/automomous-instantdocument-system.jar
+foo@bar:~$ sudo cp ./automomous-instantdocument-system-cli /usr/local/bin
+foo@bar:~$ gzip docs/man/autonomous-instantdocument-system.1
+foo@bar:~$ sudo cp .docs/man/autonomous-instantdocument-system.1.gz /usr/share/man/man1/
 ```
 It is recommended that you define an alias If you want to launch from the commandline
 ``` sh
