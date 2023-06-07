@@ -63,9 +63,28 @@ public class Main {
 	}
 
 	/**
-	 * This method handles the command line arguments
-	 * 
-	 * @param args
+	 * Handles the command line arguments.
+	 *
+	 * <p>
+	 * Only the following arguments are handled:
+	 * <ul>
+	 * <li><em>v</em> - Print version and exit</li>
+	 * <li><em>version</em> - Same as <em>v</em></li>
+	 * <li><em>h</em> - Print help and exit</li>
+	 * <li><em>help</em> - Same as <em>h</em></li>
+	 * <li><em>ns</em> - Turn off shuffle mode</li>
+	 * <li><em>noshuffle</em> - Same as <em>ns</em></li>
+	 * </ul>
+	 * </p>
+	 *
+	 * <p>
+	 * If the argument is not in the list, it is assumed that the 
+	 * argument is a parameterized argument.
+	 * These arguments are redirected to
+	 * {@link Main#handleParamArgs(String arg, String prevArg)}.
+	 * </p>
+	 *
+	 * @param args The command line arguments
 	 */
 	private static void handleArgs(String[] args) {
 		int argc = args.length;
@@ -105,10 +124,11 @@ public class Main {
 
 	/**
 	 * This method handles the command line arguments with additional
-	 * parameters
+	 * parameters, i.e "--someting param".
 	 * 
 	 * @param args
 	 */
+	@SuppressWarnings("squid:S131") // No deafult, because of the arg params
 	private static void handleParamArgs(String arg, String prevArg) {
 		switch (prevArg) {
 		case "type":
@@ -126,9 +146,6 @@ public class Main {
 		case "chapters":
 		case "c":
 			chapters = checkInt(arg);
-			break;
-		default:
-			System.out.println("Unknown arg: " + arg); // NOSONAR
 			break;
 		}
 	}
@@ -153,15 +170,28 @@ public class Main {
 	/**
 	 * This method print the version information to console
 	 */
+	@SuppressWarnings("squid:S106") // justified sysout, used as usermessage
 	private static void printVersion() {
-		System.out.println(VERSION); // NOSONAR
+		System.out.println(VERSION);
 	}
 
 	/**
-	 * This Method prints a si mple help document to console
+	 * Prints a simple help to console
 	 */
+	@SuppressWarnings("squid:S106") // justified sysout, used as usermessage
 	private static void printHelp() {
-		// TODO Add help once all features are implemented
-		System.out.println("NO HELP (yet...)"); // NOSONAR
+		System.out.println("Flags:\t\t\t\tFunction:");
+		System.out.println("-t --type <type>\t\t"
+				+ "Specifies the Document to generate.");
+		System.out.println("-c --chapters <chapters>\t"
+				+ "Specifies the amount of chapters per document.");
+		System.out.println("-a --amount <amount>\t\t"
+				+ "Specifies the amount of Documents.");
+		System.out.println("-ns --noshuffle\t\t\t"
+				+ "Turns off shuffle mode.");
+		System.out.println(
+				"-h --help\t\t\t" + "Show summary of options.");
+		System.out.println("-v --version\t\t\t"
+				+ "Print version number and exit.");
 	}
 }

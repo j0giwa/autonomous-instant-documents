@@ -19,7 +19,7 @@
 
 /**
  * This package contains all classes that handle data, either from files or
- * databases
+ * databases.
  * 
  * @author Jonas Schwind
  */

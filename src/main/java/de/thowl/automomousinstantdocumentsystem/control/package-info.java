@@ -18,7 +18,7 @@
  */
 
 /**
- * This Package contains the Main controlling logic of the Programm
+ * This Package contains the Main controlling logic of the programm.
  * 
  * @author Jonas Schwind
  */

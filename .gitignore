@@ -16,6 +16,9 @@
 # VS COde
 .vscode
 
+# DOOM emacs
+.factorypath
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 

@@ -18,6 +18,6 @@
  */
 
 /**
- * This Package contains the Grafical User Interface (GUI)
+ * This Package contains the Grafical User Interface
  */
 package de.thowl.automomousinstantdocumentsystem.view;
