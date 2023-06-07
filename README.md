@@ -84,7 +84,7 @@ alias automomous-instantdocument-system="java -jar /opt/automomous-instantdocume
 Usage
 =============================
 
-Running `automomous-instantdocument-system` without options launches in a grafical mode.
+Running `automomous-instantdocument-system` without options launches a grafical interface.
 
 ### Flags
 | flag          | function                           |
