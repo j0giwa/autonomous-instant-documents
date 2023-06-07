@@ -54,7 +54,7 @@ xcopy ".\assets\defaults\*" "%appdata\aids%" /E /Y
 
 #### Linux (maybe Mac)
 Run these commands.
-``` bash
+``` sh
 mvn package
 sudo cp ./target/automomousInstantdocumentSystem-*-jar-with-dependencies.jar /opt/automomous-instantdocument-system/automomous-instantdocument-system.jar
 sudo cp ./automomous-instantdocument-system-cli /usr/local/bin
