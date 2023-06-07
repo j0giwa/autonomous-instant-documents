@@ -16,7 +16,7 @@
 * [:pencil: About The Project](#:pencil:-About-The-Project)
     * [Features](#Features)
     * [Planned](#Planned)
-* [:book: Getting started :book:](#:book:-Getting-started)
+* [:book: Getting started](#:book:-Getting-started)
     * [Requirements](#Requirements)
     * [Installation](#Installation)
         * [Build it yourself](#Build-it-yourself)
@@ -37,7 +37,7 @@
 - Customisable LaTeX snippets (preconfigured ffor exams and answers)
 - Snippet statistics are saved in a database (for example how often a snipped has been used)
 - Export database to csv
-- ChatGPT integration to automatically generate new snippets (API-key required)
+- ~~ChatGPT integration to automatically generate new snippets (API-key required)~~
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
