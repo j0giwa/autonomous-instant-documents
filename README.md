@@ -67,15 +67,15 @@ doskey automomous-instantdocument-system="java -jar C:\Program Files\automomous-
 ```
 
 Linux
-``` console
-foo@bar:~$ mvn package
-foo@bar:~$ sudo cp ./target/automomousInstantdocumentSystem-*-jar-with-dependencies.jar /opt/automomous-instantdocument-system/automomous-instantdocument-system.jar
-foo@bar:~$ sudo cp ./automomous-instantdocument-system-cli /usr/local/bin
-foo@bar:~$ gzip docs/man/autonomous-instantdocument-system.1
-foo@bar:~$ sudo cp .docs/man/autonomous-instantdocument-system.1.gz /usr/share/man/man1/
+``` shell
+mvn package
+sudo cp ./target/automomousInstantdocumentSystem-*-jar-with-dependencies.jar /opt/automomous-instantdocument-system/automomous-instantdocument-system.jar
+sudo cp ./automomous-instantdocument-system-cli /usr/local/bin
+gzip docs/man/autonomous-instantdocument-system.1
+sudo cp .docs/man/autonomous-instantdocument-system.1.gz /usr/share/man/man1/
 ```
 It is recommended that you define an alias If you want to launch from the commandline
-``` sh
+``` shell
 alias automomous-instantdocument-system="java -jar /opt/automomous-instantdocument-system/automomous-instantdocument-system.jar"
 ```
 
