@@ -13,14 +13,16 @@
 <details open="open">
 <summary>Table of Contents</summary>
 
-* [:pencil: About The Project](#:pencil:-About-The-Project)
-    * [Features](#Features)
-    * [Planned](#Planned)
-* [:book: Getting started](#:book:-Getting-started)
-    * [Requirements](#Requirements)
-    * [Installation](#Installation)
-        * [Build it yourself](#Build-it-yourself)
-* [Usage](#Usage)
+- [:pencil: About The Project](#:pencil:-About-The-Project)
+    - [Features](#Features)
+    - [Planned](#Planned)
+- [:book: Getting started](#:book:-Getting-started)
+	- [Requirements](#Requirements)
+	- [Installation](#Installation)
+		- [Build it yourself](#Build-it-yourself)
+			- [Windows](#Windows)
+			- [Linux](#Linux)
+- [Usage](#Usage)
 
 </details>
 
@@ -29,11 +31,11 @@
 :pencil: About The Project
 =============================
 
-### Features
+## Features
 - Generate LaTeX documents
 - Usable via GUI, TUI (UNIX OS only) and CLI
 
-### Planned
+## Planned
 - Customisable LaTeX snippets (preconfigured for exams and answers)
 - Snippet usage saved in a database
 - Export database to csv
@@ -55,7 +57,7 @@
 
 ### Build it yourself
 
-Windows
+#### Windows
 ``` bat
 mvn package
 xcopy ".\target\automomousInstantdocumentSystem-*-jar-with-dependencies.jar" "C:\Program Files\automomous-instantdocument-system.jar" /Y
@@ -66,7 +68,7 @@ It is recommended that you define an alias If you want to launch from the comman
 doskey automomous-instantdocument-system="java -jar C:\Program Files\automomous-instantdocument-system.jar"
 ```
 
-Linux
+#### Linux
 ``` shell
 mvn package
 sudo cp ./target/automomousInstantdocumentSystem-*-jar-with-dependencies.jar /opt/automomous-instantdocument-system/automomous-instantdocument-system.jar

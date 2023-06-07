@@ -18,7 +18,7 @@
  */
 
 /**
- * This package contains nonstandart exceptions for the programm.
+ * This package contains nonstandard exceptions for the programm.
  * 
  * @author Jonas Schwind
  */
