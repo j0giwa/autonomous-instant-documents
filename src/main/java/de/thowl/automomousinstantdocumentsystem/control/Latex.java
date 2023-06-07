@@ -32,6 +32,8 @@ import java.util.List;
 import java.util.Random;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import de.thowl.automomousinstantdocumentsystem.exceptions.LatexNotInstalledException;
 import de.thowl.automomousinstantdocumentsystem.model.LatexSnippet;
@@ -55,6 +57,9 @@ public class Latex {
 	private Os os;
 	private String osName;
 	private String homeDir;
+
+	private static final Logger logger = LogManager
+			.getLogger(Controller.class);
 
 	/**
 	 * Constructor for objects of this class
@@ -172,19 +177,20 @@ public class Latex {
 		String userdir = System.getProperty("user.dir");
 		String outputDir = "-output-directory=" + destination;
 		String texFile = userdir + "/temp/" + type + ".tex";
-		String command = compiler + " " + outputDir + " " + texFile;
+		String[] command = { compiler, outputDir, texFile };
 		try {
-			// TODO: Change this ASAP
-			@SuppressWarnings("deprecation")
-			Process proc = Runtime.getRuntime().exec(command);
-			// Print stdOut of pdflatex NOTE: NECCESARY, DON'T
-			// DELETE!!!
-			InputStreamReader stream = new InputStreamReader(
-					proc.getInputStream());
-			BufferedReader stdout = new BufferedReader(stream);
-			String compliermsg;
-			while ((compliermsg = stdout.readLine()) != null) {
-				System.out.println(compliermsg); // NOSONAR
+			Process proccess = Runtime.getRuntime().exec(command);
+			/*
+			 * Print stdOut pdflatex NOTE: NECCESARY, DON'T
+			 * DELETE!!!
+			 */
+			InputStreamReader proccessStream = new InputStreamReader(
+					proccess.getInputStream());
+			BufferedReader stdout = new BufferedReader(
+					proccessStream);
+			String pdflatexMessage;
+			while ((pdflatexMessage = stdout.readLine()) != null) {
+				logger.info(pdflatexMessage);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -204,7 +210,8 @@ public class Latex {
 		gatherSnippets(type, chapters, true);
 		for (int i = 1; i <= amount; i++) {
 			String subdirname = "foldername" + i;
-			String outputDir = destination + "/" + subdirname;
+			String outputDir = destination + File.separator
+					+ subdirname;
 			new File(outputDir).mkdir();
 			concat(type);
 			compile(type, outputDir);

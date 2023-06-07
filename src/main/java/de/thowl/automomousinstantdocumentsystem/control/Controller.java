@@ -30,6 +30,7 @@ import java.util.ResourceBundle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import de.thowl.automomousinstantdocumentsystem.model.Json;
 import de.thowl.automomousinstantdocumentsystem.model.Os;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -55,7 +56,7 @@ import javafx.stage.Stage;
  * @see de.thowl.automomousinstantdocumentsystem.view.Gui
  */
 public class Controller implements Initializable {
-	
+
 	private static final Logger logger = LogManager
 			.getLogger(Controller.class);
 
@@ -265,8 +266,18 @@ public class Controller implements Initializable {
 		generation.start();
 	}
 
+	// TODO: rename
 	@FXML
 	private void btnChatGptGoClick() {
-		// Todo: add logic
+		Os os = new Os();
+		String settingsFile = os.getHomeDir() + File.separator
+				+ "settings.json";
+		Json settings = new Json(settingsFile);
+		String[] editor = { settings.getValue("settings", "editor") };
+		try {
+			Runtime.getRuntime().exec(editor);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
