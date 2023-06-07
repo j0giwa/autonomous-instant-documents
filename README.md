@@ -48,8 +48,7 @@
 ```
 mvn package
 xcopy ".\target\automomousInstantdocumentSystem-*-jar-with-dependencies.jar" "C:\Program\Files\automomous-instantdocument-system.jar" /Y
-gzip ".\docs\man\autonomous-instantdocument-system.1"
-copy ".\assets\defaults\*" "%appdata\aids%" /E /Y
+xcopy ".\assets\defaults\*" "%appdata\aids%" /E /Y
 ```
 
 #### Linux (maybe Mac)
