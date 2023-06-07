@@ -13,10 +13,10 @@
 <details open="open">
 <summary>Table of Contents</summary>
 
-- [:pencil: About The Project](#:pencil:-About-The-Project)
+- [:pencil: About The Project](#About-The-Project)
     - [Features](#Features)
     - [Planned](#Planned)
-- [:book: Getting started](#:book:-Getting-started)
+- [:book: Getting started](#Getting-started)
 	- [Requirements](#Requirements)
 	- [Installation](#Installation)
 		- [Build it yourself](#Build-it-yourself)
@@ -28,7 +28,7 @@
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-:pencil: About The Project
+About The Project
 =============================
 
 ## Features
@@ -43,7 +43,7 @@
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-:book: Getting started
+Getting started
 =============================
 
 ## Requirements
