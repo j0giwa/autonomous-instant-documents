@@ -93,7 +93,7 @@
 }
 
 #btnGenerateDocument,
-#btnChatGptGo {
+#btnOpenEditor {
   -fx-padding: 16px 38px; 
   -fx-border-insets: 17px;
   -fx-background-insets: 17px;

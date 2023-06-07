@@ -44,15 +44,13 @@
 		<!--Buttons-->
 		<VBox fx:id="buttonarea" GridPane.columnIndex="1">
 			<children>
-				<Label text="Scene 2"/>
 				<ComboBox fx:id="cmbType" value="Type"/>
-				<TextField fx:id="txtChatGptPrompt" promptText="Proompt"/>
-				 <Button fx:id="btnChatGptGo" text="GO" onAction="#btnChatGptGoClick"/>
+				<TextField fx:id="txtFileName" promptText="Filename"/>
+				<Button fx:id="btnOpenEditor" text="GO" onAction="#btnOpenEditorClick"/>
 			</children>
 		</VBox>
 		<!--Multipurpose Textarea-->
 		<VBox fx:id="multipurposearea" GridPane.columnIndex="2">
-			<TextArea fx:id="txtMultipurposeTextArea"/>
 		</VBox>
 	</children>
 </GridPane>

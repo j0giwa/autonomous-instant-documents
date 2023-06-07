@@ -76,13 +76,13 @@ public class Controller implements Initializable {
 	@FXML
 	private TextField txtChapters;
 	@FXML
-	private TextField txtChatGptPrompt;
+	private TextField txtFileName;
 	@FXML
 	private CheckBox chkShuffle;
 	@FXML
 	private Button btnGenerateDocument;
 	@FXML
-	private Button btnChatGptGo;
+	private Button btnO;
 
 	// Multipurpose TextArea
 	@FXML
@@ -268,16 +268,23 @@ public class Controller implements Initializable {
 
 	// TODO: rename
 	@FXML
-	private void btnChatGptGoClick() {
+	private void btnOpenEditorClick() {
 		Os os = new Os();
 		String settingsFile = os.getHomeDir() + File.separator
 				+ "settings.json";
 		Json settings = new Json(settingsFile);
-		String[] editor = { settings.getValue("settings", "editor") };
+		String editor = settings.getValue("settings", "editor");
+		String file = os.getHomeDir() + File.separator + "latex"
+				+ File.separator
+				+ cmbType.getSelectionModel().getSelectedItem()
+				+ File.separator + txtFileName.getText();
+		String[] editorCommand = { editor, file };
 		try {
-			Runtime.getRuntime().exec(editor);
+			Runtime.getRuntime().exec(editorCommand);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 	}
+
 }
