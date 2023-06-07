@@ -45,13 +45,15 @@
 ### Build it yourself
 
 #### Windows
-```
+Run these commands as administrator.
+``` bat
 mvn package
 xcopy ".\target\automomousInstantdocumentSystem-*-jar-with-dependencies.jar" "C:\Program Files\automomous-instantdocument-system.jar" /Y
 xcopy ".\assets\defaults\*" "%appdata\aids%" /E /Y
 ```
 
 #### Linux (maybe Mac)
+Run these commands.
 ``` bash
 mvn package
 sudo cp ./target/automomousInstantdocumentSystem-*-jar-with-dependencies.jar /opt/automomous-instantdocument-system/automomous-instantdocument-system.jar
