@@ -54,7 +54,7 @@ xcopy ".\assets\defaults\*" "%appdata%\aids" /E /Y
 
 It is recommended that you define an alias If you want to launch from the commandline
 ``` bat
-doskey aids=java -jar C:\Program Files\automomous-instantdocument-system.jar
+doskey aids="java -jar C:\Program Files\automomous-instantdocument-system.jar"
 ```
 
 #### Linux (maybe Mac)
