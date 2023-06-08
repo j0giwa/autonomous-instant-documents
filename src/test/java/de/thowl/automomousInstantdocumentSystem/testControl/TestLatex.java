@@ -27,8 +27,9 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
-import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -51,9 +52,9 @@ public class TestLatex {
 	}
 
 	/**
-	 * Tests the {@link Latex#gatherSnippets(String, int, boolean)} method to ensure
-	 * it correctly gathers snippets
-	 * from the specified directory and randomizes the order when requested.
+	 * Tests the {@link Latex#gatherSnippets(String, int, boolean)} method
+	 * to ensure it correctly gathers snippets from the specified directory
+	 * and randomizes the order when requested.
 	 */
 	@Test
 	public void test_gatherSnippets_ShouldGatherSnippetsAndRandomizeOrder() {
@@ -68,8 +69,7 @@ public class TestLatex {
 
 	/**
 	 * Tests the {@link Latex#concat(String)} method to ensure it correctly
-	 * concatenates the snippets and generates
-	 * the source file.
+	 * concatenates the snippets and generates the source file.
 	 */
 	@Test
 	public void test_concat_ShouldConcatenateSnippetsAndGenerateSourceFile() {
@@ -83,27 +83,9 @@ public class TestLatex {
 	}
 
 	/**
-	 * Tests the {@link Latex#latexCompilerLocation()} method to ensure it
-	 * correctly returns the location of the
-	 * pdflatex binary based on the current operating system.
-	 */
-	@Test
-	public void test_latexCompilerLocation_ShouldReturnPdflatexLocation() {
-		String expectedLocation = "/usr/bin/pdflatex";
-
-		String location;
-		try {
-			location = latex.latexCompilerLocation();
-			assertEquals(expectedLocation, location);
-		} catch (LatexNotInstalledException e) {
-			fail("Unexpected exception: " + e.getMessage());
-		}
-	}
-
-	/**
 	 * Tests the {@link Latex#compile(String, String)} method to ensure it
-	 * correctly compiles the LaTeX document from the source file
-	 * and generates the output in the specified destination.
+	 * correctly compiles the LaTeX document from the source file and
+	 * generates the output in the specified destination.
 	 */
 	@Test
 	public void test_compile_ShouldCompileLaTeXDocument() {
@@ -118,8 +100,8 @@ public class TestLatex {
 
 	/**
 	 * Tests the {@link Latex#generate(String, String, int, int, boolean)}
-	 * method to ensure it correctly generates the specified number
-	 * of documents with shuffled snippets.
+	 * method to ensure it correctly generates the specified number of
+	 * documents with shuffled snippets.
 	 */
 	@Test
 	public void test_generate_ShouldGenerateDocumentsWithShuffledSnippets() {
@@ -130,19 +112,22 @@ public class TestLatex {
 		boolean shuffle = true;
 		latex.generate(type, destination, amount, chapters, shuffle);
 		for (int i = 1; i <= amount; i++) {
-			File documentFolder = new File(destination + "/foldername" + i);
+			File documentFolder = new File(
+					destination + "/foldername" + i);
 			assertTrue(documentFolder.exists());
-			File sourceFile = new File(TEMP_DIR + "/" + type + ".tex");
+			File sourceFile = new File(
+					TEMP_DIR + "/" + type + ".tex");
 			assertTrue(sourceFile.exists());
-			File outputFile = new File(documentFolder.getPath() + "/" + type + ".pdf");
+			File outputFile = new File(documentFolder.getPath()
+					+ "/" + type + ".pdf");
 			assertTrue(outputFile.exists());
 		}
 	}
 
 	private void createDirectories() {
 		try {
-			FileUtils.forceMkdir(new File(SNIPPETS_DIR));
-			FileUtils.forceMkdir(new File(TEMP_DIR));
+			Files.createDirectories(Paths.get(SNIPPETS_DIR));
+			Files.createDirectories(Paths.get(TEMP_DIR));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

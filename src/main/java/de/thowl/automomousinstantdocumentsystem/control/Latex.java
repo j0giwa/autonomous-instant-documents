@@ -24,6 +24,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -31,13 +33,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import de.thowl.automomousinstantdocumentsystem.exceptions.LatexNotInstalledException;
 import de.thowl.automomousinstantdocumentsystem.model.LatexSnippet;
-import de.thowl.automomousinstantdocumentsystem.model.Os;
+import de.thowl.automomousinstantdocumentsystem.model.OperatingSystem;
 
 /**
  * This class is a Representation of a LaTeX-document.
@@ -54,22 +55,24 @@ public class Latex {
 	private LatexSnippet header;
 	private ArrayList<LatexSnippet> snippets;
 	private LatexSnippet footer;
-	private Os os;
-	private String osName;
+	private OperatingSystem operatingSystem;
 	private String homeDir;
+	private String pdflatex;
 
-	private static final Logger logger = LogManager
-			.getLogger(Controller.class);
+	private static final Logger logger = LogManager.getLogger(Latex.class);
 
 	/**
 	 * Constructor for objects of this class
 	 */
 	public Latex() {
 		snippets = new ArrayList<LatexSnippet>();
-		os = new Os();
-		osName = os.getOperatingSystem();
-		homeDir = os.getHomeDir();
-		os = null;
+		operatingSystem = new OperatingSystem();
+		homeDir = operatingSystem.getHomeDir();
+		try {
+			pdflatex = operatingSystem.getPdflatexLocation();
+		} catch (LatexNotInstalledException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -124,37 +127,12 @@ public class Latex {
 		}
 		sb.append(footer.getFileContent() + "\n");
 		try {
-			File outputfile = new File("./temp/" + type + ".tex");
-			FileUtils.writeStringToFile(outputfile, sb.toString(),
-					StandardCharsets.UTF_8);
+			String outputfilePath = "./temp/" + type + ".tex";
+			Files.write(Paths.get(outputfilePath), sb.toString()
+					.getBytes(StandardCharsets.UTF_8));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	/**
-	 * Returns the location of the pdflatex binary current operating system
-	 * <p>
-	 * Only the default instalation locations are checked. If the binary is
-	 * stored anywhre else, it can't be found.
-	 * </p>
-	 * 
-	 * @return location of the pdflatex binary
-	 * @throws LatexNotInstalledException if the compiler cannot be found
-	 *                                    anywhere on the system.
-	 */
-	public String latexCompilerLocation()
-			throws LatexNotInstalledException {
-		String compilerPath = null;
-		if (osName.equals("UNIX")) {
-			compilerPath = "/usr/bin/pdflatex";
-		} else if (osName.equals("Windows")) {
-			compilerPath = "C:\\texlive\\2023\\bin\\windows\\pdflatex.exe";
-		}
-		if (!new File(compilerPath).exists())
-			throw new LatexNotInstalledException(
-					"pdflatex not found");
-		return compilerPath;
 	}
 
 	/**
@@ -168,16 +146,10 @@ public class Latex {
 	 * @param destination outputlocation for the compilde document.
 	 */
 	public void compile(String type, String destination) {
-		String compiler = null;
-		try {
-			compiler = latexCompilerLocation();
-		} catch (LatexNotInstalledException e) {
-			e.printStackTrace();
-		}
 		String userdir = System.getProperty("user.dir");
 		String outputDir = "-output-directory=" + destination;
 		String texFile = userdir + "/temp/" + type + ".tex";
-		String[] command = { compiler, outputDir, texFile };
+		String[] command = { pdflatex, outputDir, texFile };
 		try {
 			Process proccess = Runtime.getRuntime().exec(command);
 			/*
@@ -203,6 +175,7 @@ public class Latex {
 	 * @param type        type of the document that should be genearated
 	 * @param destination directory in which the documunt should be saved
 	 * @param amount      amount of instances that should be saved
+	 * @param chapters    amount of snippets per document
 	 * @param shuffle     generate each document with a new set of snippets
 	 */
 	public void generate(String type, String destination, int amount,
@@ -219,15 +192,31 @@ public class Latex {
 		}
 	}
 
+	/**
+	 * Return the header of the document
+	 * 
+	 * @return the header of the document
+	 */
 	public LatexSnippet getHeader() {
 		return header;
 	}
 
+	/**
+	 * Return the snippets in the document
+	 * 
+	 * @return a list of LaTeX snippets
+	 */
+	public List<LatexSnippet> getSnippets() {
+		return snippets;
+	}
+
+	/**
+	 * Return the footer of the document
+	 * 
+	 * @return the footer of the document
+	 */
 	public LatexSnippet getFooter() {
 		return footer;
 	}
 
-	public List<LatexSnippet> getSnippets() {
-		return snippets;
-	}
 }

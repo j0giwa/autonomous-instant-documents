@@ -35,53 +35,56 @@ import org.json.simple.parser.ParseException;
  */
 public class Json {
 
-    private String filePath;
-    private JSONObject jsonObject;
+	private String filePath;
+	private JSONObject jsonObject;
 
-    /**
-     * Constructor for objects of this class
-     * 
-     * @param filepath The location of the JSonfile
-     */
-    public Json(String filepath) {
-        this.filePath = filepath;
-        try {
-            Object parser = new JSONParser().parse(new FileReader(filepath));
-            jsonObject = (JSONObject) parser;
-        } catch (IOException | ParseException e) {
-            e.printStackTrace();
-        }
-    }
+	/**
+	 * Constructor for objects of this class
+	 * 
+	 * @param filepath The location of the JSonfile
+	 */
+	public Json(String filepath) {
+		this.filePath = filepath;
+		try {
+			Object parser = new JSONParser()
+					.parse(new FileReader(filepath));
+			jsonObject = (JSONObject) parser;
+		} catch (IOException | ParseException e) {
+			e.printStackTrace();
+		}
+	}
 
-    /**
-     * Returns a value from a JSon file.
-     * 
-     * @param object JSonObject that contains the value that should be returned
-     * @param key    key in JSonObject, that contains the value that should be
-     *               returned
-     * @return value of the Json Key
-     */
-    public String getValue(String object, String key) {
-        JSONObject currentObject = (JSONObject) jsonObject.get(object);
-        return (String) currentObject.get(key);
-    }
+	/**
+	 * Returns a value from a JSon file.
+	 * 
+	 * @param object JSonObject that contains the value that should be
+	 *               returned
+	 * @param key    key in JSonObject, that contains the value that should
+	 *               be returned
+	 * @return value of the Json Key
+	 */
+	public String getValue(String object, String key) {
+		JSONObject currentObject = (JSONObject) jsonObject.get(object);
+		return (String) currentObject.get(key);
+	}
 
-    /**
-     * Cahnges a value in a JSon file.
-     * 
-     * @param object JSonObject that contains the value that should be changed
-     * @param key    key in JSonObject, that contains the value that should be
-     *               changed
-     * @param value  value the should be changed
-     */
-    public void setValue(String object, String key, String value) {
-        JSONObject currentObject = (JSONObject) jsonObject.get(object);
-        // NOTE: library not implemented as "generic type"
-        currentObject.put(key, value);
-        try (FileWriter file = new FileWriter(filePath)) {
-            file.write(jsonObject.toJSONString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+	/**
+	 * Cahnges a value in a JSon file.
+	 * 
+	 * @param object JSonObject that contains the value that should be
+	 *               changed
+	 * @param key    key in JSonObject, that contains the value that should
+	 *               be changed
+	 * @param value  value the should be changed
+	 */
+	public void setValue(String object, String key, String value) {
+		JSONObject currentObject = (JSONObject) jsonObject.get(object);
+		// NOTE: JSONObject is not generic, warning cannot be fixed
+		currentObject.put(key, value);
+		try (FileWriter file = new FileWriter(filePath)) {
+			file.write(jsonObject.toJSONString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

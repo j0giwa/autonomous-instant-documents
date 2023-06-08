@@ -46,7 +46,7 @@ public class TestJson {
 	 * when the object and key exist.
 	 */
 	@Test
-	public void getValue_ShouldReturnCorrectValue_WhenObjectAndKeyExist() {
+	public void test_getValue_ShouldReturnCorrectValue_WhenObjectAndKeyExist() {
 		String object = "person";
 		String key = "name";
 		String expectedValue = "John Doe";
@@ -60,7 +60,7 @@ public class TestJson {
 	 * when the object and key exist.
 	 */
 	@Test
-	public void setValue_ShouldChangeValue_WhenObjectAndKeyExist() {
+	public void test_setValue_ShouldChangeValue_WhenObjectAndKeyExist() {
 		String object = "person";
 		String key = "age";
 		String expectedValue = "30";

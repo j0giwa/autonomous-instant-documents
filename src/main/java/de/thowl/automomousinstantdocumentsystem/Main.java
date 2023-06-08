@@ -38,7 +38,6 @@ public class Main {
 	private static final int EXIT_ERROR = 1;
 
 	private static final String VERSION = "version: 0.8.5";
-
 	private static final Logger logger = LogManager.getLogger(Main.class);
 
 	private static String type = null;
@@ -53,12 +52,11 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		if (args.length == 0) {
+		if (args.length == 0)
 			Application.launch(Gui.class, args);
-			System.exit(EXIT_SUCCESS);
-		}
 		handleArgs(args);
-		if (type == null || destination == null || amount <= 0) {
+		if (type == null || destination == null || amount <= 0
+				|| chapters <= 0) {
 			logger.error("Not enough arguments");
 			System.exit(EXIT_ERROR);
 		}
@@ -75,6 +73,7 @@ public class Main {
 	 *
 	 * <p>
 	 * Only the following arguments are handled:
+	 * </p>
 	 * <ul>
 	 * <li><em>v</em> - Print version and exit</li>
 	 * <li><em>version</em> - Same as <em>v</em></li>
@@ -83,8 +82,7 @@ public class Main {
 	 * <li><em>ns</em> - Turn off shuffle mode</li>
 	 * <li><em>noshuffle</em> - Same as <em>ns</em></li>
 	 * </ul>
-	 * </p>
-	 *
+	 * 
 	 * <p>
 	 * If the argument is not in the list, it is assumed that the argument
 	 * is a parameterized argument. These arguments are redirected to
@@ -93,7 +91,7 @@ public class Main {
 	 *
 	 * @param args The command line arguments
 	 */
-	private static void handleArgs(String[] args) {
+	public static void handleArgs(String[] args) {
 		int argc = args.length;
 		String arg = null;
 		String prevArg = null;
@@ -111,12 +109,10 @@ public class Main {
 			case "version":
 			case "v":
 				printVersion();
-				System.exit(EXIT_SUCCESS);
 				break;
 			case "help":
 			case "h":
 				printHelp();
-				System.exit(EXIT_SUCCESS);
 				break;
 			case "noshuffle":
 			case "ns":
@@ -180,6 +176,7 @@ public class Main {
 	@SuppressWarnings("squid:S106") // justified sysout, used as usermessage
 	private static void printVersion() {
 		System.out.println(VERSION);
+		System.exit(EXIT_SUCCESS);
 	}
 
 	/**
@@ -200,5 +197,6 @@ public class Main {
 				"-h --help\t\t\t" + "Show summary of options.");
 		System.out.println("-v --version\t\t\t"
 				+ "Print version number and exit.");
+		System.exit(EXIT_SUCCESS);
 	}
 }

@@ -21,10 +21,11 @@ package de.thowl.automomousInstantdocumentSystem.testModel;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
-import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -57,8 +58,8 @@ public class TestLatexSnippet {
 	}
 
 	/**
-	 * Tests the {@link LatexSnippet#getFileContent()} method to ensure
-	 * it returns the correct file content.
+	 * Tests the {@link LatexSnippet#getFileContent()} method to ensure it
+	 * returns the correct file content.
 	 */
 	@Test
 	public void test_getFileContent_ShouldReturnFileContent() {
@@ -68,8 +69,8 @@ public class TestLatexSnippet {
 	}
 
 	/**
-	 * Tests the {@link LatexSnippet#setFilepath(String)} method
-	 * to ensure it correctly overwrites the file path.
+	 * Tests the {@link LatexSnippet#setFilepath(String)} method to ensure
+	 * it correctly overwrites the file path.
 	 */
 	@Test
 	public void test_setFilepath_ShouldOverwriteFilePath() {
@@ -79,8 +80,8 @@ public class TestLatexSnippet {
 	}
 
 	/**
-	 * Tests the {@link LatexSnippet#setFilecontent(String)} method to ensure it
-	 * correctly overwrites the file content.
+	 * Tests the {@link LatexSnippet#setFilecontent(String)} method to
+	 * ensure it correctly overwrites the file content.
 	 */
 	@Test
 	public void test_setFilecontent_ShouldOverwriteFileContent() {
@@ -91,7 +92,9 @@ public class TestLatexSnippet {
 
 	private void createTestTexFile() {
 		try {
-			FileUtils.writeStringToFile(new File(FILE_PATH), FILE_CONTENT, "utf-8");
+			Files.write(Paths.get(FILE_PATH), FILE_CONTENT
+					.getBytes(StandardCharsets.UTF_8));
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -31,7 +31,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import de.thowl.automomousinstantdocumentsystem.model.Json;
-import de.thowl.automomousinstantdocumentsystem.model.Os;
+import de.thowl.automomousinstantdocumentsystem.model.OperatingSystem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -60,7 +60,6 @@ public class Controller implements Initializable {
 	private static final Logger logger = LogManager
 			.getLogger(Controller.class);
 
-	// Sidebar
 	@FXML
 	private Button btnMainScene;
 	@FXML
@@ -68,7 +67,6 @@ public class Controller implements Initializable {
 	@FXML
 	private Button btnDatabaseScene;
 
-	// Button area
 	@FXML
 	private ComboBox<String> cmbType;
 	@FXML
@@ -82,9 +80,8 @@ public class Controller implements Initializable {
 	@FXML
 	private Button btnGenerateDocument;
 	@FXML
-	private Button btnO;
+	private Button btnOpenEditor;
 
-	// Multipurpose TextArea
 	@FXML
 	private TextArea txtMultipurposeTextArea;
 
@@ -119,7 +116,7 @@ public class Controller implements Initializable {
 	 * Populates the Dropdownmenu <em>cmbType</em>
 	 */
 	private void initialiseTypeDropdown() {
-		Os os = new Os();
+		OperatingSystem os = new OperatingSystem();
 		String homeDir = os.getHomeDir();
 		String snippetsDir = homeDir + "/latex";
 		File directory = new File(snippetsDir);
@@ -266,10 +263,9 @@ public class Controller implements Initializable {
 		generation.start();
 	}
 
-	// TODO: rename
 	@FXML
 	private void btnOpenEditorClick() {
-		Os os = new Os();
+		OperatingSystem os = new OperatingSystem();
 		String settingsFile = os.getHomeDir() + File.separator
 				+ "settings.json";
 		Json settings = new Json(settingsFile);
