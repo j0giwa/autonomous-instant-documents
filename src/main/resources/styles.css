@@ -1,5 +1,6 @@
 * {
   -fx-primary:              #FA1F4E;
+  -fx-hover:                rgba(250, 31, 78, 0.15);
   -fx-background:           #09080D;
   -fx-light-background:     #121119;
   -fx-input-background:     #242031;
@@ -13,30 +14,48 @@
 }
 
 #sidebar {
-  -fx-min-width: 40px;
+  -fx-alignment: BASELINE_CENTER;
   -fx-max-width: 40px; 
   -fx-pref-width: 40px;
   -fx-min-height: 490px;
   -fx-padding: 20px 2px;
-  -fx-border-width: 2px;
+  -fx-border-width: 1px;
   -fx-background-color: -fx-background;
   -fx-border-color: -fx-primary;
 }
 
 #sidebar .button {
-  -fx-min-width: 24px;
-  -fx-max-width: 24px; 
-  -fx-pref-width: 24px;
-  -fx-min-height: 24px;
-  -fx-max-height: 24px; 
-  -fx-pref-height: 24px;
-  -fx-margin-bottom: 12px;
+  -fx-pref-height: 30px;
+  -fx-pref-width: 30px;
+  -fx-padding: 5px;
   -fx-border: none;
   -fx-background-color: transparent;
 }
 
 #sidebar .button SVGPath{
   -fx-fill: -fx-primary;
+}
+
+#btnGenerateDocument,
+#btnOpenEditor {
+  -fx-padding: 16px 38px; 
+  -fx-border-insets: 17px;
+  -fx-background-insets: 17px;
+  -fx-max-height: 30.0; 
+  -fx-min-width: 194.0;
+  -fx-border-width: 2px;
+  -fx-border-radius: 6px;
+  -fx-background-radius: 6px;
+  -fx-border-color: -fx-primary;
+  -fx-background-color: -fx-light-background;
+  -fx-font-size: 16pt;
+  -fx-text-fill: -fx-primary-text;
+}
+
+#sidebar .button:hover,
+#btnGenerateDocument:hover,
+#btnOpenEditor:hover  {
+    -fx-background-color: -fx-hover;
 }
 
 #multipurposearea,
@@ -90,22 +109,6 @@
 
 .check-box:selected > .box > .mark{
    -fx-background-color: mark-color
-}
-
-#btnGenerateDocument,
-#btnOpenEditor {
-  -fx-padding: 16px 38px; 
-  -fx-border-insets: 17px;
-  -fx-background-insets: 17px;
-  -fx-max-height: 30.0; 
-  -fx-min-width: 194.0;
-  -fx-border-width: 2px;
-  -fx-border-radius: 6px;
-  -fx-background-radius: 6px;
-  -fx-border-color: -fx-primary;
-  -fx-background-color: -fx-light-background;
-  -fx-font-size: 16pt;
-  -fx-text-fill: -fx-primary-text;
 }
 
 .text-area {

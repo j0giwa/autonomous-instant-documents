@@ -27,10 +27,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import de.thowl.automomousinstantdocumentsystem.model.Json;
 import de.thowl.automomousinstantdocumentsystem.model.OperatingSystem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -42,10 +38,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
@@ -55,10 +48,7 @@ import javafx.stage.Stage;
  * @version 0.1.2
  * @see de.thowl.automomousinstantdocumentsystem.view.Gui
  */
-public class Controller implements Initializable {
-
-	private static final Logger logger = LogManager
-			.getLogger(Controller.class);
+public class MasterController implements Initializable {
 
 	@FXML
 	private Button btnMainScene;
@@ -68,22 +58,23 @@ public class Controller implements Initializable {
 	private Button btnDatabaseScene;
 
 	@FXML
-	private ComboBox<String> cmbType;
-	@FXML
-	private TextField txtAmount;
-	@FXML
-	private TextField txtChapters;
-	@FXML
-	private TextField txtFileName;
-	@FXML
-	private CheckBox chkShuffle;
-	@FXML
-	private Button btnGenerateDocument;
-	@FXML
-	private Button btnOpenEditor;
+	protected ComboBox<String> cmbType;
 
-	@FXML
-	private TextArea txtMultipurposeTextArea;
+	/**
+	 * Displays an error alert with the specified header and exception
+	 * details.
+	 *
+	 * @param header Header text for the error alert
+	 * @param e      Exception that occurred
+	 */
+	private void showErrorAlert(String header, Exception e) {
+		Alert errorAlert = new Alert(AlertType.ERROR);
+		StringWriter stringWriter = new StringWriter();
+		e.printStackTrace(new PrintWriter(stringWriter));
+		errorAlert.setHeaderText(header);
+		errorAlert.setContentText(stringWriter.toString());
+		errorAlert.showAndWait();
+	}
 
 	/**
 	 * Changes the scene to the specified one.
@@ -132,53 +123,6 @@ public class Controller implements Initializable {
 	}
 
 	/**
-	 * Appends a String to the TextArea <em>txtMultipurposeTextArea</em>
-	 * 
-	 * @param newString String to append
-	 */
-	private void appendToTextArea(String newString) {
-		StringBuilder areaContent = new StringBuilder();
-		areaContent.append(txtMultipurposeTextArea.getText());
-		areaContent.append(newString);
-		txtMultipurposeTextArea.setText(areaContent.toString());
-	}
-
-	/**
-	 * Called to initialize this gui controller after its root element has
-	 * been completely processed by JavaFX.
-	 * 
-	 * @param location  The location used to resolve relative paths for the
-	 *                  root object, or {@code null} if the location is not
-	 *                  known.
-	 * @param resources The resources used to localize the root object, or
-	 *                  {@code null} if the root object was not localized.
-	 */
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		try {
-			initialiseTypeDropdown();
-		} catch (NullPointerException e) {
-			// Do nothing
-		}
-	}
-
-	/**
-	 * Displays an error alert with the specified header and exception
-	 * details.
-	 *
-	 * @param header Header text for the error alert
-	 * @param e      Exception that occurred
-	 */
-	private void showErrorAlert(String header, Exception e) {
-		Alert errorAlert = new Alert(AlertType.ERROR);
-		StringWriter stringWriter = new StringWriter();
-		e.printStackTrace(new PrintWriter(stringWriter));
-		errorAlert.setHeaderText(header);
-		errorAlert.setContentText(stringWriter.toString());
-		errorAlert.showAndWait();
-	}
-
-	/**
 	 * Valtidates if an supposed integer is an actual integer
 	 * <p>
 	 * This is an grafical version of
@@ -188,7 +132,7 @@ public class Controller implements Initializable {
 	 * @param inputInt Integer to validate
 	 * @return Integervalue (if int)
 	 */
-	private int validateInt(String inputInt) {
+	protected int validateInt(String inputInt) {
 		int integer = 0;
 		try {
 			integer = Integer.parseInt(inputInt);
@@ -230,57 +174,21 @@ public class Controller implements Initializable {
 	}
 
 	/**
-	 * This method contains the logic behind the "Generate" Button Executed
-	 * when button is pressed
+	 * Called to initialize this gui controller after its root element has
+	 * been completely processed by JavaFX.
 	 * 
-	 * @param event ActionEvent of the Button
+	 * @param location  The location used to resolve relative paths for the
+	 *                  root object, or {@code null} if the location is not
+	 *                  known.
+	 * @param resources The resources used to localize the root object, or
+	 *                  {@code null} if the root object was not localized.
 	 */
-	@FXML
-	private void btnGenerateDocumentClick(ActionEvent event) {
-		final String type = cmbType.getSelectionModel()
-				.getSelectedItem();
-		// TODO: add location in settings
-		final String destination = "/home/jogiwa/Downloads";
-		final int amount = validateInt(txtAmount.getText());
-		final int chapters = validateInt(txtChapters.getText());
-		final boolean shuffle = chkShuffle.isArmed();
-		if (type == null || amount <= 0 || chapters <= 0) {
-			return;
-		}
-		Thread generation = new Thread(() -> {
-			Latex latex = new Latex();
-			appendToTextArea("[ INFO ]  Generating " + amount
-					+ " Document(s) of type '" + type
-					+ "' with " + chapters
-					+ " chapters...\n");
-			logger.info("Generating {} Document(s) of type '{}' with {} chapters.",
-					amount, type, chapters);
-			latex.generate(type, destination, amount, chapters,
-					shuffle);
-			appendToTextArea("[ INFO ]  Generation complete\n");
-			logger.info("Generation complete");
-		});
-		generation.start();
-	}
-
-	@FXML
-	private void btnOpenEditorClick() {
-		OperatingSystem os = new OperatingSystem();
-		String settingsFile = os.getHomeDir() + File.separator
-				+ "settings.json";
-		Json settings = new Json(settingsFile);
-		String editor = settings.getValue("settings", "editor");
-		String file = os.getHomeDir() + File.separator + "latex"
-				+ File.separator
-				+ cmbType.getSelectionModel().getSelectedItem()
-				+ File.separator + txtFileName.getText();
-		String[] editorCommand = { editor, file };
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
 		try {
-			Runtime.getRuntime().exec(editorCommand);
-		} catch (IOException e) {
-			e.printStackTrace();
+			initialiseTypeDropdown();
+		} catch (NullPointerException e) {
+			// Do nothing
 		}
-
 	}
-
 }
