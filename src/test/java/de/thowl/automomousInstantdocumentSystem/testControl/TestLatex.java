@@ -23,7 +23,6 @@ package de.thowl.automomousInstantdocumentSystem.testControl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,7 +33,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import de.thowl.automomousinstantdocumentsystem.control.Latex;
-import de.thowl.automomousinstantdocumentsystem.exceptions.LatexNotInstalledException;
 
 public class TestLatex {
 

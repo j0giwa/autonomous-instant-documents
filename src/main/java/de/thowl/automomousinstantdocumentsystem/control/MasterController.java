@@ -81,26 +81,23 @@ public class MasterController implements Initializable {
 	 *
 	 * @param event The ActionEvent from the current scene
 	 * @param name  The name of the scene to switch to
+	 * @throws IOException
 	 */
-	private void switchToScene(ActionEvent event, String name) {
-		try {
-			URL resourceURL = getClass().getClassLoader()
-					.getResource(name + ".fxml");
-			URL stylesheetURL = getClass().getClassLoader()
-					.getResource("styles.css");
-			FXMLLoader fxmlLoader = new FXMLLoader();
-			fxmlLoader.setLocation(resourceURL);
-			Parent root = fxmlLoader.load();
-			root.getStylesheets()
-					.add(stylesheetURL.toExternalForm());
-			Stage stage = (Stage) ((Node) event.getSource())
-					.getScene().getWindow();
-			Scene scene = new Scene(root);
-			stage.setScene(scene);
-			stage.show();
-		} catch (IOException e) {
-			showErrorAlert("Scene '" + name + "' not found", e);
-		}
+	private void switchToScene(ActionEvent event, String name)
+			throws IOException {
+		URL fxmlURL = getClass().getClassLoader()
+				.getResource("javafx/" + name + ".fxml");
+		URL cssURL = getClass().getClassLoader()
+				.getResource("javafx/styles.css");
+		FXMLLoader fxmlLoader = new FXMLLoader();
+		fxmlLoader.setLocation(fxmlURL);
+		Parent root = fxmlLoader.load();
+		root.getStylesheets().add(cssURL.toExternalForm());
+		Stage stage = (Stage) ((Node) event.getSource()).getScene()
+				.getWindow();
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
 	}
 
 	/**
@@ -150,7 +147,11 @@ public class MasterController implements Initializable {
 	 */
 	@FXML
 	private void btnMainSceneClick(ActionEvent event) {
-		switchToScene(event, "Main");
+		try {
+			switchToScene(event, "Main");
+		} catch (IOException e) {
+			showErrorAlert("Scene 'Main' not found", e);
+		}
 	}
 
 	/**
@@ -160,7 +161,11 @@ public class MasterController implements Initializable {
 	 */
 	@FXML
 	private void btnLatexSceneClick(ActionEvent event) {
-		switchToScene(event, "Latex");
+		try {
+			switchToScene(event, "Latex");
+		} catch (IOException e) {
+			showErrorAlert("Scene 'Latex' not found", e);
+		}
 	}
 
 	/**
@@ -170,7 +175,11 @@ public class MasterController implements Initializable {
 	 */
 	@FXML
 	private void btnDatabaseSceneClick(ActionEvent event) {
-		switchToScene(event, "Database");
+		try {
+			switchToScene(event, "Database");
+		} catch (IOException e) {
+			showErrorAlert("Scene 'Database' not found", e);
+		}
 	}
 
 	/**

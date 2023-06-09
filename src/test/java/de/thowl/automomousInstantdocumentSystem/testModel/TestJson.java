@@ -31,7 +31,7 @@ import de.thowl.automomousinstantdocumentsystem.model.Json;
 
 public class TestJson {
 
-	private static final String FILE_PATH = "./src/test/resources/test.json";
+	private static final String FILE_PATH = "./temp/test.json";
 	private Json json;
 
 	@BeforeEach
@@ -41,9 +41,9 @@ public class TestJson {
 	}
 
 	/**
-	 * Tests the {@link Json#getValue(String, String)} method to ensure
-	 * it returns the correct value from the JSON object
-	 * when the object and key exist.
+	 * Tests the {@link Json#getValue(String, String)} method to ensure it
+	 * returns the correct value from the JSON object when the object and
+	 * key exist.
 	 */
 	@Test
 	public void test_getValue_ShouldReturnCorrectValue_WhenObjectAndKeyExist() {
@@ -55,9 +55,9 @@ public class TestJson {
 	}
 
 	/**
-	 * Tests the {@link Json#setValue(String, String, String)} method
-	 * to ensure it changes the value in the JSON object
-	 * when the object and key exist.
+	 * Tests the {@link Json#setValue(String, String, String)} method to
+	 * ensure it changes the value in the JSON object when the object and
+	 * key exist.
 	 */
 	@Test
 	public void test_setValue_ShouldChangeValue_WhenObjectAndKeyExist() {
