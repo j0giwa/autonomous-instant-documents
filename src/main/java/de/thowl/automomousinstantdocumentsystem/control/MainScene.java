@@ -82,11 +82,9 @@ public class MainScene extends MasterController {
 		}
 		Thread generation = new Thread(() -> {
 			Latex latex = new Latex();
-			appendToTextArea("[ INFO ]  Generating " + amount
-					+ " Document(s) of type '" + type
-					+ "' with " + chapters
-					+ " chapters...\n");
-			logger.info("Generating {} Document(s) of type '{}' with {} chapters.",
+			appendToTextArea("[ INFO ]  Generating " + amount + " '" + type
+					+ "'-Document(s) with " + chapters + " chapters...\n");
+			logger.info("Generating {} '{}'-Documents with {} chapters.",
 					amount, type, chapters);
 			latex.generate(type, destination, amount, chapters,
 					shuffle);

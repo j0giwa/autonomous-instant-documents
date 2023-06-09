@@ -77,7 +77,7 @@ public class MasterController implements Initializable {
 	}
 
 	/**
-	 * Changes the scene to the specified one.
+	 * Changes the scene without changeing the geometry of the Window.
 	 *
 	 * @param event The ActionEvent from the current scene
 	 * @param name  The name of the scene to switch to
@@ -95,8 +95,11 @@ public class MasterController implements Initializable {
 		root.getStylesheets().add(cssURL.toExternalForm());
 		Stage stage = (Stage) ((Node) event.getSource()).getScene()
 				.getWindow();
-		Scene scene = new Scene(root);
-		stage.setScene(scene);
+		double windowWidth = stage.getWidth();
+		double windowHeight = stage.getHeight();
+		stage.setScene(new Scene(root));
+		stage.setWidth(windowWidth);
+		stage.setHeight(windowHeight);
 		stage.show();
 	}
 
