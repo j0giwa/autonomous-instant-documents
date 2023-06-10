@@ -106,7 +106,7 @@ public class MasterController implements Initializable {
 	/**
 	 * Populates the Dropdownmenu <em>cmbType</em>
 	 */
-	private void initialiseTypeDropdown() {
+	protected void initialiseTypeDropdown() {
 		OperatingSystem os = new OperatingSystem();
 		String homeDir = os.getHomeDir();
 		String snippetsDir = homeDir + "/latex";
@@ -197,10 +197,6 @@ public class MasterController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		try {
-			initialiseTypeDropdown();
-		} catch (NullPointerException e) {
-			// Do nothing
-		}
+		// Gets overwitten by children
 	}
 }

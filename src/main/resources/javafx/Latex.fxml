@@ -9,6 +9,8 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.control.TreeItem?>
 <?import javafx.scene.shape.*?>
 <GridPane fx:controller="de.thowl.automomousinstantdocumentsystem.control.LatexScene"
 		  xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/13">
@@ -44,13 +46,38 @@
 		<!--Buttons-->
 		<VBox fx:id="buttonarea" GridPane.columnIndex="1">
 			<children>
-				<ComboBox fx:id="cmbType" value="Type"/>
-				<TextField fx:id="txtFileName" promptText="Filename"/>
-				<Button fx:id="btnOpenEditor" text="GO" onAction="#btnOpenEditorClick"/>
+				<VBox fx:id="buttonareaContainer">
+					<children>
+						<ComboBox fx:id="cmbType" value="Type"/>
+						<TreeView fx:id="treeFileTree">
+							<root>
+                				<TreeItem value="exam files">
+                    				<children>
+                        				<TreeItem value="header.tex"/>
+                        				<TreeItem value="chapters">
+                    						<children>
+                        						<TreeItem value="01.tex"/>
+                        						<TreeItem value="02.tex"/>
+                        						<TreeItem value="03.tex"/>
+                    						</children>
+                						</TreeItem>
+                        				<TreeItem value="footer.tex"/>
+                    				</children>
+                				</TreeItem>
+            				</root>
+        				</TreeView>
+						<Button fx:id="btnOpenEditor" text="Open in Editor" onAction="#btnOpenEditorClick"/>
+					</children>
+				</VBox>
 			</children>
 		</VBox>
 		<!--Multipurpose Textarea-->
 		<VBox fx:id="multipurposearea" GridPane.columnIndex="2">
+			<children>
+				<VBox fx:id="multipurposeareaContainer">	
+					<TextArea fx:id="txtMultipurposeTextArea" editable="false"/>
+				</VBox>
+			</children>
 		</VBox>
 	</children>
 </GridPane>

@@ -1,12 +1,12 @@
 * {
-  -fx-primary:              #FA1F4E;
-  -fx-hover:                rgba(250, 31, 78, 0.15);
-  -fx-background:           #09080D;
-  -fx-light-background:     #121119;
-  -fx-input-background:     #242031;
-  -fx-accent:               #332C45;
-  -fx-primary-text:         #F0F0F0;
-  -fx-secondary-text:       #757575;
+  -fx-primary: #FA1F4E;
+  -fx-hover: rgba(250, 31, 78, 0.15);
+  -fx-background: #09080D;
+  -fx-light-background: #121119;
+  -fx-input-background: #242031;
+  -fx-accent: #332C45;
+  -fx-primary-text: #F0F0F0;
+  -fx-secondary-text: #757575;
 }
 
 .root {
@@ -15,8 +15,8 @@
 
 #sidebar {
   -fx-alignment: BASELINE_CENTER;
-  -fx-max-width: 40px; 
-  -fx-pref-width: 40px;
+  -fx-max-width: 50px;
+  -fx-pref-width: 50px;
   -fx-min-height: 490px;
   -fx-padding: 20px 2px;
   -fx-border-width: 0px 1px 0px 0px;
@@ -25,23 +25,30 @@
 }
 
 #sidebar .button {
-  -fx-pref-height: 30px;
-  -fx-pref-width: 30px;
-  -fx-padding: 5px;
+  -fx-pref-height: 24px;
+  -fx-pref-width: 24px;
+  -fx-padding: 10px;
   -fx-border: none;
   -fx-background-color: transparent;
 }
 
-#sidebar .button SVGPath{
+#sidebar .button SVGPath {
   -fx-fill: -fx-primary;
+  -fx-scale-x: 1.3;
+  -fx-scale-y: 1.3;
+}
+
+#sidebar .button:hover SVGPath {
+  -fx-scale-x: 1.5;
+  -fx-scale-y: 1.5;
 }
 
 #btnGenerateDocument,
 #btnOpenEditor {
-  -fx-padding: 16px 38px; 
+  -fx-padding: 16px 38px;
   -fx-border-insets: 17px;
   -fx-background-insets: 17px;
-  -fx-max-height: 30.0; 
+  -fx-max-height: 30.0;
   -fx-min-width: 194.0;
   -fx-border-width: 2px;
   -fx-border-radius: 6px;
@@ -54,35 +61,52 @@
 
 #sidebar .button:hover,
 #btnGenerateDocument:hover,
-#btnOpenEditor:hover  {
-    -fx-background-color: -fx-hover;
+#btnOpenEditor:hover {
+  -fx-background-color: -fx-hover;
 }
 
-#multipurposearea,
-#buttonarea {
-  -fx-min-width: 365px;
-  -fx-min-height: 490px;
+#buttonarea,
+#multipurposearea {
+  -fx-alignment: TOP_CENTER;
+  -fx-pref-width: 365px;
+  -fx-pref-height: 490px;
   -fx-padding: 20px 40px;
 }
 
-.combo-box,
-.text-field {
+#buttonarea #buttonareaContainer,
+#multipurposearea #multipurposeareaContainer {
+  -fx-alignment: TOP_LEFT;
   -fx-padding: 10px;
+}
+
+.combo-box,
+.tree-view,
+.text-field {
+  -fx-padding: 5px;
   -fx-border-insets: 10px;
   -fx-background-insets: 10px;
-  -fx-max-height: 30.0; 
-  -fx-max-width: 300.0;
+  -fx-max-width: 260px;
   -fx-border-width: 2px;
   -fx-border-radius: 6px;
   -fx-background-radius: 6px;
   -fx-border-color: -fx-accent;
   -fx-background-color: -fx-input-background;
-  -fx-font-size: 12pt;
+  -fx-font-size: 10pt;
   -fx-text-fill: -fx-primary-text;
 }
 
+.tree-cell,
 .combo-box .cell {
+  -fx-background-color: -fx-input-background;
   -fx-text-fill: -fx-primary-text;
+}
+
+.tree-cell:filled:hover {
+  -fx-background-color: -fx-hover;
+}
+
+.tree-cell:filled:selected {
+  -fx-text-fill: white;
 }
 
 .text-field:focused {
@@ -99,16 +123,16 @@
   mark-color: -fx-primary-text;
 }
 
-.check-box > .box{
+.check-box>.box {
   -fx-background-color: box-color;
 }
 
-.check-box:selected > .box {
+.check-box:selected>.box {
   -fx-background-color: selected-box-color;
 }
 
-.check-box:selected > .box > .mark{
-   -fx-background-color: mark-color
+.check-box:selected>.box>.mark {
+  -fx-background-color: mark-color
 }
 
 .text-area {

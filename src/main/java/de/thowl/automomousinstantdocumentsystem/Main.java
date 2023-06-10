@@ -57,12 +57,14 @@ public class Main {
 			System.exit(EXIT_SUCCESS);
 		}
 		handleArgs(args);
-		if (type == null || destination == null || amount <= 0 || chapters <= 0) {
+		if (type == null || destination == null || amount <= 0
+				|| chapters <= 0) {
 			logger.error("Not enough arguments");
 			System.exit(EXIT_ERROR);
 		}
 		Latex latex = new Latex();
-		logger.info("Generating {} '{}'-Documents with {} chapters.", amount, type, chapters);
+		logger.info("Generating {} '{}'-Documents with {} chapters.",
+				amount, type, chapters);
 		latex.generate(type, destination, amount, chapters, shuffle);
 		logger.info("done");
 		System.exit(EXIT_SUCCESS);

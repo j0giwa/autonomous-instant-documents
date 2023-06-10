@@ -44,12 +44,20 @@
 		<!--Buttons-->
 		<VBox fx:id="buttonarea" GridPane.columnIndex="1">
 			<children>
-				<Label text="Scene 3"/>
+				<VBox fx:id="buttonareaContainer">
+					<children>
+						<Label text="Scene 3"/>
+					</children>
+				</VBox>
 			</children>
 		</VBox>
 		<!--Multipurpose Textarea-->
 		<VBox fx:id="multipurposearea" GridPane.columnIndex="2">
-			<TextArea fx:id="txtMultipurposeTextArea"/>
+			<children>
+				<VBox fx:id="multipurposeareaContainer">	
+					<TextArea fx:id="txtMultipurposeTextArea" editable="false"/>
+				</VBox>
+			</children>
 		</VBox>
 	</children>
 </GridPane>

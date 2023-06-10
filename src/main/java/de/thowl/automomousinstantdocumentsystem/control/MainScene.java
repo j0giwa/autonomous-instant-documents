@@ -19,6 +19,9 @@
 
 package de.thowl.automomousinstantdocumentsystem.control;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -82,8 +85,9 @@ public class MainScene extends MasterController {
 		}
 		Thread generation = new Thread(() -> {
 			Latex latex = new Latex();
-			appendToTextArea("[ INFO ]  Generating " + amount + " '" + type
-					+ "'-Document(s) with " + chapters + " chapters...\n");
+			appendToTextArea("[ INFO ]  Generating " + amount + " '"
+					+ type + "'-Document(s) with "
+					+ chapters + " chapters...\n");
 			logger.info("Generating {} '{}'-Documents with {} chapters.",
 					amount, type, chapters);
 			latex.generate(type, destination, amount, chapters,
@@ -92,5 +96,20 @@ public class MainScene extends MasterController {
 			logger.info("Generation complete");
 		});
 		generation.start();
+	}
+
+	/**
+	 * Called to initialize this gui controller after its root element has
+	 * been completely processed by JavaFX.
+	 * 
+	 * @param location  The location used to resolve relative paths for the
+	 *                  root object, or {@code null} if the location is not
+	 *                  known.
+	 * @param resources The resources used to localize the root object, or
+	 *                  {@code null} if the root object was not localized.
+	 */
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		super.initialiseTypeDropdown();
 	}
 }

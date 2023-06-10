@@ -44,16 +44,24 @@
 		<!--Buttons-->
 		<VBox fx:id="buttonarea" GridPane.columnIndex="1">
 			<children>
-				<ComboBox fx:id="cmbType" value="Type"/>
-				<TextField fx:id="txtAmount" promptText="Amount"/>
-				<TextField fx:id="txtChapters" promptText="Chapters"/>
-				<CheckBox fx:id="chkShuffle" text="Shuffle"/>
-				<Button fx:id="btnGenerateDocument" text="Generate" onAction="#btnGenerateDocumentClick"/>
+				<VBox fx:id="buttonareaContainer">
+					<children>
+						<ComboBox fx:id="cmbType" value="Type"/>
+						<TextField fx:id="txtAmount" promptText="Amount"/>
+						<TextField fx:id="txtChapters" promptText="Chapters"/>
+						<CheckBox fx:id="chkShuffle" text="Shuffle"/>
+						<Button fx:id="btnGenerateDocument" text="Generate" onAction="#btnGenerateDocumentClick"/>
+					</children>
+				</VBox>
 			</children>
 		</VBox>
 		<!--Multipurpose Textarea-->
 		<VBox fx:id="multipurposearea" GridPane.columnIndex="2">
-			<TextArea fx:id="txtMultipurposeTextArea"/>
+			<children>
+				<VBox fx:id="multipurposeareaContainer">	
+					<TextArea fx:id="txtMultipurposeTextArea" editable="false"/>
+				</VBox>
+			</children>
 		</VBox>
 	</children>
 </GridPane>
