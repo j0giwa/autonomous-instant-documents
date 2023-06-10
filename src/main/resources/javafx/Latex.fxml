@@ -48,24 +48,8 @@
 			<children>
 				<VBox fx:id="buttonareaContainer">
 					<children>
-						<ComboBox fx:id="cmbType" value="Type"/>
-						<TreeView fx:id="treeFileTree">
-							<root>
-                				<TreeItem value="exam files">
-                    				<children>
-                        				<TreeItem value="header.tex"/>
-                        				<TreeItem value="chapters">
-                    						<children>
-                        						<TreeItem value="01.tex"/>
-                        						<TreeItem value="02.tex"/>
-                        						<TreeItem value="03.tex"/>
-                    						</children>
-                						</TreeItem>
-                        				<TreeItem value="footer.tex"/>
-                    				</children>
-                				</TreeItem>
-            				</root>
-        				</TreeView>
+						<ComboBox fx:id="cmbType" value="Type" onAction="#cmbTypeSelection"/>
+						<TreeView fx:id="treeFileTree"/>
 						<Button fx:id="btnOpenEditor" text="Open in Editor" onAction="#btnOpenEditorClick"/>
 					</children>
 				</VBox>

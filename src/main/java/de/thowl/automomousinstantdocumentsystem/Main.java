@@ -49,7 +49,7 @@ public class Main {
 	/**
 	 * This method starts the programm (as we all know)
 	 * 
-	 * @param args
+	 * @param args The command line arguments
 	 */
 	public static void main(String[] args) {
 		if (args.length == 0) {

@@ -66,8 +66,8 @@ public class MainScene extends MasterController {
 	}
 
 	/**
-	 * This method contains the logic behind the "Generate" Button Executed
-	 * when button is pressed
+	 * Eventhandeler for the "Generate" Button.
+	 * Executed when button is pressed
 	 * 
 	 * @param event ActionEvent of the Button
 	 */

@@ -24,18 +24,26 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import de.thowl.automomousinstantdocumentsystem.model.Json;
 import de.thowl.automomousinstantdocumentsystem.model.OperatingSystem;
 import javafx.fxml.FXML;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 
 public class LatexScene extends MasterController {
 
-	@FXML
-	private ComboBox<String> cmbType;
+	private static final Logger logger = LogManager
+			.getLogger(LatexScene.class);
+
+	private String latexdir;
+	private String settingsFile;
+
 	@FXML
 	private TreeView<String> treeFileTree;
 	@FXML
@@ -43,13 +51,111 @@ public class LatexScene extends MasterController {
 	@FXML
 	private Button btnOpenEditor;
 
-	@FXML
-	private void btnOpenEditorClick() {
-
+	/**
+	 * Creates a TreeItem for the specified file, including its children (if
+	 * it is a directory).
+	 *
+	 * @param file The file or directory.
+	 * @return The TreeItem representing the file or directory.
+	 */
+	private TreeItem<String> createTreeItem(File file) {
+		TreeItem<String> item = new TreeItem<>(file.getName());
+		item.setExpanded(true);
+		if (!file.isDirectory())
+			return item;
+		File[] files = file.listFiles();
+		if (files != null) {
+			for (File childFile : files) {
+				TreeItem<String> child = createTreeItem(
+						childFile);
+				item.getChildren().add(child);
+			}
+		}
+		return item;
 	}
 
-	public void populateTreeView() {
+	/**
+	 * Recursively expands nodes in the TreeView.
+	 *
+	 * @param rootItem The root TreeItem.
+	 */
+	private void expandNode(TreeItem<String> rootItem) {
+		if (rootItem == null)
+			return;
+		rootItem.getChildren().forEach(this::expandNode);
+		String value = rootItem.getValue();
+		if (value != null)
+			rootItem.setExpanded(true);
+	}
 
+	/**
+	 * Populates the TreeView with the file structure of the specified
+	 * directory.
+	 *
+	 * @param directory The directory path.
+	 */
+	private void populateTreeView(String directory) {
+		File rootDirectory = new File(directory);
+		TreeItem<String> rootItem = createTreeItem(rootDirectory);
+		treeFileTree.setRoot(rootItem);
+		treeFileTree.setShowRoot(true);
+		expandNode(rootItem);
+	}
+
+	/**
+	 * Retrieves the selected item's path in the TreeView.
+	 *
+	 * @param item The selected TreeItem in the TreeView.
+	 * @return The path of the selected item.
+	 */
+	public String getSelectedTree(TreeItem<String> item) {
+		if (item == null)
+			return "";
+		StringBuilder path = new StringBuilder(item.getValue());
+		TreeItem<String> parentItem = item.getParent();
+		while (parentItem != null) {
+			path.insert(0, File.separator).insert(0,
+					parentItem.getValue());
+			parentItem = parentItem.getParent();
+		}
+		return path.toString();
+	}
+
+	/**
+	 * Eventhandeler for the "type" combobox. Executed when an item is
+	 * selected.
+	 * 
+	 * @param event ActionEvent of the combobox
+	 */
+	@FXML
+	private void cmbTypeSelection(ActionEvent event) {
+		String item = cmbType.getSelectionModel().getSelectedItem();
+		String directory = latexdir + File.separator + item;
+		populateTreeView(directory);
+	}
+
+	/**
+	 * Eventhandeler for the "Open in Editor" Button. Executed when the
+	 * Button is clicked.
+	 * 
+	 * @param event ActionEvent of the Button
+	 */
+	@FXML
+	private void btnOpenEditorClick(ActionEvent event) {
+		Json settings = new Json(settingsFile);
+		String editor = settings.getValue("settings", "editor");
+		TreeItem<String> item = treeFileTree.getSelectionModel()
+				.getSelectedItem();
+		if (item == null)
+			return;
+		String file = latexdir + File.separator + getSelectedTree(item);
+		String[] editorCommand = { editor, file };
+		try {
+			logger.info("Opening file '{}' in {}", file, editor);
+			Runtime.getRuntime().exec(editorCommand);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -64,6 +170,10 @@ public class LatexScene extends MasterController {
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		OperatingSystem os = new OperatingSystem();
+		latexdir = os.getHomeDir() + File.separator + "latex";
+		settingsFile = os.getHomeDir() + File.separator
+				+ "settings.json";
 		super.initialiseTypeDropdown();
 	}
 }
