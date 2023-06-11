@@ -15,13 +15,13 @@
 <GridPane fx:controller="de.thowl.automomousinstantdocumentsystem.control.LatexScene"
 		  xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/13">
 	<columnConstraints>
-		<ColumnConstraints hgrow="NEVER"/>
-		<ColumnConstraints hgrow="SOMETIMES"/>
-		<ColumnConstraints hgrow="SOMETIMES"/>
-	</columnConstraints>
-	<rowConstraints>
-		<RowConstraints vgrow="ALWAYS"/>
-	</rowConstraints>
+        <ColumnConstraints/>
+        <ColumnConstraints hgrow="ALWAYS"/>
+        <ColumnConstraints hgrow="ALWAYS"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints vgrow="ALWAYS" />
+    </rowConstraints>
 	<children>
 		<!--Sidebar-->
 		<VBox fx:id="sidebar" GridPane.columnIndex="0">
@@ -46,11 +46,11 @@
 		<!--Buttons-->
 		<VBox fx:id="buttonarea" GridPane.columnIndex="1">
 			<children>
-				<VBox fx:id="buttonareaContainer">
+				<VBox fx:id="container">
 					<children>
 						<ComboBox fx:id="cmbType" value="Type" onAction="#cmbTypeSelection"/>
 						<TreeView fx:id="treeFileTree"/>
-						<Button fx:id="btnOpenEditor" text="Open in Editor" onAction="#btnOpenEditorClick"/>
+						<Button fx:id="btnOpenEditor" text="Editor" onAction="#btnOpenEditorClick"/>
 					</children>
 				</VBox>
 			</children>
@@ -58,7 +58,7 @@
 		<!--Multipurpose Textarea-->
 		<VBox fx:id="multipurposearea" GridPane.columnIndex="2">
 			<children>
-				<VBox fx:id="multipurposeareaContainer">	
+				<VBox fx:id="container">	
 					<TextArea fx:id="txtMultipurposeTextArea" editable="false"/>
 				</VBox>
 			</children>

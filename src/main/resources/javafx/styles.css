@@ -1,12 +1,24 @@
-* {
+/** {
   -fx-primary: #FA1F4E;
-  -fx-hover: rgba(250, 31, 78, 0.15);
   -fx-background: #09080D;
   -fx-light-background: #121119;
   -fx-input-background: #242031;
-  -fx-accent: #332C45;
   -fx-primary-text: #F0F0F0;
   -fx-secondary-text: #757575;
+  -fx-accent: #332C45;
+  -fx-hover: rgba(250, 31, 78, 0.15);
+}*/
+
+/* Hacky Light theme implementation */
+* {
+  -fx-primary: #1F94D4;
+  -fx-background: #F0F0F0;
+  -fx-light-background: #FFFFFF;
+  -fx-input-background: #F5F5F5;
+  -fx-primary-text: #333333;
+  -fx-secondary-text: #000000;
+  -fx-accent: #ECEFF1;
+  -fx-hover: rgba(31, 148, 212, 0.15);
 }
 
 .root {
@@ -17,7 +29,7 @@
   -fx-alignment: BASELINE_CENTER;
   -fx-max-width: 50px;
   -fx-pref-width: 50px;
-  -fx-min-height: 490px;
+  -fx-pref-height: 100%;
   -fx-padding: 20px 2px;
   -fx-border-width: 0px 1px 0px 0px;
   -fx-background-color: -fx-background;
@@ -46,8 +58,8 @@
 #btnGenerateDocument,
 #btnOpenEditor {
   -fx-padding: 16px 38px;
-  -fx-border-insets: 17px;
-  -fx-background-insets: 17px;
+  -fx-border-insets: 20px 0px 0px 0px;
+  -fx-background-insets: 20px 0px 0px 0px;
   -fx-max-height: 30.0;
   -fx-min-width: 194.0;
   -fx-border-width: 2px;
@@ -68,24 +80,23 @@
 #buttonarea,
 #multipurposearea {
   -fx-alignment: TOP_CENTER;
-  -fx-pref-width: 365px;
-  -fx-pref-height: 490px;
-  -fx-padding: 20px 40px;
+  -fx-pref-width: 100%;
+  -fx-pref-height: 100%;
+  -fx-padding: 45px 15px;
 }
 
-#buttonarea #buttonareaContainer,
-#multipurposearea #multipurposeareaContainer {
+#buttonarea #container,
+#multipurposearea #container {
   -fx-alignment: TOP_LEFT;
-  -fx-padding: 10px;
 }
 
 .combo-box,
 .tree-view,
 .text-field {
-  -fx-padding: 5px;
-  -fx-border-insets: 10px;
-  -fx-background-insets: 10px;
-  -fx-max-width: 260px;
+  -fx-padding: 8px;
+  -fx-border-insets: 0px 0px 20px 0px;
+  -fx-background-insets: 0px 0px 20px 0px;
+  -fx-max-width: 450px;
   -fx-border-width: 2px;
   -fx-border-radius: 6px;
   -fx-background-radius: 6px;
@@ -93,6 +104,7 @@
   -fx-background-color: -fx-input-background;
   -fx-font-size: 10pt;
   -fx-text-fill: -fx-primary-text;
+  -fx-prompt-text-fill: -fx-secondary-text;
 }
 
 .tree-cell,
@@ -115,9 +127,9 @@
 }
 
 .check-box {
-  -fx-padding: 17px;
-  -fx-border-insets: 5px;
-  -fx-background-insets: 5px;
+  -fx-padding: 6px;
+  -fx-border-insets: 0px 0px 20px 0px;
+  -fx-background-insets: 0px 0px 20px 0px;
   selected-box-color: -fx-primary;
   box-color: -fx-input-background;
   mark-color: -fx-primary-text;
@@ -137,6 +149,9 @@
 
 .text-area {
   -fx-min-height: 416px;
+  -fx-min-height: 416px;
+  -fx-pref-width: 100%;
+  -fx-pref-height: 100%;
   -fx-border-width: 2px;
   -fx-border-radius: 6px;
   -fx-background-radius: 6px;
@@ -147,5 +162,5 @@
 
 .text-area .content {
   -fx-border-color: none;
-  -fx-background-color: -fx-light-background;
+  -fx-background-color: -fx-input-background;
 }
