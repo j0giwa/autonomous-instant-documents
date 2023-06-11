@@ -28,38 +28,38 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * This class represents the GUI of the Program.
- * It acts as a loader for an FXML file and sets up the graphical user
- * interface.
+ * This class represents the GUI of the Program. It acts as a loader for an FXML
+ * file and sets up the graphical user interface.
  * 
  * <p>
  * The controlling logic can be found in the
- * {@link de.thowl.automomousinstantdocumentsystem.control.Controller} class.
+ * {@link de.thowl.automomousinstantdocumentsystem.control.MasterController}
+ * class.
  * </p>
  * 
  * @author Jonas Schwind
  * @version 1.0.3
  * 
- * @see de.thowl.automomousinstantdocumentsystem.control.Controller
+ * @see de.thowl.automomousinstantdocumentsystem.control.MasterController
  */
 public class Gui extends Application {
 
 	/*
 	 * Starts the GUI by loading the FXML file, applying the stylesheet,
 	 * configuring the stage, and displaying it.
-	 * 
 	 * @param stage the primary stage for this application
-	 * 
 	 * @throws Exception if an error occurs during GUI initialization
 	 */
 	@Override
 	public void start(Stage stage) throws Exception {
-		URL resourceURL = getClass().getClassLoader().getResource("Main.fxml");
-		URL stylesheetURL = getClass().getClassLoader().getResource("styles.css");
+		URL fxmlURL = getClass().getClassLoader()
+				.getResource("javafx/Main.fxml");
+		URL cssURL = getClass().getClassLoader()
+				.getResource("javafx/styles.css");
 		FXMLLoader fxmlLoader = new FXMLLoader();
-		fxmlLoader.setLocation(resourceURL);
+		fxmlLoader.setLocation(fxmlURL);
 		Parent root = fxmlLoader.load();
-		root.getStylesheets().add(stylesheetURL.toExternalForm());
+		root.getStylesheets().add(cssURL.toExternalForm());
 		stage.setTitle("Automomous Instantdocument System");
 		stage.setScene(new Scene(root, 760, 490));
 		stage.show();

@@ -10,16 +10,16 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.shape.*?>
-<GridPane fx:controller="de.thowl.automomousinstantdocumentsystem.control.Controller"
+<GridPane fx:controller="de.thowl.automomousinstantdocumentsystem.control.DatabaseScene"
 		  xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/13">
 	<columnConstraints>
-		<ColumnConstraints hgrow="NEVER"/>
-		<ColumnConstraints hgrow="SOMETIMES"/>
-		<ColumnConstraints hgrow="SOMETIMES"/>
-	</columnConstraints>
-	<rowConstraints>
-		<RowConstraints vgrow="ALWAYS"/>
-	</rowConstraints>
+        <ColumnConstraints/>
+        <ColumnConstraints hgrow="ALWAYS"/>
+        <ColumnConstraints hgrow="ALWAYS"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints vgrow="ALWAYS" />
+    </rowConstraints>
 	<children>
 		<!--Sidebar-->
 		<VBox fx:id="sidebar" GridPane.columnIndex="0">
@@ -44,13 +44,20 @@
 		<!--Buttons-->
 		<VBox fx:id="buttonarea" GridPane.columnIndex="1">
 			<children>
-				<ComboBox fx:id="cmbType" value="Type"/>
-				<TextField fx:id="txtFileName" promptText="Filename"/>
-				<Button fx:id="btnOpenEditor" text="GO" onAction="#btnOpenEditorClick"/>
+				<VBox fx:id="container">
+					<children>
+						<Label text="Scene 3"/>
+					</children>
+				</VBox>
 			</children>
 		</VBox>
 		<!--Multipurpose Textarea-->
 		<VBox fx:id="multipurposearea" GridPane.columnIndex="2">
+			<children>
+				<VBox fx:id="container">	
+					<TextArea fx:id="txtMultipurposeTextArea" editable="false"/>
+				</VBox>
+			</children>
 		</VBox>
 	</children>
 </GridPane>

@@ -49,11 +49,13 @@ public class Main {
 	/**
 	 * This method starts the programm (as we all know)
 	 * 
-	 * @param args
+	 * @param args The command line arguments
 	 */
 	public static void main(String[] args) {
-		if (args.length == 0)
+		if (args.length == 0) {
 			Application.launch(Gui.class, args);
+			System.exit(EXIT_SUCCESS);
+		}
 		handleArgs(args);
 		if (type == null || destination == null || amount <= 0
 				|| chapters <= 0) {
@@ -61,7 +63,7 @@ public class Main {
 			System.exit(EXIT_ERROR);
 		}
 		Latex latex = new Latex();
-		logger.info("Generating {} Documents of type '{}' with {} chapters.",
+		logger.info("Generating {} '{}'-Documents with {} chapters.",
 				amount, type, chapters);
 		latex.generate(type, destination, amount, chapters, shuffle);
 		logger.info("done");
