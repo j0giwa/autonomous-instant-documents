@@ -18,6 +18,7 @@
 
 # DOOM emacs
 .factorypath
+.editorconfig
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/

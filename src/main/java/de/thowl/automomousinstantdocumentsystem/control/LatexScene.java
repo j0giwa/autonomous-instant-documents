@@ -79,13 +79,12 @@ public class LatexScene extends MasterController {
 	 *
 	 * @param rootItem The root TreeItem.
 	 */
-	private void expandNode(TreeItem<String> rootItem) {
+	private void expandItem(TreeItem<String> item) {
 		if (rootItem == null)
 			return;
-		rootItem.getChildren().forEach(this::expandNode);
-		String value = rootItem.getValue();
-		if (value != null)
-			rootItem.setExpanded(true);
+		// Recursion BS has to stay, items could resemble a filetree
+		rootItem.getChildren().forEach(this::expandItem);
+		rootItem.setExpanded(true);
 	}
 
 	/**
@@ -99,7 +98,7 @@ public class LatexScene extends MasterController {
 		TreeItem<String> rootItem = createTreeItem(rootDirectory);
 		treeFileTree.setRoot(rootItem);
 		treeFileTree.setShowRoot(true);
-		expandNode(rootItem);
+		expandItem(rootItem);
 	}
 
 	/**
