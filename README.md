@@ -8,7 +8,6 @@
 [![shields.io](https://img.shields.io/github/issues/j0giwa/automomous-instantdokument-system)](https://img.shields.io/github/issues/j0giwa/automomous-instantdokument-system)
 
 Table of Contents
-
 =============================
 
 <details open="open">
@@ -30,7 +29,6 @@ Table of Contents
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 About The Project
-
 =============================
 
 ## Features
@@ -48,7 +46,6 @@ About The Project
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 Getting started
-
 =============================
 
 ## Requirements
@@ -96,7 +93,6 @@ alias automomous-instantdocument-system="java -jar /opt/automomous-instantdocume
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 Usage
-
 =============================
 
 Running `automomous-instantdocument-system` without options launches a grafical interface.

@@ -60,7 +60,6 @@ public class LatexScene extends MasterController {
 	 */
 	private TreeItem<String> createTreeItem(File file) {
 		TreeItem<String> item = new TreeItem<>(file.getName());
-		item.setExpanded(true);
 		if (!file.isDirectory())
 			return item;
 		File[] files = file.listFiles();
@@ -75,16 +74,16 @@ public class LatexScene extends MasterController {
 	}
 
 	/**
-	 * Recursively expands nodes in the TreeView.
+	 * Recursively expands TreeItems in the TreeView.
 	 *
 	 * @param rootItem The root TreeItem.
 	 */
 	private void expandItem(TreeItem<String> item) {
-		if (rootItem == null)
+		if (item == null)
 			return;
 		// Recursion BS has to stay, items could resemble a filetree
-		rootItem.getChildren().forEach(this::expandItem);
-		rootItem.setExpanded(true);
+		item.getChildren().forEach(this::expandItem);
+		item.setExpanded(true);
 	}
 
 	/**
