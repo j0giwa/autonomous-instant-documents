@@ -76,14 +76,14 @@ public class Latex {
 	}
 
 	/**
-	 * This Method gathers snipptes for a LaTex document
+	 * This Method gathers snipptes for a LaTeX document
 	 * 
 	 * @param type      The "type" of snippets that should be collected, the
 	 *                  type is defined by a directoryname in the
 	 *                  confighome.
 	 * @param chapters  amount of snippets
-	 * @param randomise should the order be randomised (always true except
-	 *                  for tests)
+	 * @param randomise should the order be randomised
+	 *                  (always {@code true} except for tests)
 	 */
 	public void gatherSnippets(String type, int chapters,
 			boolean randomise) {
@@ -108,6 +108,7 @@ public class Latex {
 	/**
 	 * This method concatenates a sourcefile from snippets gathered by the
 	 * <em>gatherSnippets</em> method.
+	 *
 	 * <p>
 	 * The method {@link #gatherSnippets(String, int, boolean)} needs to be
 	 * called first, as it gathers all snippets that are required for the
@@ -169,8 +170,13 @@ public class Latex {
 	}
 
 	/**
-	 * This Method is wrapper function, genererate documents here
-	 * 
+	 * This Method is wrapper function to genererate documents
+	 *
+	 * <p>
+	 * It handles the methods {@link #gatherSnippets(String, int, boolean)},
+	 * {@link #concat(String)} and {@link #compile(String, String)} for you.
+	 * </p>
+	 *
 	 * @param type        type of the document that should be genearated
 	 * @param destination directory in which the documunt should be saved
 	 * @param amount      amount of instances that should be saved
@@ -181,21 +187,20 @@ public class Latex {
 			int chapters, boolean shuffle) {
 		gatherSnippets(type, chapters, true);
 		for (int i = 1; i <= amount; i++) {
-			// TODO: Add pretty foldename
-			String subdirname = "foldername" + i;
-			String workingDir = "./temp" + File.separator
-					+ subdirname;
+			// TODO: Add pretty foldername
+			String subDir = "foldername" + i;
+			String workingDir = "./temp" + File.separator + subDir;
 			new File(workingDir).mkdir();
 			concat(type, workingDir);
 			compile(type, workingDir);
 			try {
-				String outputPdfPath = workingDir + File.separator + type + ".pdf";
-				String destinationPath = destination + File.separator + subdirname;
-				String pdfDestinationPath = destinationPath + File.separator + type + ".pdf";
-				File outputPdf = new File(outputPdfPath);
-				File targetDir = new File(pdfDestinationPath);
-				new File(destinationPath).mkdir();
-				Files.copy(outputPdf.toPath(), targetDir.toPath());
+				String fileName = type + ".pdf";
+				String sourceDir = workingDir;
+				String targetDir = destination + File.separator + subDir;
+				File sourceFile = new File(sourceDir + File.separator + fileName);
+				File targetFile = new File(targetDir + File.separator + fileName);
+				new File(targetDir).mkdir();
+				Files.copy(sourceFile.toPath(), targetFile.toPath());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

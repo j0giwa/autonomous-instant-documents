@@ -27,7 +27,7 @@ import de.thowl.automomousinstantdocumentsystem.view.Gui;
 import javafx.application.Application;
 
 /**
- * This is the Main Class of the Program
+ * This is the Main class of the Program
  * 
  * @version 0.2.5
  * @author Jonas Schwind
@@ -49,7 +49,8 @@ public class Main {
 	/**
 	 * This method starts the programm (as we all know)
 	 * 
-	 * @param args The command line arguments
+	 * @param args The command line arguments,
+	 *             without args the programm launches in a GUI.
 	 */
 	public static void main(String[] args) {
 		if (args.length == 0) {
@@ -84,7 +85,7 @@ public class Main {
 	 * <li><em>ns</em> - Turn off shuffle mode</li>
 	 * <li><em>noshuffle</em> - Same as <em>ns</em></li>
 	 * </ul>
-	 * 
+	 *
 	 * <p>
 	 * If the argument is not in the list, it is assumed that the argument
 	 * is a parameterized argument. These arguments are redirected to
@@ -129,8 +130,8 @@ public class Main {
 
 	/**
 	 * This method handles the command line arguments with additional
-	 * parameters, i.e "--someting param".
-	 * 
+	 * parameters, i.e "--something {param}".
+	 *
 	 * @param args
 	 */
 	@SuppressWarnings("squid:S131") // No deafult, because of the arg params
@@ -157,7 +158,7 @@ public class Main {
 
 	/**
 	 * Valtidates if an supposed integer is an actual integer
-	 * 
+	 *
 	 * @param inputInt Integer to validate
 	 * @return Integervalue (if int)
 	 */

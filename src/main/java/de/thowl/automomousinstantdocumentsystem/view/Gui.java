@@ -47,7 +47,9 @@ public class Gui extends Application {
 	/*
 	 * Starts the GUI by loading the FXML file, applying the stylesheet,
 	 * configuring the stage, and displaying it.
+	 *
 	 * @param stage the primary stage for this application
+	 *
 	 * @throws Exception if an error occurs during GUI initialization
 	 */
 	@Override

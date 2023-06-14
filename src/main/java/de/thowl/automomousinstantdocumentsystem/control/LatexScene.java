@@ -32,15 +32,13 @@ import de.thowl.automomousinstantdocumentsystem.model.OperatingSystem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 
 public class LatexScene extends MasterController {
 
-	private static final Logger logger = LogManager
-			.getLogger(LatexScene.class);
+	private static final Logger logger = LogManager.getLogger(LatexScene.class);
 
 	private String latexdir;
 	private String settingsFile;
@@ -51,6 +49,44 @@ public class LatexScene extends MasterController {
 	private TextField txtFileName;
 	@FXML
 	private Button btnOpenEditor;
+
+	/**
+	 * Retrieves the selected item's path in the TreeView.
+	 *
+	 * @param item The selected TreeItem in the TreeView.
+	 * @return The path of the selected item.
+	 */
+	public String getSelectedTree(TreeItem<String> item) {
+		if (item == null)
+			return "";
+		StringBuilder path = new StringBuilder(item.getValue());
+		TreeItem<String> parentItem = item.getParent();
+		while (parentItem != null) {
+			path.insert(0, File.separator).insert(0,
+					parentItem.getValue());
+			parentItem = parentItem.getParent();
+		}
+		return path.toString();
+	}
+
+	/**
+	 * Called to initialize this gui controller after its root element has
+	 * been completely processed by JavaFX.
+	 *
+	 * @param location  The location used to resolve relative paths for the
+	 *                  root object, or {@code null} if the location is not
+	 *                  known.
+	 * @param resources The resources used to localize the root object, or
+	 *                  {@code null} if the root object was not localized.
+	 */
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		OperatingSystem os = new OperatingSystem();
+		latexdir = os.getHomeDir() + File.separator + "latex";
+		settingsFile = os.getHomeDir() + File.separator
+				+ "settings.json";
+		super.initialiseTypeDropdown();
+	}
 
 	/**
 	 * Creates a TreeItem for the specified file, including its children (if
@@ -102,28 +138,9 @@ public class LatexScene extends MasterController {
 	}
 
 	/**
-	 * Retrieves the selected item's path in the TreeView.
-	 *
-	 * @param item The selected TreeItem in the TreeView.
-	 * @return The path of the selected item.
-	 */
-	public String getSelectedTree(TreeItem<String> item) {
-		if (item == null)
-			return "";
-		StringBuilder path = new StringBuilder(item.getValue());
-		TreeItem<String> parentItem = item.getParent();
-		while (parentItem != null) {
-			path.insert(0, File.separator).insert(0,
-					parentItem.getValue());
-			parentItem = parentItem.getParent();
-		}
-		return path.toString();
-	}
-
-	/**
 	 * Eventhandeler for the "type" combobox. Executed when an item is
 	 * selected.
-	 * 
+	 *
 	 * @param event ActionEvent of the combobox
 	 */
 	@FXML
@@ -136,7 +153,7 @@ public class LatexScene extends MasterController {
 	/**
 	 * Eventhandeler for the "Open in Editor" Button. Executed when the
 	 * Button is clicked.
-	 * 
+	 *
 	 * @param event ActionEvent of the Button
 	 */
 	@FXML
@@ -155,24 +172,5 @@ public class LatexScene extends MasterController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	/**
-	 * Called to initialize this gui controller after its root element has
-	 * been completely processed by JavaFX.
-	 * 
-	 * @param location  The location used to resolve relative paths for the
-	 *                  root object, or {@code null} if the location is not
-	 *                  known.
-	 * @param resources The resources used to localize the root object, or
-	 *                  {@code null} if the root object was not localized.
-	 */
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		OperatingSystem os = new OperatingSystem();
-		latexdir = os.getHomeDir() + File.separator + "latex";
-		settingsFile = os.getHomeDir() + File.separator
-				+ "settings.json";
-		super.initialiseTypeDropdown();
 	}
 }

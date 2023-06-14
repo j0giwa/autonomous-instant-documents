@@ -1,4 +1,4 @@
-/** {
+* {
   -fx-primary: #FA1F4E;
   -fx-background: #09080D;
   -fx-light-background: #121119;
@@ -7,9 +7,9 @@
   -fx-secondary-text: #757575;
   -fx-accent: #332C45;
   -fx-hover: rgba(250, 31, 78, 0.15);
-}*/
+}
 
-/* Hacky Light theme implementation */
+/* NOTE: Hacky Light theme implementation, delete after presentaion */
 * {
   -fx-primary: #1F94D4;
   -fx-background: #F0F0F0;
