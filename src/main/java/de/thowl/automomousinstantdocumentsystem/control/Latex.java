@@ -114,10 +114,11 @@ public class Latex {
 	 * sourcefile.
 	 * </p>
 	 * 
-	 * @param type type of the document, the sourcefile gets saved under
-	 *             this name at a temporary location.
+	 * @param type        type of the document, the sourcefile gets saved under
+	 *                    this name at a temporary location.
+	 * @param destination location the the sourcefile should be placed
 	 */
-	public void concat(String type) {
+	public void concat(String type, String destination) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(header.getFileContent() + "\n");
 		Iterator<LatexSnippet> it = snippets.iterator();
@@ -127,7 +128,8 @@ public class Latex {
 		}
 		sb.append(footer.getFileContent() + "\n");
 		try {
-			String outputfilePath = "./temp/" + type + ".tex";
+			new File(destination).mkdir();
+			String outputfilePath = destination + File.separator + type + ".tex";
 			Files.write(Paths.get(outputfilePath), sb.toString()
 					.getBytes(StandardCharsets.UTF_8));
 		} catch (IOException e) {
@@ -141,28 +143,25 @@ public class Latex {
 	 * The method {@link #concat(String)} needs to be called first, as it
 	 * generates the sourcefile.
 	 * </p>
-	 * 
-	 * @param type        type of the the sourcefile ()
-	 * @param destination outputlocation for the compilde document.
+	 *
+	 * @param type        type of the the sourcefile
+	 * @param destination temporary loaction where document should be proccessed
 	 */
-	public void compile(String type, String destination) {
-		String userdir = System.getProperty("user.dir");
-		String outputDir = "-output-directory=" + destination;
-		String texFile = userdir + "/temp/" + type + ".tex";
+	public void compile(String type, String workingDir) {
+		String texFile = workingDir + File.separator + type + ".tex";
+		String outputDir = "-output-directory=" + workingDir;
 		String[] command = { pdflatex, outputDir, texFile };
 		try {
-			Process proccess = Runtime.getRuntime().exec(command);
-			/*
-			 * Print stdOut pdflatex NOTE: NECCESARY, DON'T
-			 * DELETE!!!
-			 */
-			InputStreamReader proccessStream = new InputStreamReader(
-					proccess.getInputStream());
-			BufferedReader stdout = new BufferedReader(
-					proccessStream);
-			String pdflatexMessage;
-			while ((pdflatexMessage = stdout.readLine()) != null) {
-				logger.info(pdflatexMessage);
+			// NOTE: Generaly LaTeX-documents are compiled twice
+			for (int i = 1; i <= 2; i++) {
+				Process proc = Runtime.getRuntime().exec(command);
+				// NOTE: pdflatex wont work if messagesare suppressed
+				BufferedReader stdout = new BufferedReader(
+						new InputStreamReader(proc.getInputStream()));
+				String pdflatexMessage;
+				while ((pdflatexMessage = stdout.readLine()) != null) {
+					logger.info(pdflatexMessage);
+				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -182,12 +181,24 @@ public class Latex {
 			int chapters, boolean shuffle) {
 		gatherSnippets(type, chapters, true);
 		for (int i = 1; i <= amount; i++) {
+			// TODO: Add pretty foldename
 			String subdirname = "foldername" + i;
-			String outputDir = destination + File.separator
+			String workingDir = "./temp" + File.separator
 					+ subdirname;
-			new File(outputDir).mkdir();
-			concat(type);
-			compile(type, outputDir);
+			new File(workingDir).mkdir();
+			concat(type, workingDir);
+			compile(type, workingDir);
+			try {
+				String outputPdfPath = workingDir + File.separator + type + ".pdf";
+				String destinationPath = destination + File.separator + subdirname;
+				String pdfDestinationPath = destinationPath + File.separator + type + ".pdf";
+				File outputPdf = new File(outputPdfPath);
+				File targetDir = new File(pdfDestinationPath);
+				new File(destinationPath).mkdir();
+				Files.copy(outputPdf.toPath(), targetDir.toPath());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			Collections.shuffle(snippets);
 		}
 	}
@@ -218,5 +229,4 @@ public class Latex {
 	public LatexSnippet getFooter() {
 		return footer;
 	}
-
 }

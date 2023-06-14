@@ -118,7 +118,7 @@
 }
 
 .tree-cell:filled:selected {
-  -fx-text-fill: white;
+  -fx-text-fill: -fx-secondary-text;
 }
 
 .text-field:focused {

@@ -108,21 +108,21 @@ public class Main {
 				prevArg = null;
 			}
 			switch (arg) {
-			case "version":
-			case "v":
-				printVersion();
-				break;
-			case "help":
-			case "h":
-				printHelp();
-				break;
-			case "noshuffle":
-			case "ns":
-				shuffle = false;
-				break;
-			default:
-				prevArg = arg;
-				break;
+				case "version":
+				case "v":
+					printVersion();
+					break;
+				case "help":
+				case "h":
+					printHelp();
+					break;
+				case "noshuffle":
+				case "ns":
+					shuffle = false;
+					break;
+				default:
+					prevArg = arg;
+					break;
 			}
 		}
 	}
@@ -136,22 +136,22 @@ public class Main {
 	@SuppressWarnings("squid:S131") // No deafult, because of the arg params
 	private static void handleParamArgs(String arg, String prevArg) {
 		switch (prevArg) {
-		case "type":
-		case "t":
-			type = arg;
-			break;
-		case "destination":
-		case "d":
-			destination = arg;
-			break;
-		case "amount":
-		case "a":
-			amount = checkInt(arg);
-			break;
-		case "chapters":
-		case "c":
-			chapters = checkInt(arg);
-			break;
+			case "type":
+			case "t":
+				type = arg;
+				break;
+			case "destination":
+			case "d":
+				destination = arg;
+				break;
+			case "amount":
+			case "a":
+				amount = checkInt(arg);
+				break;
+			case "chapters":
+			case "c":
+				chapters = checkInt(arg);
+				break;
 		}
 	}
 

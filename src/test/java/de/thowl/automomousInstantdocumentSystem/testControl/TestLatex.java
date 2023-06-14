@@ -37,7 +37,7 @@ import de.thowl.automomousinstantdocumentsystem.control.Latex;
 public class TestLatex {
 
 	private static final String SNIPPETS_DIR = "./src/test/resources/latex/test/chapters";
-	private static final String TEMP_DIR = "./temp/";
+	private static final String TEMP_DIR = "./temp";
 	private static final String TEST_TYPE = "test";
 	private static final int TEST_CHAPTERS = 2;
 
@@ -72,11 +72,10 @@ public class TestLatex {
 	@Test
 	public void test_concat_ShouldConcatenateSnippetsAndGenerateSourceFile() {
 		String type = TEST_TYPE;
-
+		String workingDir = TEMP_DIR + File.separator + "singlecompileTest";
 		latex.gatherSnippets(type, TEST_CHAPTERS, false);
-		latex.concat(type);
-
-		File sourceFile = new File(TEMP_DIR + type + ".tex");
+		latex.concat(type, workingDir);
+		File sourceFile = new File(workingDir + File.separator + type + ".tex");
 		assertTrue(sourceFile.exists());
 	}
 
@@ -88,11 +87,11 @@ public class TestLatex {
 	@Test
 	public void test_compile_ShouldCompileLaTeXDocument() {
 		String type = TEST_TYPE;
-		String destination = TEMP_DIR;
+		String workingDir = TEMP_DIR + File.separator + "singlecompileTest";
 		latex.gatherSnippets(type, TEST_CHAPTERS, false);
-		latex.concat(type);
-		latex.compile(type, destination);
-		File outputFile = new File(destination + type + ".pdf");
+		latex.concat(type, workingDir);
+		latex.compile(type, workingDir);
+		File outputFile = new File(workingDir + File.separator + type + ".pdf");
 		assertTrue(outputFile.exists());
 	}
 

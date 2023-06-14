@@ -58,8 +58,8 @@
 		<!--Multipurpose Textarea-->
 		<VBox fx:id="multipurposearea" GridPane.columnIndex="2">
 			<children>
-				<VBox fx:id="container">	
-					<TextArea fx:id="txtMultipurposeTextArea" editable="false"/>
+				<VBox fx:id="container">
+					<!--><TextArea fx:id="txtMultipurposeTextArea" editable="false"/>-->
 				</VBox>
 			</children>
 		</VBox>
