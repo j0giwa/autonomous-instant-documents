@@ -72,6 +72,21 @@ public class Main {
 	}
 
 	/**
+	 * Strips the preceeding dashes from an arg
+	 *
+	 * @param arg withoud dashes
+	 */
+	public static String formatArg(String arg) {
+		if (arg.isEmpty() || arg.equals(""))
+			return null;
+		if (arg.startsWith("--"))
+			arg = arg.substring(2);
+		if (arg.startsWith("-"))
+			arg = arg.substring(1);
+		return arg;
+	}
+
+	/**
 	 * Handles the command line arguments.
 	 *
 	 * <p>
@@ -99,11 +114,7 @@ public class Main {
 		String arg = null;
 		String prevArg = null;
 		for (int i = 0; i < argc; i++) {
-			arg = args[i];
-			if (arg.startsWith("--"))
-				arg = arg.substring(2);
-			if (arg.startsWith("-"))
-				arg = arg.substring(1);
+			arg = formatArg(args[i]);
 			if (prevArg != null) {
 				handleParamArgs(arg, prevArg);
 				prevArg = null;
