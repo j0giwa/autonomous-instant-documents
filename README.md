@@ -78,8 +78,7 @@ doskey automomous-instantdocument-system="java -jar C:\Program Files\automomous-
 mvn package
 sudo cp ./target/automomousInstantdocumentSystem-*-jar-with-dependencies.jar /opt/automomous-instantdocument-system/automomous-instantdocument-system.jar
 sudo cp ./automomous-instantdocument-system-cli /usr/local/bin
-gzip docs/man/autonomous-instantdocument-system.1
-sudo cp .docs/man/autonomous-instantdocument-system.1.gz /usr/share/man/man1/
+gzip -c docs/man/autonomous-instantdocument-system.1 | sudo tee /usr/share/man/man1/autonomous-instantdocument-system.1.gz >/dev/null
 ```
 
 It is recommended that you define an alias If you want to launch from the commandline
