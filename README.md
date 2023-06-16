@@ -58,9 +58,7 @@ Getting started
 
 ## Installation
 
-### Build it yourself
-
-#### Windows
+### Windows
 
 ``` bat
 mvn package
@@ -74,7 +72,7 @@ It is recommended that you define an alias If you want to launch from the comman
 doskey automomous-instantdocument-system="java -jar C:\Program Files\automomous-instantdocument-system.jar"
 ```
 
-#### Linux
+### Linux
 
 ``` shell
 mvn package
