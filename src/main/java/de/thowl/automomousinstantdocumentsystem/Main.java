@@ -74,9 +74,9 @@ public class Main {
 	/**
 	 * Strips the preceeding dashes from an arg
 	 *
-	 * @param arg withoud dashes
+	 * @param arg without dashes
 	 */
-	public static String formatArg(String arg) {
+	private static String formatArg(String arg) {
 		if (arg.isEmpty() || arg.equals(""))
 			return null;
 		if (arg.startsWith("--"))
@@ -109,7 +109,7 @@ public class Main {
 	 *
 	 * @param args The command line arguments
 	 */
-	public static void handleArgs(String[] args) {
+	private static void handleArgs(String[] args) {
 		int argc = args.length;
 		String arg = null;
 		String prevArg = null;
