@@ -79,8 +79,7 @@ public class Latex {
 	 * This Method gathers snipptes for a LaTeX document
 	 * 
 	 * @param type      The "type" of snippets that should be collected, the
-	 *                  type is defined by a directoryname in the
-	 *                  confighome.
+	 *                  type is defined by a directoryname in the confighome.
 	 * @param chapters  amount of snippets
 	 * @param randomise should the order be randomised
 	 *                  (always {@code true} except for tests)
@@ -148,24 +147,20 @@ public class Latex {
 	 * @param type        type of the the sourcefile
 	 * @param destination temporary loaction where document should be proccessed
 	 */
-	public void compile(String type, String workingDir) {
+	public void compile(String type, String workingDir) throws IOException {
 		String texFile = workingDir + File.separator + type + ".tex";
 		String outputDir = "-output-directory=" + workingDir;
 		String[] command = { pdflatex, outputDir, texFile };
-		try {
-			// NOTE: Generaly LaTeX-documents are compiled twice
-			for (int i = 1; i <= 2; i++) {
-				Process proc = Runtime.getRuntime().exec(command);
-				// NOTE: pdflatex wont work if messagesare suppressed
-				BufferedReader stdout = new BufferedReader(
-						new InputStreamReader(proc.getInputStream()));
-				String pdflatexMessage;
-				while ((pdflatexMessage = stdout.readLine()) != null) {
-					logger.info(pdflatexMessage);
-				}
+		// NOTE: Generaly LaTeX-documents are compiled twice
+		for (int i = 1; i <= 2; i++) {
+			Process proc = Runtime.getRuntime().exec(command);
+			// NOTE: pdflatex wont work if messagesare suppressed
+			BufferedReader stdout = new BufferedReader(
+					new InputStreamReader(proc.getInputStream()));
+			String pdflatexMessage;
+			while ((pdflatexMessage = stdout.readLine()) != null) {
+				logger.info(pdflatexMessage);
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 
@@ -192,8 +187,8 @@ public class Latex {
 			String workingDir = "./temp" + File.separator + subDir;
 			new File(workingDir).mkdir();
 			concat(type, workingDir);
-			compile(type, workingDir);
 			try {
+				compile(type, workingDir);
 				String fileName = type + ".pdf";
 				String sourceDir = workingDir;
 				String targetDir = destination + File.separator + subDir;

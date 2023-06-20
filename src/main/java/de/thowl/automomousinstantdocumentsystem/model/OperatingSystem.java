@@ -42,30 +42,30 @@ public class OperatingSystem {
 		String osName = System.getProperty("os.name");
 		homeDir = System.getenv("AIDS_HOME");
 		switch (osName) {
-		case "BSD":
-		case "Linux":
-			operatingSystem = "UNIX";
-			homeDir = System.getenv("XDG_CONFIG_HOME");
-			// Fallback when XDG is unconfigured/unsupported
-			if (homeDir == null)
-				homeDir = System.getProperty("user.home")
-						+ "/.config";
-			pdflatexPath = "/usr/bin/pdflatex";
-			break;
-		case "Mac OS X":
-			operatingSystem = "Mac";
-			homeDir = "~/Library/Application Support/";
-			pdflatexPath = "/usr/bin/pdflatex";
-			break;
-		case "Windows 7":
-		case "Windows 10":
-		case "Windows 11":
-			operatingSystem = "Windows";
-			homeDir = System.getenv("APPDATA");
-			pdflatexPath = "C:\\texlive\\2023\\bin\\windows\\pdflatex.exe";
-			break;
-		default:
-			break;
+			case "BSD":
+			case "Linux":
+				operatingSystem = "UNIX";
+				homeDir = System.getenv("XDG_CONFIG_HOME");
+				// Fallback when XDG is unconfigured/unsupported
+				if (homeDir == null)
+					homeDir = System.getProperty("user.home")
+							+ "/.config";
+				pdflatexPath = "/usr/bin/pdflatex";
+				break;
+			case "Mac OS X":
+				operatingSystem = "Mac";
+				homeDir = "~/Library/Application Support/";
+				pdflatexPath = "/usr/bin/pdflatex";
+				break;
+			case "Windows 7":
+			case "Windows 10":
+			case "Windows 11":
+				operatingSystem = "Windows";
+				homeDir = System.getenv("APPDATA");
+				pdflatexPath = "C:\\texlive\\2023\\bin\\windows\\pdflatex.exe";
+				break;
+			default:
+				break;
 		}
 		homeDir += "/aids";
 	}
