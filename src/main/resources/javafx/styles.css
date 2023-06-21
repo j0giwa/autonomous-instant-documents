@@ -9,7 +9,8 @@
   -fx-hover: rgba(250, 31, 78, 0.15);
 }
 
-/* NOTE: Hacky Light theme implementation, delete after presentaion */
+/* TODO: Hacky Light theme implementation, delete after presentaion */
+/*
 * {
   -fx-primary: #1F94D4;
   -fx-background: #F0F0F0;
@@ -20,6 +21,7 @@
   -fx-accent: #ECEFF1;
   -fx-hover: rgba(31, 148, 212, 0.15);
 }
+*/
 
 .root {
   -fx-background-color: -fx-light-background;
@@ -147,12 +149,13 @@
   -fx-background-color: mark-color
 }
 
+
 .text-area {
   -fx-min-height: 416px;
   -fx-min-height: 416px;
-  -fx-pref-width: 100%;
-  -fx-pref-height: 100%;
+  -fx-vbox-grow: always;
   -fx-border-width: 2px;
+  -fx-pref-height: 100%;
   -fx-border-radius: 6px;
   -fx-background-radius: 6px;
   -fx-border-color: -fx-accent;
