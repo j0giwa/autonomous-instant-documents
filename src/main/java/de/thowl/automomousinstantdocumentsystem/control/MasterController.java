@@ -27,6 +27,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import de.thowl.automomousinstantdocumentsystem.model.OperatingSystem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -50,6 +53,8 @@ import javafx.stage.Stage;
  */
 public class MasterController implements Initializable {
 
+	private static final Logger logger = LogManager.getLogger(MasterController.class);
+
 	@FXML
 	private Button btnMainScene;
 	@FXML
@@ -67,12 +72,16 @@ public class MasterController implements Initializable {
 	 * @param header Header text for the error alert
 	 * @param e      Exception that occurred
 	 */
-	private void showErrorAlert(String header, Exception e) {
+	protected void showErrorAlert(String header, String text, Exception exception) {
 		Alert errorAlert = new Alert(AlertType.ERROR);
-		StringWriter stringWriter = new StringWriter();
-		e.printStackTrace(new PrintWriter(stringWriter));
 		errorAlert.setHeaderText(header);
-		errorAlert.setContentText(stringWriter.toString());
+		if (text == null) {
+			errorAlert.setContentText("Something went wrong, check log for details");
+		} else {
+			errorAlert.setContentText(text);
+		}
+		if (exception != null)
+			logger.error("Something went wrong", exception);
 		errorAlert.showAndWait();
 	}
 
@@ -137,7 +146,7 @@ public class MasterController implements Initializable {
 		try {
 			integer = Integer.parseInt(inputInt);
 		} catch (NumberFormatException e) {
-			showErrorAlert("NumberFormatException", e);
+			showErrorAlert("NumberFormatException", inputInt + " is not an Integer", e);
 			return 0;
 		}
 		return integer;
@@ -153,7 +162,7 @@ public class MasterController implements Initializable {
 		try {
 			switchToScene(event, "Main");
 		} catch (IOException e) {
-			showErrorAlert("Scene 'Main' not found", e);
+			showErrorAlert("Scene not found", "Unable to find scene 'Main'", e);
 		}
 	}
 
@@ -167,7 +176,7 @@ public class MasterController implements Initializable {
 		try {
 			switchToScene(event, "Latex");
 		} catch (IOException e) {
-			showErrorAlert("Scene 'Latex' not found", e);
+			showErrorAlert("Scene not found", "Unable to find scene 'Latex'", e);
 		}
 	}
 
@@ -181,7 +190,7 @@ public class MasterController implements Initializable {
 		try {
 			switchToScene(event, "Database");
 		} catch (IOException e) {
-			showErrorAlert("Scene 'Database' not found", e);
+			showErrorAlert("Scene not found", "Unable to find scene 'Database'", e);
 		}
 	}
 

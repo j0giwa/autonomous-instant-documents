@@ -23,7 +23,6 @@ package de.thowl.automomousInstantdocumentSystem.testControl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.io.IOException;
@@ -91,11 +90,7 @@ public class TestLatex {
 		String workingDir = TEMP_DIR + File.separator + "singlecompileTest";
 		latex.gatherSnippets(type, TEST_CHAPTERS, false);
 		latex.concat(type, workingDir);
-		try {
-			latex.compile(type, workingDir);
-		} catch (IOException e) {
-			fail("An IOException occured.");
-		}
+		latex.compile(type, workingDir);
 		File outputFile = new File(workingDir + File.separator + type + ".pdf");
 		assertTrue(outputFile.exists());
 	}

@@ -80,7 +80,9 @@ public class MainScene extends MasterController {
 		final int amount = super.validateInt(txtAmount.getText());
 		final int chapters = super.validateInt(txtChapters.getText());
 		final boolean shuffle = chkShuffle.isArmed();
-		if (type == null || amount <= 0 || chapters <= 0) {
+		// NOTE: "Type" is a placeholder when no type is selceted.
+		if (type.equals("Type")) {
+			showErrorAlert("Invalid", "No type selected", null);
 			return;
 		}
 		Thread generation = new Thread(() -> {
