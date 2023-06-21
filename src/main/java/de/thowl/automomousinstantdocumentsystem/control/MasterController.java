@@ -21,8 +21,6 @@ package de.thowl.automomousinstantdocumentsystem.control;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -118,7 +116,7 @@ public class MasterController implements Initializable {
 	protected void initialiseTypeDropdown() {
 		OperatingSystem os = new OperatingSystem();
 		String homeDir = os.getHomeDir();
-		String snippetsDir = homeDir + "/latex";
+		String snippetsDir = homeDir + File.separator + "latex";
 		File directory = new File(snippetsDir);
 		String[] files = directory.list();
 		ArrayList<String> dropdownItems = new ArrayList<String>();

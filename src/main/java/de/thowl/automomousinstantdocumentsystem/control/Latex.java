@@ -52,14 +52,14 @@ import de.thowl.automomousinstantdocumentsystem.model.OperatingSystem;
  */
 public class Latex {
 
+	private static final Logger logger = LogManager.getLogger(Latex.class);
 	private LatexSnippet header;
 	private ArrayList<LatexSnippet> snippets;
 	private LatexSnippet footer;
 	private OperatingSystem operatingSystem;
 	private String homeDir;
-	private String pdflatex;
 
-	private static final Logger logger = LogManager.getLogger(Latex.class);
+	private String pdflatex;
 
 	/**
 	 * Constructor for objects of this class

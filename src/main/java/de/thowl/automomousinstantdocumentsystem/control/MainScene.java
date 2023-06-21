@@ -34,8 +34,7 @@ import javafx.scene.control.TextField;
 
 public class MainScene extends MasterController {
 
-	private static final Logger logger = LogManager
-			.getLogger(MainScene.class);
+	private static final Logger logger = LogManager.getLogger(MainScene.class);
 
 	@FXML
 	private TextField txtAmount;
