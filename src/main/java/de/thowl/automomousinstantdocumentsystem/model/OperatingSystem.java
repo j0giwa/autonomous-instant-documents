@@ -54,7 +54,7 @@ public class OperatingSystem {
 				break;
 			case "Mac OS X":
 				operatingSystem = "Mac";
-				homeDir = "~/Library/Application Support/";
+				homeDir = System.getProperty("user.home") + "/Library/Application Support/";
 				pdflatexPath = "/usr/bin/pdflatex";
 				break;
 			case "Windows 7":

@@ -119,18 +119,18 @@ public class Latex {
 	 * @param destination location the the sourcefile should be placed
 	 */
 	public void concat(String type, String destination) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(header.getFileContent() + "\n");
+		StringBuilder fileContent = new StringBuilder();
+		fileContent.append(header.getFileContent() + "\n");
 		Iterator<LatexSnippet> it = snippets.iterator();
 		while (it.hasNext()) {
 			LatexSnippet snippet = it.next();
-			sb.append("\\input{" + snippet.getFilePath() + "}\n");
+			fileContent.append("\\input{" + snippet.getFilePath() + "}\n");
 		}
-		sb.append(footer.getFileContent() + "\n");
+		fileContent.append(footer.getFileContent() + "\n");
 		try {
 			new File(destination).mkdir();
 			String outputfilePath = destination + File.separator + type + ".tex";
-			Files.write(Paths.get(outputfilePath), sb.toString()
+			Files.write(Paths.get(outputfilePath), fileContent.toString()
 					.getBytes(StandardCharsets.UTF_8));
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -155,7 +155,7 @@ public class Latex {
 			// NOTE: Generaly LaTeX-documents are compiled twice
 			for (int i = 1; i <= 2; i++) {
 				Process proc = Runtime.getRuntime().exec(command);
-				// NOTE: pdflatex wont work if messagesare suppressed
+				// NOTE: pdflatex won't work if messages are suppressed
 				BufferedReader stdout = new BufferedReader(
 						new InputStreamReader(proc.getInputStream()));
 				String pdflatexMessage;
@@ -163,6 +163,25 @@ public class Latex {
 					logger.info(pdflatexMessage);
 				}
 			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Copys a pdf file to a location.
+	 *
+	 * @param sourceDir      Directory in wich the original pdf is located
+	 * @param fileName       name of the pdf (without type extention)
+	 * @param destinationDir directory whrere the pdf should by copyed to.
+	 * @param newFileName    new name of the file
+	 */
+	private void copyPdf(String sourceDir, String fileName, String destinationDir, String newFileName) {
+		try {
+			File sourceFile = new File(sourceDir + File.separator + fileName);
+			File targetFile = new File(destinationDir + File.separator + newFileName);
+			new File(destinationDir).mkdir();
+			Files.copy(sourceFile.toPath(), targetFile.toPath());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -192,17 +211,7 @@ public class Latex {
 			new File(workingDir).mkdir();
 			concat(type, workingDir);
 			compile(type, workingDir);
-			try {
-				String fileName = type + ".pdf";
-				String sourceDir = workingDir;
-				String targetDir = destination + File.separator + subDir;
-				File sourceFile = new File(sourceDir + File.separator + fileName);
-				File targetFile = new File(targetDir + File.separator + fileName);
-				new File(targetDir).mkdir();
-				Files.copy(sourceFile.toPath(), targetFile.toPath());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			copyPdf(workingDir, type, destination, type);
 			Collections.shuffle(snippets);
 		}
 	}
