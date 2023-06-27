@@ -11,7 +11,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.shape.*?>
-<GridPane fx:controller="de.thowl.automomousinstantdocumentsystem.control.MainScene"
+<GridPane fx:controller="de.thowl.gui.MainScene"
 	xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/13">
 	<columnConstraints>
 		<ColumnConstraints/>

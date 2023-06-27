@@ -35,7 +35,8 @@ import javafx.scene.control.TextField;
 
 public class MainScene extends MasterController {
 
-	private static final Logger logger = LogManager.getLogger(MainScene.class);
+	private static final Logger logger = LogManager
+			.getLogger(MainScene.class);
 
 	@FXML
 	private TextField txtAmount;
@@ -66,8 +67,8 @@ public class MainScene extends MasterController {
 	}
 
 	/**
-	 * Eventhandeler for the "Generate" Button.
-	 * Executed when button is pressed
+	 * Eventhandeler for the "Generate" Button. Executed when button is
+	 * pressed
 	 * 
 	 * @param event ActionEvent of the Button
 	 */

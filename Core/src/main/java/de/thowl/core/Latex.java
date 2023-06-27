@@ -203,7 +203,7 @@ public class Latex {
 		for (int i = 1; i <= amount; i++) {
 			// TODO: Add pretty foldername
 			String subDir = "foldername" + i;
-			String workingDir = "../temp" + File.separator + subDir;
+			String workingDir = "temp" + File.separator + subDir;
 			new File(workingDir).mkdir();
 			concat(type, workingDir);
 			compile(type, workingDir);

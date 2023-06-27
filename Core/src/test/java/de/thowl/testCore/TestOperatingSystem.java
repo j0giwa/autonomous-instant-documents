@@ -1,4 +1,4 @@
-package de.thowl.automomousInstantdocumentSystem.testModel;
+package de.thowl.testCore;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertFalse;

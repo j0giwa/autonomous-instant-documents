@@ -10,7 +10,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.shape.*?>
-<GridPane fx:controller="de.thowl.automomousinstantdocumentsystem.control.DatabaseScene"
+<GridPane fx:controller="de.thowl.gui.DatabaseScene"
 		  xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/13">
 	<columnConstraints>
         <ColumnConstraints/>

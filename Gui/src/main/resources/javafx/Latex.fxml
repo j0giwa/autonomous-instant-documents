@@ -13,7 +13,7 @@
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.control.TreeItem?>
 <?import javafx.scene.shape.*?>
-<GridPane fx:controller="de.thowl.automomousinstantdocumentsystem.control.LatexScene"
+<GridPane fx:controller="de.thowl.gui.LatexScene"
 		  xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/13">
 	<columnConstraints>
         <ColumnConstraints/>
