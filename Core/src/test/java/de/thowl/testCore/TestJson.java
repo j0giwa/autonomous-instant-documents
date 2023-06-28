@@ -31,7 +31,7 @@ import de.thowl.core.Json;
 
 public class TestJson {
 
-	private static final String FILE_PATH = "../temp/test.json";
+	private static final String FILE_PATH = "./temp/test.json";
 	private Json json;
 
 	@BeforeEach
