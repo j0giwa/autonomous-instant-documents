@@ -47,7 +47,7 @@ import javafx.stage.Stage;
  * 
  * @author Jonas Schwind
  * @version 0.1.2
- * @see de.thowl.automomousinstantdocumentsystem.view.Gui
+ * @see de.thowl.gui.Gui
  */
 public class MasterController implements Initializable {
 
@@ -67,8 +67,8 @@ public class MasterController implements Initializable {
 	 * Displays an error alert with the specified header and exception
 	 * details.
 	 *
-	 * @param header Header text for the error alert
-	 * @param e      Exception that occurred
+	 * @param header    Header text for the error alert
+	 * @param exception Exception that occurred
 	 */
 	protected void showErrorAlert(String header, String text, Exception exception) {
 		Alert errorAlert = new Alert(AlertType.ERROR);
@@ -131,11 +131,7 @@ public class MasterController implements Initializable {
 
 	/**
 	 * Valtidates if an supposed integer is an actual integer
-	 * <p>
-	 * This is an grafical version of
-	 * {@link de.thowl.automomousinstantdocumentsystem.Main#checkInt}
-	 * </p>
-	 * 
+	 *
 	 * @param inputInt Integer to validate
 	 * @return Integervalue (if int)
 	 */

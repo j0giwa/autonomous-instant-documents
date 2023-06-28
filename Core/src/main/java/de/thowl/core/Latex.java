@@ -136,12 +136,12 @@ public class Latex {
 	/**
 	 * Compiles a LaTeX document from a sourcefile
 	 * <p>
-	 * The method {@link #concat(String)} needs to be called first, as it
+	 * The method {@link #concat(String, String)} needs to be called first, as it
 	 * generates the sourcefile.
 	 * </p>
 	 *
-	 * @param type        type of the the sourcefile
-	 * @param destination temporary loaction where document should be proccessed
+	 * @param type       type of the the sourcefile
+	 * @param workingDir temporary loaction where document should be proccessed
 	 */
 	public void compile(String type, String workingDir) {
 		String texFile = workingDir + File.separator + type + ".tex";
@@ -188,7 +188,7 @@ public class Latex {
 	 *
 	 * <p>
 	 * It handles the methods {@link #gatherSnippets(String, int, boolean)},
-	 * {@link #concat(String)} and {@link #compile(String, String)} for you.
+	 * {@link #concat(String, String)} and {@link #compile(String, String)} for you.
 	 * </p>
 	 *
 	 * @param type        type of the document that should be genearated

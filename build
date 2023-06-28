@@ -1,0 +1,7 @@
+#!/usr/bin/sh
+
+#buildcommand="make clean"
+buildcommand="make clean"
+buildcommand="mvn clean package javadoc:javadoc javadoc:aggregate"
+
+$buildcommand && notify-send --icon=gtk-info "Build has completed" || notifyend --icon=gtk-info "Build has failed"

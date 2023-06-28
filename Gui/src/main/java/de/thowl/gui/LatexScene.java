@@ -38,7 +38,8 @@ import javafx.scene.control.TreeView;
 
 public class LatexScene extends MasterController {
 
-	private static final Logger logger = LogManager.getLogger(LatexScene.class);
+	private static final Logger logger = LogManager
+			.getLogger(LatexScene.class);
 
 	private String latexdir;
 	private String settingsFile;

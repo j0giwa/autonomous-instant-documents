@@ -33,14 +33,14 @@ import javafx.stage.Stage;
  * 
  * <p>
  * The controlling logic can be found in the
- * {@link de.thowl.automomousinstantdocumentsystem.control.MasterController}
+ * {@link de.thowl.gui.MasterController}
  * class.
  * </p>
  * 
  * @author Jonas Schwind
  * @version 1.0.3
  * 
- * @see de.thowl.automomousinstantdocumentsystem.control.MasterController
+ * @see de.thowl.gui.MasterController
  */
 public class Gui extends Application {
 

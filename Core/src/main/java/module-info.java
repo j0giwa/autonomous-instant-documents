@@ -12,6 +12,9 @@
  * Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+/**
+ * This module contains the corefuntions of the Programm
+ */
 module de.thowl.core {
 	requires org.apache.logging.log4j;
 	requires json.simple;

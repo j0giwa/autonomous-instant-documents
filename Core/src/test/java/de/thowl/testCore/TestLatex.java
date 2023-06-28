@@ -36,8 +36,8 @@ import de.thowl.core.Latex;
 
 public class TestLatex {
 
-	private static final String SNIPPETS_DIR = "./Core/src/test/resources/latex/test/chapters";
-	private static final String TEMP_DIR = "../temp";
+	private static final String SNIPPETS_DIR = "./src/test/resources/latex/test/chapters";
+	private static final String TEMP_DIR = "./temp";
 	private static final String TEST_TYPE = "test";
 	private static final int TEST_CHAPTERS = 2;
 

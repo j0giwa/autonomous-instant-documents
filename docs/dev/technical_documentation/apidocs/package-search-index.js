@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"de.thowl.automomousinstantdocumentsystem"},{"l":"de.thowl.automomousinstantdocumentsystem.control"},{"l":"de.thowl.automomousinstantdocumentsystem.exceptions"},{"l":"de.thowl.automomousinstantdocumentsystem.model"},{"l":"de.thowl.automomousinstantdocumentsystem.view"}];updateSearchResults();

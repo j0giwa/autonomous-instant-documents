@@ -7,63 +7,196 @@
 	<version>0.8.5</version>
 	<packaging>pom</packaging>
 	<modules>
-        <module>Gui</module>
-        <!--<module>database</module>-->
-         <module>Core</module>
-        <module>Main</module>
-        <module>Distribution</module>
-    </modules>
+		<module>Core</module>
+		<module>Gui</module>
+		<!--<module>database</module>-->
+		<module>Main</module>
+		<module>Distribution</module>
+	</modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<!--dependencies-->
+		<java.version>20</java.version>
+		<javafx.version>13</javafx.version>
+		<junit.version>5.9.2</junit.version>
+		<mockito.version>5.3.1</mockito.version>
+		<log4j.version>2.20.0</log4j.version>
+		<json-simple.version>1.1.1</json-simple.version>
+		<!-- Moddules -->
+		<module.main.version>0.8.5</module.main.version>
+		<module.core.version>0.8.5</module.core.version>
+		<module.gui.version>0.8.5</module.gui.version>
+		<!--<module.main.version></module.database.version>-->
+		<!-- Plugins -->
+		<maven-compiler.version>3.11.0</maven-compiler.version>
+		<maven-assembly.version>3.3.0</maven-assembly.version>
+		<maven-javadoc.version>3.5.0</maven-javadoc.version>
+		<maven-surefire.version>3.1.2</maven-surefire.version>
+		<maven-failsafe.version>2.22.0</maven-failsafe.version>
+		<jacoco.version>0.8.9</jacoco.version>
+		<maven-javafx.version>0.0.3</maven-javafx.version>
 	</properties>
+	<dependencyManagement>
+		<dependencies>
+			<!-- Testing -->
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-api</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-engine</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-params</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-core</artifactId>
+				<version>${mockito.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-junit-jupiter</artifactId>
+				<version>${mockito.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<!-- Logging -->
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-api</artifactId>
+				<version>${log4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-core</artifactId>
+				<version>${log4j.version}</version>
+			</dependency>
+			<!-- JavaFX -->
+			<dependency>
+				<groupId>org.openjfx</groupId>
+				<artifactId>javafx-controls</artifactId>
+				<version>${javafx.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.openjfx</groupId>
+				<artifactId>javafx-fxml</artifactId>
+				<version>${javafx.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.googlecode.json-simple</groupId>
+				<artifactId>json-simple</artifactId>
+				<version>${json-simple.version}</version>
+			</dependency>
+			<!-- Modules -->
+			<dependency>
+				<groupId>de.thowl.main</groupId>
+				<artifactId>Main</artifactId>
+				<version>${module.main.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>de.thowl.core</groupId>
+				<artifactId>Core</artifactId>
+				<version>${module.core.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>de.thowl.gui</groupId>
+				<artifactId>Gui</artifactId>
+				<version>${module.gui.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<build>
 		<!--<sourceDirectory>src/main/java</sourceDirectory>-->
 		<pluginManagement>
 			<plugins>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-					<version>3.11.0</version>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven-compiler.version}</version>
 					<configuration>
 						<source>20</source>
 						<target>20</target>
 					</configuration>
 				</plugin>
 				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-javadoc-plugin</artifactId>
-					<version>3.5.0</version>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>${maven-assembly.version}</version>
 					<executions>
 						<execution>
-							<id>atrach-javadocs</id>
+							<id>make-bundles</id>
 							<goals>
-								<goal>jar</goal>
+								<goal>single</goal>
 							</goals>
+							<phase>package</phase>
+							<configuration>
+								<finalName>automomous-instantdocument-system</finalName>
+								<archive>
+									<manifest>
+										<mainClass>de.thowl.main.Main</mainClass>
+									</manifest>
+								</archive>
+								<descriptorRefs>
+									<descriptorRef>jar-with-dependencies</descriptorRef>
+								</descriptorRefs>
+								<appendAssemblyId>false</appendAssemblyId>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>${maven-javadoc.version}</version>
+					<configuration>
+						<!-- Default configuration for all reports -->
+						<noqualifier>all</noqualifier>
+						<destDir>javadoc</destDir>
+					</configuration>
+					<executions>
+						<execution>
+							<id>aggregate</id>
+							<goals>
+								<goal>aggregate</goal>
+							</goals>
+							<configuration>
+								<!-- Specific configuration for the aggregate report -->
+								<reportOutputDirectory>${user.dir}/documents</reportOutputDirectory>
+								<destDir>javadoc</destDir>
+							</configuration>
 						</execution>
 					</executions>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
-					<version>3.1.2</version>
+					<version>${maven-surefire.version}</version>
 					<configuration>
-                        <argLine>-Ddetail=true</argLine>
-                        <skipAfterFailureCount>10</skipAfterFailureCount>
-                        <rerunFailingTestsCount>2</rerunFailingTestsCount>
-                        <useSystemClassLoader>false</useSystemClassLoader>
-                        <!--<failIfNoTests>true</failIfNoTests>-->
-                    </configuration>
+						<argLine>-Ddetail=true</argLine>
+						<skipAfterFailureCount>10</skipAfterFailureCount>
+						<rerunFailingTestsCount>2</rerunFailingTestsCount>
+						<useSystemClassLoader>false</useSystemClassLoader>
+						<!--<failIfNoTests>true</failIfNoTests>-->
+					</configuration>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-failsafe-plugin</artifactId>
-					<version>2.22.0</version>
+					<version>${maven-failsafe.version}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.jacoco</groupId>
 					<artifactId>jacoco-maven-plugin</artifactId>
-					<version>0.8.9</version>
+					<version>${jacoco.version}</version>
 					<executions>
 						<execution>
 							<id>prepare-agent</id>
@@ -88,7 +221,7 @@
 				<plugin>
 					<groupId>org.openjfx</groupId>
 					<artifactId>javafx-maven-plugin</artifactId>
-					<version>0.0.3</version>
+					<version>${maven-javafx.version}</version>
 					<configuration>
 						<mainClass>de.thowl.main.Main</mainClass>
 					</configuration>
