@@ -20,12 +20,12 @@
 /**
  * This module contains thegui of the prgramm
  */
-module de.thowl.gui {
-	requires de.thowl.core;
+module de.thowl.aids.gui {
+	requires de.thowl.aids.core;
 	requires org.apache.logging.log4j;
 	requires json.simple;
 	requires javafx.controls;
 	requires javafx.fxml;
 
-	exports de.thowl.gui;
+	exports de.thowl.aids.gui;
 }

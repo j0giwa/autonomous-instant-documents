@@ -1,11 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>de.thowl.main</groupId>
-    <artifactId>Main</artifactId>
+    <groupId>de.thowl.aids</groupId>
+    <artifactId>main</artifactId>
+    <name>Main Module (CLI-client)</name>
+    <description>CLI-client</description>
     <version>0.8.5</version>
     <packaging>jar</packaging>
     <parent>
-        <groupId>de.thowl.automomousInstantdocumentSystem</groupId>
+        <groupId>de.thowl.aids</groupId>
         <artifactId>automomousInstantdocumentSystem</artifactId>
         <version>0.8.5</version>
     </parent>
@@ -15,12 +17,12 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>de.thowl.core</groupId>
-            <artifactId>Core</artifactId>
+            <groupId>de.thowl.aids</groupId>
+            <artifactId>core</artifactId>
         </dependency>
         <dependency>
-            <groupId>de.thowl.gui</groupId>
-            <artifactId>Gui</artifactId>
+            <groupId>de.thowl.aids</groupId>
+            <artifactId>gui</artifactId>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>

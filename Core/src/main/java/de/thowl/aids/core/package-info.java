@@ -15,4 +15,4 @@
 /**
  * This package contains the corefuntions of the Programm
  */
-package de.thowl.core;
+package de.thowl.aids.core;

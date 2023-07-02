@@ -61,8 +61,9 @@ Getting started
 ### Windows
 
 ``` bat
+cd Distribution
 mvn package
-xcopy ".\target\automomousInstantdocumentSystem-*-jar-with-dependencies.jar" "C:\Program Files\automomous-instantdocument-system.jar" /Y
+xcopy ".\target\automomous-instantdocument-system.jar" "C:\Program Files\automomous-instantdocument-system.jar" /Y
 xcopy ".\assets\defaults\*" "%appdata%\aids" /E /Y
 ```
 
@@ -75,8 +76,9 @@ doskey automomous-instantdocument-system="java -jar C:\Program Files\automomous-
 ### Linux
 
 ``` shell
+cd Distribution
 mvn package
-sudo cp ./target/automomousInstantdocumentSystem-*-jar-with-dependencies.jar /opt/automomous-instantdocument-system/automomous-instantdocument-system.jar
+sudo cp ./target/automomousInstantdocumentSystem.jar /opt/automomous-instantdocument-system/automomous-instantdocument-system.jar
 sudo cp ./automomous-instantdocument-system-cli /usr/local/bin
 gzip -c docs/man/autonomous-instantdocument-system.1 | sudo tee /usr/share/man/man1/autonomous-instantdocument-system.1.gz >/dev/null
 ```
@@ -84,7 +86,7 @@ gzip -c docs/man/autonomous-instantdocument-system.1 | sudo tee /usr/share/man/m
 It is recommended that you define an alias If you want to launch from the commandline
 
 ``` shell
-alias automomous-instantdocument-system="java -jar /opt/automomous-instantdocument-system/automomous-instantdocument-system.jar"
+alias automomous-instantdocument-system="java -jar /opt/automomous-instantdocument-system/automomous-instantdocument-system.jar":
 ```
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)

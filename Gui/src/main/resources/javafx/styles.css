@@ -9,20 +9,6 @@
   -fx-hover: rgba(250, 31, 78, 0.15);
 }
 
-/* TODO: Hacky Light theme implementation, delete after presentaion */
-/*
-* {
-  -fx-primary: #1F94D4;
-  -fx-background: #F0F0F0;
-  -fx-light-background: #FFFFFF;
-  -fx-input-background: #F5F5F5;
-  -fx-primary-text: #333333;
-  -fx-secondary-text: #000000;
-  -fx-accent: #ECEFF1;
-  -fx-hover: rgba(31, 148, 212, 0.15);
-}
-*/
-
 .root {
   -fx-background-color: -fx-light-background;
 }

@@ -17,7 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-package de.thowl.gui;
+package de.thowl.aids.gui;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,7 +28,7 @@ import java.util.ResourceBundle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import de.thowl.core.OperatingSystem;
+import de.thowl.aids.core.OperatingSystem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -47,7 +47,7 @@ import javafx.stage.Stage;
  * 
  * @author Jonas Schwind
  * @version 0.1.2
- * @see de.thowl.gui.Gui
+ * @see de.thowl.aids.gui.Gui
  */
 public class MasterController implements Initializable {
 
@@ -68,6 +68,7 @@ public class MasterController implements Initializable {
 	 * details.
 	 *
 	 * @param header    Header text for the error alert
+	 * @param text      Text to be diplayed in the body
 	 * @param exception Exception that occurred
 	 */
 	protected void showErrorAlert(String header, String text, Exception exception) {

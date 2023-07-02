@@ -1,4 +1,4 @@
-package de.thowl.testCore;
+package de.thowl.aids.testCore;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -8,8 +8,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import de.thowl.core.LatexNotInstalledException;
-import de.thowl.core.OperatingSystem;
+import de.thowl.aids.core.LatexNotInstalledException;
+import de.thowl.aids.core.OperatingSystem;
 
 public class TestOperatingSystem {
 

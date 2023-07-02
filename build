@@ -4,4 +4,4 @@
 buildcommand="make clean"
 buildcommand="mvn clean package javadoc:javadoc javadoc:aggregate"
 
-$buildcommand && notify-send --icon=gtk-info "Build has completed" || notifyend --icon=gtk-info "Build has failed"
+$buildcommand && notify-send --icon=gtk-info "Build has completed" || notify-send --icon=gtk-info "Build has failed"

@@ -17,14 +17,13 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-package de.thowl.main;
+package de.thowl.aids.main;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import de.thowl.aids.core.Latex;
 import javafx.application.Application;
-
-import de.thowl.core.Latex;
 
 /**
  * This is the Main class of the Program
@@ -54,7 +53,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		if (args.length == 0) {
-			Application.launch(de.thowl.gui.Gui.class, args);
+			Application.launch(de.thowl.aids.gui.Gui.class, args);
 			System.exit(EXIT_SUCCESS);
 		}
 		handleArgs(args);
@@ -119,6 +118,8 @@ public class Main {
 				handleParamArgs(arg, prevArg);
 				prevArg = null;
 			}
+			if (arg == null)
+				return;
 			switch (arg) {
 				case "version":
 				case "v":

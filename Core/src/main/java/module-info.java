@@ -15,11 +15,11 @@
 /**
  * This module contains the corefuntions of the Programm
  */
-module de.thowl.core {
+module de.thowl.aids.core {
 	requires org.apache.logging.log4j;
 	requires json.simple;
 	requires javafx.controls;
 	requires javafx.fxml;
 
-	exports de.thowl.core;
+	exports de.thowl.aids.core;
 }

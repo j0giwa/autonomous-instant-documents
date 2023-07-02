@@ -17,29 +17,20 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-package de.thowl.core;
+package de.thowl.aids.gui;
 
 /**
- * This exception gets thrown wen a LaTeX binary cannot be found
+ * This class is the Controller of the DatabaseScene in the GUI
  */
-public class LatexNotInstalledException extends Exception {
+public class DatabaseScene extends MasterController {
 
-	private static final long serialVersionUID = 1L;
-	private final String message;
-
-	/**
-	 * @param message errormessage if the exception gets thrown
-	 */
-	public LatexNotInstalledException(String message) {
-		super(message);
-		this.message = message;
-	}
-
-	/**
-	 * @return Erromassage as a String
-	 */
-	@Override
-	public String toString() {
-		return message;
-	}
+  /**
+   * Construcktor for this controller
+   * <p>
+   * NOTE: Does nothing
+   * </p>
+   */
+  public DatabaseScene() {
+    // Nothing
+  }
 }

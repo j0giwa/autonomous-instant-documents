@@ -9,7 +9,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
@@ -17,7 +17,29 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+package de.thowl.aids.core;
+
 /**
- * This module package thegui of the prgramm
+ * This exception gets thrown wen a LaTeX binary cannot be found
  */
-package de.thowl.gui;
+public class LatexNotInstalledException extends Exception {
+
+	private static final long serialVersionUID = 1L;
+	private final String message;
+
+	/**
+	 * @param message errormessage if the exception gets thrown
+	 */
+	public LatexNotInstalledException(String message) {
+		super(message);
+		this.message = message;
+	}
+
+	/**
+	 * @return Erromassage as a String
+	 */
+	@Override
+	public String toString() {
+		return message;
+	}
+}

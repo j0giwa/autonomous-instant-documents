@@ -17,15 +17,19 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/** This module contains the mainclass of the programm */
-
-module de.thowl.main {
+/**
+ * This module serves as the CLI-client.
+ * <p>
+ * It contains the mainclass of the programm
+ * </p>
+ */
+module de.thowl.aids.main {
     requires org.apache.logging.log4j;
     requires json.simple;
     requires javafx.controls;
     requires javafx.fxml;
-    requires de.thowl.gui;
-    requires de.thowl.core;
+    requires de.thowl.aids.gui;
+    requires de.thowl.aids.core;
 
-    exports de.thowl.main;
+    exports de.thowl.aids.main;
 }

@@ -17,7 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-package de.thowl.testCore;
+package de.thowl.aids.testCore;
 
 import static org.junit.Assert.assertEquals;
 
@@ -29,7 +29,7 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import de.thowl.core.LatexSnippet;
+import de.thowl.aids.core.LatexSnippet;
 
 public class TestLatexSnippet {
 

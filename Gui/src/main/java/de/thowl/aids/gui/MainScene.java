@@ -17,7 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-package de.thowl.gui;
+package de.thowl.aids.gui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,7 +25,7 @@ import java.util.ResourceBundle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import de.thowl.core.Latex;
+import de.thowl.aids.core.Latex;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -33,6 +33,9 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
+/**
+ * This class is the Controller of the MainScene in the GUI
+ */
 public class MainScene extends MasterController {
 
 	private static final Logger logger = LogManager
@@ -53,6 +56,16 @@ public class MainScene extends MasterController {
 
 	@FXML
 	private TextArea txtMultipurposeTextArea;
+
+	/**
+	 * Construcktor for this controller
+	 * <p>
+	 * NOTE: Does nothing
+	 * </p>
+	 */
+	public MainScene() {
+
+	}
 
 	/**
 	 * Appends a String to the TextArea <em>txtMultipurposeTextArea</em>

@@ -17,7 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-package de.thowl.gui;
+package de.thowl.aids.gui;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,8 +27,8 @@ import java.util.ResourceBundle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import de.thowl.core.Json;
-import de.thowl.core.OperatingSystem;
+import de.thowl.aids.core.Json;
+import de.thowl.aids.core.OperatingSystem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -36,6 +36,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 
+/**
+ *
+ */
 public class LatexScene extends MasterController {
 
 	private static final Logger logger = LogManager
@@ -50,6 +53,16 @@ public class LatexScene extends MasterController {
 	private TextField txtFileName;
 	@FXML
 	private Button btnOpenEditor;
+
+	/**
+	 * Construcktor for this controller
+	 * <p>
+	 * NOTE: Does nothing
+	 * </p>
+	 */
+	public LatexScene() {
+		// Nothing
+	}
 
 	/**
 	 * Retrieves the selected item's path in the TreeView.

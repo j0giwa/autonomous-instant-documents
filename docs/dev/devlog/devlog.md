@@ -1,11 +1,10 @@
-# Entwicklungsprotokoll Jonas Schwind
+# Entwicklungsprotokoll 
 
 ## Gesprächsprotokolle
-======================
 
-### 1.ste Besprechung Programmersprachen II (mit Wolf)
+### 1ste Besprechung (mit Wolf)
 
-Es wurden unsere Ideen und Ansätze bezüglich des projektes vorgestellt,
+Es wurden unsere Ideen und Ansätze bezüglich des Projektes vorgestellt,
 und der Meilensteilplan Präsentiert.
 Diese wurden alle gut aufgeneommen.
 Im abschluss wurde noch ein themenwunsch für eine evtl. Übung vogeschlagen: Java FX guis.
@@ -15,13 +14,12 @@ Unser Projektansätze:
 - Automatisierung via Cronjobs.
 - Chatgpt anbindung
 
-### 2te Besprechung Programmersprachen II (mit Wolf)
+### 2te Besprechung (mit Wolf)
 
 Es wurde der aktuelle fortschritt bezüglich des Projektes, sowie Probleme vorgestellt,
 Probleme mit den JUnit-tests konnten nach einem vorschlag ignoriert werden.
 
 ## Probleme
-===========
 
 ### pfdlatex macht absolut nichts
 
@@ -30,13 +28,13 @@ Beim testen des codes der compile() methode passirte absolut gar nichts.
 Es wurden nicht einmal fehler oder vergleichbares ausgegeben.
 
 #### Lösung:
-Um dem unsprung auf den grund zu gehen, wollte ich ersteimal dafür sorgen, 
+Um dem ursprung auf den grund zu gehen, wollte ich ersteimal dafür sorgen, 
 das der gewohnte output von pdflatex von unserem programm ausgegeben wird.
 Bei der Umsetzung wurde festgestellt das der fehlende Output an sich die ursache war,
 und eben dieser nicht blockirt werden darf.
 Dieses Problem hat sich mehr oder wenigen von selbst gelöst.
 
-### pfdlatex-ausfuhrung deprecated
+### pfdlatex-ausfuhrungsmethode deprecated
 
 #### Beschreibung:
 Die Art und Weise mit der wir pdflatex ausführen
@@ -63,15 +61,16 @@ Die Text-Area wurde nach ewigen trial and error als designentscheidung akzeptier
 
 #### Beschreibung:
 ChatGPT ist bei der beantwortung von Fragen immer sehr geprächig,
-Eine typische ChatGPT-Antwort siht in etwa so aus:
+Eine typische ChatGPT-Antwort sieht in etwa so aus:
+
 [Beschriebung der eigenen frage]
 
 [Tatsächliche Antwort]
 
-[Kurzes Fazit,oder ähnlices]
+[Kurzes Fazit, oder ähnliches]
 
-Da es selbt mit überedungversuchen keine konstante eindeutuge möglichekeit gab, 
-den wichtigen Teil der Antwort zu isolieren, 
+Da es selbt mit überedungversuchen keine konstante eindeutige möglichekeit gab, 
+den wichtigen Teil der Antwort zu isolieren,
 die nicht mit eimen LaTeX-Steuerzeichen verwechselbar ist,
 wird es sehr schwierig dieses feature umzusetzen.
 

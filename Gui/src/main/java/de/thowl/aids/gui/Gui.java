@@ -17,7 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-package de.thowl.gui;
+package de.thowl.aids.gui;
 
 import java.net.URL;
 
@@ -33,16 +33,26 @@ import javafx.stage.Stage;
  * 
  * <p>
  * The controlling logic can be found in the
- * {@link de.thowl.gui.MasterController}
+ * {@link de.thowl.aids.gui.MasterController}
  * class.
  * </p>
  * 
  * @author Jonas Schwind
  * @version 1.0.3
  * 
- * @see de.thowl.gui.MasterController
+ * @see de.thowl.aids.gui.MasterController
  */
 public class Gui extends Application {
+
+	/**
+	 * Construcktor for this class
+	 * <p>
+	 * NOTE: Does nothing
+	 * </p>
+	 */
+	public Gui() {
+		// Nothing
+	}
 
 	/*
 	 * Starts the GUI by loading the FXML file, applying the stylesheet,
