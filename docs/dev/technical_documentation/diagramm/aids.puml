@@ -1,0 +1,150 @@
+@startuml
+
+package de.thowl.aids.main {
+    class Main {
+        -# EXIT_SUCCESS: int
+        -# EXIT_ERROR: int
+        -# VERSION: int
+        -# logger: Logger
+        -# type: String
+	    -_ destination: String
+	    -_ amount: int
+	    -_ chapters: int
+	    -_ shuffle: boolean;
+        +_ main(String[]: args): void
+        -_ formatArg(String: arg): String
+        -_ handleArgs(String[]: args): void
+        -_ handleParamArgs(String: arg, String: prevArg): void
+        -_ checkInt(String: inputInt): int
+        -_ printVersion(): void
+        -_ printHelp(): void
+    }
+}
+
+de.thowl.aids.main.Main --> de.thowl.aids.gui.Gui
+de.thowl.aids.main.Main --> de.thowl.aids.core.Latex
+
+package de.thowl.aids.core {
+    class Latex {
+        - logger: Logger
+        - header: LatexSnippet
+        - snippets: ArrayList<LatexSnippet>
+        - footer: LatexSnippet
+        - operatingSystem: OperatingSystem
+        - homeDir: String
+        - pdflatex: String
+        + Latex()
+        + gatherSnippets(type: String, chapters: int, randomise: boolean): void
+        + concat(type: String, destination: String): void
+        + compile(type: String, workingDir: String): void
+        - copyPdf(sourceDir: String, fileName: String, destinationDir: String, newFileName: String): void
+        + generate(type: String, destination: String, amount: int, chapters: int, shuffle: boolean): void
+        + getHeader(): LatexSnippet
+        + getSnippets(): List<LatexSnippet>
+        + getFooter(): LatexSnippet
+    }
+
+    Latex --> LatexSnippet
+    Latex --> OperatingSystem
+    Latex --> Json
+    Latex --> LatexNotInstalledException
+
+    class LatexSnippet {
+        - filePath: String
+        + LatexSnippet(filePath: String)
+        + getFileContent(): String
+        + getFilePath(): String
+    }
+
+    class OperatingSystem {
+        - operatingSystem: String
+	    - homeDir: String
+	    - pdflatexPath: String
+        + getOperatingSystem(): String
+        + getHomeDir(): String
+        + getPdflatexLocation(): String
+    }
+
+    class Json {
+        - filePath: String
+        - jsonObject: JSONObject
+        + Json(filepath: String)
+        + getValue(object: String, key: String): String
+        + setValue(object: String, key: String, value: String): void
+    }
+
+    class LatexNotInstalledException {
+        - serialVersionUID: long
+        - message: String
+        + LatexNotInstalledException(message: String)
+        + toString(): String
+    }
+
+    class LatexSnippet {
+        - file: File
+	    - filePath: String
+	    - fileContent: String
+        + getFilePath(): String
+        + getFileContent(): String
+        + setFilepath(String: filePath): void
+        + setFilecontent(String: fileContent): void
+    }
+}
+
+package de.thowl.aids.gui{
+    class Gui {
+        + start(stage: Stage): void throws Exception
+    }
+
+    class MasterController implements Initializable{
+        - Button btnMainScene;
+	    - Button btnLatexScene;
+	    - Button btnDatabaseScene;
+        # cmbType: ComboBox<String>
+        # showErrorAlert(String: header, String: text, Exception: exception): void
+        # switchToScene(ActionEvent: event, String: name): void
+        # initialiseTypeDropdown(): void
+        # validateInt(String: inputInt): int
+        - btnMainSceneClick(ActionEvent: event): void
+        - btnLatexSceneClick(ActionEvent: event): void
+        - btnDatabaseSceneClick(ActionEvent: event): void
+        + initialize(URL: location, ResourceBundle: resources): void
+    }
+
+    class MainScene extends MasterController {
+        - txtAmount: TextField
+	    - txtChapters: TextField
+	    - txtFileName: TextField
+	    - chkShuffle: CheckBox
+	    - btnGenerateDocument: Button
+	    - btnOpenEditor: Button
+        - txtMultipurposeTextArea: TextArea
+        - appendToTextArea(String newString): void
+        - btnGenerateDocumentClick(ActionEvent: event): void
+        + initialize(URL: location, ResourceBundle: resources): void
+    }
+
+    class LatexScene extends MasterController {
+        -# logger: Logger
+        - latexdir: String
+	    - settingsFile: String
+        - treeFileTree: TreeView<String>
+        - txtFileName: TextField
+        - btnOpenEditor: Button
+        + getSelectedTree(TreeItem<String>: item): String
+        + initialize(URL: location, ResourceBundle: resources): void
+        - createTreeItem(File: file): TreeItem<String>
+        - expandItem(TreeItem<String>: item): void
+        - populateTreeView(String: directory): void
+        - cmbTypeSelection(ActionEvent event): void
+        - btnOpenEditorClick(ActionEvent event): void 
+    }
+
+    Initializable <|-- MasterController : overrides
+    MasterController <|-- MainScene : overrides
+    MasterController <|-- LatexScene : overrides
+}
+
+
+
+@enduml
