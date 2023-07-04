@@ -1,9 +1,9 @@
 @startuml
 
-de.thowl.aids.main.Main --> de.thowl.aids.gui.Gui
-de.thowl.aids.main.Main --> de.thowl.aids.core.Latex
-de.thowl.aids.gui.MainScene --> de.thowl.aids.core.Json
-de.thowl.aids.gui.LatexScene --> de.thowl.aids.core.Json
+de.thowl.aids.main.Main -- de.thowl.aids.gui.Gui
+de.thowl.aids.main.Main -- de.thowl.aids.core.Latex
+de.thowl.aids.gui.MainScene -- de.thowl.aids.core.Json
+de.thowl.aids.gui.LatexScene -- de.thowl.aids.core.Json
 
 package de.thowl.aids.main {
     class Main {
@@ -46,10 +46,10 @@ package de.thowl.aids.core {
         + getFooter(): LatexSnippet
     }
 
-    Latex --> LatexSnippet
-    Latex --> OperatingSystem
-    Latex --> Json
-    Latex --> LatexNotInstalledException
+    Latex o-- LatexSnippet 
+    Latex -- OperatingSystem
+    Latex -- Json
+    Latex -- LatexNotInstalledException
 
     class LatexSnippet {
         - filePath: String
@@ -93,16 +93,16 @@ package de.thowl.aids.core {
     }
 }
 
-note top of de.thowl.aids.gui : Modul könnte theorhethisch optional sein.
+note top of de.thowl.aids.gui : Module in theory optional.
 package de.thowl.aids.gui{
     class Gui {
         + start(stage: Stage): void throws Exception
     }
 
-    note "Klassse GUI started eine FXML, die diese Klassen als Controller verwended" as N1
+    note "Gui loads an FXML, which uses one off theese as an Controller" as N1
     Gui .. N1
-    N1 .. MainScene
-    N1 .. LatexScene
+    N1 ..> MainScene
+    N1 ..> LatexScene
 
     class MasterController implements Initializable{
         - Button btnMainScene;
