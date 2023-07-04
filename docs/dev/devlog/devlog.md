@@ -2,7 +2,7 @@
 
 ## Anfordungsanalyse
 
-- Das Programm soll aus Vorgefertigten (anpassbaren) snipseln ein LaTeX document erstellen
+- Das Programm soll aus vorgefertigten (anpassbaren) Schnipseln ein LaTeX-dokument erstellen.
 - ~~Generierung neuer schnippsel durch ChatGPT~~ (verworfen)
 - Die Schnipssel werden in einer MySQL Datenbank verwaltet, diese sollte sich zu einer CSV exportieren lassen
 - Andere einstellungen sollten in eine JSon verwaltet werden.
