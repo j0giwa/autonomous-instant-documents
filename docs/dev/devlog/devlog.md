@@ -50,7 +50,7 @@ das der gewohnte output von pdflatex von unserem Programm ausgegeben wird, um Fe
 Bei der Umsetzung wurde festgestellt das der fehlende Output an sich die Ursache war, und eben dieser nicht blockiert werden darf.
 Dieses Problem hat sich mehr oder weniger von selbst gelöst.
 
-### pfdlatex-ausfuhrungsmethode deprecated
+### pfdlatex-ausführung deprecated
 
 #### Beschreibung
 
@@ -64,7 +64,7 @@ dass ein String[] vorgesehen ist,
 und unserer Ansatz durch häufigen missbrauch (nicht näher beschrieben) entfernt werden sollte.
 Der ensprecende Quellcode wurde stante pede angepasst.
 
-### CSS-Stylesheet ignoiert einige regeln
+### CSS-stylesheet ignoiert einige regeln
 
 #### Beschreibung
 
