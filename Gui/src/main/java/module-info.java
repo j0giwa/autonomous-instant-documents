@@ -24,8 +24,8 @@ module de.thowl.aids.gui {
 	requires de.thowl.aids.core;
 	requires org.apache.logging.log4j;
 	requires json.simple;
-	requires javafx.controls;
-	requires javafx.fxml;
+	requires transitive javafx.controls;
+	requires transitive javafx.fxml;
 
 	exports de.thowl.aids.gui;
 }

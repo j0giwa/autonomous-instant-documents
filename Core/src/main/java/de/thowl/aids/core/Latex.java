@@ -136,12 +136,12 @@ public class Latex {
 	/**
 	 * Compiles a LaTeX document from a sourcefile
 	 * <p>
-	 * The method {@link #concat(String, String)} needs to be called first, as it
-	 * generates the sourcefile.
+	 * The method {@link #concat(String, String)} needs to be called first, 
+	 * as it generates the sourcefile.
 	 * </p>
 	 *
 	 * @param type       type of the the sourcefile
-	 * @param workingDir temporary loaction where document should be proccessed
+	 * @param workingDir loaction where document should be proccessed
 	 */
 	public void compile(String type, String workingDir) {
 		String texFile = workingDir + File.separator + type + ".tex";
@@ -151,9 +151,9 @@ public class Latex {
 			// NOTE: Generaly LaTeX-documents are compiled twice
 			for (int i = 1; i <= 2; i++) {
 				Process proc = Runtime.getRuntime().exec(command);
-				// NOTE: pdflatex won't work if messages are suppressed
-				BufferedReader stdout = new BufferedReader(
-						new InputStreamReader(proc.getInputStream()));
+				// NOTE: pdflatex won't work without messages 
+				InputStreamReader procStream = new InputStreamReader(proc.getInputStream());
+				BufferedReader stdout = new BufferedReader(procStream);
 				String pdflatexMessage;
 				while ((pdflatexMessage = stdout.readLine()) != null) {
 					logger.info(pdflatexMessage);
@@ -203,7 +203,7 @@ public class Latex {
 		for (int i = 1; i <= amount; i++) {
 			// TODO: Add pretty foldername
 			String subDir = "foldername" + i;
-			String workingDir = "temp" + File.separator + subDir;
+			String workingDir = "./temp" + File.separator + subDir;
 			new File(workingDir).mkdir();
 			concat(type, workingDir);
 			compile(type, workingDir);

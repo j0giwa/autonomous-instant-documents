@@ -1,4 +1,4 @@
-@startuml
+@startuml aids
 
 de.thowl.aids.main.Main -- de.thowl.aids.gui.Gui
 de.thowl.aids.main.Main -- de.thowl.aids.core.Latex
