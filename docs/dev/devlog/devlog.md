@@ -6,12 +6,12 @@
 - ~~Generierung neuer schnippsel durch ChatGPT~~ (verworfen)
 - Die Schnipssel werden in einer MySQL Datenbank verwaltet, diese sollte sich zu einer CSV exportieren lassen
 - Andere einstellungen sollten in eine JSon verwaltet werden.
-- Das Programm solle universell einsetzbar sein (Klausuren also nur ein Möglicher verwendungzweck)
-- Grafischeoberrfläche für den gemeinen Nutzer
-- CLI-Schnittstelle (Gewährleistted automatisierung via cron)
-- Detailierte Anwenderdokumentation(Github, manpage)
+- Das Programm solle universell einsetzbar sein (Klausuren also nur ein M´möglicher Verwendungzweck)
+- Grafische Oberfläche für den gemeinen Nutzer
+- CLI-schnittstelle (Gewährleisted Automatisierung via cron)
+- Detailierte Anwenderdokumentation(GitHub, manpage)
 
-## Archtekrturentwurf
+## Archtekturentwurf
 
 TODO: Diagramme einfügen
 
@@ -30,7 +30,7 @@ Im abschluss wurde noch ein themenwunsch für eine evtl. Vorlesung vogeschlagen:
 
 ### 2te Besprechung
 
-Es wurde der aktuelle fortschritt bezüglich des Projektes, sowie Probleme vorgestellt.
+Es wurde der aktuelle Fortschritt bezüglich des Projektes, sowie Probleme vorgestellt.
 Probleme mit den JUnit-tests konnten nach einem Vorschlag ignoriert werden (Diese werden daher auch nicht weiter erwähnt).
 
 ## Implementierung (Probleme und Lösungen)
