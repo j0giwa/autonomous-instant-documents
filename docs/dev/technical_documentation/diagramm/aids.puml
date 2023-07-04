@@ -93,6 +93,7 @@ package de.thowl.aids.core {
     }
 }
 
+note top of de.thowl.aids.gui : Modul könnte theorhethisch optional sein.
 package de.thowl.aids.gui{
     class Gui {
         + start(stage: Stage): void throws Exception
@@ -132,7 +133,7 @@ package de.thowl.aids.gui{
     }
 
     class LatexScene extends MasterController {
-        - {static} logger: Logger
+        - logger: Logger
         - latexdir: String
 	    - settingsFile: String
         - treeFileTree: TreeView<String>
