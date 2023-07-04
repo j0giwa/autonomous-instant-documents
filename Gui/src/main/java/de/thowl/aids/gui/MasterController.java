@@ -64,6 +64,16 @@ public class MasterController implements Initializable {
 	protected ComboBox<String> cmbType;
 
 	/**
+	 * Construcktor for this controller
+	 * <p>
+	 * NOTE: Does nothing
+	 * </p>
+	 */
+	public MasterController() {
+		// nothing
+	}
+
+	/**
 	 * Displays an error alert with the specified header and exception
 	 * details.
 	 *

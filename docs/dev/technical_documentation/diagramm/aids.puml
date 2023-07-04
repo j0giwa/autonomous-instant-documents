@@ -1,28 +1,30 @@
 @startuml
 
-package de.thowl.aids.main {
-    class Main {
-        -# EXIT_SUCCESS: int
-        -# EXIT_ERROR: int
-        -# VERSION: int
-        -# logger: Logger
-        -# type: String
-	    -_ destination: String
-	    -_ amount: int
-	    -_ chapters: int
-	    -_ shuffle: boolean;
-        +_ main(String[]: args): void
-        -_ formatArg(String: arg): String
-        -_ handleArgs(String[]: args): void
-        -_ handleParamArgs(String: arg, String: prevArg): void
-        -_ checkInt(String: inputInt): int
-        -_ printVersion(): void
-        -_ printHelp(): void
-    }
-}
-
 de.thowl.aids.main.Main --> de.thowl.aids.gui.Gui
 de.thowl.aids.main.Main --> de.thowl.aids.core.Latex
+de.thowl.aids.gui.MainScene --> de.thowl.aids.core.Json
+de.thowl.aids.gui.LatexScene --> de.thowl.aids.core.Json
+
+package de.thowl.aids.main {
+    class Main {
+        - {static} EXIT_SUCCESS: int
+        - {static} EXIT_ERROR: int
+        - {static} VERSION: int
+        - {static} logger: Logger
+        - {static} type: String
+	    - {static} destination: String
+	    - {static} amount: int
+	    - {static} chapters: int
+	    - {static} shuffle: boolean;
+        + {static} main(String[]: args): void
+        - {static} formatArg(String: arg): String
+        - {static} handleArgs(String[]: args): void
+        - {static} handleParamArgs(String: arg, String: prevArg): void
+        - {static} checkInt(String: inputInt): int
+        - {static} printVersion(): void
+        - {static} printHelp(): void
+    }
+}
 
 package de.thowl.aids.core {
     class Latex {
@@ -96,6 +98,11 @@ package de.thowl.aids.gui{
         + start(stage: Stage): void throws Exception
     }
 
+    note "Klassse GUI started eine FXML, die diese Klassen als Controller verwended" as N1
+    Gui .. N1
+    N1 .. MainScene
+    N1 .. LatexScene
+
     class MasterController implements Initializable{
         - Button btnMainScene;
 	    - Button btnLatexScene;
@@ -125,7 +132,7 @@ package de.thowl.aids.gui{
     }
 
     class LatexScene extends MasterController {
-        -# logger: Logger
+        - {static} logger: Logger
         - latexdir: String
 	    - settingsFile: String
         - treeFileTree: TreeView<String>
@@ -144,7 +151,4 @@ package de.thowl.aids.gui{
     MasterController <|-- MainScene : overrides
     MasterController <|-- LatexScene : overrides
 }
-
-
-
 @enduml

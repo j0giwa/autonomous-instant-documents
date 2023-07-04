@@ -37,7 +37,7 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 
 /**
- *
+ * This class is the Controller of the LatexScene in the GUI
  */
 public class LatexScene extends MasterController {
 
