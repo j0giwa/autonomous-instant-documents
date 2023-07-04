@@ -6,7 +6,7 @@
 - ~~Generierung neuer schnippsel durch ChatGPT~~ (verworfen)
 - Die Schnipssel werden in einer MySQL Datenbank verwaltet, diese sollte sich zu einer CSV exportieren lassen
 - Andere einstellungen sollen in einer JSon verwaltet werden.
-- Die Datein werden dan dem ort gespeichert der vom OS vogesehen ist.
+- Die configdatein (Schnipsel eigeschlossen) werden an dem Ort gespeichert der vom OS für diesen Zweck vogesehen ist.
 - Das Programm solle universell einsetzbar sein (Klausuren also nur ein möglicher Verwendungzweck)
 - Grafische Oberfläche für den gemeinen Nutzer
 - CLI-schnittstelle (Gewährleisted Automatisierung via cron)
