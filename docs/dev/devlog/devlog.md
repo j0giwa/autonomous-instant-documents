@@ -5,7 +5,8 @@
 - Das Programm soll aus vorgefertigten (anpassbaren) Schnipseln ein LaTeX-dokument erstellen.
 - ~~Generierung neuer schnippsel durch ChatGPT~~ (verworfen)
 - Die Schnipssel werden in einer MySQL Datenbank verwaltet, diese sollte sich zu einer CSV exportieren lassen
-- Andere einstellungen sollten in eine JSon verwaltet werden.
+- Andere einstellungen sollen in einer JSon verwaltet werden.
+- Die Datein werden dan dem ort gespeichert der vom OS vogesehen ist.
 - Das Programm solle universell einsetzbar sein (Klausuren also nur ein möglicher Verwendungzweck)
 - Grafische Oberfläche für den gemeinen Nutzer
 - CLI-schnittstelle (Gewährleisted Automatisierung via cron)
