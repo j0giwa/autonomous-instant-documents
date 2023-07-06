@@ -7,21 +7,21 @@
 	<version>0.8.5</version>
 	<packaging>pom</packaging>
 	<modules>
-		<module>Core</module>
-		<module>Gui</module>
-		<!--<module>database</module>-->
-		<module>Main</module>
-		<module>Distribution</module>
+		<module>core</module>
+		<module>gui</module>
+		<module>main</module>
+		<module>distribution</module>
 	</modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<!--dependencies-->
 		<java.version>20</java.version>
-		<javafx.version>13</javafx.version>
+		<javafx.version>20.0.1</javafx.version>
 		<junit.version>5.9.2</junit.version>
 		<mockito.version>5.3.1</mockito.version>
 		<log4j.version>2.20.0</log4j.version>
+		<testfx.version>4.0.16-alpha</testfx.version>
 		<json-simple.version>1.1.1</json-simple.version>
 		<!-- Moddules -->
 		<module.main.version>0.8.5</module.main.version>
@@ -93,6 +93,23 @@
 				<version>${javafx.version}</version>
 			</dependency>
 			<dependency>
+				<groupId>org.testfx</groupId>
+				<artifactId>testfx-core</artifactId>
+				<version>${testfx.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.testfx</groupId>
+				<artifactId>testfx-junit5</artifactId>
+				<version>${testfx.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.jfxtras</groupId>
+				<artifactId>openjfx-monocle</artifactId>
+				<version>1.8.0_20</version>
+			</dependency>
+			<dependency>
 				<groupId>com.googlecode.json-simple</groupId>
 				<artifactId>json-simple</artifactId>
 				<version>${json-simple.version}</version>
@@ -116,7 +133,6 @@
 		</dependencies>
 	</dependencyManagement>
 	<build>
-		<!--<sourceDirectory>src/main/java</sourceDirectory>-->
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -169,7 +185,6 @@
 								<goal>aggregate</goal>
 							</goals>
 							<configuration>
-								<!-- Specific configuration for the aggregate report -->
 								<reportOutputDirectory>${user.dir}/documents</reportOutputDirectory>
 								<destDir>javadoc</destDir>
 							</configuration>
@@ -181,11 +196,15 @@
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>${maven-surefire.version}</version>
 					<configuration>
-						<argLine>-Ddetail=true</argLine>
+						<useModulePath>false</useModulePath>
+						<parallel>both</parallel>
+						<useUnlimitedThreads>true</useUnlimitedThreads>
+						<argLine>
+							-Ddetail=true
+						</argLine>
 						<skipAfterFailureCount>10</skipAfterFailureCount>
 						<rerunFailingTestsCount>2</rerunFailingTestsCount>
 						<useSystemClassLoader>false</useSystemClassLoader>
-						<!--<failIfNoTests>true</failIfNoTests>-->
 					</configuration>
 				</plugin>
 				<plugin>
