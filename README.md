@@ -62,7 +62,7 @@ Getting started
 
 ``` bat
 mvn package
-xcopy ".distribution\target\automomous-instantdocument-system.jar" "C:\Program Files\automomous-instantdocument-system.jar" /Y
+xcopy "distribution\target\automomous-instantdocument-system.jar" "C:\Program Files\automomous-instantdocument-system.jar" /Y
 xcopy "distribution\assets\defaults\*" "%appdata%\aids" /E /Y
 ```
 
