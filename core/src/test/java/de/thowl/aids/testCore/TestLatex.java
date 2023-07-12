@@ -56,7 +56,7 @@ public class TestLatex {
 	 */
 	@Test
 	public void test_gatherSnippets_ShouldGatherSnippetsAndRandomizeOrder() {
-		String type = TEST_TYPE;
+    String type = TEST_TYPE;
 		int chapters = TEST_CHAPTERS;
 		boolean randomize = true;
 		latex.gatherSnippets(type, chapters, randomize);
@@ -70,9 +70,9 @@ public class TestLatex {
 	 * concatenates the snippets and generates the source file.
 	 */
 	@Test
-	public void test_concat_ShouldConcatenateSnippetsAndGenerateSourceFile() {
+	public void test_concat_ShouldConcatenateSourceFile() {
 		String type = TEST_TYPE;
-		String workingDir = TEMP_DIR + File.separator + "singleConcatTest";
+		String workingDir = TEMP_DIR + File.separator + "concatTest";
 		latex.gatherSnippets(type, TEST_CHAPTERS, false);
 		latex.concat(type, workingDir);
 		File sourceFile = new File(workingDir + File.separator + type + ".tex");
@@ -85,7 +85,7 @@ public class TestLatex {
 	 * generates the output in the specified destination.
 	 */
 	@Test
-	public void test_compile_ShouldCompileLaTeXDocument() {
+	public void test_compile_ShouldCompile() {
 		String type = TEST_TYPE;
 		String workingDir = TEMP_DIR + File.separator + "singleCompileTest";
 		latex.gatherSnippets(type, TEST_CHAPTERS, false);
@@ -101,7 +101,7 @@ public class TestLatex {
 	 * documents with shuffled snippets.
 	 */
 	@Test
-	public void test_generate_ShouldGenerateDocumentsWithShuffledSnippets() {
+	public void test_generate_ShouldGenerateDocuments() {
 		String type = TEST_TYPE;
 		String destination = TEMP_DIR;
 		int amount = 3;

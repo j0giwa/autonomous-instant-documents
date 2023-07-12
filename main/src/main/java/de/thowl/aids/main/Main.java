@@ -108,7 +108,7 @@ public class Main {
 	 *
 	 * @param args The command line arguments
 	 */
-	private static void handleArgs(String[] args) {
+	public static void handleArgs(String[] args) {
 		int argc = args.length;
 		String arg = null;
 		String prevArg = null;
@@ -121,21 +121,21 @@ public class Main {
 			if (arg == null)
 				return;
 			switch (arg) {
-			case "version":
-			case "v":
-				printVersion();
-				break;
-			case "help":
-			case "h":
-				printHelp();
-				break;
-			case "noshuffle":
-			case "ns":
-				shuffle = false;
-				break;
-			default:
-				prevArg = arg;
-				break;
+				case "version":
+				case "v":
+					printVersion();
+					break;
+				case "help":
+				case "h":
+					printHelp();
+					break;
+				case "noshuffle":
+				case "ns":
+					shuffle = false;
+					break;
+				default:
+					prevArg = arg;
+					break;
 			}
 		}
 	}
@@ -149,22 +149,22 @@ public class Main {
 	@SuppressWarnings("squid:S131") // No deafult, because of the arg params
 	private static void handleParamArgs(String arg, String prevArg) {
 		switch (prevArg) {
-		case "type":
-		case "t":
-			type = arg;
-			break;
-		case "destination":
-		case "d":
-			destination = arg;
-			break;
-		case "amount":
+			case "type":
+			case "t":
+				type = arg;
+				break;
+			case "destination":
+			case "d":
+				destination = arg;
+				break;
+			case "amount":
 			case "a":
-			amount = checkInt(arg);
-			break;
-		case "chapters":
-		case "c":
-			chapters = checkInt(arg);
-			break;
+				amount = checkInt(arg);
+				break;
+			case "chapters":
+			case "c":
+				chapters = checkInt(arg);
+				break;
 		}
 	}
 
@@ -174,7 +174,7 @@ public class Main {
 	 * @param inputInt Integer to validate
 	 * @return Integervalue (if int)
 	 */
-	private static int checkInt(String inputInt) {
+	public static int checkInt(String inputInt) {
 		int integer = 0;
 		try {
 			integer = Integer.parseInt(inputInt);
@@ -214,4 +214,27 @@ public class Main {
 				+ "Print version number and exit.");
 		System.exit(EXIT_SUCCESS);
 	}
+
+	// Helpers for tests
+
+	public static String getType() {
+		return type;
+	}
+
+	public static String getDestination() {
+		return destination;
+	}
+
+	public static int getAmount() {
+		return amount;
+	}
+
+	public static int getChapters() {
+		return chapters;
+	}
+
+	public static boolean getShuffle() {
+		return shuffle;
+	}
+
 }
