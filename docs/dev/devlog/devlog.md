@@ -17,7 +17,7 @@
 
 -   Das Programm sollte universell einsetzbar sein.
     Das beduetet dass das Programm nicht zwingend für Klausuren eingesetzt werden muss, und auch für andere Dokumente verwendet werden kann.
--   <del>Generierung neuer Schnippsel durch ChatGPT</del> (verworfen)
+-   ~~Generierung neuer Schnippsel durch ChatGPT~~ (verworfen)
 
 ### Werkzeuge
 
@@ -121,14 +121,14 @@ Nach einem Blick in die Documentation wurde klar, dass ein `String[]` vorgesehen
 Unser Ansatz sollte durch häufigen missbrauch (nicht näher beschrieben) aus Java entfernt werden.
 Der ensprecende Quellcode wurde stante pede angepasst.
 
-\### CSS-stylesheet ignoriert einige regeln
+### CSS-stylesheet ignoriert einige regeln
 
 Einige Elemente wie die Icons in der Seitenleite und die Text-Area,
 wollten sich nicht den in der Große anzeigen lassen, die ursprünglich vorgesehen war.
 
 Etwas Nachforschung ergab, dass die Icons einige extraregeln für die Skalierung benötigten.
 Da die Text-Area nach ewigen trial-and-error immer noch nicht die geplanten Dimensionen aufwies, 
-und die optische schönheit aus zeitgründen nicht priorisiert wurde, wurde dies als &ldquo;Designentscheidung&rdquo; angesehen und so belassen.
+und die optische schönheit aus zeitgründen nicht priorisiert wurde, wurde dies als "Designentscheidung" angesehen und so belassen.
 
 ### ChatGPT
 
