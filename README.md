@@ -20,7 +20,7 @@ Table of Contents
   - [Requirements](#requirements)
   - [Installation](#installation)
     - [Windows](#windows)
-    - [UNIX (BSD, GNU/Linux)](#UNIX-(BSD,-GNU/Linux))
+    - [UNIX (BSD, GNU/Linux)](#UNIX-BSD-GNULinux)
 - [Usage](#usage)
 
 </details>
