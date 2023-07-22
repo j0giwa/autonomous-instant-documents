@@ -19,9 +19,8 @@ Table of Contents
 - [Getting started](#getting-started)
   - [Requirements](#requirements)
   - [Installation](#installation)
-  - [Build it yourself](#build-it-yourself)
     - [Windows](#windows)
-    - [Linux](#linux)
+    - [UNIX (BSD, GNU/Linux)](#UNIX-(BSD,-GNU/Linux))
 - [Usage](#usage)
 
 </details>
@@ -72,7 +71,7 @@ It is recommended that you define an alias If you want to launch from the comman
 doskey automomous-instantdocument-system="java -jar C:\Program Files\automomous-instantdocument-system.jar"
 ```
 
-### Linux
+### UNIX (BSD, GNU/Linux)
 
 ``` shell
 mvn package
