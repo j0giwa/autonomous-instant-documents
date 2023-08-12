@@ -49,11 +49,12 @@ Getting started
 
 ## Requirements
 
+- maven
 - java20
 - javafx
 - pdflatex
 - whiptail (for TUI)
-- maven (if you want to build from source)
+
 
 ## Installation
 
