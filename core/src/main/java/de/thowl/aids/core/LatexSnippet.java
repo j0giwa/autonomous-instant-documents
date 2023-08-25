@@ -88,4 +88,21 @@ public class LatexSnippet {
 	public void setFilecontent(String fileContent) {
 		this.fileContent = fileContent;
 	}
+
+	public File getFile() {
+		return file;
+	}
+
+	public void setFile(File file) {
+		this.file = file;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+	public void setFileContent(String fileContent) {
+		this.fileContent = fileContent;
+	}
+
 }

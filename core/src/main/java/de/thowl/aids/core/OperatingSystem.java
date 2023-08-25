@@ -120,4 +120,21 @@ public class OperatingSystem {
 					"pdflatex not found");
 		return pdflatexPath;
 	}
+
+	public void setOperatingSystem(String operatingSystem) {
+		this.operatingSystem = operatingSystem;
+	}
+
+	public void setHomeDir(String homeDir) {
+		this.homeDir = homeDir;
+	}
+
+	public String getPdflatexPath() {
+		return pdflatexPath;
+	}
+
+	public void setPdflatexPath(String pdflatexPath) {
+		this.pdflatexPath = pdflatexPath;
+	}
+
 }
