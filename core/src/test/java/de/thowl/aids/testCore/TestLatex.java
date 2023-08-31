@@ -1,4 +1,3 @@
-
 /*
  * Autonomous Instantdocument System -- Automatically generate LaTeX Documents
  * Copyright (C) 2023 Jonas Schwind, Marvin Boschmann
