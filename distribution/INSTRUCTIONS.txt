@@ -1,0 +1,13 @@
+INSTRUCTIONS:
+
+1.  Go and download a prebuild version or build one yourself, if you see this, you probably did that already. Congratulations.
+
+2.  Move the .jar in the ./target directory to a location you like, make sure it's in your path.
+	
+3.  move the contents of ./assets/defaults to one of the Following locations
+
+- ~/.config/aids - if you are on Linux (or BSD)
+- %appdata%\aids - if you are on Windows
+- ~/Library/Application Support/aids - if you are on macOS
+
+4. Start the application.
