@@ -87,4 +87,20 @@ public class Json {
 			e.printStackTrace();
 		}
 	}
+
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+	public JSONObject getJsonObject() {
+		return jsonObject;
+	}
+
+	public void setJsonObject(JSONObject jsonObject) {
+		this.jsonObject = jsonObject;
+	}
 }

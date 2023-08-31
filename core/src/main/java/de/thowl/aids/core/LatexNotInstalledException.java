@@ -42,4 +42,13 @@ public class LatexNotInstalledException extends Exception {
 	public String toString() {
 		return message;
 	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
 }

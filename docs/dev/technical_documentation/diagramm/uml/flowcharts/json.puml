@@ -1,0 +1,13 @@
+@startuml getValue
+	  (*) --> "load JSonObject"
+	  --> "Get value from key"
+	  --> "Return Value"
+	  --> (*)
+@enduml
+
+@startuml setValue
+	  (*) --> "load JSonObject"
+	  --> "Overwrite value at key"
+	  --> "Write JSon to file"
+	  --> (*)
+@enduml

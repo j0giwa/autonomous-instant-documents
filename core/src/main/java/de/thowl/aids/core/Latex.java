@@ -136,7 +136,7 @@ public class Latex {
 	/**
 	 * Compiles a LaTeX document from a sourcefile
 	 * <p>
-	 * The method {@link #concat(String, String)} needs to be called first, 
+	 * The method {@link #concat(String, String)} needs to be called first,
 	 * as it generates the sourcefile.
 	 * </p>
 	 *
@@ -151,7 +151,7 @@ public class Latex {
 			// NOTE: Generaly LaTeX-documents are compiled twice
 			for (int i = 1; i <= 2; i++) {
 				Process proc = Runtime.getRuntime().exec(command);
-				// NOTE: pdflatex won't work without messages 
+				// NOTE: pdflatex won't work without messages
 				InputStreamReader procStream = new InputStreamReader(proc.getInputStream());
 				BufferedReader stdout = new BufferedReader(procStream);
 				String pdflatexMessage;
@@ -238,4 +238,45 @@ public class Latex {
 	public LatexSnippet getFooter() {
 		return footer;
 	}
+
+	public static Logger getLogger() {
+		return logger;
+	}
+
+	public void setHeader(LatexSnippet header) {
+		this.header = header;
+	}
+
+	public void setSnippets(ArrayList<LatexSnippet> snippets) {
+		this.snippets = snippets;
+	}
+
+	public void setFooter(LatexSnippet footer) {
+		this.footer = footer;
+	}
+
+	public OperatingSystem getOperatingSystem() {
+		return operatingSystem;
+	}
+
+	public void setOperatingSystem(OperatingSystem operatingSystem) {
+		this.operatingSystem = operatingSystem;
+	}
+
+	public String getHomeDir() {
+		return homeDir;
+	}
+
+	public void setHomeDir(String homeDir) {
+		this.homeDir = homeDir;
+	}
+
+	public String getPdflatex() {
+		return pdflatex;
+	}
+
+	public void setPdflatex(String pdflatex) {
+		this.pdflatex = pdflatex;
+	}
+
 }

@@ -75,6 +75,7 @@ package de.thowl.aids.core {
 		- filePath: String
 		- fileContent: String
 	}
+
 }
 
 note top of de.thowl.aids.gui : Module in theory optional.
