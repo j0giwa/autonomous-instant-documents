@@ -89,6 +89,7 @@ public class Latex {
 			File directory = new File(
 					snippetsDir + type + "/chapters/");
 			File[] files = directory.listFiles();
+			// HACK: I odnt know why, but this fixes things
 			Arrays.sort(files);
 			int index = i;
 			if (randomise) {
