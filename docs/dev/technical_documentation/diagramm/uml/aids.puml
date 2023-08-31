@@ -1,5 +1,7 @@
 @startuml aids
 
+skinparam monochrome true
+
 de.thowl.aids.main.Main -- de.thowl.aids.gui.Gui
 de.thowl.aids.main.Main -- de.thowl.aids.core.Latex
 de.thowl.aids.gui.MainScene -- de.thowl.aids.core.Json
@@ -47,20 +49,10 @@ package de.thowl.aids.core {
 	Latex -- Json
 	Latex -- LatexNotInstalledException
 
-	class LatexSnippet {
-		- filePath: String
-		+ LatexSnippet(filePath: String)
-		+ getFileContent(): String
-		+ getFilePath(): String
-	}
-
 	class OperatingSystem {
 		- operatingSystem: String
 		- homeDir: String
 		- pdflatexPath: String
-		+ getOperatingSystem(): String
-		+ getHomeDir(): String
-		+ getPdflatexLocation(): String
 	}
 
 	class Json {
@@ -82,11 +74,8 @@ package de.thowl.aids.core {
 		- file: File
 		- filePath: String
 		- fileContent: String
-		+ getFilePath(): String
-		+ getFileContent(): String
-		+ setFilepath(String: filePath): void
-		+ setFilecontent(String: fileContent): void
 	}
+
 }
 
 note top of de.thowl.aids.gui : Module in theory optional.

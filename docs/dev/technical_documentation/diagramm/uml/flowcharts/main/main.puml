@@ -1,0 +1,40 @@
+@startuml de.thowl.aids.main
+
+skinparam monochrome true
+
+package de.thowl.aids.main {
+	class Main {
+		- {static} EXIT_SUCCESS: int
+		- {static} EXIT_ERROR: int
+		- {static} VERSION: int
+		- {static} logger: Logger
+		- {static} type: String
+		- {static} destination: String
+		- {static} amount: int
+		- {static} chapters: int
+		- {static} shuffle: boolean;
+		+ {static} main(String[]: args): void
+		- {static} formatArg(String: arg): String
+		- {static} handleArgs(String[]: args): void
+		- {static} handleParamArgs(String: arg, String: prevArg): void
+		- {static} checkInt(String: inputInt): int
+		- {static} printVersion(): void
+		- {static} printHelp(): void
+	}
+}
+
+@enduml
+
+@startuml Main
+skinparam monochrome true
+start
+:Count Arguments;
+if (No Argumants) then (yes)
+	:Start Gui;
+	stop
+else
+	:Handle Arguments;
+	:Generate Document(s);
+endif
+stop
+@enduml

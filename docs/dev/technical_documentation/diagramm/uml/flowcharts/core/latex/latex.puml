@@ -1,11 +1,12 @@
 @startuml gatherSnippets
+skinparam monochrome true
 start
 :Get Latex Header path;
 :Construct latex header Object;
 while (filelist?) is (incomplete)
-:get filepath from database;
-:construct file;
-:add file to list;
+    :get filepath from database;
+    :construct file;
+    :add file to list;
 endwhile (contains all files)
 :Get latexfooter path;
 :Construct latex footer Object;
@@ -13,6 +14,7 @@ stop
 @enduml
 
 @startuml concat
+skinparam monochrome true
 start
 :Initialise file;
 :Append Latexheader content to file;
@@ -23,6 +25,7 @@ stop
 @enduml
 
 @startuml compile
+skinparam monochrome true
 start
 :construct pdflatex command;
 :execute command;

@@ -19,9 +19,8 @@ Table of Contents
 - [Getting started](#getting-started)
   - [Requirements](#requirements)
   - [Installation](#installation)
-  - [Build it yourself](#build-it-yourself)
     - [Windows](#windows)
-    - [Linux](#linux)
+    - [UNIX (BSD, GNU/Linux)](#UNIX-BSD-GNULinux)
 - [Usage](#usage)
 
 </details>
@@ -50,21 +49,21 @@ Getting started
 
 ## Requirements
 
+- maven
 - java20
 - javafx
 - pdflatex
 - whiptail (for TUI)
-- maven (if you want to build from source)
+
 
 ## Installation
 
 ### Windows
 
 ``` bat
-cd Distribution
 mvn package
-xcopy ".\target\automomous-instantdocument-system.jar" "C:\Program Files\automomous-instantdocument-system.jar" /Y
-xcopy ".\assets\defaults\*" "%appdata%\aids" /E /Y
+xcopy "distribution\target\automomous-instantdocument-system.jar" "C:\Program Files\automomous-instantdocument-system.jar" /Y
+xcopy "distribution\assets\defaults\*" "%appdata%\aids" /E /Y
 ```
 
 It is recommended that you define an alias If you want to launch from the commandline
@@ -73,13 +72,12 @@ It is recommended that you define an alias If you want to launch from the comman
 doskey automomous-instantdocument-system="java -jar C:\Program Files\automomous-instantdocument-system.jar"
 ```
 
-### Linux
+### UNIX (BSD, GNU/Linux)
 
 ``` shell
-cd Distribution
 mvn package
-sudo cp ./target/automomousInstantdocumentSystem.jar /opt/automomous-instantdocument-system/automomous-instantdocument-system.jar
-sudo cp ./automomous-instantdocument-system-cli /usr/local/bin
+sudo cp distribution/target/automomousInstantdocumentSystem.jar /opt/automomous-instantdocument-system/automomous-instantdocument-system.jar
+sudo cp distribution/automomous-instantdocument-system-cli /usr/local/bin
 gzip -c docs/man/autonomous-instantdocument-system.1 | sudo tee /usr/share/man/man1/autonomous-instantdocument-system.1.gz >/dev/null
 ```
 
