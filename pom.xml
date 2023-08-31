@@ -10,6 +10,7 @@
 		<module>core</module>
 		<module>gui</module>
 		<module>main</module>
+		<module>database</module>
 		<module>distribution</module>
 	</modules>
 	<properties>
@@ -23,11 +24,11 @@
 		<log4j.version>2.20.0</log4j.version>
 		<testfx.version>4.0.16-alpha</testfx.version>
 		<json-simple.version>1.1.1</json-simple.version>
-		<!-- Moddules -->
+		<!-- Modules -->
 		<module.main.version>0.8.5</module.main.version>
 		<module.core.version>0.8.5</module.core.version>
 		<module.gui.version>0.8.5</module.gui.version>
-		<!--<module.main.version></module.database.version>-->
+		<module.main.version></module.database.version>
 		<!-- Plugins -->
 		<maven-compiler.version>3.11.0</maven-compiler.version>
 		<maven-assembly.version>3.3.0</maven-assembly.version>
