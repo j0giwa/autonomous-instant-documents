@@ -129,6 +129,7 @@ public class LatexScene extends Controller {
 	 *
 	 * @param rootItem The root TreeItem.
 	 */
+	// "Run you fools" - Gandalf
 	private void expandItem(TreeItem<String> item) {
 		if (item == null)
 			return;
