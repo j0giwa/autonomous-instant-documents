@@ -37,9 +37,9 @@ About The Project
 
 ## Planned
 
-- Customisable LaTeX snippets (preconfigured for exams and answers)
+- Customizable LaTeX snippets (preconfigured for exams and answers)
 - Snippet usage saved in a database
-- Export database to csv
+- Export database to CSV
 - ~~ChatGPT integration to automatically generate new snippets (API-key required)~~
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
@@ -51,7 +51,7 @@ Getting started
 
 - maven
 - java20
-- javafx
+- JavaFX
 - pdflatex
 - whiptail (for TUI)
 
@@ -60,13 +60,17 @@ Getting started
 
 ### Windows
 
+Build and install with these commands.
+
 ``` bat
-mvn package
+mvn package -DskipTests
 xcopy "distribution\target\automomous-instantdocument-system.jar" "C:\Program Files\automomous-instantdocument-system.jar" /Y
 xcopy "distribution\assets\defaults\*" "%appdata%\aids" /E /Y
 ```
 
-It is recommended that you define an alias If you want to launch from the commandline
+> NOTE: -DskipTests is not necceasary, it's just make the process go much faster
+
+It is recommended that you define an alias If you want to launch from the command line
 
 ``` bat
 doskey automomous-instantdocument-system="java -jar C:\Program Files\automomous-instantdocument-system.jar"
@@ -74,14 +78,18 @@ doskey automomous-instantdocument-system="java -jar C:\Program Files\automomous-
 
 ### UNIX (BSD, GNU/Linux)
 
+Build and install with these commands.
+
 ``` shell
-mvn package
+mvn package -DskipTests
 sudo cp distribution/target/automomousInstantdocumentSystem.jar /opt/automomous-instantdocument-system/automomous-instantdocument-system.jar
 sudo cp distribution/automomous-instantdocument-system-cli /usr/local/bin
 gzip -c docs/man/autonomous-instantdocument-system.1 | sudo tee /usr/share/man/man1/autonomous-instantdocument-system.1.gz >/dev/null
 ```
 
-It is recommended that you define an alias If you want to launch from the commandline
+> NOTE: -DskipTests is not necceasary, it's just make the process go much faster
+
+It is recommended that you define an alias If you want to launch from the command line
 
 ``` shell
 alias automomous-instantdocument-system="java -jar /opt/automomous-instantdocument-system/automomous-instantdocument-system.jar":
@@ -92,15 +100,15 @@ alias automomous-instantdocument-system="java -jar /opt/automomous-instantdocume
 Usage
 =============================
 
-Running `automomous-instantdocument-system` without options launches a grafical interface.
+Running `automomous-instantdocument-system` without options launches a graphical interface.
 
 ### Flags
 
 | flag          | function                           |
 | ------------- | ---------------------------------- |
-| -t --type <type> | Specifies the desired Document type e.g. "exam". |
+| -t --type <type> | Specifies the desired Document type, e.g. "exam". |
 | -c --chapters <chapters> | Specifies the amount of chapters per document.
 | -a --amount <amount> | Specifies how many Documents should be generated.
-| -ns --noshuffle | Turns of shuffle mode. |
+| -s --shuffle | Turns the shuffle mode on. |
 | -h --help | Show summary of options. |
 | -v --version | Print version number and exit. |
