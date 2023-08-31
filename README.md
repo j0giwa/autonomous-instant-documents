@@ -83,7 +83,7 @@ Build and install with these commands.
 ``` shell
 mvn package -DskipTests
 sudo cp distribution/target/automomousInstantdocumentSystem.jar /opt/automomous-instantdocument-system/automomous-instantdocument-system.jar
-sudo cp distribution/automomous-instantdocument-system-cli /usr/local/bin
+sudo cp distribution/automomous-instantdocument-system-cli /usr/local/bin # optional
 gzip -c docs/man/autonomous-instantdocument-system.1 | sudo tee /usr/share/man/man1/autonomous-instantdocument-system.1.gz >/dev/null
 ```
 
