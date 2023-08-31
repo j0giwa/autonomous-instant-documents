@@ -33,17 +33,17 @@ import javafx.application.Application;
  */
 public class Main {
 
+	// NOTE: These are helpers for this file only
 	private static final int EXIT_SUCCESS = 0;
 	private static final int EXIT_ERROR = 1;
-
 	private static final String VERSION = "version: 0.8.5";
-	private static final Logger logger = LogManager.getLogger(Main.class);
 
+	private static final Logger logger = LogManager.getLogger(Main.class);
 	private static String type = null;
 	private static String destination = null;
 	private static int amount = 0;
 	private static int chapters = 0;
-	private static boolean shuffle = true;
+	private static boolean shuffle = false;
 
 	/**
 	 * This method starts the programm (as we all know)
@@ -96,8 +96,8 @@ public class Main {
 	 * <li><em>version</em> - Same as <em>v</em></li>
 	 * <li><em>h</em> - Print help and exit</li>
 	 * <li><em>help</em> - Same as <em>h</em></li>
-	 * <li><em>ns</em> - Turn off shuffle mode</li>
-	 * <li><em>noshuffle</em> - Same as <em>ns</em></li>
+	 * <li><em>s</em> - Turn on shuffle mode</li>
+	 * <li><em>shuffle</em> - Same as <em>s</em></li>
 	 * </ul>
 	 *
 	 * <p>
@@ -129,9 +129,9 @@ public class Main {
 				case "h":
 					printHelp();
 					break;
-				case "noshuffle":
-				case "ns":
-					shuffle = false;
+				case "shuffle":
+				case "s":
+					shuffle = true;
 					break;
 				default:
 					prevArg = arg;
@@ -206,8 +206,8 @@ public class Main {
 				+ "Specifies the amount of chapters per document.");
 		System.out.println("-a --amount <amount>\t\t"
 				+ "Specifies the amount of Documents.");
-		System.out.println("-ns --noshuffle\t\t\t"
-				+ "Turns off shuffle mode.");
+		System.out.println("-s --shuffle\t\t\t"
+				+ "Turns on shuffle mode.");
 		System.out.println(
 				"-h --help\t\t\t" + "Show summary of options.");
 		System.out.println("-v --version\t\t\t"
@@ -215,24 +215,42 @@ public class Main {
 		System.exit(EXIT_SUCCESS);
 	}
 
-	// Helpers for tests
-
+	/**
+	 * Get the type.
+	 * @return Document type
+	 */
 	public static String getType() {
 		return type;
 	}
 
+	/**
+	 * Get the destination.
+	 * @return Document destination
+	 */
 	public static String getDestination() {
 		return destination;
 	}
 
+	/**
+	 * Get the Amount.
+	 * @return Document Amount
+	 */
 	public static int getAmount() {
 		return amount;
 	}
 
+	/**
+	 * Get the Chapters.
+	 * @return Amount of Chapters per Document
+	 */
 	public static int getChapters() {
 		return chapters;
 	}
 
+	/**
+	 * Get the shufflemode status.
+	 * @return State of shuffle mode
+	 */
 	public static boolean getShuffle() {
 		return shuffle;
 	}
