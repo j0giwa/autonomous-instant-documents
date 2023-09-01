@@ -34,9 +34,6 @@ package de.thowl.aids.core {
 		- header: LatexSnippet
 		- snippets: ArrayList<LatexSnippet>
 		- footer: LatexSnippet
-		- operatingSystem: OperatingSystem
-		- homeDir: String
-		- pdflatex: String
 		+ gatherSnippets(type: String, chapters: int, randomise: boolean): void
 		+ concat(type: String, destination: String): void
 		+ compile(type: String, workingDir: String): void

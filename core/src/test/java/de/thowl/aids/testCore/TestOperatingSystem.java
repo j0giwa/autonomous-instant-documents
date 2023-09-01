@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ :w
  */
 
 package de.thowl.aids.testCore;
@@ -74,7 +75,7 @@ public class TestOperatingSystem {
 	public void test_getPdflatexLocation_ShouldReturnPdflatexLocation() {
 		String pdflatex;
 		try {
-			pdflatex = operatingSystem.getPdflatexLocation();
+			pdflatex = operatingSystem.getPdflatexPath();
 			assertNotNull(pdflatex);
 		} catch (LatexNotInstalledException e) {
 			fail("Unexpected exception: " + e.getMessage());

@@ -30,7 +30,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Random;
 
 import org.apache.logging.log4j.LogManager;
@@ -39,7 +38,7 @@ import org.apache.logging.log4j.Logger;
 /**
  * This class is a Representation of a LaTeX-document.
  * <p>
- * It contains methods for the creation of LaTeX-Documents
+ * It also contains methods for the creation of LaTeX-Documents
  * </p>
  * 
  * @author Jonas Schwind
@@ -53,23 +52,11 @@ public class Latex {
 	private ArrayList<LatexSnippet> snippets;
 	private LatexSnippet footer;
 
-	// TODO: these should't be attributes
-	private OperatingSystem operatingSystem;
-	private String homeDir;
-	private String pdflatex;
-
 	/**
 	 * Constructor for objects of this class
 	 */
 	public Latex() {
 		snippets = new ArrayList<LatexSnippet>();
-		operatingSystem = new OperatingSystem();
-		homeDir = operatingSystem.getHomeDir();
-		try {
-			pdflatex = operatingSystem.getPdflatexLocation();
-		} catch (LatexNotInstalledException e) {
-			e.printStackTrace();
-		}
 	}
 
 	/**
@@ -84,6 +71,8 @@ public class Latex {
 	public void gatherSnippets(String type, int chapters,
 			boolean randomise) {
 		Random rng = new Random(System.currentTimeMillis() / 1000L);
+		OperatingSystem operatingSystem = new OperatingSystem();
+		String homeDir = operatingSystem.getHomeDir();
 		String snippetsDir = homeDir + "/latex/";
 		header = new LatexSnippet(snippetsDir + type + "/header.tex");
 		for (int i = 0; i < chapters; i++) {
@@ -146,8 +135,15 @@ public class Latex {
 	 * @param workingDir loaction where document should be proccessed
 	 */
 	public void compile(String type, String workingDir) {
-		String texFile = workingDir + File.separator + type + ".tex";
+		String pdflatex = "";
+		try {
+			OperatingSystem operatingSystem = new OperatingSystem();
+			pdflatex = operatingSystem.getPdflatexPath();
+		} catch (LatexNotInstalledException e) {
+			e.printStackTrace();
+		}
 		String outputDir = "-output-directory=" + workingDir;
+		String texFile = workingDir + File.separator + type + ".tex";
 		String[] command = { pdflatex, outputDir, texFile };
 		try {
 			// NOTE: Generaly LaTeX-documents are compiled twice
