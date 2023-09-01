@@ -23,8 +23,8 @@
       <artifactId>gui</artifactId>
     </dependency>
     <!--<dependency>
-      <groupId>de.thowl</groupId>
-      <artifactId>Database</artifactId>
+      <groupId>de.thowl.aids</groupId>
+      <artifactId>database</artifactId>
     </dependency>-->
   </dependencies>
   <build>
