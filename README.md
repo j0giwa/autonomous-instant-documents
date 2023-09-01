@@ -53,7 +53,7 @@ Getting started
 - [java20](https://jdk.java.net/20/)
 - [JavaFX](https://jdk.java.net/javafx20/)
 - [pdflatex](https://www.latex-project.org/)
-- [whiptail] (for TUI)
+- whiptail (for TUI)
 
 ## Installation
 
