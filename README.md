@@ -67,7 +67,8 @@ xcopy "distribution\target\automomous-instantdocument-system.jar" "C:\Program Fi
 xcopy "distribution\assets\defaults\*" "%appdata%\aids" /E /Y
 ```
 
-> NOTE: -DskipTests is not necessary, it's just making the process go much faster
+> NOTE: -DskipTests is not necessary, it's just making the process go much faster.
+> If you want to run tests anyway, you need to install the config-files first.
 
 It is recommended that you define an alias If you want to launch from the command line
 
@@ -86,7 +87,8 @@ sudo cp distribution/automomous-instantdocument-system-cli /usr/local/bin # opti
 gzip -c docs/man/autonomous-instantdocument-system.1 | sudo tee /usr/share/man/man1/autonomous-instantdocument-system.1.gz >/dev/null
 ```
 
-> NOTE: -DskipTests is not necessary, it's just making the process go much faster
+> NOTE: -DskipTests is not necessary, it's just making the process go much faster.
+> If you want to run tests anyway, you need to install the config-files first.
 
 It is recommended that you define an alias If you want to launch from the command line
 
