@@ -52,9 +52,10 @@ public class Latex {
 	private LatexSnippet header;
 	private ArrayList<LatexSnippet> snippets;
 	private LatexSnippet footer;
+
+	// TODO: these should't be attributes
 	private OperatingSystem operatingSystem;
 	private String homeDir;
-
 	private String pdflatex;
 
 	/**
@@ -227,7 +228,7 @@ public class Latex {
 	 * 
 	 * @return a list of LaTeX snippets
 	 */
-	public List<LatexSnippet> getSnippets() {
+	public ArrayList<LatexSnippet> getSnippets() {
 		return snippets;
 	}
 
@@ -240,44 +241,39 @@ public class Latex {
 		return footer;
 	}
 
+	/**
+	 * Get the logger for this class
+	 *
+	 * @return logger
+	 */
 	public static Logger getLogger() {
 		return logger;
 	}
 
+	/**
+	 * Sets the header of the document
+	 * 
+	 * @param header header snippet
+	 */
 	public void setHeader(LatexSnippet header) {
 		this.header = header;
 	}
 
+	/**
+	 * Sets the snippets of the document
+	 * 
+	 * @param snippets a list of snippets
+	 */
 	public void setSnippets(ArrayList<LatexSnippet> snippets) {
 		this.snippets = snippets;
 	}
 
+	/**
+	 * Sets the footer of the document
+	 * 
+	 * @param header footer snippet
+	 */
 	public void setFooter(LatexSnippet footer) {
 		this.footer = footer;
 	}
-
-	public OperatingSystem getOperatingSystem() {
-		return operatingSystem;
-	}
-
-	public void setOperatingSystem(OperatingSystem operatingSystem) {
-		this.operatingSystem = operatingSystem;
-	}
-
-	public String getHomeDir() {
-		return homeDir;
-	}
-
-	public void setHomeDir(String homeDir) {
-		this.homeDir = homeDir;
-	}
-
-	public String getPdflatex() {
-		return pdflatex;
-	}
-
-	public void setPdflatex(String pdflatex) {
-		this.pdflatex = pdflatex;
-	}
-
 }
