@@ -49,11 +49,11 @@ Getting started
 
 ## Requirements
 
-- maven
-- java20
-- JavaFX
-- pdflatex
-- whiptail (for TUI)
+- [maven](https://maven.apache.org/)
+- [java20](https://jdk.java.net/20/)
+- [JavaFX](https://jdk.java.net/javafx20/)
+- [pdflatex](https://www.latex-project.org/)
+- [whiptail] (for TUI)
 
 ## Installation
 
