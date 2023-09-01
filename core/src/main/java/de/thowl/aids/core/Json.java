@@ -88,18 +88,35 @@ public class Json {
 		}
 	}
 
+	/**
+	 * Gets the filepath
+  	 * @return filepath
+	 */
 	public String getFilePath() {
 		return filePath;
 	}
 
+	/**
+	 * Sets the filepath
+  	 * @param filepath new filepath
+	 */
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
 	}
 
+	/**
+	 * Gets the jsonObject
+  	 * @return jsonObject
+	 */
 	public JSONObject getJsonObject() {
 		return jsonObject;
 	}
 
+	
+	/**
+	 * Sets the jsonObject
+  	 * @param jsonObject new jsonObject
+	 */
 	public void setJsonObject(JSONObject jsonObject) {
 		this.jsonObject = jsonObject;
 	}
