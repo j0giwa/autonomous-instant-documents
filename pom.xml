@@ -132,7 +132,7 @@
 				<version>${module.gui.version}</version>
 			</dependency>
 			<!--<dependency>
-      				<groupId>de.thowl</groupId>
+      				<groupId>de.thowl.aids</groupId>
 			      	<artifactId>database</artifactId>
 				<version>${module.database.version}</version>
     			</dependency>-->
