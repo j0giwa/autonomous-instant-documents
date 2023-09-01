@@ -114,7 +114,7 @@ public class OperatingSystem {
 	 * @throws LatexNotInstalledException if the compiler cannot be found
 	 *                                    anywhere on the system.
 	 */
-	public String getPdflatexLocation() throws LatexNotInstalledException {
+	public String getPdflatexPath() throws LatexNotInstalledException {
 		if (!new File(pdflatexPath).exists())
 			throw new LatexNotInstalledException(
 					"pdflatex not found");
@@ -127,10 +127,6 @@ public class OperatingSystem {
 
 	public void setHomeDir(String homeDir) {
 		this.homeDir = homeDir;
-	}
-
-	public String getPdflatexPath() {
-		return pdflatexPath;
 	}
 
 	public void setPdflatexPath(String pdflatexPath) {
