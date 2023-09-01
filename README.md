@@ -55,7 +55,6 @@ Getting started
 - pdflatex
 - whiptail (for TUI)
 
-
 ## Installation
 
 ### Windows

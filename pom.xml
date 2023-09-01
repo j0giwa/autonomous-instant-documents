@@ -4,13 +4,13 @@
 	<groupId>de.thowl.aids</groupId>
 	<artifactId>automomousInstantdocumentSystem</artifactId>
 	<name>Autonomous Instantdocument System</name>
-	<version>0.8.5</version>
+	<version>0.9.2</version>
 	<packaging>pom</packaging>
 	<modules>
 		<module>core</module>
+		<module>cli</module>
 		<module>gui</module>
-		<module>main</module>
-		<module>database</module>
+		<!--<module>database</module>-->
 		<module>distribution</module>
 	</modules>
 	<properties>
@@ -25,10 +25,10 @@
 		<testfx.version>4.0.16-alpha</testfx.version>
 		<json-simple.version>1.1.1</json-simple.version>
 		<!-- Modules -->
-		<module.main.version>0.8.5</module.main.version>
+		<module.cli.version>1.0.1</module.cli.version>
 		<module.core.version>0.8.5</module.core.version>
 		<module.gui.version>0.8.5</module.gui.version>
-		<module.main.version></module.database.version>
+		<module.database.version>0.8.5</module.database.version>
 		<!-- Plugins -->
 		<maven-compiler.version>3.11.0</maven-compiler.version>
 		<maven-assembly.version>3.3.0</maven-assembly.version>
@@ -118,8 +118,8 @@
 			<!-- Modules -->
 			<dependency>
 				<groupId>de.thowl.aids</groupId>
-				<artifactId>main</artifactId>
-				<version>${module.main.version}</version>
+				<artifactId>cli</artifactId>
+				<version>${module.cli.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>de.thowl.aids</groupId>
