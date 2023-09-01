@@ -131,6 +131,11 @@
 				<artifactId>gui</artifactId>
 				<version>${module.gui.version}</version>
 			</dependency>
+			<!--<dependency>
+      				<groupId>de.thowl</groupId>
+			      	<artifactId>database</artifactId>
+				<version>${module.database.version}</version>
+    			</dependency>-->
 		</dependencies>
 	</dependencyManagement>
 	<build>
