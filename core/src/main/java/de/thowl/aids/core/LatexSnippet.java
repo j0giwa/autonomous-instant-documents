@@ -89,18 +89,38 @@ public class LatexSnippet {
 		this.fileContent = fileContent;
 	}
 
+	/**
+	 * Get the snippet's file
+         * 
+	 * @return the snippet's file
+	 */
 	public File getFile() {
 		return file;
 	}
 
+	/**
+	 * Overwrite the snippet's file
+         * 
+	 * @param file the file
+	 */
 	public void setFile(File file) {
 		this.file = file;
 	}
 
+	/**
+	 * Get the the path to the snippet's file
+         * 
+	 * @return the snippet's file path
+	 */
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
 	}
 
+	/**
+	 * Overwrite the snippet's file path
+         * 
+	 * @param file new path ot the the file
+	 */
 	public void setFileContent(String fileContent) {
 		this.fileContent = fileContent;
 	}
