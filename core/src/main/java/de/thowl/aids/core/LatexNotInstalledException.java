@@ -20,7 +20,7 @@
 package de.thowl.aids.core;
 
 /**
- * This exception gets thrown wen a LaTeX binary cannot be found
+ * This exception gets thrown when a LaTeX binary cannot be found
  */
 public class LatexNotInstalledException extends Exception {
 
@@ -28,6 +28,8 @@ public class LatexNotInstalledException extends Exception {
 	private final String message;
 
 	/**
+ 	 * Exception constructor
+	 *
 	 * @param message errormessage if the exception gets thrown
 	 */
 	public LatexNotInstalledException(String message) {
@@ -36,19 +38,22 @@ public class LatexNotInstalledException extends Exception {
 	}
 
 	/**
-	 * @return Erromassage as a String
+ 	 * Gets an errorstring
+         *
+	 * @return Errormessage as a String
 	 */
 	@Override
 	public String toString() {
 		return message;
 	}
 
+	/**
+ 	 * Gets the Serial version uid
+         *
+	 * @return Serial version uid
+	 */
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
-	public String getMessage() {
-		return message;
-	}
-
+	
 }
