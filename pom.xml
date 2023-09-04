@@ -10,7 +10,7 @@
 		<module>core</module>
 		<module>cli</module>
 		<module>gui</module>
-		<!--<module>database</module>-->
+		<module>database</module>
 		<module>distribution</module>
 	</modules>
 	<properties>
@@ -115,7 +115,6 @@
 				<artifactId>json-simple</artifactId>
 				<version>${json-simple.version}</version>
 			</dependency>
-			<!-- Modules -->
 			<dependency>
 				<groupId>de.thowl.aids</groupId>
 				<artifactId>cli</artifactId>
@@ -131,11 +130,11 @@
 				<artifactId>gui</artifactId>
 				<version>${module.gui.version}</version>
 			</dependency>
-			<!--<dependency>
+			<dependency>
       				<groupId>de.thowl.aids</groupId>
 			      	<artifactId>database</artifactId>
 				<version>${module.database.version}</version>
-    			</dependency>-->
+    			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<build>

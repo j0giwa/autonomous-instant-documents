@@ -22,11 +22,11 @@
       <groupId>de.thowl.aids</groupId>
       <artifactId>gui</artifactId>
     </dependency>
-    <!--<dependency>
+    <dependency>
       <groupId>de.thowl.aids</groupId>
       <artifactId>database</artifactId>
-    </dependency>-->
-  </dependencies>
+    </dependency>
+    </dependencies>
   <build>
     <plugins>
       <plugin>
