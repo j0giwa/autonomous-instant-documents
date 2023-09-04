@@ -1,5 +1,4 @@
-package de.thowl.automomousinstantdocumentsystem.model;
-
+package de.thowl.aids.database;
 
 import java.io.*;
 import java.sql.*;
@@ -7,14 +6,13 @@ import java.sql.*;
 import java.util.*;
  
 // Main class
-class MySQLTEST {
-// Main driver method
-/**
- * @param args
- * @throws Exception
- */
-public static void main(String[] args) throws Exception
-{
+class MySQL {
+  // Main driver method
+  /**
+  * @param args
+  * @throws Exception
+  */
+  public static void main(String[] args) throws Exception {
     String url = "jbdc:mysql://localhost:3306/aids"; // table details
     String userName = "root";
     String password = "";
@@ -33,8 +31,5 @@ public static void main(String[] args) throws Exception
     con.close();
     System.out.println("Connection Closed");
 
+  }
 }
-
-
-
-

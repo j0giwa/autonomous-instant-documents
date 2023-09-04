@@ -163,7 +163,7 @@
 								<finalName>automomous-instantdocument-system</finalName>
 								<archive>
 									<manifest>
-										<mainClass>de.thowl.aids.main.Main</mainClass>
+										<mainClass>de.thowl.aids.cli.Main</mainClass>
 									</manifest>
 								</archive>
 								<descriptorRefs>
