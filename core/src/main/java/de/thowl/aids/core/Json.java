@@ -22,85 +22,77 @@ package de.thowl.aids.core;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 /**
  * This class contains Methods to read and write a JSon file
- * 
+ *
  * @author Jonas Schwind
  * @version 1.0,0
  */
 public class Json {
 
-	private String filePath;
-	private JSONObject jsonObject;
+  private String filePath;
+  private JSONObject jsonObject;
 
-	/**
-	 * Constructor for objects of this class
-	 * 
-	 * @param filepath The location of the JSonfile
-	 */
-	public Json(String filepath) {
-		this.filePath = filepath;
-		try {
-			Object parser = new JSONParser()
-					.parse(new FileReader(filepath));
-			jsonObject = (JSONObject) parser;
-		} catch (IOException | ParseException e) {
-			e.printStackTrace();
-		}
-	}
+  /**
+   * Constructor for objects of this class
+   *
+   * @param filepath The location of the JSonfile
+   */
+  public Json(String filepath) {
+    this.filePath = filepath;
+    try {
+      Object parser = new JSONParser().parse(new FileReader(filepath));
+      jsonObject = (JSONObject)parser;
+    } catch (IOException | ParseException e) {
+      e.printStackTrace();
+    }
+  }
 
-	/**
-	 * Returns a value from a JSon file.
-	 * 
-	 * @param object JSonObject that contains the value that should be
-	 *               returned
-	 * @param key    key in JSonObject, that contains the value that should
-	 *               be returned
-	 * @return value of the Json Key
-	 */
-	public String getValue(String object, String key) {
-		JSONObject currentObject = (JSONObject) jsonObject.get(object);
-		return (String) currentObject.get(key);
-	}
+  /**
+   * Returns a value from a JSon file.
+   *
+   * @param object JSonObject that contains the value that should be
+   *               returned
+   * @param key    key in JSonObject, that contains the value that should
+   *               be returned
+   * @return value of the Json Key
+   */
+  public String getValue(String object, String key) {
+    JSONObject currentObject = (JSONObject)jsonObject.get(object);
+    return (String)currentObject.get(key);
+  }
 
-	/**
-	 * Cahnges a value in a JSon file.
-	 * 
-	 * @param object JSonObject that contains the value that should be
-	 *               changed
-	 * @param key    key in JSonObject, that contains the value that should
-	 *               be changed
-	 * @param value  value the should be changed
-	 */
-	public void setValue(String object, String key, String value) {
-		JSONObject currentObject = (JSONObject) jsonObject.get(object);
-		// NOTE: JSONObject is not generic, warning cannot be fixed
-		currentObject.put(key, value);
-		try (FileWriter file = new FileWriter(filePath)) {
-			file.write(jsonObject.toJSONString());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+  /**
+   * Cahnges a value in a JSon file.
+   *
+   * @param object JSonObject that contains the value that should be
+   *               changed
+   * @param key    key in JSonObject, that contains the value that should
+   *               be changed
+   * @param value  value the should be changed
+   */
+  public void setValue(String object, String key, String value) {
+    JSONObject currentObject = (JSONObject)jsonObject.get(object);
+    // NOTE: JSONObject is not generic, warning cannot be fixed
+    currentObject.put(key, value);
+    try (FileWriter file = new FileWriter(filePath)) {
+      file.write(jsonObject.toJSONString());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
 
-	public String getFilePath() {
-		return filePath;
-	}
+  public String getFilePath() { return filePath; }
 
-	public void setFilePath(String filePath) {
-		this.filePath = filePath;
-	}
+  public void setFilePath(String filePath) { this.filePath = filePath; }
 
-	public JSONObject getJsonObject() {
-		return jsonObject;
-	}
+  public JSONObject getJsonObject() { return jsonObject; }
 
-	public void setJsonObject(JSONObject jsonObject) {
-		this.jsonObject = jsonObject;
-	}
+  public void setJsonObject(JSONObject jsonObject) {
+    this.jsonObject = jsonObject;
+  }
 }
