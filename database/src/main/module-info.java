@@ -17,6 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-module de.thowl.database {
-    exports de.thowl.database;
+module de.thowl.aids.database {
+  requires java.sql;
+  exports de.thowl.aids.database;
 }
