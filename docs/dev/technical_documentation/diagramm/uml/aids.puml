@@ -9,9 +9,6 @@ de.thowl.aids.gui.LatexScene -- de.thowl.aids.core.Json
 
 package de.thowl.aids.cli {
 	class Main {
-		- {static} EXIT_SUCCESS: int
-		- {static} EXIT_ERROR: int
-		- {static} VERSION: int
 		- {static} logger: Logger
 		- {static} type: String
 		- {static} destination: String
@@ -134,4 +131,18 @@ package de.thowl.aids.gui{
 	MasterController <|-- MainScene : overrides
 	MasterController <|-- LatexScene : overrides
 }
+
+package de.thowl.aids.database {
+        class MySQL{
+                - url: String
+                - userName: String
+                - password: String
+                - con: Connection
+                + openConnection: void
+                + closeConnection: void
+                + getSubjekt: String
+                + setSubjekt: String
+        }
+}
+
 @enduml
