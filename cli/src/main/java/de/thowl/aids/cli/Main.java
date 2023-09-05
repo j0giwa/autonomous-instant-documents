@@ -1,6 +1,6 @@
 /*
  * Autonomous Instantdocument System -- Automatically generate LaTeX Documents
- * Copyright (C) 2023 Jonas Schwind, Marvin Boschmann
+ * Copyright (C) 2023 Jonas Schwind, Martin Boschmann
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -217,6 +217,7 @@ public class Main {
 
 	/**
 	 * Get the type.
+	 *
 	 * @return Document type
 	 */
 	public static String getType() {
@@ -225,6 +226,7 @@ public class Main {
 
 	/**
 	 * Get the destination.
+	 *
 	 * @return Document destination
 	 */
 	public static String getDestination() {
@@ -233,6 +235,7 @@ public class Main {
 
 	/**
 	 * Get the Amount.
+	 *
 	 * @return Document Amount
 	 */
 	public static int getAmount() {
@@ -241,6 +244,7 @@ public class Main {
 
 	/**
 	 * Get the Chapters.
+	 *
 	 * @return Amount of Chapters per Document
 	 */
 	public static int getChapters() {
@@ -249,6 +253,7 @@ public class Main {
 
 	/**
 	 * Get the shufflemode status.
+	 *
 	 * @return State of shuffle mode
 	 */
 	public static boolean getShuffle() {

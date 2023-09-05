@@ -38,3 +38,17 @@ else
 endif
 stop
 @enduml
+
+@startuml Ha
+skinparam monochrome true
+start
+:Count Arguments;
+if (No Argumants) then (yes)
+	:Start Gui;
+	stop
+else
+	:Handle Arguments;
+	:Generate Document(s);
+endif
+stop
+@enduml

@@ -1,1 +1,1 @@
-package de.thowl.database;
+package de.thowl.aids.database;
