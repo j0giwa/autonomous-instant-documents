@@ -4,9 +4,6 @@ skinparam monochrome true
 
 package de.thowl.aids.cli {
 	class Main {
-		- {static} EXIT_SUCCESS: int
-		- {static} EXIT_ERROR: int
-		- {static} VERSION: int
 		- {static} logger: Logger
 		- {static} type: String
 		- {static} destination: String
@@ -22,7 +19,6 @@ package de.thowl.aids.cli {
 		- {static} printHelp(): void
 	}
 }
-
 @enduml
 
 @startuml Main
@@ -36,5 +32,41 @@ else
 	:Handle Arguments;
 	:Generate Document(s);
 endif
+stop
+@enduml
+
+@startuml formatArg
+skinparam monochrome true
+start
+:take arg;
+:remove dashes;
+:return arg;
+stop
+@enduml
+
+@startuml handleArgs
+skinparam monochrome true
+start
+while (unhandled Argumnets)
+        if (If valid argument) then (yes)
+	        :run corresponding method;
+	        stop
+        else
+	        :pass to handle param args;
+        endif
+endwhile
+stop
+@enduml
+
+@startuml handleParamArgs
+skinparam monochrome true
+start
+while (unhandled Argumnets)
+        :save arg;
+        :get param;
+        if (If valid argument) then (yes)
+	        :run corresponding method with param;
+        endif
+endwhile
 stop
 @enduml

@@ -15,14 +15,14 @@
 \title{Ausarbeitung Programiersprachen II: Autonomous Instantdocument System}
 \shorttitle{Autonomous Instantdocument System}
 \leftheader{Schwind}
-\authorsnames{Jonas Schwind, Marvin Boschmann}
+\authorsnames{Jonas Schwind, Martin Boschmann}
 \affiliation{Technische Hochschule Ostwestfahlen-Lippe}
 \course{PGR2 8512: Programmiersprachen II}
 \professor{Prof.\ Dr.\ rer.\ nat.\ Stefan Wolf}
 \duedate{08.09.2023}
 
 \hypersetup{
- pdfauthor={Jonas Schwind, Marvin Boschman},
+ pdfauthor={Jonas Schwind, Martin Boschman},
  pdftitle={Ausarbeitung Programiersprachen II},
  pdfkeywords={},
  pdfsubject={},
@@ -132,14 +132,28 @@ Argument & Funktion \\
 \noindent Die in Tabelle~\ref{Argumente} aufgeführten Argumente können auch in der Anwenderdokumentation nachgelesen werden.
 
 \subsubsection{GUI}
+\noindent Die stilistische Vorlage der Grafischen Oberfläche entsprang zwei Anwendungen.
+Zum einen war es der Webbrowser Opera GX (Abbildung~\ref{opera}), von dem das Farbschema übernommen wurde.
+Außerdem gab es den Launcher des GAMMA Modpacks (Abbildung~\ref{gamma}), für das Spiel S.T.A.L.K.E.R. Anomaly, ihm wurde Teile seines Layouts abgegriffen.
 
-TODO: .jpg einfügen
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=450px]{../technical_documentation/gui_sketches/inspiration/gamma.png}
+\caption{\label{gamma}Gui des GAMMA launchers}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=450px]{../technical_documentation/gui_sketches/inspiration/opera.png}
+\caption{\label{gx}Architektur des cli Moduls}
+\end{figure}
 
 \clearpage
 
 \section{Entwurf}
 
 \subsection{de.thowl.aids.cli}
+\noindent Das Modul \texttt{cli} ist der Startpunkt des Programms, es ist der CLI-Client oder startet die grafische Oberfläche.
 
 \begin{figure}[!htbp]
 \centering
@@ -147,9 +161,14 @@ TODO: .jpg einfügen
 \caption{\label{CLI Architektur}Architektur des cli Moduls}
 \end{figure}
 
-\noindent Das Modul \texttt{cli} ist der Startpunkt des Programms, es ist der CLI-Client oder startet die grafische Oberfläche.
-
 \subsubsection{de.thowl.aids.cli.Main}
+\noindent Die \texttt{main} Methode verwaltet die CLI-Argumente, sofern welche übergeben wurden.
+Wenn keine Argumente übergeben wurden, startet das Programm mit einer grafischen Oberfläche. (s. Abbildung~\ref{main-methode})
+
+Sollten Argumente übergeben worden sein, werden diese zunächst formatiert (s. Abbildung~\ref{formatArg-methode}).
+Im Anschluss werden die Argumente mit der \texttt{handleArgs} Methode abgearbeitet, sofern diese der Methode bekannt sind.
+
+Wenn \texttt{handleArgs} mit diesem Argument nichts anfangen kann, wird davon ausgegangen, dass es sich bei diesem Argument um ein parametrisiertes Argument handelt, bspw. \texttt{--amount 10}. Dies werden von der \texttt{handleParamArgs} Methode verarbeitet (s. Abbildung~\ref{handleParamArgs-methode}).
 
 \begin{figure}[!htbp]
 \centering
@@ -157,10 +176,26 @@ TODO: .jpg einfügen
 \caption{\label{main-methode}Ablaufdiagramm der main Methode}
 \end{figure}
 
-\noindent Die \texttt{main} Methode verwaltet die CLI-Argumente, sofern welche übergeben wurden.
-Wenn keine Argumente übergeben wurden, startet das Programm mit einer grafischen Oberfläche.
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=150px]{../technical_documentation/diagramm/uml/flowcharts/cli/formatArg.png}
+\caption{\label{formatArg-methode}Ablaufdiagramm der formatArg Methode}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=350px]{../technical_documentation/diagramm/uml/flowcharts/cli/handleArgs.png}
+\caption{\label{handleArgs-methode}Ablaufdiagramm der handleArgs Methode}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=250px]{../technical_documentation/diagramm/uml/flowcharts/cli/handleParamArgs.png}
+\caption{\label{handleParamArgs-methode}Ablaufdiagramm der handleParamArgs Methode}
+\end{figure}
 
 \subsection{de.thowl.aids.core}
+\noindent Im Modul \texttt{Core} sind alle essentiellen Klassen und Methoden vorhanden. Es ist das herzstück das programms
 
 \begin{figure}[!htbp]
 \centering
@@ -168,11 +203,9 @@ Wenn keine Argumente übergeben wurden, startet das Programm mit einer grafische
 \caption{\label{Core Architektur}Architektur des core Moduls}
 \end{figure}
 
-\noindent Im Modul \texttt{Core} sind alle essentiellen Klassen und Methoden vorhanden. Es ist das herzstück das programms
-
 \subsubsection{de.thowl.aids.core.Json}
-
 \noindent Die \texttt{json} Klasse kümmert sich, wie der Name vermuten lässt, um die Datenhaltung/Verwaltung via JSON.
+Die Ablaufdiagramme in Abbildung~\ref{getValue-methode} und Abbildung~\ref{setValue-methode} sind trivial und sprechen für sich selbst.
 
 \begin{figure}[!htbp]
 \centering
@@ -186,9 +219,16 @@ Wenn keine Argumente übergeben wurden, startet das Programm mit einer grafische
 \caption{\label{setValue-methode}Ablaufdiagramm der setValue Methode}
 \end{figure}
 
-\noindent Die Ablaufdiagramme sind trivial und sprechen für sich selbst.
-
 \subsubsection{de.thowl.aids.core.latex}
+\noindent Die Methode \texttt{gatherSnippets} sammelt alle Schnipsel, die für ein \LaTeX{}-dokument benötigt werden.
+Der Dokumentheader und Footer werden in je einer separaten Variable gespeichert.
+Alle anderen Schnipsel landen in einer ArrayList (s. Abbildung~\ref{gatherSnippets-methode}).
+
+Die Methode \texttt{concat} verbindet alle Schnippel, die von \texttt{gatherSnippets} gesammelt wurden, zu einer \texttt{.tex}-datei.
+Der Inhalt des Headers und des Footers werden in die Datei kopiert.
+Bei allen anderen Schnipseln wird der Dateipfad zu einem \texttt{\textbackslash{}inculde\{\}} formatiert und eingefügt (s. Abbildung~\ref{concat-methode}).
+
+Die \texttt{compile} Methode compiliert die von \texttt{concat} erstellte \LaTeX{}-datei zu einem PDF-Dokument (s. Abbildung~\ref{compile-methode}).
 
 \begin{figure}[!htbp]
 \centering
@@ -196,22 +236,11 @@ Wenn keine Argumente übergeben wurden, startet das Programm mit einer grafische
 \caption{\label{gatherSnippets-methode}Ablaufdiagramm der gatherSnippets Methode}
 \end{figure}
 
-\noindent Die Methode \texttt{gatherSnippets} sammelt alle Schnipsel, die für ein \LaTeX{}-dokument benötigt werden.
-Der Dokumentheader und Footer werden in je einer separaten Variable gespeichert.
-
-Alle anderen Schnipsel landen in einer ArrayList.
-
 \begin{figure}[!htbp]
 \centering
 \includegraphics[width=150px]{../technical_documentation/diagramm/uml/flowcharts/core/latex/concat.png}
 \caption{\label{concat-methode}Ablaufdiagramm der concat Methode}
 \end{figure}
-
-\noindent Die Methode \texttt{concat} verbindet alle Schnippel, die von \texttt{gatherSnippets} gesammelt wurden, zu einer \texttt{.tex}-datei.
-Der Inhalt des Headers und des Footers werden in die Datei kopiert.
-
-Bei allen anderen Schnipseln wird der Dateipfad zu einem \texttt{\textbackslash{}inculde\{\}}
-formatiert und eingefügt.
 
 \begin{figure}[!htbp]
 \centering
@@ -219,23 +248,20 @@ formatiert und eingefügt.
 \caption{\label{compile-methode}Ablaufdiagramm der compile Methode}
 \end{figure}
 
-\noindent Die \texttt{compile} Methode compiliert die von \texttt{concat} erstellte \LaTeX{}-datei zu einem PDF-Dokument.
-
 \clearpage
 
 \subsubsection{de.thowl.aids.core.OperartingSystem}
+\noindent Der in Abbildung~\ref{os-construcktor} Konstruktor legt die Objektattribute abhängig vom verwendetem Betriebssystem an.
+
+Es soll vermieden werden, für das Programm wichtige Dateien sinnlos im Dokumente-Verzeichniss abzulegen. Daher werden die Dateipfade, die vom OS für diesen Zweck vorgesehen sind, verwendet.
+
+Aus persönlichen Gründen kann die Verwendung unter macOS allerdings nicht getestet werden.
 
 \begin{figure}[!htbp]
 \centering
 \includegraphics[width=250px]{../technical_documentation/diagramm/uml/flowcharts/core/os/construcktor.png}
 \caption{\label{os-construcktor}Ablaufdiagramm des Konstrucktors der Klasse OperartingSystem}
 \end{figure}
-
-\noindent Dieser Konstruktor legt die Objektattribute abhängig vom verwendetem Betriebssystem an.
-
-Es soll vermieden werden, für das Programm wichtige Dateien sinnlos im Dokumente-Verzeichniss abzulegen. Daher werden die Dateipfade, die vom OS für diesen Zweck vorgesehen sind, verwendet.
-
-Aus persönlichen Gründen kann die Verwendung unter macOS allerdings nicht getestet werden.
 
 \subsection{de.thowl.aids.gui}
 \noindent Das \texttt{gui} Modul ist für die grafische Oberfläche zuständig.
