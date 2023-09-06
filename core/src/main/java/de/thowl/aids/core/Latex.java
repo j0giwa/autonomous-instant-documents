@@ -26,9 +26,11 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Random;
 
@@ -198,14 +200,22 @@ public class Latex {
 	public void generate(String type, String destination, int amount,
 			int chapters, boolean shuffle) {
 		gatherSnippets(type, chapters, true);
+		OperatingSystem os = new OperatingSystem();
 		for (int i = 1; i <= amount; i++) {
-			// TODO: Add pretty foldername
-			String subDir = "foldername" + i;
-			String workingDir = "./temp" + File.separator + subDir;
-			new File(workingDir).mkdir();
+			String subDir = "aids" + File.separator + type + i;
+			String workingDir = os.getTempDir() + File.separator + subDir;
+			try {
+				Files.createDirectories(Paths.get(workingDir));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			concat(type, workingDir);
 			compile(type, workingDir);
-			copyPdf(workingDir, type, destination, type);
+			Date date = new Date();
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+			String fileName = dateFormat.format(date) + "-" + type + "-" + "(" + i + ").pdf";
+			copyPdf(workingDir, type, destination, fileName);
+			System.out.println("made it");
 			Collections.shuffle(snippets);
 		}
 	}

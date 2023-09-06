@@ -31,6 +31,7 @@ public class OperatingSystem {
 
 	private String operatingSystem;
 	private String homeDir;
+	private String tempDir;
 	private String pdflatexPath;
 
 	/**
@@ -48,11 +49,13 @@ public class OperatingSystem {
 				if (homeDir == null)
 					homeDir = System.getProperty("user.home")
 							+ "/.config";
+				tempDir = "/tmp";
 				pdflatexPath = "/usr/bin/pdflatex";
 				break;
 			case "Mac OS X":
 				operatingSystem = "Mac";
 				homeDir = System.getProperty("user.home") + "/Library/Application Support/";
+				tempDir = "/tmp";
 				pdflatexPath = "/usr/bin/pdflatex";
 				break;
 			case "Windows 7":
@@ -60,6 +63,7 @@ public class OperatingSystem {
 			case "Windows 11":
 				operatingSystem = "Windows";
 				homeDir = System.getenv("APPDATA");
+				tempDir = "%temp%";
 				pdflatexPath = "C:\\texlive\\2023\\bin\\windows\\pdflatex.exe";
 				break;
 			default:
@@ -131,6 +135,14 @@ public class OperatingSystem {
 
 	public void setPdflatexPath(String pdflatexPath) {
 		this.pdflatexPath = pdflatexPath;
+	}
+
+	public String getTempDir() {
+		return tempDir;
+	}
+
+	public void setTempDir(String tempDir) {
+		this.tempDir = tempDir;
 	}
 
 }

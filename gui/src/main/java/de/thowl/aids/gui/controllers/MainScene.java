@@ -19,13 +19,16 @@
 
 package de.thowl.aids.gui.controllers;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import de.thowl.aids.core.Json;
 import de.thowl.aids.core.Latex;
+import de.thowl.aids.core.OperatingSystem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -87,10 +90,11 @@ public class MainScene extends Controller {
 	 */
 	@FXML
 	private void btnGenerateDocumentClick(ActionEvent event) {
+		OperatingSystem os = new OperatingSystem();
+		Json json = new Json(os.getHomeDir() + File.separator + "settings.json");
 		final String type = super.cmbType.getSelectionModel()
 				.getSelectedItem();
-		// TODO: add location in settings
-		final String destination = "/home/jogiwa/Downloads";
+		final String destination = json.getValue("settings", "defaultDestination");
 		final int amount = super.validateInt(txtAmount.getText());
 		final int chapters = super.validateInt(txtChapters.getText());
 		final boolean shuffle = chkShuffle.isArmed();

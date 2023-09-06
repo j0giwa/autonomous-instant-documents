@@ -27,16 +27,18 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import de.thowl.aids.core.Latex;
+import de.thowl.aids.core.OperatingSystem;
 
 public class TestLatex {
 
-	private static final String SNIPPETS_DIR = "./src/test/resources/latex/test/chapters";
-	private static final String TEMP_DIR = "./temp";
+	private static String tempdir;
 	private static final String TEST_TYPE = "test";
 	private static final int TEST_CHAPTERS = 2;
 
@@ -44,6 +46,8 @@ public class TestLatex {
 
 	@BeforeEach
 	public void setUp() {
+		OperatingSystem os = new OperatingSystem();
+		tempdir = os.getTempDir() + File.separator + "aidsTest";
 		createDirectories();
 		latex = new Latex();
 	}
@@ -55,7 +59,7 @@ public class TestLatex {
 	 */
 	@Test
 	public void test_gatherSnippets_ShouldGatherSnippetsAndRandomizeOrder() {
-    String type = TEST_TYPE;
+		String type = TEST_TYPE;
 		int chapters = TEST_CHAPTERS;
 		boolean randomize = true;
 		latex.gatherSnippets(type, chapters, randomize);
@@ -71,7 +75,7 @@ public class TestLatex {
 	@Test
 	public void test_concat_ShouldConcatenateSourceFile() {
 		String type = TEST_TYPE;
-		String workingDir = TEMP_DIR + File.separator + "concatTest";
+		String workingDir = tempdir + File.separator + "concatTest";
 		latex.gatherSnippets(type, TEST_CHAPTERS, false);
 		latex.concat(type, workingDir);
 		File sourceFile = new File(workingDir + File.separator + type + ".tex");
@@ -86,7 +90,8 @@ public class TestLatex {
 	@Test
 	public void test_compile_ShouldCompile() {
 		String type = TEST_TYPE;
-		String workingDir = TEMP_DIR + File.separator + "singleCompileTest";
+		String workingDir = tempdir + File.separator + "singleCompileTest";
+
 		latex.gatherSnippets(type, TEST_CHAPTERS, false);
 		latex.concat(type, workingDir);
 		latex.compile(type, workingDir);
@@ -102,24 +107,26 @@ public class TestLatex {
 	@Test
 	public void test_generate_ShouldGenerateDocuments() {
 		String type = TEST_TYPE;
-		String destination = TEMP_DIR;
+		String destination = tempdir;
 		int amount = 3;
 		int chapters = TEST_CHAPTERS;
 		boolean shuffle = true;
 		latex.generate(type, destination, amount, chapters, shuffle);
 		for (int i = 1; i <= amount; i++) {
-			File documentFolder = new File(
-					destination + File.separator + "foldername" + i);
-			File outputFile = new File(documentFolder.getPath()
-					+ File.separator + type + ".pdf");
+			File documentFolder = new File(destination);
+			Date date = new Date();
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+			String fileName = dateFormat.format(date) + "-" + TEST_TYPE + "-(" + i + ").pdf";
+			File outputFile = new File(documentFolder.getPath() + File.separator + fileName);
+			System.out.println(outputFile.toPath().toString());
 			assertTrue(outputFile.exists());
 		}
 	}
 
 	private void createDirectories() {
 		try {
-			Files.createDirectories(Paths.get(SNIPPETS_DIR));
-			Files.createDirectories(Paths.get(TEMP_DIR));
+			Files.deleteIfExists(Paths.get(tempdir));
+			Files.createDirectories(Paths.get(tempdir));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
