@@ -39,7 +39,8 @@ public class TestJson {
 	@BeforeEach
 	public void setUp() {
 		OperatingSystem os = new OperatingSystem();
-		file = os.getTempDir() + File.separator + "aidsTest" + File.separator + "test.json";
+		file = os.getTempDir() + File.separator + "aidsTest" +
+				File.separator + "test.json";
 		createTestJsonFile();
 		json = new Json(file);
 	}

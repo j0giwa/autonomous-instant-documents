@@ -24,6 +24,7 @@
 		<log4j.version>2.20.0</log4j.version>
 		<testfx.version>4.0.16-alpha</testfx.version>
 		<json-simple.version>1.1.1</json-simple.version>
+		<mysql-connector.version>8.0.33</mysql-connector.version>
 		<!-- Modules -->
 		<module.cli.version>1.0.1</module.cli.version>
 		<module.core.version>0.8.5</module.core.version>
@@ -114,6 +115,11 @@
 				<groupId>com.googlecode.json-simple</groupId>
 				<artifactId>json-simple</artifactId>
 				<version>${json-simple.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${mysql-connector.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>de.thowl.aids</groupId>

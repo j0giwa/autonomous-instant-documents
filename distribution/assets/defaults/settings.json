@@ -1,5 +1,6 @@
 {
-	"settings": { 
-		"editor": "mousepad" 
-	} 
+  "settings":{
+    "defaultDestination":"~/Downloads/"
+    "editor":"mousepad"
+  }
 }
