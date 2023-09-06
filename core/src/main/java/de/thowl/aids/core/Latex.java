@@ -113,12 +113,14 @@ public class Latex {
 		Iterator<LatexSnippet> it = snippets.iterator();
 		while (it.hasNext()) {
 			LatexSnippet snippet = it.next();
-			fileContent.append("\\input{" + snippet.getFilePath() + "}\n");
+			fileContent.append("\\input{" +
+					snippet.getFilePath() + "}\n");
 		}
 		fileContent.append(footer.getFileContent() + "\n");
 		try {
 			new File(destination).mkdir();
-			String outputfilePath = destination + File.separator + type + ".tex";
+			String outputfilePath = destination + File.separator +
+					type + ".tex";
 			Files.write(Paths.get(outputfilePath), fileContent.toString()
 					.getBytes(StandardCharsets.UTF_8));
 		} catch (IOException e) {
@@ -203,7 +205,8 @@ public class Latex {
 		OperatingSystem os = new OperatingSystem();
 		for (int i = 1; i <= amount; i++) {
 			String subDir = "aids" + File.separator + type + i;
-			String workingDir = os.getTempDir() + File.separator + subDir;
+			String workingDir = os.getTempDir() +
+					File.separator + subDir;
 			try {
 				Files.createDirectories(Paths.get(workingDir));
 			} catch (IOException e) {
@@ -213,7 +216,8 @@ public class Latex {
 			compile(type, workingDir);
 			Date date = new Date();
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-			String fileName = dateFormat.format(date) + "-" + type + "-" + "(" + i + ").pdf";
+			String fileName = dateFormat.format(date) + "-" + type +
+					"-(" + i + ").pdf";
 			copyPdf(workingDir, type, destination, fileName);
 			System.out.println("made it");
 			Collections.shuffle(snippets);

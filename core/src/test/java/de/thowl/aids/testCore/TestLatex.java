@@ -78,7 +78,8 @@ public class TestLatex {
 		String workingDir = tempdir + File.separator + "concatTest";
 		latex.gatherSnippets(type, TEST_CHAPTERS, false);
 		latex.concat(type, workingDir);
-		File sourceFile = new File(workingDir + File.separator + type + ".tex");
+		File sourceFile = new File(workingDir + File.separator +
+				type + ".tex");
 		assertTrue(sourceFile.exists());
 	}
 
@@ -90,12 +91,13 @@ public class TestLatex {
 	@Test
 	public void test_compile_ShouldCompile() {
 		String type = TEST_TYPE;
-		String workingDir = tempdir + File.separator + "singleCompileTest";
-
+		String workingDir = tempdir + File.separator +
+				"singleCompileTest";
 		latex.gatherSnippets(type, TEST_CHAPTERS, false);
 		latex.concat(type, workingDir);
 		latex.compile(type, workingDir);
-		File outputFile = new File(workingDir + File.separator + type + ".pdf");
+		File outputFile = new File(workingDir + File.separator +
+				type + ".pdf");
 		assertTrue(outputFile.exists());
 	}
 
@@ -116,8 +118,10 @@ public class TestLatex {
 			File documentFolder = new File(destination);
 			Date date = new Date();
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-			String fileName = dateFormat.format(date) + "-" + TEST_TYPE + "-(" + i + ").pdf";
-			File outputFile = new File(documentFolder.getPath() + File.separator + fileName);
+			String fileName = dateFormat.format(date) + "-" +
+					TEST_TYPE + "-(" + i + ").pdf";
+			File outputFile = new File(documentFolder.getPath() +
+					File.separator + fileName);
 			System.out.println(outputFile.toPath().toString());
 			assertTrue(outputFile.exists());
 		}
