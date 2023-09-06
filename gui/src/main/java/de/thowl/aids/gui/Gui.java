@@ -72,7 +72,7 @@ public class Gui extends Application {
 		fxmlLoader.setLocation(fxmlURL);
 		Parent root = fxmlLoader.load();
 		root.getStylesheets().add(cssURL.toExternalForm());
-		stage.setTitle("Automomous Instantdocument System");
+		stage.setTitle("Autonomous Instantdocument System");
 		stage.setScene(new Scene(root, 760, 490));
 		stage.show();
 	}

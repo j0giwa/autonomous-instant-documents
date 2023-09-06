@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.thowl.aids</groupId>
-	<artifactId>automomousInstantdocumentSystem</artifactId>
+	<artifactId>autonomousInstantdocumentSystem</artifactId>
 	<name>Autonomous Instantdocument System</name>
 	<version>0.9.2</version>
 	<packaging>pom</packaging>
@@ -160,7 +160,7 @@
 							</goals>
 							<phase>package</phase>
 							<configuration>
-								<finalName>automomous-instantdocument-system</finalName>
+								<finalName>autonomous-instantdocument-system</finalName>
 								<archive>
 									<manifest>
 										<mainClass>de.thowl.aids.cli.Main</mainClass>
