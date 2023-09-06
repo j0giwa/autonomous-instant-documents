@@ -3,9 +3,9 @@
 [![forthebadge](https://forthebadge.com/images/badges/made-with-java.svg)](https://forthebadge.com)
 [![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)
 
-[![shields.io](https://img.shields.io/github/license/j0giwa/autonomous-instantdokument-system)](https://img.shields.io/github/license/j0giwa/autonomous-instantdokument-system)
-[![sields.io](https://img.shields.io/github/stars/j0giwa/autonomous-instantdokument-system)](https://img.shields.io/github/stars/j0giwa/autonomous-instantdokument-system)
-[![shields.io](https://img.shields.io/github/issues/j0giwa/autonomous-instantdokument-system)](https://img.shields.io/github/issues/j0giwa/autonomous-instantdokument-system)
+[![shields.io](https://img.shields.io/github/license/j0giwa/autonomous-instantdocument-system)](https://img.shields.io/github/license/j0giwa/autonomous-instantdocument-system)
+[![sields.io](https://img.shields.io/github/stars/j0giwa/autonomous-instantdocument-system)](https://img.shields.io/github/stars/j0giwa/autonomous-instantdocument-system)
+[![shields.io](https://img.shields.io/github/issues/j0giwa/autonomous-instantdocument-system)](https://img.shields.io/github/issues/j0giwa/autonomous-instantdocument-system)
 
 Table of Contents
 =============================
