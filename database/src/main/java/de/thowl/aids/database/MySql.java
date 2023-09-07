@@ -1,4 +1,4 @@
-package de.thowl.database;
+package de.thowl.aids.database;
 
 import java.io.*;
 import java.sql.*;
@@ -14,11 +14,10 @@ class MySql {
 
   // Main driver method
   /**
-  * @param args
-  * @throws Exception
-  */
-  public MySql() throws Exception
-   {
+   * @param args
+   * @throws Exception
+   */
+  public MySql() throws Exception {
     url = "jbdc:mysql://localhost:3306/aids"; // table details
     userName = "root";
     password = "";
@@ -26,8 +25,6 @@ class MySql {
     con = DriverManager.getConnection(url, userName, password);
     Class.forName("com.mysql.cj.jdbc.Driver");
     System.out.println("Connection Succsesfully Ethablished");
-   
-
 
   }
 
@@ -62,35 +59,34 @@ class MySql {
     System.out.println("Connection Succsesfully Ethablished");
   }
 
-  private String getSubjekt() throws Exception 
-  {
+  private String getSubjekt() throws Exception {
     String result = "";
     String query = ("Select *From `subjekts`");
     Statement st = con.createStatement();
     ResultSet rs = st.executeQuery(query);
     while (rs.next()) {
-      //Retrieve by column name
-    result = rs.getString("subjekt");
+      // Retrieve by column name
+      result = rs.getString("subjekt");
     }
     st.close();
     con.close();
     return result;
   }
-  
+
   public void snippetVerarbeitung() {
     OperatingSystem operatingSystem = new OperatingSystem();
     String verzeichnisPfad = operatingSystem.getHomeDir();
-    
+
     try {
       Connection verbindung = DriverManager.getConnection(url, userName, password);
-      
+
       File verzeichnis = new File(verzeichnisPfad);
       File[] dateien = verzeichnis.listFiles();
 
-      if(dateien != null) {
+      if (dateien != null) {
         int nummer = 1;
-        for(File datei : dateien) {
-          if(datei.isFile() && datei.getName().endsWith(".tex")) {
+        for (File datei : dateien) {
+          if (datei.isFile() && datei.getName().endsWith(".tex")) {
             String dateiPfad = datei.getAbsolutePath();
             String datenName = datei.getName().replace(".tex", "");
 
@@ -110,6 +106,5 @@ class MySql {
     }
 
   }
-  
-}
 
+}
