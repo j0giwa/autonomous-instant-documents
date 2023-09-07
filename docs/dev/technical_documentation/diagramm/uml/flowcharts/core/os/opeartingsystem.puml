@@ -1,0 +1,19 @@
+@startuml construcktor
+skinparam monochrome true
+start
+:Get Os;
+if (GNU/Linux or BSD) then (yes)
+	:set Unix home dir;
+	:set linux temp dir;
+	:set linux pdflatex bin path;
+elseif (Windows) then (yes)
+	:set windows home dir;
+	:set windows temp dir;
+	:set windows pdflatex bin path;
+elseif (mac) then (yes)
+	:set mac home dir;
+	:set mac temp dir;
+	:set mac pdflatex bin path;
+endif
+stop
+@enduml

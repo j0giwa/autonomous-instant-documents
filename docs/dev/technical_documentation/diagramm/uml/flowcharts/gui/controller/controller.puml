@@ -1,0 +1,20 @@
+@startuml initialiseTypeDropdown
+skinparam monochrome true
+start
+:Get directory with LaTex;
+while (sudirectorys not in dropdown)
+        :add directory name to dropdown;
+endwhile
+stop
+@enduml
+
+@startuml switchToScene
+skinparam monochrome true
+start
+:load requested FXML;
+:load requested stylesheet;
+:save currend window dimentsions;
+:replace FXML and Stylesheet;
+:apply saved window dimentsions;
+stop
+@enduml

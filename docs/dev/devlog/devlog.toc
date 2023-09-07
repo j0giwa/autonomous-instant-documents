@@ -1,0 +1,33 @@
+\babel@toc {ngerman}{}\relax 
+\contentsline {section}{Analyse}{6}{section*.5}%
+\contentsline {subsection}{Anforderungen}{6}{section*.6}%
+\contentsline {subsubsection}{Erforderlich}{6}{section*.7}%
+\contentsline {subsubsection}{Optional}{6}{section*.8}%
+\contentsline {subsection}{Architektur}{6}{section*.9}%
+\contentsline {subsection}{Werkzeuge}{7}{section*.11}%
+\contentsline {subsubsection}{Entwicklungsumgebungen}{7}{section*.12}%
+\contentsline {subsubsection}{git}{7}{section*.13}%
+\contentsline {subsubsection}{JSON}{7}{section*.14}%
+\contentsline {subsubsection}{Maven}{8}{section*.15}%
+\contentsline {subsubsection}{plantuml}{8}{section*.16}%
+\contentsline {subsection}{Benutzerschnittstellen}{8}{section*.17}%
+\contentsline {subsubsection}{CLI}{8}{section*.18}%
+\contentsline {subsubsection}{GUI}{8}{section*.20}%
+\contentsline {section}{Entwurf}{9}{section*.21}%
+\contentsline {subsection}{de.thowl.aids.cli}{9}{section*.22}%
+\contentsline {subsubsection}{de.thowl.aids.cli.Main}{9}{section*.24}%
+\contentsline {subsection}{de.thowl.aids.core}{9}{section*.29}%
+\contentsline {subsubsection}{de.thowl.aids.core.Json}{9}{section*.31}%
+\contentsline {subsubsection}{de.thowl.aids.core.Latex}{11}{section*.34}%
+\contentsline {subsubsection}{de.thowl.aids.core.OperartingSystem}{14}{section*.38}%
+\contentsline {subsection}{de.thowl.aids.gui}{14}{section*.40}%
+\contentsline {subsection}{de.thowl.aids.database}{15}{section*.42}%
+\contentsline {subsubsection}{de.thowl.aids.gui.Controller}{15}{section*.43}%
+\contentsline {subsubsection}{de.thowl.aids.gui.MainScene}{15}{section*.46}%
+\contentsline {section}{Gesprächsprokolle}{18}{section*.48}%
+\contentsline {subsection}{1ste Besprechung}{18}{section*.49}%
+\contentsline {subsection}{2te Besprechung}{18}{section*.50}%
+\contentsline {section}{Implementierung (Probleme und Lösungen)}{19}{section*.51}%
+\contentsline {subsection}{pdflatex}{19}{section*.52}%
+\contentsline {subsection}{CSS-stylesheet}{19}{section*.53}%
+\contentsline {subsection}{ChatGPT}{19}{section*.54}%
