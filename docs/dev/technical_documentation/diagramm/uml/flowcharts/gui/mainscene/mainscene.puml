@@ -1,7 +1,0 @@
-@startuml appendToTextArea
-start
-:get text from TextArea;
-:append new String;
-:replace text in TextArea;
-stop
-@enduml
