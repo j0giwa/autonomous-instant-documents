@@ -1,0 +1,68 @@
+@startuml de.thowl.aids.gui
+package de.thowl.aids.gui {
+	class Gui {
+		+ start(stage: Stage): void throws Exception
+	}
+
+	note "Gui loads an FXML, which uses one off these as a Controller" as N1
+	Gui .. N1
+	N1 ..> de.thowl.aids.gui.controllers
+
+        package de.thowl.aids.gui.controllers {
+	        class MasterController implements Initializable{
+		        - Button btnMainScene;
+		        - Button btnLatexScene;
+		        - Button btnDatabaseScene;
+		        # cmbType: ComboBox<String>
+		        # showErrorAlert(String: header, String: text, Exception: exception): void
+		        # switchToScene(ActionEvent: event, String: name): void
+		        # initialiseTypeDropdown(): void
+		        # validateInt(String: inputInt): int
+		        - btnMainSceneClick(ActionEvent: event): void
+		        - btnLatexSceneClick(ActionEvent: event): void
+		        - btnDatabaseSceneClick(ActionEvent: event): void
+		        + initialize(URL: location, ResourceBundle: resources): void
+	        }
+
+	        class MainScene extends Controller {
+		        - txtAmount: TextField
+		        - txtChapters: TextField
+		        - txtFileName: TextField
+		        - chkShuffle: CheckBox
+		        - btnGenerateDocument: Button
+		        - btnOpenEditor: Button
+		        - txtMultipurposeTextArea: TextArea
+		        - appendToTextArea(String newString): void
+		        - btnGenerateDocumentClick(ActionEvent: event): void
+		        + initialize(URL: location, ResourceBundle: resources): void
+	        }
+
+	        class LatexScene extends MasterController {
+		        - logger: Logger
+		        - latexdir: String
+		        - settingsFile: String
+		        - treeFileTree: TreeView<String>
+		        - txtFileName: TextField
+		        - btnOpenEditor: Button
+		        + getSelectedTree(TreeItem<String>: item): String
+		        + initialize(URL: location, ResourceBundle: resources): void
+		        - createTreeItem(File: file): TreeItem<String>
+		        - expandItem(TreeItem<String>: item): void
+		        - populateTreeView(String: directory): void
+		        - cmbTypeSelection(ActionEvent event): void
+		        - btnOpenEditorClick(ActionEvent event): void
+	        }
+
+                class DatabaseScene extends MasterController {
+		        - btnImportDatabase: Button
+		        - btnExportDatabase: Button
+		        - btnImportDatabase(ActionEvent event): void
+		        - btnExportDatabase(ActionEvent event): void
+	        }
+
+	        Initializable <|-- MasterController : overrides
+	        MasterController <|-- MainScene : overrides
+	        MasterController <|-- LatexScene : overrides
+        }
+}
+@enduml

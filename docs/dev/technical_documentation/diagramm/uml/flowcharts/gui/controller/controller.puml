@@ -1,0 +1,18 @@
+@startuml initialiseTypeDropdown
+start
+:Get directory with LaTex;
+while (sudirectorys not in dropdown)
+        :add directory name to dropdown;
+endwile
+stop
+@enduml
+
+@startuml switchToScene
+start
+:load requested FXML;
+:load requested stylesheet;
+:save currend window dimentsions;
+:replace FXML and Stylesheet;
+:apply saved window dimentsions;
+stop
+@enduml
