@@ -39,7 +39,6 @@ public class MySql {
     userName = "root";
     password = "";
     String query = "select *from datenbank";
-    con = DriverManager.getConnection(url, userName, password);
     Class.forName("com.mysql.cj.jdbc.Driver");
     System.out.println("Connection Succsesfully Ethablished");
   }
@@ -129,7 +128,7 @@ public class MySql {
             if (count == 0) {
 
               String dateiPfad = datei.getAbsolutePath();
-              String insertSQL = "INSERT INTO `snippets`(`DataNumber`, `DataName`, `DataPath`) VALUES (" + nummer + ""+ datenName +"," + dateiPfad + " ?, ?)";
+              String insertSQL = "INSERT INTO `snippets`(`DataNumber`, `DataName`, `DataPath`) VALUES (" + nummer + ""+ datenName +"," + dateiPfad + ")";
               PreparedStatement preparedStatement = verbindung.prepareStatement(insertSQL);
               preparedStatement.setInt(1, nummer);
               preparedStatement.setString(2, dateiPfad);
