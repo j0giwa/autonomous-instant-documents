@@ -163,7 +163,7 @@ class MySql {
    * Import Methode. Hiermit werden zu Importierende CSV Daten ausgelesen und anschließend 
    * in die Entsprechende Tabelle eingelesen.
    */
-  public void ImportCSVData() {
+  public void importCSVData() {
     try {
       Connection con = DriverManager.getConnection(url, userName, password);
       Statement st = con.createStatement();
@@ -212,7 +212,7 @@ class MySql {
     if (option.equals("Export")) {
       exportToCSV();
     } else if (option.equals("Import")) {
-      ImportCSVData();
+      importCSVData();
     } else {
       System.out.println("Auswahl ungültig");
     }
