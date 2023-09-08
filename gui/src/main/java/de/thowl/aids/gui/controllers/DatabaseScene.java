@@ -87,7 +87,13 @@ public class DatabaseScene extends Controller {
 
   @FXML
   private void btnUpdateDatabaseClick(ActionEvent event) {
-
+    MySql database;
+    try {
+      database = new MySql();
+      database.snippetVerarbeitung();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
 }
