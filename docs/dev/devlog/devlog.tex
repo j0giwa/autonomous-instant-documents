@@ -270,7 +270,18 @@ In diesem Abschnitt werebn Eventhandler nicht Betrachtet.
 \end{figure}
 
 \subsection{de.thowl.aids.database}
-\noindent Das \texttt{database} Modul ist für die Datenbank zuständig.
+\noindent Das \texttt{database} Das database Modul ist für die Datenbank zuständig. 
+Die Einzige Klasse in dem Modul „database“ ist „MySql“. In dieser Klasse, werden Sämtliche 
+Befehle die mit der SQL Datenbank zusammenhängen untergebracht. Dazu gehören auslese, 
+einlese, sowie Im- Export Methoden. Auch Ausgebemethoden für eine besser Übersicht des 
+Users und ausführlichere InformaƟonsausgabe wurden erstellt und oder geplant. Diese 
+werden jedoch in der Aktuellen Version des Programmen nicht genutzt. 
+Die nach der Grundlegenden Eingabe wichƟgsten Methoden dieser Klasse, sind die Import 
+und Export Methoden für CSV Dateien. Diese werden an eine Steuerungseinheit in der Gui 
+gekoppelt. 
+Grundvariablen dieser Klasse sind u.a. die Zugangsdaten zur Datenbank. Sollte der 
+Eigentümer der Datenbank, diese also ändern müssen die Variablen manuell im Code 
+angepasst werden. 
 
 \subsubsection{de.thowl.aids.gui.Controller}
 \noindent Die Klasse \texttt{Controller} ist eine abstrakte Klasse, von der alle GUI-Controller erben.
