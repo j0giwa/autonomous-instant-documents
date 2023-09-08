@@ -151,6 +151,10 @@ package de.thowl.aids.database {
                 + closeConnection: void
                 + getSubjekt: String
                 + setSubjekt: String
+				+ snippetVerarbeitung: void
+				+ exportToCSV: void
+				+ importCSVData: void
+				+ CSVPortDesision: String
         }
 }
 
