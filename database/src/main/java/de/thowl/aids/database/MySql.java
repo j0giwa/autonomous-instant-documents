@@ -5,6 +5,8 @@ package de.thowl.aids.database;
  * Die Klasse MySql
  * enthält Sämmtliche befehle, die im zusammenhang mit der Datenbank
  * arbeiten.
+ * Leider Gab es am Ende Probleme mit der Nutzung, und aufgrund von zeitmangel und
+ * fehlender Tests Meiner seits konnte dies nicht Arbeitend abgegeben werden 
  */
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
