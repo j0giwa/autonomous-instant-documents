@@ -99,7 +99,7 @@ public class MySql {
    * Neue Dateien werden in die Datenbank eingelesen und die Informationen die die
    * Entsprechende Spalte eingetragen.
    */
-  public void snippetVerarbeitung() {
+  public void snippetVerarbeitung() throws Exception{
     OperatingSystem operatingSystem = new OperatingSystem();
     String verzeichnisPfad = operatingSystem.getHomeDir();
 
@@ -113,23 +113,42 @@ public class MySql {
         int nummer = 1;
         for (File datei : dateien) {
           if (datei.isFile() && datei.getName().endsWith(".tex")) {
-            String dateiPfad = datei.getAbsolutePath();
+            
             String datenName = datei.getName().replace(".tex", "");
 
-            String insertSQL = "INSERT INTO `snippets`(`DataNumber`, `DataName`, `DataPath`) VALUES (?, ?, ?)";
-            PreparedStatement preparedStatement = verbindung.prepareStatement(insertSQL);
-            preparedStatement.setInt(1, nummer);
-            preparedStatement.setString(2, dateiPfad);
-            preparedStatement.setString(3, datenName);
+            String dopplungsPruefung = "SELECT COUNT(*) FROM snippets WHERE datenName = ?";
+            PreparedStatement pruefungSt = verbindung.prepareStatement(dopplungsPruefung);
+            pruefungSt.setString(1, datenName);
+            ResultSet rs = pruefungSt.executeQuery();
+            rs.next();
+            int count = rs.getInt(1);
+            rs.close();
 
-            nummer++;
+            if (count == 0) {
+
+              String dateiPfad = datei.getAbsolutePath();
+              String insertSQL = "INSERT INTO `snippets`(`DataNumber`, `DataName`, `DataPath`) VALUES (?, ?, ?)";
+              PreparedStatement preparedStatement = verbindung.prepareStatement(insertSQL);
+              preparedStatement.setInt(1, nummer);
+              preparedStatement.setString(2, dateiPfad);
+              preparedStatement.setString(3, datenName);
+
+              nummer++;
+            } else {
+              System.out.println("Die Datei " + datenName + "ist bereits vorhanden");
+
           }
         }
       }
-      verbindung.close();
-    } catch (SQLException e) {
-      e.printStackTrace();
     }
+      verbindung.close();
+  } catch (SQLException e) {
+      e.printStackTrace();
+  }
+
+}
+
+  public void renewSnippets() {
 
   }
 
