@@ -272,16 +272,6 @@ Aus persönlichen Gründen kann die Verwendung unter macOS allerdings nicht gete
 \caption{\label{os-construcktor}Ablaufdiagramm des Konstrucktors der Klasse OperartingSystem}
 \end{figure}
 
-\subsection{de.thowl.aids.gui}
-\noindent Das \texttt{gui} Modul ist für die grafische Oberfläche zuständig.
-In diesem Abschnitt werebn Eventhandler nicht Betrachtet.
-
-\begin{figure}[!htbp]
-\centering
-\includegraphics[width=350px]{../technical_documentation/diagramm/uml/flowcharts/gui/gui.png}
-\caption{\label{gui Architektur}Architektur des gui Moduls}
-\end{figure}
-
 \subsection{de.thowl.aids.database}
 \noindent Das \texttt{database} Das database Modul ist für die Datenbank zuständig. 
 
@@ -295,6 +285,16 @@ Die nach der Grundlegenden Eingabe wichtgsten Methoden dieser Klasse, sind die I
 Diese werden an eine Steuerungseinheit in der Gui gekoppelt. 
 Grundvariablen dieser Klasse sind u.a. die Zugangsdaten zur Datenbank. 
 Sollte der Eigentümer der Datenbank, diese also ändern müssen die Variablen manuell im Code angepasst werden. 
+
+\subsection{de.thowl.aids.gui}
+\noindent Das \texttt{gui} Modul ist für die grafische Oberfläche zuständig.
+In diesem Abschnitt werebn Eventhandler nicht Betrachtet.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=350px]{../technical_documentation/diagramm/uml/flowcharts/gui/gui.png}
+\caption{\label{gui Architektur}Architektur des gui Moduls}
+\end{figure}
 
 \subsubsection{de.thowl.aids.gui.Controller}
 \noindent Die Klasse \texttt{Controller} ist eine abstrakte Klasse, von der alle GUI-Controller erben.

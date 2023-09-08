@@ -5,6 +5,8 @@ package de.thowl.aids.database;
  * Die Klasse MySql
  * enthält Sämmtliche befehle, die im zusammenhang mit der Datenbank
  * arbeiten.
+ * Leider Gab es am Ende Probleme mit der Nutzung, und aufgrund von zeitmangel und
+ * fehlender Tests Meiner seits konnte dies nicht Arbeitend abgegeben werden 
  */
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -21,7 +23,7 @@ import java.sql.Statement;
 import de.thowl.aids.core.OperatingSystem;
 
 public class MySql {
-
+  int counter;
   String url; // table details
   String userName;
   String password;
@@ -34,11 +36,11 @@ public class MySql {
    * Verbindung mit der Datenbank notwendigen Daten.
    */
   public MySql() throws Exception {
+    counter = 1;
     url = "jbdc:mysql://localhost:3306/aids"; // table details
     userName = "root";
     password = "";
     String query = "select *from datenbank";
-    con = DriverManager.getConnection(url, userName, password);
     Class.forName("com.mysql.cj.jdbc.Driver");
     System.out.println("Connection Succsesfully Ethablished");
   }
@@ -99,7 +101,8 @@ public class MySql {
    * Neue Dateien werden in die Datenbank eingelesen und die Informationen die die
    * Entsprechende Spalte eingetragen.
    */
-  public void snippetVerarbeitung() {
+  public void snippetVerarbeitung() throws Exception {
+    int nummer = counter;
     OperatingSystem operatingSystem = new OperatingSystem();
     String verzeichnisPfad = operatingSystem.getHomeDir();
 
@@ -110,26 +113,45 @@ public class MySql {
       File[] dateien = verzeichnis.listFiles();
 
       if (dateien != null) {
-        int nummer = 1;
+         nummer = 1;
         for (File datei : dateien) {
           if (datei.isFile() && datei.getName().endsWith(".tex")) {
-            String dateiPfad = datei.getAbsolutePath();
+            
             String datenName = datei.getName().replace(".tex", "");
 
-            String insertSQL = "INSERT INTO `snippets`(`DataNumber`, `DataName`, `DataPath`) VALUES (?, ?, ?)";
-            PreparedStatement preparedStatement = verbindung.prepareStatement(insertSQL);
-            preparedStatement.setInt(1, nummer);
-            preparedStatement.setString(2, dateiPfad);
-            preparedStatement.setString(3, datenName);
+            String dopplungsPruefung = "SELECT COUNT(*) FROM snippets WHERE datenName = "+ datenName +"";
+            PreparedStatement pruefungSt = verbindung.prepareStatement(dopplungsPruefung);
+            pruefungSt.setString(1, datenName);
+            ResultSet rs = pruefungSt.executeQuery();
+            rs.next();
+            int count = rs.getInt(1);
+            rs.close();
 
-            nummer++;
+            if (count == 0) {
+
+              String dateiPfad = datei.getAbsolutePath();
+              String insertSQL = "INSERT INTO `snippets`(`DataNumber`, `DataName`, `DataPath`) VALUES (" + nummer + ""+ datenName +"," + dateiPfad + ")";
+              PreparedStatement preparedStatement = verbindung.prepareStatement(insertSQL);
+              preparedStatement.setInt(1, nummer);
+              preparedStatement.setString(2, dateiPfad);
+              preparedStatement.setString(3, datenName);
+
+              nummer++;
+            } else {
+              System.out.println("Die Datei " + datenName + "ist bereits vorhanden");
+
           }
         }
       }
-      verbindung.close();
-    } catch (SQLException e) {
-      e.printStackTrace();
     }
+      verbindung.close();
+  } catch (SQLException e) {
+      e.printStackTrace();
+  }
+
+}
+
+  public void renewSnippets() {
 
   }
 
@@ -142,7 +164,7 @@ public class MySql {
     try {
       Connection con = DriverManager.getConnection(url, userName, password);
       Statement st = con.createStatement();
-      String query = "SELECT *FROM SNIPPETS";
+      String query = "SELECT *FROM snippets";
       ResultSet rs = st.executeQuery(query);
       BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));
       String line;
@@ -192,7 +214,7 @@ public class MySql {
 
       while ((line = reader.readLine()) != null) {
         String[] data = line.split(",");
-        String query = "INSERT INTO Snippets (";// Richtiger behehl ist noch einzufügen!!!!!
+        String query = "INSERT INTO snippets (";// Richtiger behehl ist noch einzufügen!!!!!
         for (int i = 0; i < head.length; i++) {
           query += head[i];
           if (i < head.length - 1) {
