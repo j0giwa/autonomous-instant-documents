@@ -1,6 +1,6 @@
 /*
  * Autonomous Instantdocument System -- Automatically generate LaTeX Documents
- * Copyright (C) 2023 Jonas Schwind, Marvin Boschmann
+ * Copyright (C) 2023 Jonas Schwind, Martin Boschmann
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,6 +22,7 @@
  */
 module de.thowl.aids.gui {
 	requires de.thowl.aids.core;
+	requires de.thowl.aids.database;
 	requires org.apache.logging.log4j;
 	requires json.simple;
 	requires transitive javafx.fxml;

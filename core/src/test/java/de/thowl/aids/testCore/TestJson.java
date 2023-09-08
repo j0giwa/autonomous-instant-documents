@@ -1,6 +1,6 @@
 /*
  * Autonomous Instantdocument System -- Automatically generate LaTeX Documents
- * Copyright (C) 2023 Jonas Schwind, Marvin Boschmann
+ * Copyright (C) 2023 Jonas Schwind, Martin Boschmann
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,6 +21,7 @@ package de.thowl.aids.testCore;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -28,16 +29,20 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import de.thowl.aids.core.Json;
+import de.thowl.aids.core.OperatingSystem;
 
 public class TestJson {
 
-	private static final String FILE_PATH = "./temp/test.json";
+	private String file;
 	private Json json;
 
 	@BeforeEach
 	public void setUp() {
+		OperatingSystem os = new OperatingSystem();
+		file = os.getTempDir() + File.separator + "aidsTest" +
+				File.separator + "test.json";
 		createTestJsonFile();
-		json = new Json(FILE_PATH);
+		json = new Json(file);
 	}
 
 	/**
@@ -71,7 +76,7 @@ public class TestJson {
 
 	private void createTestJsonFile() {
 		String content = "{ \"person\": { \"name\": \"John Doe\" } }";
-		try (FileWriter fileWriter = new FileWriter(FILE_PATH)) {
+		try (FileWriter fileWriter = new FileWriter(file)) {
 			fileWriter.write(content);
 		} catch (IOException e) {
 			e.printStackTrace();

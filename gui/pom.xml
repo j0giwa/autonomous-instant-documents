@@ -10,13 +10,17 @@
 	<packaging>jar</packaging>
 	<parent>
 		<groupId>de.thowl.aids</groupId>
-		<artifactId>automomousInstantdocumentSystem</artifactId>
+		<artifactId>autonomousInstantdocumentSystem</artifactId>
 		<version>0.9.2</version>
 	</parent>
 	<dependencies>
 		<dependency>
 			<groupId>de.thowl.aids</groupId>
 			<artifactId>core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>de.thowl.aids</groupId>
+			<artifactId>database</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.openjfx</groupId>
@@ -59,7 +63,7 @@
 			</plugin>
 			<plugin>
 				<groupId>org.jacoco</groupId>
-  			<artifactId>jacoco-maven-plugin</artifactId>
+  				<artifactId>jacoco-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>

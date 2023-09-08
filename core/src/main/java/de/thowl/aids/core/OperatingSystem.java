@@ -1,6 +1,6 @@
 /*
  * Autonomous Instantdocument System -- Automatically generate LaTeX Documents
- * Copyright (C) 2023 Jonas Schwind, Marvin Boschmann
+ * Copyright (C) 2023 Jonas Schwind, Martin Boschmann
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@ package de.thowl.aids.core;
 import java.io.File;
 
 /**
- * This class contains Methods to read and write a JSon file
+ * This class contains Methods to identify the OS
  * 
  * @author Jonas Schwind
  * @version 1.3,0
@@ -31,6 +31,7 @@ public class OperatingSystem {
 
 	private String operatingSystem;
 	private String homeDir;
+	private String tempDir;
 	private String pdflatexPath;
 
 	/**
@@ -48,11 +49,14 @@ public class OperatingSystem {
 				if (homeDir == null)
 					homeDir = System.getProperty("user.home")
 							+ "/.config";
+				tempDir = "/tmp";
 				pdflatexPath = "/usr/bin/pdflatex";
 				break;
 			case "Mac OS X":
 				operatingSystem = "Mac";
-				homeDir = System.getProperty("user.home") + "/Library/Application Support/";
+				homeDir = System.getProperty("user.home") +
+						"/Library/Application Support/";
+				tempDir = "/tmp";
 				pdflatexPath = "/usr/bin/pdflatex";
 				break;
 			case "Windows 7":
@@ -60,6 +64,7 @@ public class OperatingSystem {
 			case "Windows 11":
 				operatingSystem = "Windows";
 				homeDir = System.getenv("APPDATA");
+				tempDir = System.getProperty("java.io.tmpdir");
 				pdflatexPath = "C:\\texlive\\2023\\bin\\windows\\pdflatex.exe";
 				break;
 			default:
@@ -131,6 +136,14 @@ public class OperatingSystem {
 
 	public void setPdflatexPath(String pdflatexPath) {
 		this.pdflatexPath = pdflatexPath;
+	}
+
+	public String getTempDir() {
+		return tempDir;
+	}
+
+	public void setTempDir(String tempDir) {
+		this.tempDir = tempDir;
 	}
 
 }

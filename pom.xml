@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.thowl.aids</groupId>
-	<artifactId>automomousInstantdocumentSystem</artifactId>
+	<artifactId>autonomousInstantdocumentSystem</artifactId>
 	<name>Autonomous Instantdocument System</name>
 	<version>0.9.2</version>
 	<packaging>pom</packaging>
@@ -24,6 +24,7 @@
 		<log4j.version>2.20.0</log4j.version>
 		<testfx.version>4.0.16-alpha</testfx.version>
 		<json-simple.version>1.1.1</json-simple.version>
+		<mysql-connector.version>8.0.33</mysql-connector.version>
 		<!-- Modules -->
 		<module.cli.version>1.0.1</module.cli.version>
 		<module.core.version>0.8.5</module.core.version>
@@ -116,6 +117,11 @@
 				<version>${json-simple.version}</version>
 			</dependency>
 			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${mysql-connector.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>de.thowl.aids</groupId>
 				<artifactId>cli</artifactId>
 				<version>${module.cli.version}</version>
@@ -160,7 +166,7 @@
 							</goals>
 							<phase>package</phase>
 							<configuration>
-								<finalName>automomous-instantdocument-system</finalName>
+								<finalName>autonomous-instantdocument-system</finalName>
 								<archive>
 									<manifest>
 										<mainClass>de.thowl.aids.cli.Main</mainClass>

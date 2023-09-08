@@ -1,6 +1,6 @@
 /*
  * Autonomous Instantdocument System -- Automatically generate LaTeX Documents
- * Copyright (C) 2023 Jonas Schwind, Marvin Boschmann
+ * Copyright (C) 2023 Jonas Schwind, Martin Boschmann
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,13 +19,16 @@
 
 package de.thowl.aids.gui.controllers;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import de.thowl.aids.core.Json;
 import de.thowl.aids.core.Latex;
+import de.thowl.aids.core.OperatingSystem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -35,6 +38,7 @@ import javafx.scene.control.TextField;
 
 /**
  * This class is the Controller of the MainScene in the GUI
+ * @author Jonas Schwind
  */
 public class MainScene extends Controller {
 
@@ -87,10 +91,11 @@ public class MainScene extends Controller {
 	 */
 	@FXML
 	private void btnGenerateDocumentClick(ActionEvent event) {
+		OperatingSystem os = new OperatingSystem();
+		Json json = new Json(os.getHomeDir() + File.separator + "settings.json");
 		final String type = super.cmbType.getSelectionModel()
 				.getSelectedItem();
-		// TODO: add location in settings
-		final String destination = "/home/jogiwa/Downloads";
+		final String destination = json.getValue("settings", "defaultDestination");
 		final int amount = super.validateInt(txtAmount.getText());
 		final int chapters = super.validateInt(txtChapters.getText());
 		final boolean shuffle = chkShuffle.isArmed();

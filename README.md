@@ -3,9 +3,9 @@
 [![forthebadge](https://forthebadge.com/images/badges/made-with-java.svg)](https://forthebadge.com)
 [![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)
 
-[![shields.io](https://img.shields.io/github/license/j0giwa/automomous-instantdokument-system)](https://img.shields.io/github/license/j0giwa/automomous-instantdokument-system)
-[![sields.io](https://img.shields.io/github/stars/j0giwa/automomous-instantdokument-system)](https://img.shields.io/github/stars/j0giwa/automomous-instantdokument-system)
-[![shields.io](https://img.shields.io/github/issues/j0giwa/automomous-instantdokument-system)](https://img.shields.io/github/issues/j0giwa/automomous-instantdokument-system)
+[![shields.io](https://img.shields.io/github/license/j0giwa/autonomous-instantdocument-system)](https://img.shields.io/github/license/j0giwa/autonomous-instantdocument-system)
+[![sields.io](https://img.shields.io/github/stars/j0giwa/autonomous-instantdocument-system)](https://img.shields.io/github/stars/j0giwa/autonomous-instantdocument-system)
+[![shields.io](https://img.shields.io/github/issues/j0giwa/autonomous-instantdocument-system)](https://img.shields.io/github/issues/j0giwa/autonomous-instantdocument-system)
 
 Table of Contents
 =============================
@@ -63,7 +63,7 @@ Build and install with these commands.
 
 ``` bat
 mvn package -DskipTests
-xcopy "distribution\target\automomous-instantdocument-system.jar" "C:\Program Files\automomous-instantdocument-system.jar" /Y
+xcopy "distribution\target\autonomous-instantdocument-system.jar" "C:\Program Files\autonomous-instantdocument-system.jar" /Y
 xcopy "distribution\assets\defaults\*" "%appdata%\aids" /E /Y
 ```
 
@@ -73,7 +73,7 @@ xcopy "distribution\assets\defaults\*" "%appdata%\aids" /E /Y
 It is recommended that you define an alias If you want to launch from the command line
 
 ``` bat
-doskey automomous-instantdocument-system="java -jar C:\Program Files\automomous-instantdocument-system.jar"
+doskey autonomous-instantdocument-system="java -jar C:\Program Files\autonomous-instantdocument-system.jar"
 ```
 
 ### UNIX (BSD, GNU/Linux)
@@ -82,8 +82,8 @@ Build and install with these commands.
 
 ``` shell
 mvn package -DskipTests
-sudo cp distribution/target/automomousInstantdocumentSystem.jar /opt/automomous-instantdocument-system/automomous-instantdocument-system.jar
-sudo cp distribution/automomous-instantdocument-system-cli /usr/local/bin # optional
+sudo cp distribution/target/autonomousInstantdocumentSystem.jar /opt/autonomous-instantdocument-system/autonomous-instantdocument-system.jar
+sudo cp distribution/autonomous-instantdocument-system-cli /usr/local/bin # optional
 gzip -c docs/man/autonomous-instantdocument-system.1 | sudo tee /usr/share/man/man1/autonomous-instantdocument-system.1.gz >/dev/null
 ```
 
@@ -93,7 +93,7 @@ gzip -c docs/man/autonomous-instantdocument-system.1 | sudo tee /usr/share/man/m
 It is recommended that you define an alias If you want to launch from the command line
 
 ``` shell
-alias automomous-instantdocument-system="java -jar /opt/automomous-instantdocument-system/automomous-instantdocument-system.jar":
+alias autonomous-instantdocument-system="java -jar /opt/autonomous-instantdocument-system/autonomous-instantdocument-system.jar":
 ```
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
@@ -101,7 +101,7 @@ alias automomous-instantdocument-system="java -jar /opt/automomous-instantdocume
 Usage
 =============================
 
-Running `automomous-instantdocument-system` without options launches a graphical interface.
+Running `autonomous-instantdocument-system` without options launches a graphical interface.
 
 ### Flags
 

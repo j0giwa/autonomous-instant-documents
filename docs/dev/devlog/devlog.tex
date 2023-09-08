@@ -129,11 +129,24 @@ Argument & Funktion \\
 \end{tabular}
 \end{table}
 
-\noindent Die in Tabelle~\ref{Argumente} aufgeführten Argumente können auch in der Anwenderdokumentation nachgelesen werden.
+\noindent Die in Tabelle~\ref{argumente} aufgeführten Argumente können auch in der Anwenderdokumentation nachgelesen werden.
 
 \subsubsection{GUI}
+\noindent Der Aufbau der Benutzeroberfläche wurde von zwei Anwendungen inspiriert.
+Das Farbschema, das in unserer Anwendung verwendet wurde, wurde von Opera GX (Abbildung~\ref{opera}) übernommen. Der Launcher des GAMMA Modpacks für das Spiel STALKER Anomaly (Abbildung~\ref{gamma}) inspirierte das Layout.
 
-TODO: .jpg einfügen
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=450px]{../technical_documentation/gui_sketches/inspiration/opera.png}
+\caption{\label{opera}Userinterface von Opera GX}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=450px]{../technical_documentation/gui_sketches/inspiration/gamma.png}
+\caption{\label{gamma}Userinterface des GAMMA Launchers}
+\end{figure}
+
 
 \clearpage
 
@@ -271,17 +284,51 @@ In diesem Abschnitt werebn Eventhandler nicht Betrachtet.
 
 \subsection{de.thowl.aids.database}
 \noindent Das \texttt{database} Das database Modul ist für die Datenbank zuständig. 
-Die Einzige Klasse in dem Modul „database“ ist „MySql“. In dieser Klasse, werden Sämtliche 
-Befehle die mit der SQL Datenbank zusammenhängen untergebracht. Dazu gehören auslese, 
-einlese, sowie Im- Export Methoden. Auch Ausgebemethoden für eine besser Übersicht des 
-Users und ausführlichere InformaƟonsausgabe wurden erstellt und oder geplant. Diese 
-werden jedoch in der Aktuellen Version des Programmen nicht genutzt. 
-Die nach der Grundlegenden Eingabe wichƟgsten Methoden dieser Klasse, sind die Import 
-und Export Methoden für CSV Dateien. Diese werden an eine Steuerungseinheit in der Gui 
-gekoppelt. 
-Grundvariablen dieser Klasse sind u.a. die Zugangsdaten zur Datenbank. Sollte der 
-Eigentümer der Datenbank, diese also ändern müssen die Variablen manuell im Code 
-angepasst werden. 
+
+\subsubsection{de.thowl.aids.database.MySql}
+\noindent Die Einzige Klasse in dem Modul \texttt{database} ist \texttt{MySql}. 
+In dieser Klasse, werden Sämtliche  Befehle die mit der SQL Datenbank zusammenhängen duntergebracht. 
+Dazu gehören auslese, einlese, sowie Im- Export Methoden. 
+Auch Ausgebemethoden für eine besser Übersicht des Users und ausführlichere Informatonsausgabe wurden erstellt und oder geplant. 
+Diese werden jedoch in der Aktuellen Version des Programmen nicht genutzt. 
+Die nach der Grundlegenden Eingabe wichtgsten Methoden dieser Klasse, sind die Import und Export Methoden für CSV Dateien. 
+Diese werden an eine Steuerungseinheit in der Gui gekoppelt. 
+Grundvariablen dieser Klasse sind u.a. die Zugangsdaten zur Datenbank. 
+Sollte der Eigentümer der Datenbank, diese also ändern müssen die Variablen manuell im Code angepasst werden. 
+
+\subsubsection{de.thowl.aids.gui.Controller}
+\noindent Die Klasse \texttt{Controller} ist eine abstrakte Klasse, von der alle GUI-Controller erben.
+
+Die in Abbildung~\ref{initializeTypeDropdown-methode} dargestellte Methode füllt das TypeDropdown, welches dazu verwendet wird, den Dokumenttypen grafisch auszuwählen, mit Daten.
+Der einfachste Weg dies zum Zeitpunkt der Implementierung zu realisieren ist es, die Dateistruktur im config-verzeichnis nachzubilden (s. Abbildung~\ref{initializeTypeDropdown-methode}).
+
+Die \texttt{switchToScene} methode (Abbildung~\ref{switchToScene-methode}) wechselt die Szene in der GUI.
+Dazu werden zuerst die bestehenden Dimensionen (Fensterhöhe und Breite) zwischengespeichert.
+Im Anschluss wird die FMXL und das Stylesheet ersetzt. Daraufhin werden die gespeicherten Dimensionen wieder auf das Fenster angewendet, um Größenveränderungen zu verhindern.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=150px]{../technical_documentation/diagramm/uml/flowcharts/gui/controller/initialiseTypeDropdown.png}
+\caption{\label{initializeTypeDropdown-methode}Ablaufdiagramm der initializeTypeDropdown Methode}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=150px]{../technical_documentation/diagramm/uml/flowcharts/gui/controller/switchToScene.png}
+\caption{\label{switchToScene-methode}Ablaufdiagramm der switchToScene Methode}
+\end{figure}
+
+\subsubsection{de.thowl.aids.gui.MainScene}
+
+\noindent Die Methode \texttt{appendToTextArea} (Abbildung~\ref{appendToTextArea-methode}) fügt eine Textzeile in eine TextArea ein, welche als Statusindikator genutzt wird.
+
+Dazu wird der bestehende Text kopiert, der neue String angefügt, und anschließend der alte durch den neuen Text ersetzt.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=150px]{../technical_documentation/diagramm/uml/flowcharts/gui/mainscene/appendToTextArea.png}
+\caption{\label{appendToTextArea-methode}Ablaufdiagramm der sappendToTextArea Methode}
+\end{figure}
 
 \subsubsection{de.thowl.aids.gui.Controller}
 \noindent Die Klasse \texttt{Controller} ist eine abstrakte Klasse, von der alle GUI-Controller erben.
