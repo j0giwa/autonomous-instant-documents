@@ -19,6 +19,7 @@
 
 module de.thowl.aids.database {
   requires java.sql;
+  requires de.thowl.aids.core;
 
   exports de.thowl.aids.database;
 }

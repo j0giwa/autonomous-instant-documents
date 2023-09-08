@@ -6,23 +6,32 @@ package de.thowl.aids.database;
  * enthält Sämmtliche befehle, die im zusammenhang mit der Datenbank
  * arbeiten.
  */
-import java.io.*;
-import java.sql.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import de.thowl.aids.core.OperatingSystem;
 
-
-class MySql {
+public class MySql {
 
   String url; // table details
   String userName;
   String password;
   Connection con;
   String Su = "subjekt";
-  String CSV_FILE_PATH;
 
   // Main driver method
   /**
-   * Der Konstruktor enthält Wiederholt genutzte Variablen, wie z.b. Die zur Verbindung mit der Datenbank notwendigen Daten.
+   * Der Konstruktor enthält Wiederholt genutzte Variablen, wie z.b. Die zur
+   * Verbindung mit der Datenbank notwendigen Daten.
    */
   public MySql() throws Exception {
     url = "jbdc:mysql://localhost:3306/aids"; // table details
@@ -32,15 +41,17 @@ class MySql {
     con = DriverManager.getConnection(url, userName, password);
     Class.forName("com.mysql.cj.jdbc.Driver");
     System.out.println("Connection Succsesfully Ethablished");
-    CSV_FILE_PATH = "DateiPfad zur CSV Datei";
-
   }
 
   /*
-   * Diese Methode ist dazu gedachte gezielt Neue Fäche / Module für eine Bessere Übersicht manuell eintragen zu können.
-   * Diese Methode wird in der Aktuellen version des Programmes jedoch noch Nicht benutzt. 
-   * Es kann daher sein das die Befehle für den INSERT nichtmehr mit der Aktuellen Datenbank Übereinstimmen.
-   * Die Methode wurde nicht entfernt das die Überlegung das Feature noch fertigzustellen 
+   * Diese Methode ist dazu gedachte gezielt Neue Fäche / Module für eine Bessere
+   * Übersicht manuell eintragen zu können.
+   * Diese Methode wird in der Aktuellen version des Programmes jedoch noch Nicht
+   * benutzt.
+   * Es kann daher sein das die Befehle für den INSERT nichtmehr mit der Aktuellen
+   * Datenbank Übereinstimmen.
+   * Die Methode wurde nicht entfernt das die Überlegung das Feature noch
+   * fertigzustellen
    * noch im raum steht.
    */
   private void addSubjekt(String subjektToAdd) throws Exception {
@@ -64,8 +75,10 @@ class MySql {
   }
 
   /*
-   * Eine Methode die Nicht in der Vorhandenen Version des Programmes verwendet wird. Die idee hinter der Methode,
-   * war Das Modul zu den einzelnen Fragen etc Ausgeben lassen zu können, um wen die Tabelle z.b. in eine CSV Datei Exportiert wird
+   * Eine Methode die Nicht in der Vorhandenen Version des Programmes verwendet
+   * wird. Die idee hinter der Methode,
+   * war Das Modul zu den einzelnen Fragen etc Ausgeben lassen zu können, um wen
+   * die Tabelle z.b. in eine CSV Datei Exportiert wird
    * Direkt hinter Den Dateien auch Sehen zu können zu welchem Modul sie gehöhren.
    */
   private String getSubjekt() throws Exception {
@@ -83,7 +96,8 @@ class MySql {
   }
 
   /*
-   * Neue Dateien werden in die Datenbank eingelesen und die Informationen die die Entsprechende Spalte eingetragen.
+   * Neue Dateien werden in die Datenbank eingelesen und die Informationen die die
+   * Entsprechende Spalte eingetragen.
    */
   public void snippetVerarbeitung() {
     OperatingSystem operatingSystem = new OperatingSystem();
@@ -120,16 +134,17 @@ class MySql {
   }
 
   /*
-   * Methode zum Exportieren von Tabellendaten in eine CSV. Es wird die Gesammte Tabelle mit 
-   * Datei Namen, Dateinummer und Dateipfad Exportiert. 
+   * Methode zum Exportieren von Tabellendaten in eine CSV. Es wird die Gesammte
+   * Tabelle mit
+   * Datei Namen, Dateinummer und Dateipfad Exportiert.
    */
-  public void exportToCSV() {
+  public void exportToCSV(String filepath) {
     try {
       Connection con = DriverManager.getConnection(url, userName, password);
       Statement st = con.createStatement();
       String query = "SELECT *FROM SNIPPETS";
       ResultSet rs = st.executeQuery(query);
-      BufferedWriter writer = new BufferedWriter(new FileWriter(CSV_FILE_PATH));
+      BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));
       String line;
 
       int columnCount = rs.getMetaData().getColumnCount();
@@ -160,22 +175,24 @@ class MySql {
   }
 
   /*
-   * Import Methode. Hiermit werden zu Importierende CSV Daten ausgelesen und anschließend 
+   * Import Methode. Hiermit werden zu Importierende CSV Daten ausgelesen und
+   * anschließend
    * in die Entsprechende Tabelle eingelesen.
    */
-  public void ImportCSVData() {
+  public void ImportCSVData(String filepath) {
     try {
       Connection con = DriverManager.getConnection(url, userName, password);
       Statement st = con.createStatement();
 
-      BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE_PATH));
+      BufferedReader reader = new BufferedReader(new FileReader(filepath));
       String line;
-      // Es wird davon ausgegangen das die erste Zeile der CSV Spaltenüberschriften enthält
+      // Es wird davon ausgegangen das die erste Zeile der CSV Spaltenüberschriften
+      // enthält
       String[] head = reader.readLine().split(",");
 
       while ((line = reader.readLine()) != null) {
         String[] data = line.split(",");
-        String query = "INSERT INTO Snippets (";//Richtiger behehl ist noch einzufügen!!!!!
+        String query = "INSERT INTO Snippets (";// Richtiger behehl ist noch einzufügen!!!!!
         for (int i = 0; i < head.length; i++) {
           query += head[i];
           if (i < head.length - 1) {
@@ -200,23 +217,4 @@ class MySql {
       e.printStackTrace();
     }
   }
-
-  /*
-   * Methode die die Eingabe im UserInterface annimmt und die entsprechende
-   * Methode für den Import oder Export von Daten auswählt und ausführt
-   */
-  public void CSVPortDesision(String optionSet) {
-    String option = optionSet;
-    
-
-    if (option.equals("Export")) {
-      exportToCSV();
-    } else if (option.equals("Import")) {
-      ImportCSVData();
-    } else {
-      System.out.println("Auswahl ungültig");
-    }
-  }
 }
-
-

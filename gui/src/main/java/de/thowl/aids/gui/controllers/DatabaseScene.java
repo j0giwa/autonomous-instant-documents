@@ -24,6 +24,7 @@ package de.thowl.aids.gui.controllers;
 
 import java.io.File;
 
+import de.thowl.aids.database.MySql;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -31,8 +32,13 @@ import javafx.stage.FileChooser;
 
 /**
  * This class is the Controller of the DatabaseScene in the GUI
+ * 
+ * @author Martin Boschmann
  */
 public class DatabaseScene extends Controller {
+
+  @FXML
+  private Button btnUpdateDatabase;
 
   @FXML
   private Button btnImportDatabase;
@@ -50,16 +56,38 @@ public class DatabaseScene extends Controller {
     // Nothing
   }
 
-  @FXML
-  private void btnImportDatabaseClick(ActionEvent event) {
+  private String chooseFile() {
     FileChooser fileChooser = new FileChooser();
     FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
     File csvFile = fileChooser.showOpenDialog(null);
-    System.out.println(csvFile);
+    return csvFile.getAbsolutePath();
+  }
+
+  @FXML
+  private void btnImportDatabaseClick(ActionEvent event) {
+    MySql database;
+    try {
+      database = new MySql();
+      database.ImportCSVData(chooseFile());
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   @FXML
   private void btnExportDatabaseClick(ActionEvent event) {
+    MySql database;
+    try {
+      database = new MySql();
+      database.exportToCSV(chooseFile());
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  @FXML
+  private void btnUpdateDatabaseClick(ActionEvent event) {
+
   }
 
 }

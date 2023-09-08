@@ -47,6 +47,11 @@
             <children>
                 <VBox fx:id="container">
                     <children>
+                        <Button fx:id="btnUpdateDatabase" text="Initialise / Update Database" onAction="#btnbtnUpdateDatabase">
+                            <tooltip>
+                                <Tooltip text="Click here to initialise or update the database."/>
+                            </tooltip>
+                        </Button>
                         <Button fx:id="btnImportDatabase" text="Import" onAction="#btnImportDatabaseClick">
                             <tooltip>
                                 <Tooltip text="Click here to import a Database."/>

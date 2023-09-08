@@ -45,6 +45,7 @@
 
 #btnGenerateDocument,
 #btnOpenEditor,
+#btnUpdateDatabase,
 #btnImportDatabase,
 #btnExportDatabase {
   -fx-padding: 16px 38px;
@@ -63,7 +64,8 @@
 
 #sidebar .button:hover,
 #btnGenerateDocument:hover,
-#btnOpenEditor:hover, 
+#btnOpenEditor:hover,
+#btnUpdateDatabase:hover, 
 #btnImportDatabase:hover,
 #btnExportDatabase:hover {
   -fx-background-color: -fx-hover;

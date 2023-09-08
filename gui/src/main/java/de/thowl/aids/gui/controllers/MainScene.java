@@ -38,6 +38,7 @@ import javafx.scene.control.TextField;
 
 /**
  * This class is the Controller of the MainScene in the GUI
+ * @author Jonas Schwind
  */
 public class MainScene extends Controller {
 

@@ -22,7 +22,7 @@ package de.thowl.aids.core;
 import java.io.File;
 
 /**
- * This class contains Methods to read and write a JSon file
+ * This class contains Methods to identify the OS
  * 
  * @author Jonas Schwind
  * @version 1.3,0

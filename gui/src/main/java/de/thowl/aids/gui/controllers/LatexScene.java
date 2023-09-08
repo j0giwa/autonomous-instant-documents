@@ -38,6 +38,8 @@ import javafx.scene.control.TreeView;
 
 /**
  * This class is the Controller of the LatexScene in the GUI
+ * 
+ * @author Jonas Schwind
  */
 public class LatexScene extends Controller {
 

@@ -22,6 +22,7 @@
  */
 module de.thowl.aids.gui {
 	requires de.thowl.aids.core;
+	requires de.thowl.aids.database;
 	requires org.apache.logging.log4j;
 	requires json.simple;
 	requires transitive javafx.fxml;
