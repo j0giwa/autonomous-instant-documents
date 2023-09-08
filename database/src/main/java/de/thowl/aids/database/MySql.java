@@ -162,7 +162,7 @@ public class MySql {
     try {
       Connection con = DriverManager.getConnection(url, userName, password);
       Statement st = con.createStatement();
-      String query = "SELECT *FROM SNIPPETS";
+      String query = "SELECT *FROM snippets";
       ResultSet rs = st.executeQuery(query);
       BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));
       String line;
@@ -212,7 +212,7 @@ public class MySql {
 
       while ((line = reader.readLine()) != null) {
         String[] data = line.split(",");
-        String query = "INSERT INTO Snippets (";// Richtiger behehl ist noch einzufügen!!!!!
+        String query = "INSERT INTO snippets (";// Richtiger behehl ist noch einzufügen!!!!!
         for (int i = 0; i < head.length; i++) {
           query += head[i];
           if (i < head.length - 1) {
