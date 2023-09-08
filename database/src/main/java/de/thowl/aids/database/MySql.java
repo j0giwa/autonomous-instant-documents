@@ -21,7 +21,7 @@ import java.sql.Statement;
 import de.thowl.aids.core.OperatingSystem;
 
 public class MySql {
-
+  int counter;
   String url; // table details
   String userName;
   String password;
@@ -34,6 +34,7 @@ public class MySql {
    * Verbindung mit der Datenbank notwendigen Daten.
    */
   public MySql() throws Exception {
+    counter = 1;
     url = "jbdc:mysql://localhost:3306/aids"; // table details
     userName = "root";
     password = "";
@@ -99,7 +100,8 @@ public class MySql {
    * Neue Dateien werden in die Datenbank eingelesen und die Informationen die die
    * Entsprechende Spalte eingetragen.
    */
-  public void snippetVerarbeitung() throws Exception{
+  public void snippetVerarbeitung() throws Exception {
+    int nummer = counter;
     OperatingSystem operatingSystem = new OperatingSystem();
     String verzeichnisPfad = operatingSystem.getHomeDir();
 
@@ -110,13 +112,13 @@ public class MySql {
       File[] dateien = verzeichnis.listFiles();
 
       if (dateien != null) {
-        int nummer = 1;
+         nummer = 1;
         for (File datei : dateien) {
           if (datei.isFile() && datei.getName().endsWith(".tex")) {
             
             String datenName = datei.getName().replace(".tex", "");
 
-            String dopplungsPruefung = "SELECT COUNT(*) FROM snippets WHERE datenName = ?";
+            String dopplungsPruefung = "SELECT COUNT(*) FROM snippets WHERE datenName = "+ datenName +"";
             PreparedStatement pruefungSt = verbindung.prepareStatement(dopplungsPruefung);
             pruefungSt.setString(1, datenName);
             ResultSet rs = pruefungSt.executeQuery();
@@ -127,7 +129,7 @@ public class MySql {
             if (count == 0) {
 
               String dateiPfad = datei.getAbsolutePath();
-              String insertSQL = "INSERT INTO `snippets`(`DataNumber`, `DataName`, `DataPath`) VALUES (?, ?, ?)";
+              String insertSQL = "INSERT INTO `snippets`(`DataNumber`, `DataName`, `DataPath`) VALUES (" + nummer + ""+ datenName +"," + dateiPfad + " ?, ?)";
               PreparedStatement preparedStatement = verbindung.prepareStatement(insertSQL);
               preparedStatement.setInt(1, nummer);
               preparedStatement.setString(2, dateiPfad);
