@@ -64,7 +64,7 @@ public class OperatingSystem {
 			case "Windows 11":
 				operatingSystem = "Windows";
 				homeDir = System.getenv("APPDATA");
-				tempDir = "%temp%";
+				tempDir = System.getProperty("java.io.tmpdir");
 				pdflatexPath = "C:\\texlive\\2023\\bin\\windows\\pdflatex.exe";
 				break;
 			default:
