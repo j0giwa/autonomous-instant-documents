@@ -1,5 +1,11 @@
 package de.thowl.aids.database;
 
+/*
+ * Klasse erstellt und Geschrieben von Martin Boschmann
+ * Die Klasse MySql
+ * enthält Sämmtliche befehle, die im zusammenhang mit der Datenbank
+ * arbeiten.
+ */
 import java.io.*;
 import java.sql.*;
 import de.thowl.aids.core.OperatingSystem;
@@ -16,8 +22,7 @@ class MySql {
 
   // Main driver method
   /**
-   * @param args
-   * @throws Exception
+   * Der Konstruktor enthält Wiederholt genutzte Variablen, wie z.b. Die zur Verbindung mit der Datenbank notwendigen Daten.
    */
   public MySql() throws Exception {
     url = "jbdc:mysql://localhost:3306/aids"; // table details
@@ -31,6 +36,13 @@ class MySql {
 
   }
 
+  /*
+   * Diese Methode ist dazu gedachte gezielt Neue Fäche / Module für eine Bessere Übersicht manuell eintragen zu können.
+   * Diese Methode wird in der Aktuellen version des Programmes jedoch noch Nicht benutzt. 
+   * Es kann daher sein das die Befehle für den INSERT nichtmehr mit der Aktuellen Datenbank Übereinstimmen.
+   * Die Methode wurde nicht entfernt das die Überlegung das Feature noch fertigzustellen 
+   * noch im raum steht.
+   */
   private void addSubjekt(String subjektToAdd) throws Exception {
     String url = "jbdc:mysql://localhost:3306/aids"; // table details
     String userName = "root";
@@ -51,17 +63,11 @@ class MySql {
     System.out.println("Connection Closed");
   }
 
-  private void closeConnection() throws Exception {
-    con.close();
-    System.out.println("Connection Closed");
-  }
-
-  private void openConnection() throws Exception {
-    Class.forName("com.myql.cj.jdbc.Driver");
-    Connection con = DriverManager.getConnection(url, userName, password);
-    System.out.println("Connection Succsesfully Ethablished");
-  }
-
+  /*
+   * Eine Methode die Nicht in der Vorhandenen Version des Programmes verwendet wird. Die idee hinter der Methode,
+   * war Das Modul zu den einzelnen Fragen etc Ausgeben lassen zu können, um wen die Tabelle z.b. in eine CSV Datei Exportiert wird
+   * Direkt hinter Den Dateien auch Sehen zu können zu welchem Modul sie gehöhren.
+   */
   private String getSubjekt() throws Exception {
     String result = "";
     String query = ("Select *From `subjekts`");
@@ -76,6 +82,9 @@ class MySql {
     return result;
   }
 
+  /*
+   * Neue Dateien werden in die Datenbank eingelesen und die Informationen die die Entsprechende Spalte eingetragen.
+   */
   public void snippetVerarbeitung() {
     OperatingSystem operatingSystem = new OperatingSystem();
     String verzeichnisPfad = operatingSystem.getHomeDir();
@@ -110,6 +119,10 @@ class MySql {
 
   }
 
+  /*
+   * Methode zum Exportieren von Tabellendaten in eine CSV. Es wird die Gesammte Tabelle mit 
+   * Datei Namen, Dateinummer und Dateipfad Exportiert. 
+   */
   public void exportToCSV() {
     try {
       Connection con = DriverManager.getConnection(url, userName, password);
@@ -145,7 +158,11 @@ class MySql {
       e.printStackTrace();
     }
   }
-  
+
+  /*
+   * Import Methode. Hiermit werden zu Importierende CSV Daten ausgelesen und anschließend 
+   * in die Entsprechende Tabelle eingelesen.
+   */
   public void ImportCSVData() {
     try {
       Connection con = DriverManager.getConnection(url, userName, password);
@@ -153,7 +170,7 @@ class MySql {
 
       BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE_PATH));
       String line;
-      // Es wird davon ausgegangen das die erste Zeile der CSV SPaltenüberschriften enthält
+      // Es wird davon ausgegangen das die erste Zeile der CSV Spaltenüberschriften enthält
       String[] head = reader.readLine().split(",");
 
       while ((line = reader.readLine()) != null) {
@@ -183,7 +200,11 @@ class MySql {
       e.printStackTrace();
     }
   }
-  
+
+  /*
+   * Methode die die Eingabe im UserInterface annimmt und die entsprechende
+   * Methode für den Import oder Export von Daten auswählt und ausführt
+   */
   public void CSVPortDesision(String optionSet) {
     String option = optionSet;
     
